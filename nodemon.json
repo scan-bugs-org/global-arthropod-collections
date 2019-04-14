@@ -1,0 +1,4 @@
+{
+  "events": { "restart": "npx webpack" },
+  "ignore": ["public/js/*"]
+}

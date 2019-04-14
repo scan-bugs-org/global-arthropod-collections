@@ -1,0 +1,11 @@
+#map {
+  width: 40%;
+  height: 60%;
+
+  /* background-color: black; */
+
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}

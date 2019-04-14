@@ -1,0 +1,9 @@
+extends: "eslint:recommended"
+parserOptions:
+  ecmaVersion: 2017
+env:
+  node: true
+rules:
+  no-console: off
+  no-unused-vars: warn
+  semi: [2, "always", { "omitLastInOneLineBlock": true}]
