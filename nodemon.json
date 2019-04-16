@@ -1,4 +1,7 @@
 {
-  "events": { "restart": "npx webpack" },
+  "events": {
+    "start": "npx webpack",
+    "restart": "npx webpack"
+  },
   "ignore": ["public/js/*"]
 }
