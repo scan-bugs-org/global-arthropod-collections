@@ -1,223 +1,223 @@
-Inst code,CollectionCode,Institution,Collection Name,Size,Country,State,Collection size category (Tier),,% Collection Records Public,Collection Type ,Collection latitude,Collection longitude,Website,SCAN,iDigBio,GBIF
-KU,SEMC,University of Kansas,Natural History Museum Entomology Division,4900000,USA,KS,1,,0.28,University,38.9548,-95.2561,https://biodiversity.ku.edu/entomology,Snapshot,Yes,Yes
-OSU,OSU,Ohio State University,C.A. Triplehorn Insect Collection,3600000,USA,OH,1,,0.14,University,39.9971,-83.044,wasps.osu.edu,Snapshot,Yes,Yes
-INHS,INHSIC,Illinois Natural History Survey ,Insect Collection,7000000,USA,IL,1,,0.09,University,40.0928,-88.239,http://wwx.inhs.illinois.edu/collections/insect,Snapshot,Yes,Yes
-CAS,ENT,California Academy of Sciences ,Entomology,16000000,USA,CA,1,,0.06,Private,37.7695,-122.4662,http://www.calacademy.org/scientists/entomology,Snapshot,Yes,Yes
-EMEC,EMEC,University of California-Berkeley,Essig Museum of Entomology,5100000,USA,CA,1,,0.06,University,37.8714,-122.2628,http://essig.berkeley.edu,Snapshot,Yes,Yes
-CSU,CSUC,Colorado State University, C.P. Gillette Museum of Arthropod Diversity,3600000,USA,CO,1,,0.05,University,40.5774,-105.0802,http://bspm.agsci.colostate.edu/01-2/gillette-museum/,Live,Yes,Yes
-MCZ,NA,Harvard University ,Museum of Comparative Zoology,8513000,USA,MA,1,,0.05,University,42.3789,-71.1152,http://www.mcz.harvard.edu/about/index.html,Snapshot,Yes,Yes
-LACM,LACMEC,Natural History Museum of Los Angeles County,,5800000,USA,CA,1,,0.03,Private,34.0169,-118.289,http://www.nhm.org/site/research-collections/entomology,Snapshot,Yes,Yes
-FMNH,FMNHINS,Field Museum of Natural History ,"Collection of Insects, Arachnids, and Myriapods",12000000,USA,IL,1,,0.03,Private,41.8663,-87.617,http://www.fieldmuseum.org/science/research/area/insects-arachnids-and-myriapods,Snapshot,Yes,Yes
-AMNH,NA,American Museum of Natural History,,18072585,USA,NY,1,,0.03,Private,40.7813,-73.9739,https://www.amnh.org/our-research/invertebrate-zoology,Snapshot,Yes,Yes
-UCR,NA,University of California-Riverside ,UC Riverside Entomology Research Museum,3000000,USA,CA,1,,0.03,University,33.9701,-117.326,https://entmuseum.ucr.edu/,Live,Yes,Yes
-ANSP,ENT,Academy of Natural Sciences ,Entomology Collection,3500000,USA,PA,1,,0.02,University,39.9564,-75.1793,http://www.ansp.org,Live,Yes,Yes
-USNM,USNMENT,United States National Museum ,Entomology Collections,35000000,USA,DC,1,,0.02,Government,38.8913,-77.0261,http://entomology.si.edu/default.html,Live,Yes,Yes
-HSMNCH,BPBM,Bernice P. Bishop Museum,,14500000,USA,HI,1,,0.01,Private,21.3329,-157.8706,https://www.bishopmuseum.org/,Snapshot,Yes,Yes
-UCD,BMEC,University of California-Davis,R. M. Bohart Museum of Entomology,7100000,USA,CA,1,,0.01,University,38.5353,-121.7523,http://Bohart.ucdavis.edu,Live,Yes,No
-CUIC,NA,Cornell University,Insect Collection,7000000,USA,NY,1,,0.01,University,42.4475,-76.4805,http://cuic.entomology.cornell.edu/,No,No,No
-UMSP,UMSP,University of Minnesota ,Insect Collection,3877000,USA,MN,1,,0.01,University,44.988,-93.1837,http://insectcollection.umn.edu/,Live,Yes,No
-FLMNH,MGCL,University of Florida ,"Florida Museum of Natural History, McGuire Center for Lepidoptera and Biodiversity",8200000,USA,FL,1,,0,University,29.6358,-82.3736,www.flmnh.ufl.edu/mcguire,Live,Yes,No
-WIS,WIRC,University of Wisconsin ,Wisconsin Insect Research Collection,3000000,USA,WI,1,,0,University,43.0757,-89.4133,http://labs.russell.wisc.edu/wirc/,Snapshot,Yes,No
-CMNH,NA,Carnegie Museum of Natural History,,7400000,USA,PA,1,,0,Private,40.4433,-79.9505,https://carnegiemnh.org/researcher/sections/invertebrate-zoology/,No,No,No
-FSCA,NA,Florida State Collection of Arthropods,,9000000,USA,FL,1,,0,University,29.6347,-82.3715,http://www.fsca-dpi.org/,No,No,No
-UMMC,NA,University of Michigan Musem of Zoology,Insect Division,3500000,USA,MI,1,,0,University,42.2761,-83.7413,https://lsa.umich.edu/ummz/insects.html,No,Yes,No
-UMRM,NA,University of Missouri-Columbia ,Enns Entomology Museum,5750000,USA,MO,1,,0,University,38.9407,-92.3277,https://museum.insecta.missouri.edu/,No,No,No
-USDA-ARS,ARS,USDA Bee Biology and Systematics Laboratory,,1500000,USA,UT,2,,0.42,Government,41.7451,-111.81,https://www.ars.usda.gov/pacific-west-area/logan-ut/pollinating-insect-biology-management-systematics-research/,Snapshot,Yes,Yes
-TAMU,TAMUIC,Texas A&M University,Insect Collection,2800000,USA,TX,2,,0.2,University,30.6112,-96.3481,http://insects.tamu.edu/tamuinsectcollection/,Snapshot,Yes,Yes
-MISSA,MEM,Mississippi State University,Mississippi Entomological Museum,1100000,USA,MS,2,,0.2,University,33.4536,-88.8015,http://mississippientomologicalmuseum.org.msstate.edu/,Live,Yes,Yes
-YPM,ENT,Yale Peabody Museum ,Entomology Division,1600000,USA,CT,2,,0.19,University,41.3108,-72.9581,http://peabody.yale.edu/,Snapshot,Yes,Yes
-MSU,MSUC,Michigan State University ,The Albert J. Cook Arthropod Research Collection,1500000,USA,MI,2,,0.14,University,42.7311,-84.4773,http://www.arc.ent.msu.edu/,Live,Yes,Yes
-TTU,TTU-Z,Texas Tech University,Invertebrate Zoology,1250000,USA,TX,2,,0.14,University,33.5899,-101.886,http://www.nsrl.ttu.edu/collections/Invertebrates/index.htm,Live,Yes,Yes
-DMNS,Ento & Arach,Denver Museum of Nature & Science ,Entomology & Arachnology Collections,1346000,USA,CO,2,,0.1,Private,39.7479,-104.9431,http://www.dmns.org/science/integrative-collections/dmns-zoology-collections/,Live,Yes,Yes
-CLEV,CMNHENT,Cleveland Museum of Natural History ,Invertebrate Zoology Collection,1000000,USA,OH,2,,0.1,Private,41.5116,-81.6131,http://www.cmnh.org/c-r/invertebrate-zoology,Snapshot,Yes,Yes
-OSAC,OSAC,Oregon State University ,Arthropod Collection,2600000,USA,OR,2,,0.08,University,44.567,-123.2818,http://osac.oregonstate.edu,Snapshot,Yes,Yes
-NCSU,NA,North Carolina State University ,Insect Collection,1750000,USA,NC,2,,0.07,University,35.7872,-78.6721,https://www.cals.ncsu.edu/entomology/museum/index.php,No,No,No
-BYU,BYUC,Brigham Young University ,Arthropod Museum,2100000,USA,UT,2,,0.06,University,40.2534,-111.6474,http://mlbean.byu.edu/,Live,Yes,Yes
-UA,UAIC,University of Arizona ,Insect Collection,2000000,USA,AZ,2,,0.05,University,32.2311,110.9541,http://ag.arizona.edu/ento/UAIC/,Live,Yes,Yes
-ASU,ASUHIC,Arizona State University ,Hasbrouck Insect Collection,1950000,USA,AZ,2,,0.05,University,33.42,-111.933,http://taxonbytes.org/asuhic/,Live,Yes,Yes
-PSUC,ENTO,Penn State University,Frost Entomological Museum,2100000,USA,PA,2,,0.03,University,40.8029,-77.8624,http://www.ento.psu.edu/home/frost/,Snapshot,Yes,No
-UI,WFBM,University of Idaho ,William F. Barr Entomological Museum,1000000,USA,ID,2,,0.03,University,46.7291,-117.0146,https://www.uidaho.edu/cals/pses/research-and-extension/entomological-museum,Live,Yes,Yes
-MPM,MPM ENT,Milwaukee Public Museum ,Invertebrate Zoology-Insect Collection,1000000,USA,WI,2,,0.02,Private,43.0407,-87.9213,http://www.mpm.edu/research-collections/invertebrate-zoology,Snapshot,Yes,Yes
-PU,PERC,Purdue University,Purdue Entomological Research Collection,1500000,USA,IN,2,,0.02,University,40.4236,-86.9169,http://www.entm.purdue.edu/PERC/,Live,Yes,Yes
-CSCA,NA,California State Collection of Arthropods,,1500000,USA,CA,2,,0.02,Government,38.5747,-121.492,https://www.cdfa.ca.gov/plant/ppd/csca.html,No,No,No
-GMNH,UGCA,University of Georgia ,Collection of Arthropods,2000000,USA,GA,2,,0.01,University,33.9451,-83.3724,http://blog.caes.uga.edu/ugca/,Live,Yes,No
-SDSU,SMIRC,South Dakota State University,The Severin-McDaniel Insect Research Collection,1200000,USA,SD,2,,0.01,University,44.3185,-96.7878,https://www.sdstate.edu/agronomy-horticulture-plant-science/severin-mcdaniel-insect-research-collection,Live,Yes,No
-NYSM,NA,New York State Museum,Entomology,1100000,USA,NY,2,,0,Private,42.6484,-73.7616,http://www.nysm.nysed.gov/research-collections/biology/entomology/collections,No,No,No
-CUAC,CUAC,Clemson University ,Arthropod Collection,1300000,USA,SC,2,,0,University,34.676,-82.8364,https://sites.google.com/site/clemsonarthropodcollection/,Live,Yes,No
-WSU,NA,Washington State University,James Museum,1280000,USA,WA,2,,0,University,46.7308,-117.1598,http://entomology.wsu.edu/outreach/m-t-james-museum/,Snapshot,Yes,Yes
-ISUI,NA,Iowa State University ,Insect Collection,1000000,USA,IA,2,,0,University,42.0302,-93.6461,https://www.ent.iastate.edu/insectcollection/,No,No,No
-USU,NA,Utah State University,,2100000,USA,UT,2,,0,University,41.7433,-111.811,http://www.biology.usu.edu/research/research_centers/insect-collection,Snapshot,No,No
-NA,NA,California Polytechnic University San Luis Obispo,,1000000,USA,CA,2,,0,University,35.3004,-120.6601,https://bio.calpoly.edu/content/facilities,No,No,No
-LSU,NA,Louisiana State University,Arthropod Museum,1000000,USA,LA,2,,0,University,30.4155,-91.1798,http://www.lsuinsects.org/about.html,No,No,No
-MONT,MTEC,Montana State University,Entomology Collection,2000000,USA,MT,2,,0,University,45.6674,-111.0545,https://portal.nifa.usda.gov/web/crisprojectpages/0098367-curation-of-the-msu-entomology-collection.html,No,No,No
-NDA,NA,North Dakota State University ,Insect Reference Collection,1070000,USA,ND,2,,0,University,46.8953,-96.8037,https://www.ndsu.edu/entomology/research/facilities/,No,No,No
-SJSC,NA,San Jose State University,J. Gordon Edwards Museum of Entomology,1000000,USA,CA,2,,0,University,37.3353,-121.8827,http://www.sjsu.edu/biology/research/facilities_collections/,No,No,No
-UNL,NA,University of Nebraska State Museum, Insect Division,2000000,USA,NE,2,,0,University,37.7206,-97.2936,http://museum.unl.edu/research/entomology/personnel.html,Snapshot,No,No
-TNHC,NA,University of Texas- Austin,,1000000,USA,TX,2,,0,University,30.2853,-97.7395,https://biodiversity.utexas.edu/collections/entomology,Snapshot,No,No
-USU,NA,Utah State University ,American Entomological Institute,1400000,USA,UT,2,,0,University,41.7433,-111.811,http://www.vmnh.net/,No,No,No
-VMNH,NA,Virginia Museum of Natural History,Entomology,1500000,USA,VA,2,,0,Private,36.6866,-79.8634,https://www.entm.purdue.edu/PERC/,No,No,No
-USGS,PWRC-US-CA-MX,USGS Native Bee Inventory and Monitoring Lab,,275000,USA,MD,3,,0.97,Government,39.0542,-76.8171,https://www.usgs.gov/centers/pwrc/science/native-bee-inventory-and-monitoring-lab?qt-science_center_objects=0#qt-science_center_objects,Snapshot,Yes,No
-UCFC,SMFCA,University of Central Florida,Stuart M. Fullerton Collection of Arthropods,650000,USA,FL,3,,0.96,University,28.6024,-81.2001,https://sciences.ucf.edu/biology/bugcloset/,Snapshot,Yes,No
-UAM,UAM_ENT,University of Alaska,UAM Insect Collection,500000,USA,AK,3,,0.73,University,64.8561,-147.831,http://www.uaf.edu/museum/collections/ento/,Snapshot,Yes,Yes
-UHIM,SEMC,University of Hawaii Insect Museum,,250000,USA,HI,3,,0.5,University,21.3016,-157.8166,http://www.ctahr.hawaii.edu/insectmuseum/,Live,Yes,No
-NAUF,CPMAB,Northern Arizona University,Colorado Plateau Museum of Arthropod Biodiversity,250000,USA,AZ,3,,0.28,University,35.1917,-111.6538,http://www.bugs.nau.edu/,Live,Yes,Yes
-OMNH,RINVRT,Oklahoma State University,The Sam Noble Museum Department of Recent Invertebrates,550000,USA,OK,3,,0.26,University,35.1943,-97.4489,http://samnoblemuseum.ou.edu/collections-and-research/recent-invertebrates/,Snapshot,Yes,No
-UNM,MSBA,University of New Mexico ,"Museum of Southwestern Biology, Division of Arthropods",200000,USA,NM,3,,0.23,University,35.0833,-106.6217,http://msb.unm.edu/arthropods/,Live,Yes,Yes
-SBMNH,SBMNHENT,Santa Barbara Museum of Natural History ,Entomology Collection,500000,USA,CA,3,,0.23,Private,34.441,-119.714,http://www.sbnature.org/,Live,Yes,Yes
-UMNH,ENT,University of Utah,Entomology Collection at the Natural History Museum of Utah,250000,USA,UT,3,,0.21,University,40.7643,-111.8229,https://nhmu.utah.edu/collections/entomology,Live,Yes,Yes
-NMSU,NA,New Mexico State University,Collection of Arthropods,500000,USA,NM,3,,0.18,University,32.2825,-106.7565,http://arthropods.nmsu.edu/,Live,Yes,Yes
-UD,UDCC,University of Delaware ,Insect Research Collection,350000,USA,DE,3,,0.13,University,39.6653,-75.7501,http://ag.udel.edu/research/planthoppers/index.html,Live,Yes,Yes
-ABS,ARTHARCH,Archbold Biological Station ,Arthropod Collection,250000,USA,FL,3,,0.13,Private,27.195,-81.373,http://www.archbold-station.org/html/research/entom/arthcoll.html,Snapshot,Yes,Yes
-UCM,UCMC,University of Colorado ,Museum of Natural History Entomology Collection,800000,USA,CO,3,,0.13,University,40.0064,-105.2729,http://www.colorado.edu/cumuseum/research-collections/entomology,Live,Yes,Yes
-UCMS,NA,University of Connecticut ,Biodiversity Research Collections - Insects,200000,USA,CT,3,,0.11,University,41.8077,-72.254,http://biodiversity.uconn.edu/insects/,No,No,No
-KSU,MEPAR,Kansas State University ,Museum of Entomological and Prairie Arthropod Research,300000,USA,KS,3,,0.06,University,39.1971,-96.5843,http://entomology.k-state.edu/department-info/facilities/insect-museum/,Snapshot,Yes,Yes
-SIIS,NA,Staten Island Institute of Arts and Sciences,Staten Island Museum - Entomology,500000,USA,NY,3,,0.06,Private,40.6441,-74.1022,http://www.statenislandmuseum.org/collections/natural-science-collection,No,No,No
-RUAC,NA,Rutgers University ,Entomological Museum,200000,USA,NJ,3,,0.03,University,40.4818,-74.4395,http://entomology.rutgers.edu/museum/,No,No,No
-VPI,VTEC,Virginia Polytechnic Institute ,Virginia Tech Insect Collection,500000,USA,VI,3,,0.02,University,37.2249,-80.4238,http://collection.ento.vt.edu/,Live,Yes,No
-UVM,VTZT,University of Vermont ,Zadock Thompson Zoological Collection-Invertebrates,300000,USA,VA,3,,0.01,University,44.4803,-73.1985,http://www.uvmzoo.org/,Live,Yes,No
-UMA,NA,University of Massachusetts,,100000,USA,MA,3,,0.01,University,42.3912,-72.5267,https://bcrc.bio.umass.edu/nhc/collections/insect-collection,No,No,No
-UNHP,NA,University of New Hampshire ,Insect and Arachnid Collections,700000,USA,NH,3,,0.01,University,43.1348,-70.9329,http://insectcoll.unh.edu,No,No,No
-UNR,NA,University of Nevada ,"Reno, Museum of Natural History, Entomology Research Collection",400000,USA,NV,3,,0,University,39.5377,-119.8121,http://www.naturalhistory.unr.edu/research/,No,No,No
-MNA,WACA,Museum of Northern Arizona ,,300000,USA,AZ,3,,0,University,35.2353,-111.6622,https://musnaz.org/wp-content/uploads/2017/10/collection-size-10-2017.pdf,Live,No,No
-SDNH,NA,San Diego Natural History Museum,Entomology,900000,USA,CA,3,,0,Private,32.7321,-117.1475,http://www.sdnhm.org/science/entomology/collections/,No,No,No
-UTEP,NA,University of Texas - El Paso,,325000,USA,TX,3,,0,University,31.7709,-106.5046,https://www.utep.edu/biodiversity/collections/entomology.html,Snapshot,Yes,Yes
-AUEM,NA,Auburn University,Museum of Natural History,100000,USA,AL,3,,0,University,32.5988,-85.483,http://aumnh.org,No,No,No
-NA,NA,Buffalo Museum of Science,Entomology,153000,USA,NY,3,,0,University,42.9057,-78.8434,https://www.sciencebuff.org/about-us/,No,No,No
-CNHM,NA,Cincinnati Museum of Natural History,,100000,USA,OH,3,,0,Private,39.11,-84.5377,https://www.boonshoftmuseum.org/experience-more/departments/collections1/,No,No,No
-NA,NA,Crane Hollow Preserve,,120000,USA,OH,3,,0,Private,39.4801,-82.5839,http://cranehollow.org/research.html,No,No,No
-NA,NA,Dayton Society of Natural History’s Collection,,200000,USA,OH,3,,0,Private,39.7886,-84.2017,http://www.botanicgardens.org/science-research/our-collections,No,No,No
-NA,NA,Fort Hays State University,Stenberg Museum - Entomology,100000,USA,KS,3,,0,Private,38.8895,-99.2998,http://sternberg.fhsu.edu/research-collections/collections/entomology/,No,No,No
-NA,NA,Fresno County Department of Agriculture,,100000,USA,CA,3,,0,Government,36.7263,-119.7459,https://www.co.fresno.ca.us/departments/agricultural-commissioner/pest-detection-and-exclusion/staff-entomologist,No,No,No
-NA,NA,Georgia Southern University,,520000,USA,GA,3,,0,University,32.4223,-81.7874,http://cosm.georgiasouthern.edu/icps/collections/entomology-collection/,No,No,No
-NA,NA,Illinois State University ,Entomological Research Collection,400000,USA,IL,3,,0,University,40.5125,-88.9946,NA,No,No,No
-NA,NA,Maine State Museum,,107000,USA,ME,3,,0,Private,44.3059,-69.7828,https://mainestatemuseum.org/collections/,No,No,No
-MNHM,NA,May Natural History Museum,,100000,USA,CO,3,,0,Private,38.7053,-104.8408,https://coloradospringsbugmuseum.com/,No,No,No
-NA,NA,University of Puerto Rico ,Museo de Entomología y Biodiversidad Tropical Collection,200000,USA,PR,3,,0,University,18.3958,-66.0627,NA,No,No,No
-NA,NA,Nevada State Department of Agriculture,Entomology,275000,USA,NV,3,,0,University,39.5312,-119.7724,http://museums.nevadaculture.org/nsmlv-home,No,No,No
-NA,NA,Sam Houston State University,,400000,USA,TX,3,,0,University,30.7132,-95.5504,NA,No,No,No
-NA,NA,Southern Illinois University ,Insect Collection,325000,USA,IL,3,,0,University,37.713,-89.2223,http://mypage.siu.edu/waring/collections.html,No,No,No
-NA,NA,Southwestern Oklahoma State University,,100000,USA,OK,3,,0,University,35.5356,-98.7078,NA,No,No,No
-NA,NA,University of Arkansas ,Arthropod Museum ,750000,USA,AR,3,,0,University,36.0678,-94.1737,http://www.uark.edu/ua/arthmuse/,No,No,No
-NA,NA,University of Connecticut ,Army Ant & Guest Collection,100000,USA,CN,3,,0,University,41.8077,-72.254,http://biodiversity.uconn.edu/ant-guests/,No,No,No
-NA,NA,University of Notre Dame ,Arthropod Collection,230000,USA,IN,3,,0,University,41.7056,-86.2353,https://biodiversity.nd.edu/collections/arthropod-collection/,No,No,No
-INVCOL,NA,University of Puerto Rico ,Mayaguez Invertebrate Collection,130000,USA,PR,3,,0.01,University,18.2109,-67.1409,https://www.uprm.edu/invcol/,Live,No,No
-NA,NA,University of Rhode Island,,200000,USA,RI,3,,0,University,41.4861,-71.5309, http://web.uri.edu/pse/uri-insect-collection/ ,No,No,No
-UWBM,NA,University of Washington,The Burke Museum’s Arachnology and Entomology Collections ,346000,USA,WA,3,,0,University,47.6606,-122.3104,http://www.burkemuseum.org/research-and-collections/arachnology-and-entomology/collections,No,No,No
-OSH,NA,University of Wisconsin Oshkosh,,200000,USA,WI,3,,0,University,44.0252,-88.5511,http://www.uwosh.edu/biology/department-facilities/insect-collection-and-museum-1,No,No,No
-UWY,NA,University of Wyoming ,Insect Museum,250000,USA,WY,3,,0,University,41.3128,105.5838,http://www.uwyo.edu/esm/entomology/entomology-museum-homepage.htm,No,No,No
-PPCD,NA,West Virginia Department of Agriculture ,Insect collection,250000,USA,WV,3,,0,University,38.3369,-81.6115,https://agriculture.wv.gov/divisions/plantindustries/Pages/default.aspx,No,No,No
-GUAM,ESUG,University of Guam ,Insect Collection,35000,USA,GM,4,,0.99,University,13.4305,144.8004,https://cnas-re.uog.edu/expertise/cnas-entomology/#,Live,Yes,No
-UCSB,IZC,University of California-Santa Barbara ,Invertebrate Zoology Collection,9200,USA,CA,4,,0.95,University,34.4131,-119.8491,http://ccber.ucsb.edu/collections/zoological/arthropods,Snapshot,Yes,No
-UK,NA,University of Kentucky,Department of Entomology Collection,50000,USA,KY,4,,0.86,University,38.0287,-84.5092,https://entomology.ca.uky.edu/,No,No,No
-UTC,UTCI,University of Tennessee at Chattanooga,,30000,USA,TN,4,,0.76,University,35.0477,-85.2964,http://www.utc.edu/biology-geology-environmental-science/facilities/facilities.php,Live,Yes,Yes
-UCSC,RMIC,University of California Santa Cruz,The Kenneth S. Norris Center for Natural History,92000,USA,CA,4,,0.74,University,36.9986,-122.0602,http://norriscenter.ucsc.edu/,Live,Yes,Yes
-DBG,DBGA,Denver Botanic Gardens, Collection of Arthropods,1000,USA,CO,4,,0.73,University,39.7325,-104.961,http://www.dmns.org/science/integrative-collections/dmns-zoology-collections/,Live,Yes,Yes
-DUGWAY,DUG-ENT,Dugway Proving Ground ,Natural History Collection,2000,USA,UT,4,,0.61,University,40.2166,-112.753,http://www.dugway.army.mil/,Live,Yes,Yes
-WVW,ENT,West Virginia Wesleyan College ,Katharine B. Gregg Orchid Pollinator Collection,500,USA,WV,4,,0.59,University,38.9871,-80.2236,NA,No,No,No
-UWYMED,ENT,University of Wyoming ,Dillon Lab Insect Collection,30000,USA,WY,4,,0.55,University,41.3128,105.5838,http://www.uwyo.edu/mdillon/,Live,Yes,Yes
-NA,NA,Lincoln University,,3000,USA,PA,4,,0.52,University,39.8072,-75.9273,NA,No,No,No
-UFIFAS,NA,University of Florida ,Forestry Entomology Collection,50000,USA,FL,4,,0.44,University,,,,,,
-UPRM,MEBT-UPR,University of Puerto Rico Rio Piedras Campus,Zoology Museum,15500,USA,PR,4,,0.44,University,18.4042,-66.0511,http://mzoologia.uprrp.edu/,Live,No,No
-MAJC,MAJC,M. Andrew Johnston Insect Research Collection,,10000,USA,AZ,4,,0.38,4,33.423,-111.933,https://desertbeetles.org/majc/,Live,Yes,Yes
-CHAS,ENT,Chicago Academy of Sciences,,70000,USA,IL,4,,0.37,University,41.9546,-87.6733,http://naturemuseum.org/the-museum/collections/invertebrates,Snapshot,Yes,No
-RMBL,NA,Rocky Mountain Biological Laboratory ,,5000,USA,CO,4,,0.37,Private,38.9585,-106.9878,http://www.rmbl.org/,No,No,No
-TTRSNHM,TTRSLEP (24626),Tall Timbers Research Station ,Natural History Museum,4000,USA,FL,4,,0.34,Private,30.6561,-84.2086,http://talltimbers.org/biological-collections/,Live,Yes,Yes
-UMAM,NA,University of Massachusetts Museum ,,20000,USA,MA,4,,0.33,University,42.315,-71.0377,https://bcrc.bio.umass.edu/nhc/collections/insect-collection,No,No,No
-DCH,DCEC,The Davidson College ,Entomology Collection,20000,USA,NC,4,,0.33,University,35.5015,-80.8447,http://insects.davidson.edu/,Live,Yes,Yes
-GPSC,NA,Kutztown University,Gregory P. Setliff Collection,2000,USA,PA,4,,0.29,University,40.5121,-75.7849,http://www.kutztown.edu/acad/biology/,Live,Yes,Yes
-SSAC,SSAC,Salvatore S. Anzaldo Collection,,10000,USA,AZ,4,,0.28,Research,33.42,-111.933,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=113,Live,Yes,No
-UKY-HIC,HIC,University of Kentucky ,Hymenoptera Institute Collection,70000,USA,KY,4,,0.25,University,38.047,-84.5041,http://sharkeylab.org/sharkeylab/sharkeyProjects.html,Live,Yes,Yes
-BLM,MLFO,BLM Mother Lode Field Office,The Bees of Pine Hill Preserve Collection,1000,USA,CA,4,,0.23,University,38.71,-120.99,http://www.pinehillpreserve.org/,Live,Yes,Yes
-CAES,NA,Connecticut Agricultural Experiment Station ,,50000,USA,CT,4,,0.21,Government,41.3312,-72.9196,https://www.ct.gov/caes/cwp/view.asp?a=2826&q=448278&caesNav=|,No,No,No
-PDA,NA,Pennsylvania Department of Agriculture ,,10000,USA,PA,4,,0.15,Government,40.2875,-76.881,https://www.agriculture.pa.gov/Plants_Land_Water/PlantIndustry/Entomology/Pages/default.aspx,No,No,No
-DART,NA,Dartmouth College,Insect Collection ,2000,USA,NH,4,,0.13,University,43.7052,-72.2887,NA,No,No,No
-BRFC,NA,Black Rock Forest ,Insect Collection ,2000,USA,NY,4,,0.13,University,41.417,-74.0107,https://blackrockforest.org/research/research-data,No,No,No
-WICH,WICHI,Wichita State University ,Insect Collection ,5000,USA,NE,4,,0.09,University,37.7207,-97.2938,https://www.wichita.edu/academics/fairmount_college_of_liberal_arts_and_sciences/bioscience/people/faculty/mJameson/mJamesonpage.php,Live,Yes,No
-UDAF,UDAFE,Utah Department of Agriculture and Food ,Entomology Collection,5000,USA,UT,4,,0.09,Government,40.7769,-111.9381,http://ag.utah.gov/,Live,Yes,No
-SDSU,TAC,San Diego State University ,Terrestrial Arthropods Collection,50000,USA,CA,4,,0.08,University,32.7774,-117.0719,http://www.sci.sdsu.edu/collections/terrestrialarthropods.htm,Live,Yes,No
-HDOA,NA,Hawaii Department of Agriculture Plant Pest Control Branch,,5000,USA,HI,4,,0.06,Government,21.3205,-157.887,http://hdoa.hawaii.gov/pi/ppc/,No,No,No
-BROW,BCIC,The Broward College ,Insect Collection,30000,USA,FL,4,,0.04,University,26.0798,-80.2365,http://www.broward.edu/academics/programs/environmental/environmentalscience/Pages/BCIC.aspx,Live,Yes,Yes
-NAUF,NAUF5F,Northern Arizona University,Forest Entomology Collection,10000,USA,AZ,4,,0.03,University,35.1761,-111.6573,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=177,Live,No,No
-KKIC,KKIC,Kojun Kanda Insect Research Collection,,10000,USA,AZ,4,,0.03,4,35.1919,-111.6533,http://symbiota4.acis.ufl.edu/scan/portal/collections/misc/collprofiles.php?collid=169,Live,No,No
-SWRS,NA,Southwestern Research Station of the AMNH ,,25000,USA,AZ,4,,0.02,Private,31.8832,-109.2056,https://www.amnh.org/our-research/southwestern-research-station,No,No,No
-DAR,NA,University of North Dakota ,Insect Collection.,10000,USA,ND,4,,0.02,University,47.9194,-97.0673,https://www.ndsu.edu/entomology/research/facilities/,No,No,No
-WWU,WWUC,Western Washington University ,Insect Collection,50000,USA,WA,4,,0.01,University,48.73,-122.49,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=67,Live,Yes,No
-LSU,NA,Maine Forest Service ,Insect Collection,50000,USA,ME,4,,0,University,44.3205,-69.7745,https://www.informe.org/doc/collcover.htm,No,No,No
-CSUEB,CSUEBNHM,California State University East Bay ,Natural History Museum,50000,USA,CA,4,,0,University,37.6577,-122.0564,NA,Live,Yes,Yes
-SNHM,NA,The Schiele Museum of Natural History,,50000,USA,NC,4,,0,Private,35.2533,-81.1584,http://www.schielemuseum.org/collections-research.html,No,No,No
-NA,NA,Colorado College ,Arthropod Collection,21760,USA,CO,4,,0,University,38.8466,-104.8244,https://www.coloradocollege.edu/academics/dept/obe/BiodiversityCollections/entomology-collection.html,No,No,No
-ODA,NA,Oregon Department of Agriculture ,,95000,USA,OR,4,,0,University,44.9439,-123.0263,https://www.oregon.gov/ODA/programs/IPPM/InsectsSpiders/Pages/ODAInsectCollection.aspx,No,No,No
-NA,NA,Alabama Museum of Natural History,,10000,USA,AL,4,,0,University,33.2121,-87.5438,https://almnh.ua.edu/collections-and-research.html,No,No,No
-NA,NA,American Samoa Community College,,2000,USA,AS,4,,0,University,-14.3224,-170.7419,NA,No,No,No
-NA,NA,Butler University,Insect Collection,8000,USA,IN,4,,0,University,39.838,-86.1715,NA,No,No,No
-CPUP,NA,California State Polytechnic University ,Pomona Biodiversity Collections - Entomology,11000,USA,CA,4,,0,University,34.0581,-117.8251,https://www.cpp.edu/~sci/biological-sciences/bio-collection.shtml,No,No,No
-NA,NA,Chadron State College,Entomology Collection,1000,USA,NB,4,,0,University,42.8197,-103.0004,NA,No,No,No
-NA,NA,Ciegler Collection,,12000,USA,SC,4,,0,University,34.676,-82.8364,NA,No,No,No
-NA,NA,College of Charleston,,50000,USA,SC,4,,0,University,32.7832,-79.9374,NA,No,No,No
-NA,NA,Dixie State University,Natural Science Museum,75000,USA,UT,4,,0,University,37.1035,-113.5653,NA,No,No,No
-NA,NA,Earlham College,Joseph Moore Museum,33000,USA,IN,4,,0,University,39.8242,-84.9119,http://earlham.edu/joseph-moore-museum/collections/,No,No,No
-EKUY,NA,Eastern Kentucky University ,Branson Museum of Zoology - Arthropods,50000,USA,KY,4,,0,University,37.7426,-84.3009,http://biology.eku.edu/,Live,Yes,Yes
-NA,NA,Eastern New Mexico University,"Dr. Antonio ""Tony"" Gennaro Natural History Museum",2000,USA,NM,4,,0,University,34.1791,-103.3476,https://www.enmu.edu/about/general-information/local-events-and-info/arts-and-culture/natural-history-museum,No,No,No
-NA,NA,Everhart Museum of Natural History,,800,USA,PA,4,,0,University,41.4008,-75.6442,http://everhart-museum.org/,No,No,No
-NA,NA,Florissant Fossil Beds National Monument,,10630,USA,CO,4,,0,University,38.9137,-105.2857,NA,No,No,No
-NA,NA,Fort Lewis College,,2000,USA,CO,4,,0,University,37.2752,-107.87,NA,No,No,No
-GCNP,NA,Grand Canyon National Park ,Entomology Collection,10000,USA,AZ,4,,0,Government,36.0508,-112.1342,https://www.nps.gov/grca/learn/historyculture/muscol.htm,No,No,No
-HNPH,NA,Haleakala National Park,,5000,USA,HI,4,,0,Government,20.7595,-156.2468,https://www.nps.gov/hale/learn/historyculture/entomological-collection.htm,No,No,No
-NA,NA,Illinois State Museum,,55000,USA,IL,4,,0,Government,39.7969,-89.6554,http://www.museum.state.il.us/ismdepts/zoology/collections.html,No,No,No
-NA,NA,James Madison University,,20000,USA,VA,4,,0,University,38.4379,-78.8713,NA,No,No,No
-JTNM,NA,Joshua Tree National Monument,,1039,USA,CA,4,,0,University,34.129,-116.0376,https://www.nps.gov/jotr/learn/historyculture/collections.htm,No,No,No
-KNWR,NA,Kenai National Wildlife Refuge,,80000,USA,AK,4,,0.01,Government,60.4749,-151.0843,https://www.fws.gov/refuge/Kenai/what_we_do/science/specimens.html,No,No,Yes
-NA,NA,Mississippi Museum of Natural Science,,6000,USA,MS,4,,0,Private,32.3246,-90.1568,https://www.mdwfp.com/museum/seek-study/bio-collections/insects/,No,No,No
-NA,NA,Museum of Science & History of Jacksonville,,5000,USA,FL,4,,0,Private,30.319,-81.6596,http://themosh.org/,No,No,No
-NA,NA,Natural History Institute at Prescott College,,2000,USA,AZ,4,,0,University,34.5429,-112.468,http://naturalhistoryinstitute.org/collections/,No,No,No
-NA,NA,North Carolina Museum of Natural Resources,Naturalist Center,2500,USA,NC,4,,0,University,35.7823,-78.6397,http://naturalsciences.org/,No,No,No
-NJSM,NA,New Jersey State Museum,Entomology,50000,USA,NJ,4,,0,University,40.2212,-74.7736,https://www.nj.gov/state/museum/dos_museum_collection.html,No,No,No
-NA,NA,New Mexico Museum of Natural History and Science,,7000,USA,NM,4,,0,Private,35.0981,-106.6654,http://www.nmnaturalhistory.org/bioscience/bioscience-collections,No,No,No
-NA,NA,Northern Michigan University,,30000,USA,MI,4,,0,University,46.5587,-87.4062,https://www.nmu.edu/biology/zoological-collections,No,No,No
-NA,NA,Perot Museum of Nature and Science,,25000,USA,TX,4,,0,Private,32.7866,-96.8068,https://www.perotmuseum.org/,No,No,No
-NA,NA,Putnam Museum and Science Center,,12000,USA,IA,4,,0,University,41.5309,-90.6023,http://www.putnam.org/Collections-(1)/Overview,No,No,No
-NA,NA,South Carolina State Museum,,24000,USA,SC,4,,0,University,33.9991,-81.0481,http://www.sci.sdsu.edu/collections/terrestrialarthropods.htm,No,No,Yes
-NA,NA,Southern Oregon University Southern Oregon ,Insect Museum,30000,USA,OR,4,,0,University,42.1862,-122.697,https://inside.sou.edu/biology/entmuseum.html,No,No,No
-NA,NA,Stamford Museum & Nature Center,,3000,USA,CN,4,,0,Private,41.1236,-73.5453,http://www.stamfordmuseum.org/,No,No,No
-SRSC,NA,Sul Ross State College,Entomology,90000,USA,TX,4,,0,University,30.3637,-103.6498,https://www.sulross.edu/page/1009/biology-collections,No,No,No
-NA,NA,The College of Idaho,Orma J. Smith Museum of Natural History,10000,USA,ID,4,,0,University,43.6528,-116.6774,https://www.collegeofidaho.edu/about/campus-facilities/natural-history-museum,No,No,No
-NA,NA,The University of West Alabama ,Entomological Collection.,10000,USA,AL,4,,0,University,32.5913,-88.1863,http://www.blackbeltmuseum.com/collections/,No,No,No
-NA,NA,George Washington Memorial Parkway U.S. National Park Service ,,5000,USA,DC,4,,0,Government,38.9159,-77.106,NA,No,No,No
-NA,NA,University of Iowa,,41000,USA,IA,4,,0,University,41.6621,-91.5356,www.uiowa.edu/mnh,No,No,No
-NA,NA,University of Michigan Biological Station Douglas Lake (Pellston),,4000,USA,MI,4,,0,University,45.5593,-84.6742,NA,No,No,No
-NA,ENTO,University of Nevada Las Vegas ,Marjorie Barrick Museum of Natural History - Entomology,30000,USA,NV,4,,0,University,36.1068,-115.1411,http://www.naturalhistory.unr.edu/,No,No,No
-OSEC,NA,University of Oklahoma, K. C. Emerson Museum,50000,USA,OK,4,,0,University,36.1251,-97.0702,http://entoweb.okstate.edu/museum/museum.htm,No,No,No
-WA,NA,University of Puget Sound,Slater Museum,6000,USA,WA,4,,0,University,47.2637,-122.4828,https://www.pugetsound.edu/academics/academic-resources/slater-museum/collections/,No,No,No
-DMBC,NA,University of South Carolina,Dominick Collection,27000,USA,SC,4,,0,University,33.9986,-81.027,http://zebra.biol.sc.edu/moth/Dominick_Lepidoptera_Collection_USC.html,No,No,No
-NA,NA,Whitman College,,3000,USA,WA,4,,0,University,46.0706,-118.3306,NA,No,No,No
-WPU,NA,William Paterson University ,,2500,USA,NJ,4,,0,University,40.946,-74.1981,NA,No,No,No
-UNAM,NA,Coleccion Nacional de Insectos CNIN - UNAM,,3000000,MX,DF,1,,0.34,University,19.3364,-99.1041,http://www.ibiologia.unam.mx/colecciones/insectos/centro_insec.htm,Snapshot,Yes,Yes
-CEAM,NA,Colección de Insectos del Colegio de Potgraduados,,500000,MX,EM,3,,0.9,Referency,19.4633,-98.9055,http://terranova.org.mx/terranova.html ,Snapshot,No,No
-NA,NA,Colección Entomologica Universidad de Guadalajara ,,30000,MX,JA,4,,0,University,20.6748,-103.3679,NA,Snapshot,No,Yes
-NA,NA,Colección de Invertebrados de la Universidad de la Sierra (UniSierra-UniSierra-Invertebrates),,25000,MX,SO,4,,0,Private,29.8229,-109.6784,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=124,Live,No,No
-UAQ,NA,Colección Zooligica de la Universidad Autonoma de Querétaro,,25000,MX,QT,4,,0,Private,20.701,-100.4438,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=49,Live,No,No
-NA,NA,La Colegio de la Frontera Sur San Cristobal Chiapas,,10000,MX,CS,4,,0,University,16.7036,-92.6091,NA,Snapshot,No,No
-CZIIZD,NA,Universidad Autónoma De San Luis Potosí,,10000,MX,SL,4,,0,University,22.1434,-101.0142,NA,Snapshot,No,No
-NA,NA,Colección de Invertebrados de la Universidad de la Sierra,,5000,MX,SO,4,,0,University,29.8194,-109.6783,NA,Snapshot,No,No
-UACC,NA,Colección Entomológica Forestal Div. de Ciencias Forestales Universidad Autónoma Chapingo,,50000,MX,EM,4,,0,University,19.4909,-98.8841,NA,Snapshot,No,No
-CUAT,NA,Colección de Insectos de la Universidad Autónoma de Tamaulipas,,20000,MX,TM,4,,0,University,23.7324,-99.1446,NA,Snapshot,No,No
-CICC,NA,Colección de Insectos Campo Celaya INIFAP,,80000,MX,GT,4,,0,Referency,20.5792,-100.8198,NA,Snapshot,No,No
-NA,NA,Canadian National Collection of Insects,,17000000,CA,ON,1,,0,Government,45.3926,-75.7172,http://www.canacoll.org/,No,No,Yes
-BIOUG,BIOUG,University of Guelph,The Centre for Biodiversity Genomics,3000000,CA,ON,1,,0.5,University,43.5305,-80.2262,http://www.uoguelph.ca/debu/index.htm,Snapshot,No,Yes
-MGU,LEMQ,McGill University,Lyman Entomological Museum,2800000,CA,QC,2,,0.09,University,45.4059,-73.9389,http://lyman.mcgill.ca/,Snapshot,No,No
-NA,NA,University of Manitoba,J.B. Wallis Museum of Entomology,2000000,CA,MB,2,,0,University,49.806,-97.1379,http://www.wallisroughley.ca/,No,No,No
-NA,NA,Canadian Museum of Nature Insect Collection,,1538690,CA,ON,2,,0.01,Private,45.4118,-75.6906,http://www.nature.ca/en/research-collections/collections/animals,Snapshot,No,No
-UMBC,QMOR,University of Montreal,Collection Entomologique Ouellet-Robert,1500000,CA,QC,2,,0.03,University,45.5045,-73.6129,http://www.irbv.umontreal.ca/ouellet-robert,Snapshot,No,No
-UASM,,University of Alberta Museums,E. H. Strickland Entomological Museum,1100000,CA,AB,2,,0.31,Private,53.5293,-113.528,http://www.biology.museums.ualberta.ca/EHStricklandEntomologicalMuseum.aspx,Snapshot,No,Yes
-UBC,UBCZ,University of British Columbia,Spencer Entomological Collection,650000,CA,BC,3,,0.03,University,49.2632,-123.2505,http://data.canadensys.net/ipt/resource?r=ubc-entomology-collections,Snapshot,No,No
-NA,NA,Royal Alberta Museum ,,400000,CA,AB,3,,0,Private,53.5471,-113.4889,http://royalbcmuseum.bc.ca/nh-collections/entomology/,No,No,No
-NA,NA,New Brunswick Museum,,100000,CA,NB,3,,0.6,Private,45.2734,-66.065,https://www.nbm-mnb.ca/search-the-collections/,,,
-NA,NA,Laval University,,375000,CA,QC,3,,0,University,46.7817,-71.2747,NA,No,No,No
-NA,NA,Royal Ontario Museum,,300000,CA,ON,3,,0,Private,43.6677,-79.3946,https://www.rom.on.ca/en/collections-research?_ga=2.158480442.1415836621.1547315719-39921932.1547315719,No,No,No
-NA,NA,Royal British Columbia Museum ,Entomology Collection,250000,CA,BC,3,,0.04,Private,48.4194,-123.3674,http://www.royalsaskmuseum.ca/research-and-collections/biology/cory-sheffield,Snapshot,No,Yes
-NA,NA,Montreal Insectarium,,225000,CA,QC,3,,0,Private,45.561,-73.5578,http://museesmontreal.org/en/museums/montreal-insectarium-space-for-life,No,No,No
-NA,NA,Bishop's University ,Natural History Museum,200000,CA,QC,3,,0,Private,45.3649,-71.8468,https://www.rom.on.ca/en/collections-research,No,No,No
-NA,NA,Royal Saskatchewan Museum,,200000,CA,SK,3,,0,Private,50.4398,-104.6165,https://royalsaskmuseum.ca/rsm/research/biology/cory-sheffield,No,No,No
-NA,NA,Manitoba Museum of Man and Nature,,75000,CA,MB,4,,0.39,Private,49.9,-97.1364,https://manitobamuseum.ca/main/,No,No,No
-NA,NA,McMaster University ,McMaster University Collection,75000,CA,ON,4,,0.01,University,43.2628,-79.9228,NA,No,No,No
-UWO,NA,University of Western Ontario,University of Western Ontario Collection,75000,CA,ON,4,,0.01,University,43.0075,-81.2756,https://www.uwo.ca/biology/research/biology_facilities/zoological_collections.html,Snapshot,No,Yes
+Inst code,Institution,CollectionCode,Collection Name,Size,Country,State,Collection size category (Tier),,% Collection Records Public,Collection Type ,Collection latitude,Collection longitude,Website,SCAN,iDigBio,GBIF
+KU,University of Kansas,SEMC,Natural History Museum Entomology Division,4900000,USA,KS,1,,0.28,University,38.9548,-95.2561,https://biodiversity.ku.edu/entomology,Snapshot,Yes,Yes
+OSU,Ohio State University,OSU,C.A. Triplehorn Insect Collection,3600000,USA,OH,1,,0.14,University,39.9971,-83.044,wasps.osu.edu,Snapshot,Yes,Yes
+INHS,Illinois Natural History Survey ,INHSIC,Insect Collection,7000000,USA,IL,1,,0.09,University,40.0928,-88.239,http://wwx.inhs.illinois.edu/collections/insect,Snapshot,Yes,Yes
+CAS,California Academy of Sciences ,ENT,Entomology,16000000,USA,CA,1,,0.06,Private,37.7695,-122.4662,http://www.calacademy.org/scientists/entomology,Snapshot,Yes,Yes
+EMEC,University of California-Berkeley,EMEC,Essig Museum of Entomology,5100000,USA,CA,1,,0.06,University,37.8714,-122.2628,http://essig.berkeley.edu,Snapshot,Yes,Yes
+CSU,Colorado State University,CSUC, C.P. Gillette Museum of Arthropod Diversity,3600000,USA,CO,1,,0.05,University,40.5774,-105.0802,http://bspm.agsci.colostate.edu/01-2/gillette-museum/,Live,Yes,Yes
+MCZ,Harvard University ,NA,Museum of Comparative Zoology,8513000,USA,MA,1,,0.05,University,42.3789,-71.1152,http://www.mcz.harvard.edu/about/index.html,Snapshot,Yes,Yes
+LACM,Natural History Museum of Los Angeles County,LACMEC,,5800000,USA,CA,1,,0.03,Private,34.0169,-118.289,http://www.nhm.org/site/research-collections/entomology,Snapshot,Yes,Yes
+FMNH,Field Museum of Natural History ,FMNHINS,"Collection of Insects, Arachnids, and Myriapods",12000000,USA,IL,1,,0.03,Private,41.8663,-87.617,http://www.fieldmuseum.org/science/research/area/insects-arachnids-and-myriapods,Snapshot,Yes,Yes
+AMNH,American Museum of Natural History,NA,,18072585,USA,NY,1,,0.03,Private,40.7813,-73.9739,https://www.amnh.org/our-research/invertebrate-zoology,Snapshot,Yes,Yes
+UCR,University of California-Riverside ,NA,UC Riverside Entomology Research Museum,3000000,USA,CA,1,,0.03,University,33.9701,-117.326,https://entmuseum.ucr.edu/,Live,Yes,Yes
+ANSP,Academy of Natural Sciences ,ENT,Entomology Collection,3500000,USA,PA,1,,0.02,University,39.9564,-75.1793,http://www.ansp.org,Live,Yes,Yes
+USNM,United States National Museum ,USNMENT,Entomology Collections,35000000,USA,DC,1,,0.02,Government,38.8913,-77.0261,http://entomology.si.edu/default.html,Live,Yes,Yes
+HSMNCH,Bernice P. Bishop Museum,BPBM,,14500000,USA,HI,1,,0.01,Private,21.3329,-157.8706,https://www.bishopmuseum.org/,Snapshot,Yes,Yes
+UCD,University of California-Davis,BMEC,R. M. Bohart Museum of Entomology,7100000,USA,CA,1,,0.01,University,38.5353,-121.7523,http://Bohart.ucdavis.edu,Live,Yes,No
+CUIC,Cornell University,NA,Insect Collection,7000000,USA,NY,1,,0.01,University,42.4475,-76.4805,http://cuic.entomology.cornell.edu/,No,No,No
+UMSP,University of Minnesota ,UMSP,Insect Collection,3877000,USA,MN,1,,0.01,University,44.988,-93.1837,http://insectcollection.umn.edu/,Live,Yes,No
+FLMNH,University of Florida ,MGCL,"Florida Museum of Natural History, McGuire Center for Lepidoptera and Biodiversity",8200000,USA,FL,1,,0,University,29.6358,-82.3736,www.flmnh.ufl.edu/mcguire,Live,Yes,No
+WIS,University of Wisconsin ,WIRC,Wisconsin Insect Research Collection,3000000,USA,WI,1,,0,University,43.0757,-89.4133,http://labs.russell.wisc.edu/wirc/,Snapshot,Yes,No
+CMNH,Carnegie Museum of Natural History,NA,,7400000,USA,PA,1,,0,Private,40.4433,-79.9505,https://carnegiemnh.org/researcher/sections/invertebrate-zoology/,No,No,No
+FSCA,Florida State Collection of Arthropods,NA,,9000000,USA,FL,1,,0,University,29.6347,-82.3715,http://www.fsca-dpi.org/,No,No,No
+UMMC,University of Michigan Musem of Zoology,NA,Insect Division,3500000,USA,MI,1,,0,University,42.2761,-83.7413,https://lsa.umich.edu/ummz/insects.html,No,Yes,No
+UMRM,University of Missouri-Columbia ,NA,Enns Entomology Museum,5750000,USA,MO,1,,0,University,38.9407,-92.3277,https://museum.insecta.missouri.edu/,No,No,No
+USDA-ARS,USDA Bee Biology and Systematics Laboratory,ARS,,1500000,USA,UT,2,,0.42,Government,41.7451,-111.81,https://www.ars.usda.gov/pacific-west-area/logan-ut/pollinating-insect-biology-management-systematics-research/,Snapshot,Yes,Yes
+TAMU,Texas A&M University,TAMUIC,Insect Collection,2800000,USA,TX,2,,0.2,University,30.6112,-96.3481,http://insects.tamu.edu/tamuinsectcollection/,Snapshot,Yes,Yes
+MISSA,Mississippi State University,MEM,Mississippi Entomological Museum,1100000,USA,MS,2,,0.2,University,33.4536,-88.8015,http://mississippientomologicalmuseum.org.msstate.edu/,Live,Yes,Yes
+YPM,Yale Peabody Museum ,ENT,Entomology Division,1600000,USA,CT,2,,0.19,University,41.3108,-72.9581,http://peabody.yale.edu/,Snapshot,Yes,Yes
+MSU,Michigan State University ,MSUC,The Albert J. Cook Arthropod Research Collection,1500000,USA,MI,2,,0.14,University,42.7311,-84.4773,http://www.arc.ent.msu.edu/,Live,Yes,Yes
+TTU,Texas Tech University,TTU-Z,Invertebrate Zoology,1250000,USA,TX,2,,0.14,University,33.5899,-101.886,http://www.nsrl.ttu.edu/collections/Invertebrates/index.htm,Live,Yes,Yes
+DMNS,Denver Museum of Nature & Science ,Ento & Arach,Entomology & Arachnology Collections,1346000,USA,CO,2,,0.1,Private,39.7479,-104.9431,http://www.dmns.org/science/integrative-collections/dmns-zoology-collections/,Live,Yes,Yes
+CLEV,Cleveland Museum of Natural History ,CMNHENT,Invertebrate Zoology Collection,1000000,USA,OH,2,,0.1,Private,41.5116,-81.6131,http://www.cmnh.org/c-r/invertebrate-zoology,Snapshot,Yes,Yes
+OSAC,Oregon State University ,OSAC,Arthropod Collection,2600000,USA,OR,2,,0.08,University,44.567,-123.2818,http://osac.oregonstate.edu,Snapshot,Yes,Yes
+NCSU,North Carolina State University ,NA,Insect Collection,1750000,USA,NC,2,,0.07,University,35.7872,-78.6721,https://www.cals.ncsu.edu/entomology/museum/index.php,No,No,No
+BYU,Brigham Young University ,BYUC,Arthropod Museum,2100000,USA,UT,2,,0.06,University,40.2534,-111.6474,http://mlbean.byu.edu/,Live,Yes,Yes
+UA,University of Arizona ,UAIC,Insect Collection,2000000,USA,AZ,2,,0.05,University,32.2311,110.9541,http://ag.arizona.edu/ento/UAIC/,Live,Yes,Yes
+ASU,Arizona State University ,ASUHIC,Hasbrouck Insect Collection,1950000,USA,AZ,2,,0.05,University,33.42,-111.933,http://taxonbytes.org/asuhic/,Live,Yes,Yes
+PSUC,Penn State University,ENTO,Frost Entomological Museum,2100000,USA,PA,2,,0.03,University,40.8029,-77.8624,http://www.ento.psu.edu/home/frost/,Snapshot,Yes,No
+UI,University of Idaho ,WFBM,William F. Barr Entomological Museum,1000000,USA,ID,2,,0.03,University,46.7291,-117.0146,https://www.uidaho.edu/cals/pses/research-and-extension/entomological-museum,Live,Yes,Yes
+MPM,Milwaukee Public Museum ,MPM ENT,Invertebrate Zoology-Insect Collection,1000000,USA,WI,2,,0.02,Private,43.0407,-87.9213,http://www.mpm.edu/research-collections/invertebrate-zoology,Snapshot,Yes,Yes
+PU,Purdue University,PERC,Purdue Entomological Research Collection,1500000,USA,IN,2,,0.02,University,40.4236,-86.9169,http://www.entm.purdue.edu/PERC/,Live,Yes,Yes
+CSCA,California State Collection of Arthropods,NA,,1500000,USA,CA,2,,0.02,Government,38.5747,-121.492,https://www.cdfa.ca.gov/plant/ppd/csca.html,No,No,No
+GMNH,University of Georgia ,UGCA,Collection of Arthropods,2000000,USA,GA,2,,0.01,University,33.9451,-83.3724,http://blog.caes.uga.edu/ugca/,Live,Yes,No
+SDSU,South Dakota State University,SMIRC,The Severin-McDaniel Insect Research Collection,1200000,USA,SD,2,,0.01,University,44.3185,-96.7878,https://www.sdstate.edu/agronomy-horticulture-plant-science/severin-mcdaniel-insect-research-collection,Live,Yes,No
+NYSM,New York State Museum,NA,Entomology,1100000,USA,NY,2,,0,Private,42.6484,-73.7616,http://www.nysm.nysed.gov/research-collections/biology/entomology/collections,No,No,No
+CUAC,Clemson University ,CUAC,Arthropod Collection,1300000,USA,SC,2,,0,University,34.676,-82.8364,https://sites.google.com/site/clemsonarthropodcollection/,Live,Yes,No
+WSU,Washington State University,NA,James Museum,1280000,USA,WA,2,,0,University,46.7308,-117.1598,http://entomology.wsu.edu/outreach/m-t-james-museum/,Snapshot,Yes,Yes
+ISUI,Iowa State University ,NA,Insect Collection,1000000,USA,IA,2,,0,University,42.0302,-93.6461,https://www.ent.iastate.edu/insectcollection/,No,No,No
+USU,Utah State University,NA,,2100000,USA,UT,2,,0,University,41.7433,-111.811,http://www.biology.usu.edu/research/research_centers/insect-collection,Snapshot,No,No
+NA,California Polytechnic University San Luis Obispo,NA,,1000000,USA,CA,2,,0,University,35.3004,-120.6601,https://bio.calpoly.edu/content/facilities,No,No,No
+LSU,Louisiana State University,NA,Arthropod Museum,1000000,USA,LA,2,,0,University,30.4155,-91.1798,http://www.lsuinsects.org/about.html,No,No,No
+MONT,Montana State University,MTEC,Entomology Collection,2000000,USA,MT,2,,0,University,45.6674,-111.0545,https://portal.nifa.usda.gov/web/crisprojectpages/0098367-curation-of-the-msu-entomology-collection.html,No,No,No
+NDA,North Dakota State University ,NA,Insect Reference Collection,1070000,USA,ND,2,,0,University,46.8953,-96.8037,https://www.ndsu.edu/entomology/research/facilities/,No,No,No
+SJSC,San Jose State University,NA,J. Gordon Edwards Museum of Entomology,1000000,USA,CA,2,,0,University,37.3353,-121.8827,http://www.sjsu.edu/biology/research/facilities_collections/,No,No,No
+UNL,University of Nebraska State Museum,NA, Insect Division,2000000,USA,NE,2,,0,University,37.7206,-97.2936,http://museum.unl.edu/research/entomology/personnel.html,Snapshot,No,No
+TNHC,University of Texas- Austin,NA,,1000000,USA,TX,2,,0,University,30.2853,-97.7395,https://biodiversity.utexas.edu/collections/entomology,Snapshot,No,No
+USU,Utah State University ,NA,American Entomological Institute,1400000,USA,UT,2,,0,University,41.7433,-111.811,http://www.vmnh.net/,No,No,No
+VMNH,Virginia Museum of Natural History,NA,Entomology,1500000,USA,VA,2,,0,Private,36.6866,-79.8634,https://www.entm.purdue.edu/PERC/,No,No,No
+USGS,USGS Native Bee Inventory and Monitoring Lab,PWRC-US-CA-MX,,275000,USA,MD,3,,0.97,Government,39.0542,-76.8171,https://www.usgs.gov/centers/pwrc/science/native-bee-inventory-and-monitoring-lab?qt-science_center_objects=0#qt-science_center_objects,Snapshot,Yes,No
+UCFC,University of Central Florida,SMFCA,Stuart M. Fullerton Collection of Arthropods,650000,USA,FL,3,,0.96,University,28.6024,-81.2001,https://sciences.ucf.edu/biology/bugcloset/,Snapshot,Yes,No
+UAM,University of Alaska,UAM_ENT,UAM Insect Collection,500000,USA,AK,3,,0.73,University,64.8561,-147.831,http://www.uaf.edu/museum/collections/ento/,Snapshot,Yes,Yes
+UHIM,University of Hawaii Insect Museum,SEMC,,250000,USA,HI,3,,0.5,University,21.3016,-157.8166,http://www.ctahr.hawaii.edu/insectmuseum/,Live,Yes,No
+NAUF,Northern Arizona University,CPMAB,Colorado Plateau Museum of Arthropod Biodiversity,250000,USA,AZ,3,,0.28,University,35.1917,-111.6538,http://www.bugs.nau.edu/,Live,Yes,Yes
+OMNH,Oklahoma State University,RINVRT,The Sam Noble Museum Department of Recent Invertebrates,550000,USA,OK,3,,0.26,University,35.1943,-97.4489,http://samnoblemuseum.ou.edu/collections-and-research/recent-invertebrates/,Snapshot,Yes,No
+UNM,University of New Mexico ,MSBA,"Museum of Southwestern Biology, Division of Arthropods",200000,USA,NM,3,,0.23,University,35.0833,-106.6217,http://msb.unm.edu/arthropods/,Live,Yes,Yes
+SBMNH,Santa Barbara Museum of Natural History ,SBMNHENT,Entomology Collection,500000,USA,CA,3,,0.23,Private,34.441,-119.714,http://www.sbnature.org/,Live,Yes,Yes
+UMNH,University of Utah,ENT,Entomology Collection at the Natural History Museum of Utah,250000,USA,UT,3,,0.21,University,40.7643,-111.8229,https://nhmu.utah.edu/collections/entomology,Live,Yes,Yes
+NMSU,New Mexico State University,NA,Collection of Arthropods,500000,USA,NM,3,,0.18,University,32.2825,-106.7565,http://arthropods.nmsu.edu/,Live,Yes,Yes
+UD,University of Delaware ,UDCC,Insect Research Collection,350000,USA,DE,3,,0.13,University,39.6653,-75.7501,http://ag.udel.edu/research/planthoppers/index.html,Live,Yes,Yes
+ABS,Archbold Biological Station ,ARTHARCH,Arthropod Collection,250000,USA,FL,3,,0.13,Private,27.195,-81.373,http://www.archbold-station.org/html/research/entom/arthcoll.html,Snapshot,Yes,Yes
+UCM,University of Colorado ,UCMC,Museum of Natural History Entomology Collection,800000,USA,CO,3,,0.13,University,40.0064,-105.2729,http://www.colorado.edu/cumuseum/research-collections/entomology,Live,Yes,Yes
+UCMS,University of Connecticut ,NA,Biodiversity Research Collections - Insects,200000,USA,CT,3,,0.11,University,41.8077,-72.254,http://biodiversity.uconn.edu/insects/,No,No,No
+KSU,Kansas State University ,MEPAR,Museum of Entomological and Prairie Arthropod Research,300000,USA,KS,3,,0.06,University,39.1971,-96.5843,http://entomology.k-state.edu/department-info/facilities/insect-museum/,Snapshot,Yes,Yes
+SIIS,Staten Island Institute of Arts and Sciences,NA,Staten Island Museum - Entomology,500000,USA,NY,3,,0.06,Private,40.6441,-74.1022,http://www.statenislandmuseum.org/collections/natural-science-collection,No,No,No
+RUAC,Rutgers University ,NA,Entomological Museum,200000,USA,NJ,3,,0.03,University,40.4818,-74.4395,http://entomology.rutgers.edu/museum/,No,No,No
+VPI,Virginia Polytechnic Institute ,VTEC,Virginia Tech Insect Collection,500000,USA,VI,3,,0.02,University,37.2249,-80.4238,http://collection.ento.vt.edu/,Live,Yes,No
+UVM,University of Vermont ,VTZT,Zadock Thompson Zoological Collection-Invertebrates,300000,USA,VA,3,,0.01,University,44.4803,-73.1985,http://www.uvmzoo.org/,Live,Yes,No
+UMA,University of Massachusetts,NA,,100000,USA,MA,3,,0.01,University,42.3912,-72.5267,https://bcrc.bio.umass.edu/nhc/collections/insect-collection,No,No,No
+UNHP,University of New Hampshire ,NA,Insect and Arachnid Collections,700000,USA,NH,3,,0.01,University,43.1348,-70.9329,http://insectcoll.unh.edu,No,No,No
+UNR,University of Nevada ,NA,"Reno, Museum of Natural History, Entomology Research Collection",400000,USA,NV,3,,0,University,39.5377,-119.8121,http://www.naturalhistory.unr.edu/research/,No,No,No
+MNA,Museum of Northern Arizona ,WACA,,300000,USA,AZ,3,,0,University,35.2353,-111.6622,https://musnaz.org/wp-content/uploads/2017/10/collection-size-10-2017.pdf,Live,No,No
+SDNH,San Diego Natural History Museum,NA,Entomology,900000,USA,CA,3,,0,Private,32.7321,-117.1475,http://www.sdnhm.org/science/entomology/collections/,No,No,No
+UTEP,University of Texas - El Paso,NA,,325000,USA,TX,3,,0,University,31.7709,-106.5046,https://www.utep.edu/biodiversity/collections/entomology.html,Snapshot,Yes,Yes
+AUEM,Auburn University,NA,Museum of Natural History,100000,USA,AL,3,,0,University,32.5988,-85.483,http://aumnh.org,No,No,No
+NA,Buffalo Museum of Science,NA,Entomology,153000,USA,NY,3,,0,University,42.9057,-78.8434,https://www.sciencebuff.org/about-us/,No,No,No
+CNHM,Cincinnati Museum of Natural History,NA,,100000,USA,OH,3,,0,Private,39.11,-84.5377,https://www.boonshoftmuseum.org/experience-more/departments/collections1/,No,No,No
+NA,Crane Hollow Preserve,NA,,120000,USA,OH,3,,0,Private,39.4801,-82.5839,http://cranehollow.org/research.html,No,No,No
+NA,Dayton Society of Natural History’s Collection,NA,,200000,USA,OH,3,,0,Private,39.7886,-84.2017,http://www.botanicgardens.org/science-research/our-collections,No,No,No
+NA,Fort Hays State University,NA,Stenberg Museum - Entomology,100000,USA,KS,3,,0,Private,38.8895,-99.2998,http://sternberg.fhsu.edu/research-collections/collections/entomology/,No,No,No
+NA,Fresno County Department of Agriculture,NA,,100000,USA,CA,3,,0,Government,36.7263,-119.7459,https://www.co.fresno.ca.us/departments/agricultural-commissioner/pest-detection-and-exclusion/staff-entomologist,No,No,No
+NA,Georgia Southern University,NA,,520000,USA,GA,3,,0,University,32.4223,-81.7874,http://cosm.georgiasouthern.edu/icps/collections/entomology-collection/,No,No,No
+NA,Illinois State University ,NA,Entomological Research Collection,400000,USA,IL,3,,0,University,40.5125,-88.9946,NA,No,No,No
+NA,Maine State Museum,NA,,107000,USA,ME,3,,0,Private,44.3059,-69.7828,https://mainestatemuseum.org/collections/,No,No,No
+MNHM,May Natural History Museum,NA,,100000,USA,CO,3,,0,Private,38.7053,-104.8408,https://coloradospringsbugmuseum.com/,No,No,No
+NA,University of Puerto Rico ,NA,Museo de Entomología y Biodiversidad Tropical Collection,200000,USA,PR,3,,0,University,18.3958,-66.0627,NA,No,No,No
+NA,Nevada State Department of Agriculture,NA,Entomology,275000,USA,NV,3,,0,University,39.5312,-119.7724,http://museums.nevadaculture.org/nsmlv-home,No,No,No
+NA,Sam Houston State University,NA,,400000,USA,TX,3,,0,University,30.7132,-95.5504,NA,No,No,No
+NA,Southern Illinois University ,NA,Insect Collection,325000,USA,IL,3,,0,University,37.713,-89.2223,http://mypage.siu.edu/waring/collections.html,No,No,No
+NA,Southwestern Oklahoma State University,NA,,100000,USA,OK,3,,0,University,35.5356,-98.7078,NA,No,No,No
+NA,University of Arkansas ,NA,Arthropod Museum ,750000,USA,AR,3,,0,University,36.0678,-94.1737,http://www.uark.edu/ua/arthmuse/,No,No,No
+NA,University of Connecticut ,NA,Army Ant & Guest Collection,100000,USA,CN,3,,0,University,41.8077,-72.254,http://biodiversity.uconn.edu/ant-guests/,No,No,No
+NA,University of Notre Dame ,NA,Arthropod Collection,230000,USA,IN,3,,0,University,41.7056,-86.2353,https://biodiversity.nd.edu/collections/arthropod-collection/,No,No,No
+INVCOL,University of Puerto Rico ,NA,Mayaguez Invertebrate Collection,130000,USA,PR,3,,0.01,University,18.2109,-67.1409,https://www.uprm.edu/invcol/,Live,No,No
+NA,University of Rhode Island,NA,,200000,USA,RI,3,,0,University,41.4861,-71.5309, http://web.uri.edu/pse/uri-insect-collection/ ,No,No,No
+UWBM,University of Washington,NA,The Burke Museum’s Arachnology and Entomology Collections ,346000,USA,WA,3,,0,University,47.6606,-122.3104,http://www.burkemuseum.org/research-and-collections/arachnology-and-entomology/collections,No,No,No
+OSH,University of Wisconsin Oshkosh,NA,,200000,USA,WI,3,,0,University,44.0252,-88.5511,http://www.uwosh.edu/biology/department-facilities/insect-collection-and-museum-1,No,No,No
+UWY,University of Wyoming ,NA,Insect Museum,250000,USA,WY,3,,0,University,41.3128,105.5838,http://www.uwyo.edu/esm/entomology/entomology-museum-homepage.htm,No,No,No
+PPCD,West Virginia Department of Agriculture ,NA,Insect collection,250000,USA,WV,3,,0,University,38.3369,-81.6115,https://agriculture.wv.gov/divisions/plantindustries/Pages/default.aspx,No,No,No
+GUAM,University of Guam ,ESUG,Insect Collection,35000,USA,GM,4,,0.99,University,13.4305,144.8004,https://cnas-re.uog.edu/expertise/cnas-entomology/#,Live,Yes,No
+UCSB,University of California-Santa Barbara ,IZC,Invertebrate Zoology Collection,9200,USA,CA,4,,0.95,University,34.4131,-119.8491,http://ccber.ucsb.edu/collections/zoological/arthropods,Snapshot,Yes,No
+UK,University of Kentucky,NA,Department of Entomology Collection,50000,USA,KY,4,,0.86,University,38.0287,-84.5092,https://entomology.ca.uky.edu/,No,No,No
+UTC,University of Tennessee at Chattanooga,UTCI,,30000,USA,TN,4,,0.76,University,35.0477,-85.2964,http://www.utc.edu/biology-geology-environmental-science/facilities/facilities.php,Live,Yes,Yes
+UCSC,University of California Santa Cruz,RMIC,The Kenneth S. Norris Center for Natural History,92000,USA,CA,4,,0.74,University,36.9986,-122.0602,http://norriscenter.ucsc.edu/,Live,Yes,Yes
+DBG,Denver Botanic Gardens,DBGA, Collection of Arthropods,1000,USA,CO,4,,0.73,University,39.7325,-104.961,http://www.dmns.org/science/integrative-collections/dmns-zoology-collections/,Live,Yes,Yes
+DUGWAY,Dugway Proving Ground ,DUG-ENT,Natural History Collection,2000,USA,UT,4,,0.61,University,40.2166,-112.753,http://www.dugway.army.mil/,Live,Yes,Yes
+WVW,West Virginia Wesleyan College ,ENT,Katharine B. Gregg Orchid Pollinator Collection,500,USA,WV,4,,0.59,University,38.9871,-80.2236,NA,No,No,No
+UWYMED,University of Wyoming ,ENT,Dillon Lab Insect Collection,30000,USA,WY,4,,0.55,University,41.3128,105.5838,http://www.uwyo.edu/mdillon/,Live,Yes,Yes
+NA,Lincoln University,NA,,3000,USA,PA,4,,0.52,University,39.8072,-75.9273,NA,No,No,No
+UFIFAS,University of Florida ,NA,Forestry Entomology Collection,50000,USA,FL,4,,0.44,University,,,,,,
+UPRM,University of Puerto Rico Rio Piedras Campus,MEBT-UPR,Zoology Museum,15500,USA,PR,4,,0.44,University,18.4042,-66.0511,http://mzoologia.uprrp.edu/,Live,No,No
+MAJC,M. Andrew Johnston Insect Research Collection,MAJC,,10000,USA,AZ,4,,0.38,4,33.423,-111.933,https://desertbeetles.org/majc/,Live,Yes,Yes
+CHAS,Chicago Academy of Sciences,ENT,,70000,USA,IL,4,,0.37,University,41.9546,-87.6733,http://naturemuseum.org/the-museum/collections/invertebrates,Snapshot,Yes,No
+RMBL,Rocky Mountain Biological Laboratory ,NA,,5000,USA,CO,4,,0.37,Private,38.9585,-106.9878,http://www.rmbl.org/,No,No,No
+TTRSNHM,Tall Timbers Research Station ,TTRSLEP (24626),Natural History Museum,4000,USA,FL,4,,0.34,Private,30.6561,-84.2086,http://talltimbers.org/biological-collections/,Live,Yes,Yes
+UMAM,University of Massachusetts Museum ,NA,,20000,USA,MA,4,,0.33,University,42.315,-71.0377,https://bcrc.bio.umass.edu/nhc/collections/insect-collection,No,No,No
+DCH,The Davidson College ,DCEC,Entomology Collection,20000,USA,NC,4,,0.33,University,35.5015,-80.8447,http://insects.davidson.edu/,Live,Yes,Yes
+GPSC,Kutztown University,NA,Gregory P. Setliff Collection,2000,USA,PA,4,,0.29,University,40.5121,-75.7849,http://www.kutztown.edu/acad/biology/,Live,Yes,Yes
+SSAC,Salvatore S. Anzaldo Collection,SSAC,,10000,USA,AZ,4,,0.28,Research,33.42,-111.933,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=113,Live,Yes,No
+UKY-HIC,University of Kentucky ,HIC,Hymenoptera Institute Collection,70000,USA,KY,4,,0.25,University,38.047,-84.5041,http://sharkeylab.org/sharkeylab/sharkeyProjects.html,Live,Yes,Yes
+BLM,BLM Mother Lode Field Office,MLFO,The Bees of Pine Hill Preserve Collection,1000,USA,CA,4,,0.23,University,38.71,-120.99,http://www.pinehillpreserve.org/,Live,Yes,Yes
+CAES,Connecticut Agricultural Experiment Station ,NA,,50000,USA,CT,4,,0.21,Government,41.3312,-72.9196,https://www.ct.gov/caes/cwp/view.asp?a=2826&q=448278&caesNav=|,No,No,No
+PDA,Pennsylvania Department of Agriculture ,NA,,10000,USA,PA,4,,0.15,Government,40.2875,-76.881,https://www.agriculture.pa.gov/Plants_Land_Water/PlantIndustry/Entomology/Pages/default.aspx,No,No,No
+DART,Dartmouth College,NA,Insect Collection ,2000,USA,NH,4,,0.13,University,43.7052,-72.2887,NA,No,No,No
+BRFC,Black Rock Forest ,NA,Insect Collection ,2000,USA,NY,4,,0.13,University,41.417,-74.0107,https://blackrockforest.org/research/research-data,No,No,No
+WICH,Wichita State University ,WICHI,Insect Collection ,5000,USA,NE,4,,0.09,University,37.7207,-97.2938,https://www.wichita.edu/academics/fairmount_college_of_liberal_arts_and_sciences/bioscience/people/faculty/mJameson/mJamesonpage.php,Live,Yes,No
+UDAF,Utah Department of Agriculture and Food ,UDAFE,Entomology Collection,5000,USA,UT,4,,0.09,Government,40.7769,-111.9381,http://ag.utah.gov/,Live,Yes,No
+SDSU,San Diego State University ,TAC,Terrestrial Arthropods Collection,50000,USA,CA,4,,0.08,University,32.7774,-117.0719,http://www.sci.sdsu.edu/collections/terrestrialarthropods.htm,Live,Yes,No
+HDOA,Hawaii Department of Agriculture Plant Pest Control Branch,NA,,5000,USA,HI,4,,0.06,Government,21.3205,-157.887,http://hdoa.hawaii.gov/pi/ppc/,No,No,No
+BROW,The Broward College ,BCIC,Insect Collection,30000,USA,FL,4,,0.04,University,26.0798,-80.2365,http://www.broward.edu/academics/programs/environmental/environmentalscience/Pages/BCIC.aspx,Live,Yes,Yes
+NAUF,Northern Arizona University,NAUF5F,Forest Entomology Collection,10000,USA,AZ,4,,0.03,University,35.1761,-111.6573,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=177,Live,No,No
+KKIC,Kojun Kanda Insect Research Collection,KKIC,,10000,USA,AZ,4,,0.03,4,35.1919,-111.6533,http://symbiota4.acis.ufl.edu/scan/portal/collections/misc/collprofiles.php?collid=169,Live,No,No
+SWRS,Southwestern Research Station of the AMNH ,NA,,25000,USA,AZ,4,,0.02,Private,31.8832,-109.2056,https://www.amnh.org/our-research/southwestern-research-station,No,No,No
+DAR,University of North Dakota ,NA,Insect Collection.,10000,USA,ND,4,,0.02,University,47.9194,-97.0673,https://www.ndsu.edu/entomology/research/facilities/,No,No,No
+WWU,Western Washington University ,WWUC,Insect Collection,50000,USA,WA,4,,0.01,University,48.73,-122.49,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=67,Live,Yes,No
+LSU,Maine Forest Service ,NA,Insect Collection,50000,USA,ME,4,,0,University,44.3205,-69.7745,https://www.informe.org/doc/collcover.htm,No,No,No
+CSUEB,California State University East Bay ,CSUEBNHM,Natural History Museum,50000,USA,CA,4,,0,University,37.6577,-122.0564,NA,Live,Yes,Yes
+SNHM,The Schiele Museum of Natural History,NA,,50000,USA,NC,4,,0,Private,35.2533,-81.1584,http://www.schielemuseum.org/collections-research.html,No,No,No
+NA,Colorado College ,NA,Arthropod Collection,21760,USA,CO,4,,0,University,38.8466,-104.8244,https://www.coloradocollege.edu/academics/dept/obe/BiodiversityCollections/entomology-collection.html,No,No,No
+ODA,Oregon Department of Agriculture ,NA,,95000,USA,OR,4,,0,University,44.9439,-123.0263,https://www.oregon.gov/ODA/programs/IPPM/InsectsSpiders/Pages/ODAInsectCollection.aspx,No,No,No
+NA,Alabama Museum of Natural History,NA,,10000,USA,AL,4,,0,University,33.2121,-87.5438,https://almnh.ua.edu/collections-and-research.html,No,No,No
+NA,American Samoa Community College,NA,,2000,USA,AS,4,,0,University,-14.3224,-170.7419,NA,No,No,No
+NA,Butler University,NA,Insect Collection,8000,USA,IN,4,,0,University,39.838,-86.1715,NA,No,No,No
+CPUP,California State Polytechnic University ,NA,Pomona Biodiversity Collections - Entomology,11000,USA,CA,4,,0,University,34.0581,-117.8251,https://www.cpp.edu/~sci/biological-sciences/bio-collection.shtml,No,No,No
+NA,Chadron State College,NA,Entomology Collection,1000,USA,NB,4,,0,University,42.8197,-103.0004,NA,No,No,No
+NA,Ciegler Collection,NA,,12000,USA,SC,4,,0,University,34.676,-82.8364,NA,No,No,No
+NA,College of Charleston,NA,,50000,USA,SC,4,,0,University,32.7832,-79.9374,NA,No,No,No
+NA,Dixie State University,NA,Natural Science Museum,75000,USA,UT,4,,0,University,37.1035,-113.5653,NA,No,No,No
+NA,Earlham College,NA,Joseph Moore Museum,33000,USA,IN,4,,0,University,39.8242,-84.9119,http://earlham.edu/joseph-moore-museum/collections/,No,No,No
+EKUY,Eastern Kentucky University ,NA,Branson Museum of Zoology - Arthropods,50000,USA,KY,4,,0,University,37.7426,-84.3009,http://biology.eku.edu/,Live,Yes,Yes
+NA,Eastern New Mexico University,NA,"Dr. Antonio ""Tony"" Gennaro Natural History Museum",2000,USA,NM,4,,0,University,34.1791,-103.3476,https://www.enmu.edu/about/general-information/local-events-and-info/arts-and-culture/natural-history-museum,No,No,No
+NA,Everhart Museum of Natural History,NA,,800,USA,PA,4,,0,University,41.4008,-75.6442,http://everhart-museum.org/,No,No,No
+NA,Florissant Fossil Beds National Monument,NA,,10630,USA,CO,4,,0,University,38.9137,-105.2857,NA,No,No,No
+NA,Fort Lewis College,NA,,2000,USA,CO,4,,0,University,37.2752,-107.87,NA,No,No,No
+GCNP,Grand Canyon National Park ,NA,Entomology Collection,10000,USA,AZ,4,,0,Government,36.0508,-112.1342,https://www.nps.gov/grca/learn/historyculture/muscol.htm,No,No,No
+HNPH,Haleakala National Park,NA,,5000,USA,HI,4,,0,Government,20.7595,-156.2468,https://www.nps.gov/hale/learn/historyculture/entomological-collection.htm,No,No,No
+NA,Illinois State Museum,NA,,55000,USA,IL,4,,0,Government,39.7969,-89.6554,http://www.museum.state.il.us/ismdepts/zoology/collections.html,No,No,No
+NA,James Madison University,NA,,20000,USA,VA,4,,0,University,38.4379,-78.8713,NA,No,No,No
+JTNM,Joshua Tree National Monument,NA,,1039,USA,CA,4,,0,University,34.129,-116.0376,https://www.nps.gov/jotr/learn/historyculture/collections.htm,No,No,No
+KNWR,Kenai National Wildlife Refuge,NA,,80000,USA,AK,4,,0.01,Government,60.4749,-151.0843,https://www.fws.gov/refuge/Kenai/what_we_do/science/specimens.html,No,No,Yes
+NA,Mississippi Museum of Natural Science,NA,,6000,USA,MS,4,,0,Private,32.3246,-90.1568,https://www.mdwfp.com/museum/seek-study/bio-collections/insects/,No,No,No
+NA,Museum of Science & History of Jacksonville,NA,,5000,USA,FL,4,,0,Private,30.319,-81.6596,http://themosh.org/,No,No,No
+NA,Natural History Institute at Prescott College,NA,,2000,USA,AZ,4,,0,University,34.5429,-112.468,http://naturalhistoryinstitute.org/collections/,No,No,No
+NA,North Carolina Museum of Natural Resources,NA,Naturalist Center,2500,USA,NC,4,,0,University,35.7823,-78.6397,http://naturalsciences.org/,No,No,No
+NJSM,New Jersey State Museum,NA,Entomology,50000,USA,NJ,4,,0,University,40.2212,-74.7736,https://www.nj.gov/state/museum/dos_museum_collection.html,No,No,No
+NA,New Mexico Museum of Natural History and Science,NA,,7000,USA,NM,4,,0,Private,35.0981,-106.6654,http://www.nmnaturalhistory.org/bioscience/bioscience-collections,No,No,No
+NA,Northern Michigan University,NA,,30000,USA,MI,4,,0,University,46.5587,-87.4062,https://www.nmu.edu/biology/zoological-collections,No,No,No
+NA,Perot Museum of Nature and Science,NA,,25000,USA,TX,4,,0,Private,32.7866,-96.8068,https://www.perotmuseum.org/,No,No,No
+NA,Putnam Museum and Science Center,NA,,12000,USA,IA,4,,0,University,41.5309,-90.6023,http://www.putnam.org/Collections-(1)/Overview,No,No,No
+NA,South Carolina State Museum,NA,,24000,USA,SC,4,,0,University,33.9991,-81.0481,http://www.sci.sdsu.edu/collections/terrestrialarthropods.htm,No,No,Yes
+NA,Southern Oregon University Southern Oregon ,NA,Insect Museum,30000,USA,OR,4,,0,University,42.1862,-122.697,https://inside.sou.edu/biology/entmuseum.html,No,No,No
+NA,Stamford Museum & Nature Center,NA,,3000,USA,CN,4,,0,Private,41.1236,-73.5453,http://www.stamfordmuseum.org/,No,No,No
+SRSC,Sul Ross State College,NA,Entomology,90000,USA,TX,4,,0,University,30.3637,-103.6498,https://www.sulross.edu/page/1009/biology-collections,No,No,No
+NA,The College of Idaho,NA,Orma J. Smith Museum of Natural History,10000,USA,ID,4,,0,University,43.6528,-116.6774,https://www.collegeofidaho.edu/about/campus-facilities/natural-history-museum,No,No,No
+NA,The University of West Alabama ,NA,Entomological Collection.,10000,USA,AL,4,,0,University,32.5913,-88.1863,http://www.blackbeltmuseum.com/collections/,No,No,No
+NA,George Washington Memorial Parkway U.S. National Park Service ,NA,,5000,USA,DC,4,,0,Government,38.9159,-77.106,NA,No,No,No
+NA,University of Iowa,NA,,41000,USA,IA,4,,0,University,41.6621,-91.5356,www.uiowa.edu/mnh,No,No,No
+NA,University of Michigan Biological Station Douglas Lake (Pellston),NA,,4000,USA,MI,4,,0,University,45.5593,-84.6742,NA,No,No,No
+NA,University of Nevada Las Vegas ,ENTO,Marjorie Barrick Museum of Natural History - Entomology,30000,USA,NV,4,,0,University,36.1068,-115.1411,http://www.naturalhistory.unr.edu/,No,No,No
+OSEC,University of Oklahoma,NA, K. C. Emerson Museum,50000,USA,OK,4,,0,University,36.1251,-97.0702,http://entoweb.okstate.edu/museum/museum.htm,No,No,No
+WA,University of Puget Sound,NA,Slater Museum,6000,USA,WA,4,,0,University,47.2637,-122.4828,https://www.pugetsound.edu/academics/academic-resources/slater-museum/collections/,No,No,No
+DMBC,University of South Carolina,NA,Dominick Collection,27000,USA,SC,4,,0,University,33.9986,-81.027,http://zebra.biol.sc.edu/moth/Dominick_Lepidoptera_Collection_USC.html,No,No,No
+NA,Whitman College,NA,,3000,USA,WA,4,,0,University,46.0706,-118.3306,NA,No,No,No
+WPU,William Paterson University ,NA,,2500,USA,NJ,4,,0,University,40.946,-74.1981,NA,No,No,No
+UNAM,Coleccion Nacional de Insectos CNIN - UNAM,NA,,3000000,MX,DF,1,,0.34,University,19.3364,-99.1041,http://www.ibiologia.unam.mx/colecciones/insectos/centro_insec.htm,Snapshot,Yes,Yes
+CEAM,Colección de Insectos del Colegio de Potgraduados,NA,,500000,MX,EM,3,,0.9,Referency,19.4633,-98.9055,http://terranova.org.mx/terranova.html ,Snapshot,No,No
+NA,Colección Entomologica Universidad de Guadalajara ,NA,,30000,MX,JA,4,,0,University,20.6748,-103.3679,NA,Snapshot,No,Yes
+NA,Colección de Invertebrados de la Universidad de la Sierra (UniSierra-UniSierra-Invertebrates),NA,,25000,MX,SO,4,,0,Private,29.8229,-109.6784,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=124,Live,No,No
+UAQ,Colección Zooligica de la Universidad Autonoma de Querétaro,NA,,25000,MX,QT,4,,0,Private,20.701,-100.4438,http://scan-bugs.org/portal/collections/misc/collprofiles.php?collid=49,Live,No,No
+NA,La Colegio de la Frontera Sur San Cristobal Chiapas,NA,,10000,MX,CS,4,,0,University,16.7036,-92.6091,NA,Snapshot,No,No
+CZIIZD,Universidad Autónoma De San Luis Potosí,NA,,10000,MX,SL,4,,0,University,22.1434,-101.0142,NA,Snapshot,No,No
+NA,Colección de Invertebrados de la Universidad de la Sierra,NA,,5000,MX,SO,4,,0,University,29.8194,-109.6783,NA,Snapshot,No,No
+UACC,Colección Entomológica Forestal Div. de Ciencias Forestales Universidad Autónoma Chapingo,NA,,50000,MX,EM,4,,0,University,19.4909,-98.8841,NA,Snapshot,No,No
+CUAT,Colección de Insectos de la Universidad Autónoma de Tamaulipas,NA,,20000,MX,TM,4,,0,University,23.7324,-99.1446,NA,Snapshot,No,No
+CICC,Colección de Insectos Campo Celaya INIFAP,NA,,80000,MX,GT,4,,0,Referency,20.5792,-100.8198,NA,Snapshot,No,No
+NA,Canadian National Collection of Insects,NA,,17000000,CA,ON,1,,0,Government,45.3926,-75.7172,http://www.canacoll.org/,No,No,Yes
+BIOUG,University of Guelph,BIOUG,The Centre for Biodiversity Genomics,3000000,CA,ON,1,,0.5,University,43.5305,-80.2262,http://www.uoguelph.ca/debu/index.htm,Snapshot,No,Yes
+MGU,McGill University,LEMQ,Lyman Entomological Museum,2800000,CA,QC,2,,0.09,University,45.4059,-73.9389,http://lyman.mcgill.ca/,Snapshot,No,No
+NA,University of Manitoba,NA,J.B. Wallis Museum of Entomology,2000000,CA,MB,2,,0,University,49.806,-97.1379,http://www.wallisroughley.ca/,No,No,No
+NA,Canadian Museum of Nature Insect Collection,NA,,1538690,CA,ON,2,,0.01,Private,45.4118,-75.6906,http://www.nature.ca/en/research-collections/collections/animals,Snapshot,No,No
+UMBC,University of Montreal,QMOR,Collection Entomologique Ouellet-Robert,1500000,CA,QC,2,,0.03,University,45.5045,-73.6129,http://www.irbv.umontreal.ca/ouellet-robert,Snapshot,No,No
+UASM,University of Alberta Museums,,E. H. Strickland Entomological Museum,1100000,CA,AB,2,,0.31,Private,53.5293,-113.528,http://www.biology.museums.ualberta.ca/EHStricklandEntomologicalMuseum.aspx,Snapshot,No,Yes
+UBC,University of British Columbia,UBCZ,Spencer Entomological Collection,650000,CA,BC,3,,0.03,University,49.2632,-123.2505,http://data.canadensys.net/ipt/resource?r=ubc-entomology-collections,Snapshot,No,No
+NA,Royal Alberta Museum ,NA,,400000,CA,AB,3,,0,Private,53.5471,-113.4889,http://royalbcmuseum.bc.ca/nh-collections/entomology/,No,No,No
+NA,New Brunswick Museum,NA,,100000,CA,NB,3,,0.6,Private,45.2734,-66.065,https://www.nbm-mnb.ca/search-the-collections/,,,
+NA,Laval University,NA,,375000,CA,QC,3,,0,University,46.7817,-71.2747,NA,No,No,No
+NA,Royal Ontario Museum,NA,,300000,CA,ON,3,,0,Private,43.6677,-79.3946,https://www.rom.on.ca/en/collections-research?_ga=2.158480442.1415836621.1547315719-39921932.1547315719,No,No,No
+NA,Royal British Columbia Museum ,NA,Entomology Collection,250000,CA,BC,3,,0.04,Private,48.4194,-123.3674,http://www.royalsaskmuseum.ca/research-and-collections/biology/cory-sheffield,Snapshot,No,Yes
+NA,Montreal Insectarium,NA,,225000,CA,QC,3,,0,Private,45.561,-73.5578,http://museesmontreal.org/en/museums/montreal-insectarium-space-for-life,No,No,No
+NA,Bishop's University ,NA,Natural History Museum,200000,CA,QC,3,,0,Private,45.3649,-71.8468,https://www.rom.on.ca/en/collections-research,No,No,No
+NA,Royal Saskatchewan Museum,NA,,200000,CA,SK,3,,0,Private,50.4398,-104.6165,https://royalsaskmuseum.ca/rsm/research/biology/cory-sheffield,No,No,No
+NA,Manitoba Museum of Man and Nature,NA,,75000,CA,MB,4,,0.39,Private,49.9,-97.1364,https://manitobamuseum.ca/main/,No,No,No
+NA,McMaster University ,NA,McMaster University Collection,75000,CA,ON,4,,0.01,University,43.2628,-79.9228,NA,No,No,No
+UWO,University of Western Ontario,NA,University of Western Ontario Collection,75000,CA,ON,4,,0.01,University,43.0075,-81.2756,https://www.uwo.ca/biology/research/biology_facilities/zoological_collections.html,Snapshot,No,Yes
