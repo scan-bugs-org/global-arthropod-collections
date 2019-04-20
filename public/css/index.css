@@ -2,6 +2,8 @@ body {
   font-family: "Abhaya Libre", "serif";
   background-color: #303030;
   color: white;
+  padding: 0;
+  margin: 0;
 }
 
 .marker {
@@ -19,15 +21,27 @@ body {
   background-color: darkgreen;
 }
 
+/* Default is to take up the whole screen */
 #map {
-  margin-top: 4em;
-
-  width: 70%;
-  height: 60%;
-
-  /* background-color: black; */
-
+  width: 100%;
+  height: 100%;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+}
+
+/* If the screen is bigger than 1024px:
+  - Fix the map width, height, give it a margin
+  - Give the header a margin
+ */
+@media screen and (min-width: 1024px) {
+  #header {
+    margin: 0.5em;
+  }
+
+  #map {
+    margin: 2em;
+    width: 1024px;
+    height: 768px;
+  }
 }
