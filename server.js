@@ -6,8 +6,9 @@ const path = require("path");
 const http = require("http");
 const util = require("util");
 
-const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api/api");
+const indexRouter = require("./routes/index");
+const models = require("./models");
 
 const NODE_ENV = process.env["NODE_ENV"] || "development";
 const PORT = process.env["PORT"] || 8080;
@@ -23,8 +24,10 @@ app.use("/", indexRouter);
 app.use("/api", apiRouter);
 
 let server = http.createServer(app);
-server.listen(PORT);
-server.on("listening", () => {
-  console.log(util.format("Server listening on port %d...", PORT));
+models.sequelize.sync().then(() => {
+  server.listen(PORT);
+  server.on("listening", () => {
+    console.log(util.format("Server listening on port %d...", PORT));
+  });
+  server.on("error", console.error);
 });
-server.on("error", console.error);
