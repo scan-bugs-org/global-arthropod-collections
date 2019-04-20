@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Map</title>
+    <title>Entomology Collections</title>
     <meta charset="utf-8">
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
+
+    <!-- MapboxGL JS -->
     <script
       src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'>
     </script>
+
+    <!-- Map script -->
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <!-- MapboxGL CSS -->
     <link
       href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css'
       rel='stylesheet'
     />
+
+    <!-- Cool font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Abhaya+Libre"
+      rel="stylesheet"
+    >
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="shortcut icon" href="http://example.com/myicon.ico" />
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <script type="text/javascript" src="js/index.js"></script>
   </head>
   <body>
+    <div id="header">
+      <h1>Entomology Collections of North America</h1>
+    </div>
     <div id="map"></div>
   </body>
 </html>

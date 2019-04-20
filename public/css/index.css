@@ -1,11 +1,24 @@
+body {
+  font-family: "Abhaya Libre", "serif";
+  background-color: #303030;
+  color: white;
+}
+
+#header {
+  text-align: center;
+  padding: 1em;
+  background-color: darkgreen;
+}
+
 #map {
+  margin-top: 4em;
+
   width: 60%;
   height: 50%;
 
   /* background-color: black; */
 
   position: absolute;
-  top: 10%;
   left: 50%;
   transform: translateX(-50%);
 }
