@@ -2,7 +2,6 @@
 
 const express = require("express");
 const logger = require("morgan");
-const nunjucks = require("nunjucks");
 const path = require("path");
 const http = require("http");
 const util = require("util");
@@ -18,14 +17,6 @@ app.set("port", PORT);
 app.set("projectRoot", __dirname);
 app.use(logger(NODE_ENV == "development" ? "dev" : "tiny"));
 
-nunjucks.configure("views", {
-  autoescape: true,
-  express: app,
-  watch: NODE_ENV == "development"
-});
-
-app.set("view engine", nunjucks);
-app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
