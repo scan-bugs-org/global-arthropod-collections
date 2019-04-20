@@ -86,5 +86,9 @@ with sqlite3.connect("entomology_collections.sqlite3") as c:
         );
     """)
 
+    c.execute("""
+        CREATE INDEX collection_institutionId_index ON collections(institutionid);
+    """)
+
     institution_df.to_sql("institutions", c, if_exists="append", index_label="institutionId")
     collection_df.to_sql("collections", c, if_exists="append", index_label="collectionId")

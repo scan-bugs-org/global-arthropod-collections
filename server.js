@@ -8,12 +8,14 @@ const http = require("http");
 const util = require("util");
 
 const indexRouter = require("./routes/index");
+const apiRouter = require("./routes/api/api");
 
 const NODE_ENV = process.env["NODE_ENV"] || "development";
 const PORT = process.env["PORT"] || 8080;
 
 let app = express();
 app.set("port", PORT);
+app.set("projectRoot", __dirname);
 app.use(logger(NODE_ENV == "development" ? "dev" : "tiny"));
 
 nunjucks.configure("views", {
@@ -27,6 +29,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/api", apiRouter);
 
 let server = http.createServer(app);
 server.listen(PORT);
