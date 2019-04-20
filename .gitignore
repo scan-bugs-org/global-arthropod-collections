@@ -1,6 +1,4 @@
-public/js/
 node_modules/
 data/*.sqlite3
 data/collections.csv
 data/institutions.csv
-

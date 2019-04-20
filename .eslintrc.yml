@@ -7,3 +7,4 @@ rules:
   no-console: off
   no-unused-vars: warn
   semi: [2, "always"]
+  quotes: ["warn", "double"]
