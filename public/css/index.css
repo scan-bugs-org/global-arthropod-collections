@@ -4,6 +4,15 @@ body {
   color: white;
 }
 
+.marker {
+  background-color: blue;
+  background-size: cover;
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  cursor: pointer;
+}
+
 #header {
   text-align: center;
   padding: 1em;
@@ -13,8 +22,8 @@ body {
 #map {
   margin-top: 4em;
 
-  width: 60%;
-  height: 50%;
+  width: 70%;
+  height: 60%;
 
   /* background-color: black; */
 
