@@ -18,7 +18,8 @@ const models = [
 
 let sequelize = new Sequelize("entomologyCollections", DB_USER, DB_PASS, {
   dialect: "sqlite",
-  storage: DB_PATH
+  storage: DB_PATH,
+  logging: process.env.NODE_ENV == "development"
 });
 
 for (let i = 0; i < models.length; i++) {
