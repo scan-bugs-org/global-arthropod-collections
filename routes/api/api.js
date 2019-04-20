@@ -1,24 +1,18 @@
 const express = require("express");
-const path = require("path");
-const sqlite3 = require("sqlite3");
-const models = require("../../models");
+
+const collectionsRouter = require("./collections");
+const institutionsRouter = require("./institutions");
 
 let router = express.Router();
 
-router.get("/collections", (req, res) => {
-    res.type("json");
-    models.collections.findAll()
-      .then((collections) => {
-        res.send(JSON.stringify(collections));
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-});
+// Collections
+router.get("/collections", collectionsRouter.index);
+router.get("/collections/id/:collectionId", collectionsRouter.byId);
+router.get("/collections/search", collectionsRouter.search);
 
-router.get("/institutions", (req, res) => {
-  res.type("json");
-});
+// Institutions
+router.get("/institutions", institutionsRouter.index);
+router.get("/institutions/id/:institutionId", institutionsRouter.byId);
+router.get("/institutions/search", institutionsRouter.search);
 
 module.exports = router;

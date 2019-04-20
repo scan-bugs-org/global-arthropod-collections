@@ -19,6 +19,7 @@ app.set("projectRoot", __dirname);
 app.use(logger(NODE_ENV == "development" ? "dev" : "tiny"));
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
 
 app.use("/", indexRouter);
 app.use("/api", apiRouter);

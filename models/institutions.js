@@ -8,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       institutionCode: DataTypes.TEXT,
       institutionName: DataTypes.TEXT,
       country: DataTypes.TEXT,
-      state: DataTypes.TEXT,
-      timestamps: false
+      state: DataTypes.TEXT
     },
     { timestamps: false }
   );
