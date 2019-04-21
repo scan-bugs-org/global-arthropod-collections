@@ -15,6 +15,17 @@ body {
   cursor: pointer;
 }
 
+.mapboxgl-popup {
+  max-width: 500px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: "Abhaya Libre", "serif";
+  background-color: #303030;
+  color: white;
+}
+
 #header {
   text-align: center;
   padding: 1em;

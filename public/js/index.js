@@ -28,8 +28,16 @@ function populateData(map, data) {
   collections.forEach((collection) => {
     let newPoint = document.createElement("div");
     newPoint.className = "marker";
+
+    let popup = new mapboxgl.Popup({ offset: 25 });
+
+    if (collection["collectionName"] != null) {
+      popup.setHTML("<h3>" + collection["collectionName"] + "</h3>");
+    }
+
     new mapboxgl.Marker(newPoint)
       .setLngLat({ lng: collection["lon"], lat: collection["lat"] })
+      .setPopup(popup)
       .addTo(map);
   });
 }
@@ -45,7 +53,7 @@ function main() {
     zoom: 2
   });
 
-  pullData("/api/collections")
+  pullData("/api/collections?columns=collectionName,lat,lon")
     .then((response) => {
       populateData(map, response);
     })
