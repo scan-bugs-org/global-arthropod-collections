@@ -1,34 +1,49 @@
 const models = require("../../models");
 
 module.exports.index = function(req, res) {
-  models.collections.findAll()
-    .then((collections) => {
-      res.json(collections);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  let options = new Object();
+  if ("columns" in req.query) {
+    options["attributes"] = req.query["columns"].split(",");
+    delete req.query["columns"];
+  }
+  if ("institutionId" in req.query) {
+    options["where"] = { institutionId: req.query["institutionId"] };
+    delete req.query["institutionId"];
+  }
+
+  // Any other query parameters are invalid
+  if (Object.keys(req.query).length > 0) {
+    res.sendStatus(400);
+  } else {
+    models.collections.findAll(options)
+      .then((collections) => {
+        res.json(collections);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(400);
+      });
+  }
 };
 
 module.exports.byId = function(req, res) {
-  models.collections.findByPk(req.params["collectionId"])
-    .then((collection) => {
-      res.json(collection);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
+  let options = new Object();
+  if ("columns" in req.query) {
+    options["attributes"] = req.query["columns"].split(",");
+    delete req.query["columns"];
+  }
 
-module.exports.search = function(req, res) {
-  models.collections.findAll({ where: req.query })
-    .then((collections) => {
-      res.json(collections);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.json([]);
-    });
+  // Any other query parameters are invalid
+  if (Object.keys(req.query).length > 0) {
+    res.sendStatus(400);
+  } else {
+    models.collections.findByPk(req.params["collectionId"], options)
+      .then((collection) => {
+        res.json(collection);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(400);
+      });
+  }
 };

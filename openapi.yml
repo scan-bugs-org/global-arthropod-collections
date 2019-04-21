@@ -1,0 +1,234 @@
+openapi: 3.0.0
+servers:
+  - description: Test server
+    url: http://some-server/api
+info:
+  description: North American Arthropod Collections
+  version: "1.0.0"
+  title: NAAC
+  contact:
+    email: evindunn14@gmail.com
+  license:
+    name: GPL 3.0
+    url: "https://www.gnu.org/licenses/gpl.txt"
+tags:
+  - name: institutions
+  - name: collections
+paths:
+  /institutions:
+    get:
+      summary: searches institutions
+      tags: [ "institutions" ]
+      parameters:
+        - in: query
+          name: columns
+          description: a comma-separated list of columns to return
+          schema:
+            type: array
+            items: { type: string }
+            example: institutionId,institutionName
+        - in: query
+          name: collectionId
+          description: returns the institution for a given collectionId
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+        - in: query
+          name: limit
+          description: maximum number of records to return
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Institution'
+        '400':
+          description: bad input parameter
+  /institutions/{institutionId}:
+    get:
+      summary: retrieve institution data for the given institutionId
+      tags: [ "institutions" ]
+      parameters: 
+        - in: path
+          name: institutionId
+          description: the institution's id
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+        - in: query
+          name: columns
+          description: a comma-separated list of columns to return
+          schema:
+            type: array
+            items: { type: string }
+            example: institutionId,institutionName
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Institution'
+        '400':
+          description: bad input parameter
+  /collections:
+    get:
+      summary: searches collections
+      tags: [ "collections" ]
+      parameters:
+        - in: query
+          name: columns
+          description: a comma-separated list of columns to return
+          schema:
+            type: array
+            items: { type: string }
+            example: collectionId,collectionName
+        - in: query
+          name: institutionId
+          description: returns the collections for a given institutionId
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - in: query
+          name: limit
+          description: maximum number of records to return
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collection'
+        '400':
+          description: bad input parameter
+  /collections/{collectionId}:
+    get:
+      summary: retrieve collection data for the given collectionId
+      tags: [ "collections" ]
+      parameters: 
+        - in: path
+          name: collectionId
+          description: the collection's id
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 0
+        - in: query
+          name: columns
+          description: a comma-separated list of columns to return
+          schema:
+            type: array
+            items: { type: string }
+            example: institutionId,institutionName
+      responses:
+        '200':
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+        '400':
+          description: bad input parameter
+components:
+  schemas:
+    Institution:
+      type: object
+      properties:
+        institutionId:
+          type: number
+          format: int64
+          minimum: 0
+          example: 22
+        institutionCode:
+          type: string
+          maxLength: 4
+          example: NAUF
+        institutionName:
+          type: string
+          example: Northern Arizona University
+        country:
+          type: string
+          maxLength: 2
+          example: US
+        state:
+          type: string
+          example: Arizona
+    Collection:
+      type: object
+      properties:
+        collectionId:
+          type: number
+          format: int64
+          minimum: 0
+          example: 22
+        collectionCode:
+          type: string
+          maxLength: 4
+          example: MAB
+        collectionName:
+          type: string
+          example: Museum of Arthropod Biodiversity
+        size:
+          type: number
+          format: int64
+          minimum: 0
+          example: 1000000
+        tier:
+          type: number
+          format: int64
+          minimum: 1
+          maximum: 3
+          example: 3
+        percentPublic:
+          type: number
+          format: float64
+          example: 0.3
+        lat:
+          type: number
+          format: float64
+          minimum: -90
+          maximum: 90
+          example: -35.2
+        lon:
+          type: number
+          format: float64
+          minimum: -180
+          maximum: 180
+          example: 105
+        url:
+          type: string
+          format: uri
+          example: http://www.nau.edu
+        scan:
+          type: string
+          example: Snapshot
+        idigbio:
+          type: number
+          format: int64
+          minimum: 0
+          maximum: 1
+          example: 1
+        gbif:
+          type: number
+          format: int64
+          minimum: 0
+          maximum: 1
+          example: 0
