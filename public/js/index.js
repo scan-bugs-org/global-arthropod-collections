@@ -52,12 +52,44 @@ function populateData(map, data) {
         type: "exponential",
         property: "tier",
         stops: [
-          [1, "rgba(255, 167, 0, 0.75)"],
-          [2, "rgba(255, 96, 0, 0.75)"],
+          [1, "rgba(255, 150, 0, 0.75)"],
+          [2, "rgba(255, 75, 0, 0.75)"],
           [3, "rgba(255, 0, 0, 0.75)"],
         ]
       }
     }
+  });
+
+  let popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+  map.on("mouseenter", "collections", (event) => {
+    map.getCanvas().style.cursor = "pointer";
+
+    let coordinates = event.features[0].geometry.coordinates.slice();
+    let collectionName = event.features[0].properties.collectionName;
+
+    if (collectionName == "null") {
+      collectionName = "Unnamed Collection";
+    }
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    popup.setLngLat(coordinates)
+      .setHTML("<h1>" + collectionName + "</h1>")
+      .addTo(map);
+  });
+
+  map.on("mouseleave", "collections", (event) => {
+    map.getCanvas().style.cursor = "";
+    popup.remove();
   });
 }
 

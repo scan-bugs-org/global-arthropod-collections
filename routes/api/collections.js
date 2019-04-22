@@ -1,17 +1,17 @@
 const models = require("../../models");
 
 function collectionAsFeature(collection) {
+  let coordinates = [collection["lon"], collection["lat"]];
+  delete collection["lon"];
+  delete collection["lat"];
+
   return {
     type: "Feature",
     geometry: {
       type: "Point",
-      coordinates: [collection["lon"], collection["lat"]]
+      coordinates: coordinates
     },
-    properties: {
-      collectionId: collection["collectionId"],
-      collectionName: collection["collectionName"],
-      tier: collection["tier"]
-    }
+    properties: collection
   };
 }
 
