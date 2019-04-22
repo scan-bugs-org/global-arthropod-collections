@@ -8,5 +8,6 @@ rules:
   no-unused-vars: warn
   semi: [2, "always"]
   quotes: ["warn", "double"]
+  no-empty: warn
 globals:
   Promise: readwrite

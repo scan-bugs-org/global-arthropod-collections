@@ -25,20 +25,39 @@ function pullData(url) {
  */
 function populateData(map, data) {
   let collections = JSON.parse(data);
-  collections.forEach((collection) => {
-    let newPoint = document.createElement("div");
-    newPoint.className = "marker";
-
-    let popup = new mapboxgl.Popup({ offset: 25 });
-
-    if (collection["collectionName"] != null) {
-      popup.setHTML("<h3>" + collection["collectionName"] + "</h3>");
+  map.addLayer({
+    id: "collections",
+    type: "circle",
+    source: {
+      type: "geojson",
+      data: collections
+    },
+    paint: {
+      "circle-radius": {
+        property: "tier",
+        base: 2,
+        stops: [
+          [{ zoom: 1, value: 1 }, 0.5],
+          [{ zoom: 1, value: 2 }, 1],
+          [{ zoom: 1, value: 3 }, 1.5],
+          [{ zoom: 2, value: 1 }, 3],
+          [{ zoom: 2, value: 2 }, 4],
+          [{ zoom: 2, value: 3 }, 5],
+          [{ zoom: 8, value: 1 }, 12],
+          [{ zoom: 8, value: 2 }, 16],
+          [{ zoom: 8, value: 3 }, 20]
+        ]
+      },
+      "circle-color": {
+        type: "exponential",
+        property: "tier",
+        stops: [
+          [1, "rgba(255, 167, 0, 0.75)"],
+          [2, "rgba(255, 96, 0, 0.75)"],
+          [3, "rgba(255, 0, 0, 0.75)"],
+        ]
+      }
     }
-
-    new mapboxgl.Marker(newPoint)
-      .setLngLat({ lng: collection["lon"], lat: collection["lat"] })
-      .setPopup(popup)
-      .addTo(map);
   });
 }
 
@@ -53,13 +72,15 @@ function main() {
     zoom: 2
   });
 
-  pullData("/api/collections?columns=collectionName,lat,lon")
-    .then((response) => {
-      populateData(map, response);
-    })
-    .catch((statusCode, statusText) => {
-      console.error("Error pulling data: (" + statusCode + ") " + statusText);
-    });
+  map.on("load", () => {
+    pullData("/api/collections?geojson=true")
+      .then((response) => {
+        populateData(map, response);
+      })
+      .catch((statusCode, statusText) => {
+        console.error("Error pulling data: (" + statusCode + ") " + statusText);
+      });
+  });
 }
 
 window.onload = main;
