@@ -71,13 +71,23 @@ module.exports.byId = function(req, res) {
     delete req.query["columns"];
   }
 
+  let asGeojson = false;
+  if("geojson" in req.query) {
+    asGeojson = req.query["geojson"] == "true";
+    delete req.query["geojson"];
+  }
+
   // Any other query parameters are invalid
   if (Object.keys(req.query).length > 0) {
     res.sendStatus(400);
   } else {
     models.collections.findByPk(req.params["collectionId"], options)
       .then((collection) => {
-        res.json(collection);
+        if (asGeojson) {
+          res.json(collectionAsFeature(collection));
+        } else {
+          res.json(collection);
+        }
       })
       .catch((err) => {
         console.error(err);

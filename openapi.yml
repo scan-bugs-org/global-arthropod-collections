@@ -1,7 +1,7 @@
 openapi: 3.0.0
 servers:
   - description: Test server
-    url: http://some-server/api
+    url: https://evindunn.com/api
 info:
   description: North American Arthropod Collections
   version: "1.0.0"
@@ -26,17 +26,10 @@ paths:
           schema:
             type: array
             items: { type: string }
-            example: institutionId,institutionName
+            example: https://some-server/api/institutions?columns=institutionId,institutionName
         - in: query
           name: collectionId
           description: returns the institution for a given collectionId
-          schema:
-            type: integer
-            format: int64
-            minimum: 0
-        - in: query
-          name: limit
-          description: maximum number of records to return
           schema:
             type: integer
             format: int64
@@ -56,7 +49,7 @@ paths:
     get:
       summary: retrieve institution data for the given institutionId
       tags: [ "institutions" ]
-      parameters: 
+      parameters:
         - in: path
           name: institutionId
           description: the institution's id
@@ -83,7 +76,7 @@ paths:
           description: bad input parameter
   /collections:
     get:
-      summary: searches collections
+      summary: returns all collections
       tags: [ "collections" ]
       parameters:
         - in: query
@@ -101,12 +94,9 @@ paths:
             format: int32
             minimum: 0
         - in: query
-          name: limit
-          description: maximum number of records to return
-          schema:
-            type: integer
-            format: int32
-            minimum: 0
+          name: geojson
+          description: whether to return the collection as a geojson
+          schema: { type: boolean }
       responses:
         '200':
           description: search results matching criteria
@@ -122,7 +112,7 @@ paths:
     get:
       summary: retrieve collection data for the given collectionId
       tags: [ "collections" ]
-      parameters: 
+      parameters:
         - in: path
           name: collectionId
           description: the collection's id
@@ -137,7 +127,11 @@ paths:
           schema:
             type: array
             items: { type: string }
-            example: institutionId,institutionName
+            example: collecitonId,collectionName
+        - in: query
+          name: geojson
+          description: whether to return the collection as a geojson
+          schema: { type: boolean }
       responses:
         '200':
           description: search results matching criteria
