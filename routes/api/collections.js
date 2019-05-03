@@ -1,61 +1,100 @@
 const models = require("../../models");
 
-function collectionAsFeature(collection) {
-  let coordinates = [collection["lon"], collection["lat"]];
-  delete collection["lon"];
-  delete collection["lat"];
+function collectionAsFeature(collection, withInstitution=false) {
+  return new Promise((resolve, reject) => {
+    const coordinates = [collection.lon, collection.lat];
+    const collectionCopy = Object.assign({}, collection);
 
-  return {
-    type: "Feature",
-    geometry: {
-      type: "Point",
-      coordinates: coordinates
-    },
-    properties: collection
-  };
+    delete collectionCopy.lat;
+    delete collectionCopy.lon;
+
+    const feature = {
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: coordinates
+      },
+      properties: collectionCopy
+    };
+
+    if (withInstitution) {
+      delete feature.properties.institutionId;
+      models.institutions.findByPk(collection.institutionId, { raw: true })
+        .then((institution) => {
+          feature.properties.institution = institution;
+          resolve(feature);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    } else {
+      resolve(feature);
+    }
+  });
 }
 
-function collectionsAsFeatureCollection(collections) {
-  let featureCollection = {
-    type: "FeatureCollection",
-    features: []
-  };
+function collectionsAsFeatureCollection(collections, withInstitutions=false) {
+  return new Promise((resolve, reject) => {
 
-  collections.forEach((collection) => {
-    featureCollection.features.push(collectionAsFeature(collection));
+    const features = [];
+    const featureCollection = {
+      type: "FeatureCollection"
+    };
+
+    for (let i = 0; i < collections.length; i++) {
+      features.push(collectionAsFeature(collections[i], withInstitutions));
+    }
+
+    Promise.all(features)
+      .then((results) => {
+        featureCollection.features = results;
+        resolve(featureCollection);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
-
-  return featureCollection;
 }
 
 module.exports.index = function(req, res) {
-  let options = new Object();
+  const reqCopy = Object.assign({}, req);
+  const options = { raw: true };
+
   if ("columns" in req.query) {
     options["attributes"] = req.query["columns"].split(",");
-    delete req.query["columns"];
+    delete reqCopy.query["columns"];
   }
   if ("institutionId" in req.query) {
     options["where"] = { institutionId: req.query["institutionId"] };
-    delete req.query["institutionId"];
+    delete reqCopy.query["institutionId"];
   }
 
   let asGeojson = false;
   if("geojson" in req.query) {
     asGeojson = req.query["geojson"] == "true";
-    delete req.query["geojson"];
+    delete reqCopy.query["geojson"];
+  }
+
+  let withInstitutions = false;
+  if ("withInstitutions" in req.query) {
+    withInstitutions = req.query["withInstitutions"] == "true";
+    delete reqCopy.query["withInstitutions"];
   }
 
   // Any other query parameters are invalid
-  if (Object.keys(req.query).length > 0) {
+  if (Object.keys(reqCopy.query).length > 0) {
     res.sendStatus(400);
   } else {
     models.collections.findAll(options)
       .then((collections) => {
         if (asGeojson) {
-          res.json(collectionsAsFeatureCollection(collections));
+          return collectionsAsFeatureCollection(collections, withInstitutions);
         } else {
-          res.json(collections);
+          return new Promise((resolve) => { resolve(collections); });
         }
+      })
+      .then((response) => {
+        res.json(response);
       })
       .catch((err) => {
         console.error(err);
@@ -65,20 +104,22 @@ module.exports.index = function(req, res) {
 };
 
 module.exports.byId = function(req, res) {
-  let options = new Object();
+  const reqCopy = Object.assign({}, req);
+  const options = { raw: true };
+
   if ("columns" in req.query) {
     options["attributes"] = req.query["columns"].split(",");
-    delete req.query["columns"];
+    delete reqCopy.query["columns"];
   }
 
   let asGeojson = false;
   if("geojson" in req.query) {
     asGeojson = req.query["geojson"] == "true";
-    delete req.query["geojson"];
+    delete reqCopy.query["geojson"];
   }
 
   // Any other query parameters are invalid
-  if (Object.keys(req.query).length > 0) {
+  if (Object.keys(reqCopy.query).length > 0) {
     res.sendStatus(400);
   } else {
     models.collections.findByPk(req.params["collectionId"], options)

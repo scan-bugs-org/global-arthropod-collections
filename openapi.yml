@@ -97,6 +97,12 @@ paths:
           name: geojson
           description: whether to return the collection as a geojson
           schema: { type: boolean }
+        - in: query
+          name: geojson
+          description: |
+            whether to return institution data with the collection.
+            currently can only be called with geojson set to true
+          schema: { type: boolean }
       responses:
         '200':
           description: search results matching criteria

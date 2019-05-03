@@ -36,27 +36,40 @@ function populateData(map, data) {
         },
         paint: {
           "circle-radius": {
-            property: "tier",
+            property: "zoom",
             base: 2,
             stops: [
-              [{ zoom: 1, value: 1 }, 0.5],
-              [{ zoom: 1, value: 2 }, 1],
-              [{ zoom: 1, value: 3 }, 1.5],
-              [{ zoom: 2, value: 1 }, 3],
-              [{ zoom: 2, value: 2 }, 4],
-              [{ zoom: 2, value: 3 }, 5],
-              [{ zoom: 8, value: 1 }, 12],
-              [{ zoom: 8, value: 2 }, 16],
-              [{ zoom: 8, value: 3 }, 20]
+              [{ zoom: 1, value: 0 }, 1],
+              [{ zoom: 2, value: 0 }, 3],
+              [{ zoom: 8, value: 0 }, 12],
             ]
           },
+          // "circle-radius": {
+          //   property: "tier",
+          //   base: 2,
+          //   stops: [
+          //     [{ zoom: 1, value: 1 }, 0.75],
+          //     [{ zoom: 1, value: 2 }, 1],
+          //     [{ zoom: 1, value: 3 }, 1.25],
+          //     [{ zoom: 1, value: 4 }, 1.5],
+          //     [{ zoom: 2, value: 1 }, 3],
+          //     [{ zoom: 2, value: 2 }, 4],
+          //     [{ zoom: 2, value: 3 }, 5],
+          //     [{ zoom: 2, value: 4 }, 6],
+          //     [{ zoom: 8, value: 1 }, 12],
+          //     [{ zoom: 8, value: 2 }, 16],
+          //     [{ zoom: 8, value: 3 }, 20],
+          //     [{ zoom: 8, value: 4 }, 24]
+          //   ]
+          // },
           "circle-color": {
             type: "exponential",
             property: "tier",
             stops: [
-              [1, "rgba(255, 150, 0, 0.75)"],
-              [2, "rgba(255, 75, 0, 0.75)"],
-              [3, "rgba(255, 0, 0, 0.75)"],
+              [1, "rgba(255, 255, 0, 0.75)"],
+              [2, "rgba(255, 200, 0, 0.75)"],
+              [3, "rgba(255, 150, 0, 0.75)"],
+              [4, "rgba(255, 0, 0, 0.75)"],
             ]
           }
         }
@@ -70,7 +83,7 @@ function populateData(map, data) {
 }
 
 function doPopups(map) {
-  let popup = new mapboxgl.Popup({
+  const popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false
   });
@@ -80,10 +93,22 @@ function doPopups(map) {
 
     let coordinates = event.features[0].geometry.coordinates.slice();
     let collectionName = event.features[0].properties.collectionName;
+    let institutionName = JSON.parse(
+      event.features[0].properties.institution
+    ).institutionName;
+
+    if (institutionName == "null") {
+      collectionName = "Unnamed Institution";
+    }
 
     if (collectionName == "null") {
       collectionName = "Unnamed Collection";
     }
+
+    const popupHtml = (
+      "<h2>" + institutionName + "</h2>" +
+      "<h3>" + collectionName + "</h3>"
+    );
 
     // Ensure that if the map is zoomed out such that multiple
     // copies of the feature are visible, the popup appears
@@ -93,11 +118,11 @@ function doPopups(map) {
     }
 
     popup.setLngLat(coordinates)
-      .setHTML("<h1>" + collectionName + "</h1>")
+      .setHTML(popupHtml)
       .addTo(map);
   });
 
-  map.on("mouseleave", "collections", (event) => {
+  map.on("mouseleave", "collections", () => {
     map.getCanvas().style.cursor = "";
     popup.remove();
   });
@@ -115,11 +140,11 @@ function main() {
   });
 
   map.on("load", () => {
-    pullData("/api/collections?geojson=true")
+    pullData("api/collections?geojson=true&withInstitutions=true")
       .then((response) => {
         return populateData(map, response);
       })
-      .then((collections) => {
+      .then(() => {
         doPopups(map);
       })
       .catch((statusCode, statusText) => {
