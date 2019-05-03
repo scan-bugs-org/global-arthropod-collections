@@ -24,42 +24,52 @@ function pullData(url) {
  * Populates the map with the JSON data returned by pullData(/api/collections)
  */
 function populateData(map, data) {
-  let collections = JSON.parse(data);
-  map.addLayer({
-    id: "collections",
-    type: "circle",
-    source: {
-      type: "geojson",
-      data: collections
-    },
-    paint: {
-      "circle-radius": {
-        property: "tier",
-        base: 2,
-        stops: [
-          [{ zoom: 1, value: 1 }, 0.5],
-          [{ zoom: 1, value: 2 }, 1],
-          [{ zoom: 1, value: 3 }, 1.5],
-          [{ zoom: 2, value: 1 }, 3],
-          [{ zoom: 2, value: 2 }, 4],
-          [{ zoom: 2, value: 3 }, 5],
-          [{ zoom: 8, value: 1 }, 12],
-          [{ zoom: 8, value: 2 }, 16],
-          [{ zoom: 8, value: 3 }, 20]
-        ]
-      },
-      "circle-color": {
-        type: "exponential",
-        property: "tier",
-        stops: [
-          [1, "rgba(255, 150, 0, 0.75)"],
-          [2, "rgba(255, 75, 0, 0.75)"],
-          [3, "rgba(255, 0, 0, 0.75)"],
-        ]
-      }
+  return new Promise((resolve, reject) => {
+    try {
+      const collections = JSON.parse(data);
+      map.addLayer({
+        id: "collections",
+        type: "circle",
+        source: {
+          type: "geojson",
+          data: collections
+        },
+        paint: {
+          "circle-radius": {
+            property: "tier",
+            base: 2,
+            stops: [
+              [{ zoom: 1, value: 1 }, 0.5],
+              [{ zoom: 1, value: 2 }, 1],
+              [{ zoom: 1, value: 3 }, 1.5],
+              [{ zoom: 2, value: 1 }, 3],
+              [{ zoom: 2, value: 2 }, 4],
+              [{ zoom: 2, value: 3 }, 5],
+              [{ zoom: 8, value: 1 }, 12],
+              [{ zoom: 8, value: 2 }, 16],
+              [{ zoom: 8, value: 3 }, 20]
+            ]
+          },
+          "circle-color": {
+            type: "exponential",
+            property: "tier",
+            stops: [
+              [1, "rgba(255, 150, 0, 0.75)"],
+              [2, "rgba(255, 75, 0, 0.75)"],
+              [3, "rgba(255, 0, 0, 0.75)"],
+            ]
+          }
+        }
+      });
+
+      resolve(collections);
+    } catch(err) {
+      reject(err);
     }
   });
+}
 
+function doPopups(map) {
   let popup = new mapboxgl.Popup({
     closeButton: false,
     closeOnClick: false
@@ -97,7 +107,7 @@ function populateData(map, data) {
  * Page's main function
  */
 function main() {
-  let map = new mapboxgl.Map({
+  const map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/outdoors-v11",
     center: [-90, 45],
@@ -107,7 +117,10 @@ function main() {
   map.on("load", () => {
     pullData("/api/collections?geojson=true")
       .then((response) => {
-        populateData(map, response);
+        return populateData(map, response);
+      })
+      .then((collections) => {
+        doPopups(map);
       })
       .catch((statusCode, statusText) => {
         console.error("Error pulling data: (" + statusCode + ") " + statusText);
