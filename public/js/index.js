@@ -7,7 +7,8 @@ const pointMarkerStyle = {
   fillColor: "blue",
   opacity: 0.7,
   radius: 3,
-  weight: 1
+  weight: 1,
+  riseOnHover: true
 };
 
 /**
@@ -137,9 +138,11 @@ function populateData(map, geojsonUrl) {
  */
 function doTooltip(feature, latLng) {
   const marker = L.circleMarker(latLng, pointMarkerStyle);
+  marker.on("mouseover", () => { marker.selected = true; });
+  marker.on("mouseout", () => { marker.selected = false; });
   marker.once(
     "mouseover",
-    () => {
+    (event) => {
       const propertiesPopulated = [];
 
       if (!("collectionName" in feature.properties)) {
@@ -166,7 +169,10 @@ function doTooltip(feature, latLng) {
           "<h3>" + feature.properties.institutionName + "</h3>" +
           "<h4>" + feature.properties.collectionName + "</h4>"
         );
-        marker.fire("mouseover");
+
+        if (marker.selected) {
+          marker.openTooltip();
+        }
       });
     }
   );
