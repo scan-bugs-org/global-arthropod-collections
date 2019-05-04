@@ -2,4 +2,4 @@ extends: "../../.eslintrc.yml"
 env:
   browser: true
 globals:
-  mapboxgl: readonly
+  L: readonly
