@@ -2,6 +2,7 @@ const osmAttrib = "Map data © <a href=\"https://openstreetmap.org\">OpenStreetM
 const osmURL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const collectionsGeojsonURL = "api/collections?geojson=true&columns=collectionId";
 
+// Style for the geojson points
 const pointMarkerStyle = {
   fillColor: "blue",
   opacity: 0.7,
@@ -53,6 +54,11 @@ function getCollectionName(collectionId) {
   });
 }
 
+/**
+ * Return the institution name for the given institutionId
+ * @param  {integer} institutionId Institution Id to return the name for
+ * @return {Promise<string>} Promise to return the institution name
+ */
 function getInstitutionName(institutionId) {
   return new Promise((resolve, reject) => {
     try {
@@ -72,6 +78,11 @@ function getInstitutionName(institutionId) {
   });
 }
 
+/**
+ * Returns the institution name for the given collection ID
+ * @param  {integer} collectionId Collection Id to return the institution for
+ * @return {Promise<string>} Promise to return the institution name
+ */
 function getInstitutionForCollection(collectionId) {
   return new Promise((resolve, reject) => {
     try {
@@ -118,11 +129,17 @@ function populateData(map, geojsonUrl) {
     });
 }
 
+/**
+ * Populate the markers & corresponding tooltips for each geojson collection
+ * @param  {Object} feature GeoJSON feature representing the collection
+ * @param  {Array<float>} latLng  [lat, lon]
+ * @return {L.circleMarker}       Leaflet circle marker for the geojson point
+ */
 function doTooltip(feature, latLng) {
   const marker = L.circleMarker(latLng, pointMarkerStyle);
   marker.once(
     "mouseover",
-    (event) => {
+    () => {
       const propertiesPopulated = [];
 
       if (!("collectionName" in feature.properties)) {
