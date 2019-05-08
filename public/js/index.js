@@ -5,9 +5,9 @@ const collectionsGeojsonURL = "api/collections?geojson=true&columns=collectionId
 
 // Style for the geojson points
 const pointMarkerStyle = {
-  fillColor: "red",
+  fillColor: "darkgreen",
+  fillOpacity: 0.6,
   stroke: false,
-  opacity: 0.8,
   radius: 3,
   riseOnHover: true
 };
@@ -20,12 +20,12 @@ function loadMap() {
   const map = L.map("map");
   const wikiTiles = new L.TileLayer(
     wikimediaTilesURL,
-    { minZoom: 3, maxZoom: 12, attribution: wikiMediaAttrib }
+    { minZoom: 3, maxZoom: 10, attribution: wikiMediaAttrib }
   );
 
   const hillTiles = new L.TileLayer(
     hillShadingTilesURL,
-    { minZoom: 10, maxZoom: 12 }
+    { minZoom: 10, maxZoom: 10 }
   );
 
   map.addLayer(wikiTiles);
@@ -146,16 +146,20 @@ function populateData(map, geojsonUrl) {
  */
 function resizeMarkers(map, pointLayer) {
   const currentZoom = map.getZoom();
-  console.log(currentZoom);
   if (currentZoom > 4) {
     pointLayer.eachLayer((layer) => {
-      layer.setRadius(4);
+      layer.setRadius(6);
     });
-  } else if (currentZoom > 6) {
+  } else if (currentZoom > 5) {
     pointLayer.eachLayer((layer) => {
-      layer.setRadius(8);
+      layer.setRadius(9);
     });
-  } else{
+
+  } else if (currentZoom > 6) {
+   pointLayer.eachLayer((layer) => {
+     layer.setRadius(12);
+   });
+  } else {
     pointLayer.eachLayer((layer) => {
       layer.setRadius(3);
     });
