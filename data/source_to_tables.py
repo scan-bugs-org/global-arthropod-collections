@@ -73,12 +73,15 @@ for i, row in all_df[~all_df["institutionCode"].notnull() | all_df["institutionC
 
 collection_df.drop(["institutionName"], axis=1, inplace=True)
 
-
-for i, row in all_df[~all_df["collectionName"].notnull()].iterrows():
+# Make sure every collection has a code
+for i, row in all_df[~all_df["collectionCode"].notnull()].iterrows():
     collectionCode = "UNM"
-    if not np.isnan(row["collectionName"]):
-        collectionCode = row["collectioName"][0:3]
+    if not pd.isnull(all_df.at[i, "collectionName"]):
+        collectionCode = row["collectionName"][0:3].upper()
     collection_df.at[i, "collectionCode"] = collectionCode
+
+assert len(institution_df["institutionCode"].unique()) == len(institution_df)
+assert len(collection_df.drop_duplicates(subset=["institutionCode", "collectionCode"])) == len(collection_df)
 
 print("Institution Columns: {}".format(list(institution_df.columns)))
 print("Collection Columns: {}\n".format(list(collection_df.columns)))

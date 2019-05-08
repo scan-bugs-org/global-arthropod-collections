@@ -63,10 +63,6 @@ module.exports.index = function(req, res) {
     options.attributes = req.query.columns.split(",");
     delete reqCopy.query.columns;
   }
-  if ("institutionCode" in req.query) {
-    options.where = { institutionCode: req.query.institutionCode };
-    delete reqCopy.query.institutionCode;
-  }
 
   let asGeojson = false;
   if("geojson" in req.query) {
