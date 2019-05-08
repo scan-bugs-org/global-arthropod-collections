@@ -75,7 +75,6 @@ module.exports.index = function(req, res) {
 
     // Always include the lat-lon for geoJSON
     if ("attributes" in options) {
-      console.log("got here");
       if (!options.attributes.includes("lat")) {
         options.attributes.push("lat");
       }
