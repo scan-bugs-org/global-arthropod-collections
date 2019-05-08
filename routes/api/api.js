@@ -7,10 +7,10 @@ let router = express.Router();
 
 // Collections
 router.get("/collections", collectionsRouter.index);
-router.get("/collections/:collectionId", collectionsRouter.byId);
+router.get("/collections/:institutionCode/:collectionCode", collectionsRouter.byId);
 
 // Institutions
 router.get("/institutions", institutionsRouter.index);
-router.get("/institutions/:institutionId", institutionsRouter.byId);
+router.get("/institutions/:institutionCode", institutionsRouter.byId);
 
 module.exports = router;

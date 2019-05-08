@@ -4,8 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   let Institutions = sequelize.define(
     "institutions",
     {
-      institutionId: { type: DataTypes.INTEGER, primaryKey: true },
-      institutionCode: DataTypes.TEXT,
+      institutionCode: {type: DataTypes.TEXT, primaryKey: true },
       institutionName: DataTypes.TEXT,
       country: DataTypes.TEXT,
       state: DataTypes.TEXT

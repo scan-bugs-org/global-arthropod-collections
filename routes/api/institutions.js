@@ -37,7 +37,7 @@ module.exports.byId = function(req, res) {
   if (Object.keys(reqCopy.query).length > 0) {
     res.sendStatus(400);
   } else {
-    models.institutions.findByPk(req.params.institutionId, options)
+    models.institutions.findByPk(req.params.institutionCode, options)
       .then((institution) => {
         res.json(institution);
       })

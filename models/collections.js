@@ -1,11 +1,19 @@
 "use strict";
 
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.sequelize.query(
+      "ALTER TABLE 'collections' ADD CONSTRAINT PRIMARY KEY ('institutionCode', 'collectionCode')"
+    );
+  }
+};
+
 module.exports = (sequelize, DataTypes) => {
   let Collections = sequelize.define(
     "collections",
     {
-      collectionId: { type: DataTypes.INTEGER, primaryKey: true },
-      collectionCode: DataTypes.TEXT,
+      institutionCode: { type: DataTypes.TEXT, primaryKey: true },
+      collectionCode: { type: DataTypes.TEXT, primaryKey: true },
       collectionName: DataTypes.TEXT,
       size: DataTypes.INTEGER,
       tier: DataTypes.INTEGER,
@@ -22,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Collections.associate = function(models) {
-    models.collections.belongsTo(models.institutions, { foreignKey: "institutionId" });
+    models.collections.belongsTo(models.institutions, { foreignKey: "institutionCode" });
   };
 
   return Collections;

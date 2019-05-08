@@ -1,7 +1,7 @@
 const wikiMediaAttrib = "<a href=\"https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use\">Wikimedia Maps</a> | Map data © <a href=\"https://openstreetmap.org/copyright\">OpenStreetMap</a> contributors";
 const hillShadingTilesURL = "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png";
 const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
-const collectionsGeojsonURL = "api/collections?geojson=true&columns=collectionId";
+const collectionsGeojsonURL = "api/collections?geojson=true&columns=institutionCode,collectionCode";
 
 // Style for the geojson points
 const pointMarkerStyle = {
@@ -35,14 +35,15 @@ function loadMap() {
 }
 
 /**
- * Returns the collection name for the given collection ID
- * @param  {integer} collectionId Collection Id to return the name for
+ * Returns the collection name for the given collection code
+ * @param  {string} institutionCode Institution code the collection belongs to
+ * @param  {string} collectionCode Collection code to return the name for
  * @return {Promise<string>} Promise to return the collection name
  */
-function getCollectionName(collectionId) {
+function getCollectionName(institutionCode, collectionCode) {
   return new Promise((resolve, reject) => {
     try {
-      fetch("api/collections/" + collectionId + "?columns=collectionName")
+      fetch("api/collections/" + institutionCode + "/" + collectionCode + "?columns=collectionName")
         .then((response) => {
           return response.json();
         })
@@ -63,14 +64,14 @@ function getCollectionName(collectionId) {
 }
 
 /**
- * Return the institution name for the given institutionId
- * @param  {integer} institutionId Institution Id to return the name for
+ * Return the institution name for the given institution code
+ * @param  {integer} institutionCode Institution code to return the name for
  * @return {Promise<string>} Promise to return the institution name
  */
-function getInstitutionName(institutionId) {
+function getInstitutionName(institutionCode) {
   return new Promise((resolve, reject) => {
     try {
-      fetch("api/institutions/" + institutionId + "?columns=institutionName")
+      fetch("api/institutions/" + institutionCode + "?columns=institutionName")
         .then((response) => {
           return response.json();
         })
@@ -87,19 +88,20 @@ function getInstitutionName(institutionId) {
 }
 
 /**
- * Returns the institution name for the given collection ID
- * @param  {integer} collectionId Collection Id to return the institution for
+ * Returns the institution name for the given collection code
+ * @param  {string} institutionCode Institution that the collection belongs to
+ * @param  {string} collectionCode Collection code to return the institution for
  * @return {Promise<string>} Promise to return the institution name
  */
-function getInstitutionForCollection(collectionId) {
+function getInstitutionForCollection(institutionCode, collectionCode) {
   return new Promise((resolve, reject) => {
     try {
-      fetch("api/collections/" + collectionId + "?columns=institutionId")
+      fetch("api/collections/" + institutionCode + "/" + collectionCode + "?columns=institutionCode")
         .then((response) => {
           return response.json();
         })
         .then((collectionJson) => {
-          return getInstitutionName(collectionJson.institutionId);
+          return getInstitutionName(collectionJson.institutionCode);
         })
         .then((institutionName) => {
           if (institutionName == null) {
@@ -183,7 +185,7 @@ function doTooltip(feature, latLng) {
 
       if (!("collectionName" in feature.properties)) {
         propertiesPopulated.push(
-          getCollectionName(feature.properties.collectionId)
+          getCollectionName(feature.properties.institutionCode, feature.properties.collectionCode)
             .then((name) => {
               return feature.properties.collectionName = name;
             })
@@ -192,7 +194,7 @@ function doTooltip(feature, latLng) {
 
       if (!("institutionName" in feature.properties)) {
         propertiesPopulated.push(
-          getInstitutionForCollection(feature.properties.collectionId)
+          getInstitutionForCollection(feature.properties.institutionCode, feature.properties.collectionCode)
             .then((institutionName) => {
               return feature.properties.institutionName = institutionName;
           })

@@ -63,9 +63,9 @@ module.exports.index = function(req, res) {
     options.attributes = req.query.columns.split(",");
     delete reqCopy.query.columns;
   }
-  if ("institutionId" in req.query) {
-    options.where = { institutionId: req.query.institutionId};
-    delete reqCopy.query.institutionId;
+  if ("institutionCode" in req.query) {
+    options.where = { institutionCode: req.query.institutionCode };
+    delete reqCopy.query.institutionCode;
   }
 
   let asGeojson = false;
@@ -131,11 +131,13 @@ module.exports.byId = function(req, res) {
     }
   }
 
+  options.where = { institutionCode: req.params.institutionCode, collectionCode: req.params.collectionCode };
+
   // Any other query parameters are invalid
   if (Object.keys(reqCopy.query).length > 0) {
     res.sendStatus(400);
   } else {
-    models.collections.findByPk(req.params.collectionId, options)
+    models.collections.findOne(options)
       .then((collection) => {
         if (asGeojson) {
           res.json(collectionAsFeature(collection));
