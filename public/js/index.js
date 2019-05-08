@@ -1,13 +1,14 @@
-const osmAttrib = "Map data © <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors";
-const osmURL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+const wikiMediaAttrib = "<a href=\"https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use\">Wikimedia Maps</a> | Map data © <a href=\"https://openstreetmap.org/copyright\">OpenStreetMap</a> contributors";
+const hillShadingTilesURL = "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png";
+const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
 const collectionsGeojsonURL = "api/collections?geojson=true&columns=collectionId";
 
 // Style for the geojson points
 const pointMarkerStyle = {
-  fillColor: "blue",
-  opacity: 0.7,
+  fillColor: "red",
+  stroke: false,
+  opacity: 0.8,
   radius: 3,
-  weight: 1,
   riseOnHover: true
 };
 
@@ -17,12 +18,18 @@ const pointMarkerStyle = {
  */
 function loadMap() {
   const map = L.map("map");
-  const osmTiles = new L.TileLayer(
-    osmURL,
-    { minZoom: 2, maxZoom: 12, attribution: osmAttrib }
+  const wikiTiles = new L.TileLayer(
+    wikimediaTilesURL,
+    { minZoom: 3, maxZoom: 12, attribution: wikiMediaAttrib }
   );
 
-  map.addLayer(osmTiles);
+  const hillTiles = new L.TileLayer(
+    hillShadingTilesURL,
+    { minZoom: 10, maxZoom: 12 }
+  );
+
+  map.addLayer(wikiTiles);
+  map.addLayer(hillTiles);
 
   return map;
 }
@@ -121,13 +128,38 @@ function populateData(map, geojsonUrl) {
       return geojsonData.json();
     })
     .then((geojson) => {
-      L.geoJSON(
+      const pointLayer = L.geoJSON(
         geojson,
         {
           pointToLayer: doTooltip
         }
       ).addTo(map);
+
+      map.on("zoomend", () => {
+        resizeMarkers(map, pointLayer);
+      });
     });
+}
+
+/**
+ * Called on zoomend to resize the geojson markers
+ */
+function resizeMarkers(map, pointLayer) {
+  const currentZoom = map.getZoom();
+  console.log(currentZoom);
+  if (currentZoom > 4) {
+    pointLayer.eachLayer((layer) => {
+      layer.setRadius(4);
+    });
+  } else if (currentZoom > 6) {
+    pointLayer.eachLayer((layer) => {
+      layer.setRadius(8);
+    });
+  } else{
+    pointLayer.eachLayer((layer) => {
+      layer.setRadius(3);
+    });
+  }
 }
 
 /**
@@ -142,7 +174,7 @@ function doTooltip(feature, latLng) {
   marker.on("mouseout", () => { marker.selected = false; });
   marker.once(
     "mouseover",
-    (event) => {
+    () => {
       const propertiesPopulated = [];
 
       if (!("collectionName" in feature.properties)) {
@@ -185,7 +217,6 @@ function doTooltip(feature, latLng) {
 function main() {
   const map = loadMap();
   map.setView([39.8, -98.6], 4);
-
   populateData(map, collectionsGeojsonURL);
 }
 
