@@ -119,12 +119,47 @@ function populateData(map, geojsonUrl) {
         {
           pointToLayer: doTooltip
         }
-      ).addTo(map);
+      );
+
+      const tierOne = L.layerGroup();
+      const tierTwo = L.layerGroup();
+      const tierThree = L.layerGroup();
+      const tierFour = L.layerGroup();
 
       pointLayer.eachLayer((layer) => {
+        // Set the marker style
         layer.setStyle(getMarkerStyle(map, layer));
+
+        // Create a layer for each tier
+        switch (layer.feature.properties.tier) {
+          case 2:
+            tierTwo.addLayer(layer);
+            break;
+          case 3:
+            tierThree.addLayer(layer);
+            break;
+          case 4:
+            tierFour.addLayer(layer);
+            break;
+          default:
+            tierOne.addLayer(layer);
+        }
       });
 
+      // Create a control for viewing by tier
+      const tiers = {
+        "Tier 1": tierOne,
+        "Tier 2": tierTwo,
+        "Tier 3": tierThree,
+        "Tier 4": tierFour
+      };
+      const tierControl = L.control.layers(null, tiers).addTo(map);
+      tierControl.expand();
+      for (let i = 0; i < tierControl._layerControlInputs.length; i++) {
+        tierControl._layerControlInputs[i].click();
+      }
+
+      // Auto-adjust marker size based on zoom level
       map.on("zoomend", () => {
         pointLayer.eachLayer((layer) => {
           layer.setRadius(getMarkerRadius(map, layer.feature));
@@ -196,7 +231,7 @@ function doTooltip(feature, latLng) {
         propertiesPopulated.push(
           getCollectionName(feature.properties.institutionCode, feature.properties.collectionCode)
             .then((name) => {
-              return feature.properties.collectionName = name;
+              return feature.properties.collectionName = name.trim();
             })
           );
       }
@@ -205,7 +240,7 @@ function doTooltip(feature, latLng) {
         propertiesPopulated.push(
           getInstitutionName(feature.properties.institutionCode)
             .then((institutionName) => {
-              return feature.properties.institutionName = institutionName;
+              return feature.properties.institutionName = institutionName.trim();
           })
         );
       }
@@ -214,22 +249,34 @@ function doTooltip(feature, latLng) {
         propertiesPopulated.push(
           getCollectionUrl(feature.properties.institutionCode, feature.properties.collectionCode)
             .then((url) => {
-              return feature.properties.url = url;
+              return feature.properties.url = url != null ? url.trim() : url;
             })
         );
       }
 
       Promise.all(propertiesPopulated).then(() => {
         marker.unbindPopup();
-        marker.bindPopup(
+
+        let popupContent = (
           "<h3>" + feature.properties.institutionName + "</h3>" +
           "<a target='_blank' href='" + feature.properties.url + "'>" +
             "<h4>" + feature.properties.collectionName + "</h4>" +
           "</a>"
         );
 
+        if (!feature.properties.url) {
+          popupContent = (
+            "<h3>" + feature.properties.institutionName + "</h3>" +
+            "<h4>" + feature.properties.collectionName + "</h4>"
+          );
+        }
+
+        marker.bindPopup(
+          popupContent,
+          { closeButton: false }
+        );
+
         marker.on("mouseover", () => { marker.openPopup(); });
-        marker.getPopup().on("mouseout", () => { marker.closePopup(); });
 
         if (marker.selected) {
           marker.openPopup();
