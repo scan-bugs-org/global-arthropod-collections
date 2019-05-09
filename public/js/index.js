@@ -2,6 +2,7 @@ const wikiMediaAttrib = "<a href=\"https://foundation.wikimedia.org/wiki/Maps_Te
 const hillShadingTilesURL = "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png";
 const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
 const collectionsGeojsonURL = "api/collections?geojson=true&columns=institutionCode,collectionCode,tier";
+const minZoom = 3;
 
 /**
  * Loads open street map tiles into the map container
@@ -11,7 +12,7 @@ function loadMap() {
   const map = L.map("map");
   const wikiTiles = new L.TileLayer(
     wikimediaTilesURL,
-    { minZoom: 3, maxZoom: 10, attribution: wikiMediaAttrib }
+    { minZoom: minZoom, maxZoom: 10, attribution: wikiMediaAttrib }
   );
 
   const hillTiles = new L.TileLayer(
@@ -159,6 +160,9 @@ function populateData(map, geojsonUrl) {
         tierControl._layerControlInputs[i].click();
       }
 
+      // Create a control for scale
+      L.control.scale().addTo(map);
+
       // Auto-adjust marker size based on zoom level
       map.on("zoomend", () => {
         pointLayer.eachLayer((layer) => {
@@ -176,17 +180,17 @@ function populateData(map, geojsonUrl) {
  */
 function getMarkerRadius(map, feature) {
   const currentZoom = map.getZoom();
-  let zoomComp = 1 + currentZoom / 10;
+  let zoomComp = currentZoom / minZoom;
 
   if (feature.properties.tier) {
     if (feature.properties.tier === 1) {
-      return 3 * zoomComp;
+      return 5 * zoomComp;
     } else if (feature.properties.tier === 2) {
       return 4 * zoomComp;
     } else if (feature.properties.tier === 3) {
-      return 4.5 * zoomComp;
+      return 3.5 * zoomComp;
     } else if (feature.properties.tier === 4) {
-      return 5 * zoomComp;
+      return 3 * zoomComp;
     }
   }
 
