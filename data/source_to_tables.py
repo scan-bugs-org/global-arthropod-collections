@@ -22,22 +22,18 @@ source_df = pd.read_csv(
         "lon": float,
         "url": str,
         "scan": str,
-        "idigbio": object,
-        "gbif": object
+        "idigbio": bool,
+        "gbif": bool
     }
 )
 
-all_df = source_df.copy()
-for col in ["idigbio", "gbif"]:
-    all_df[col] = source_df[col].map({"": False, "No": False, np.NAN: False, "Yes": True}).astype("bool")
-
-institution_df = all_df[
+institution_df = source_df[
     ["institutionCode", "institutionName", "state", "country"]
 ].drop_duplicates(subset=["institutionCode"]).reindex()
-collection_df = all_df.drop(["institutionName", "state", "country"], axis=1)
+collection_df = source_df.drop(["institutionName", "state", "country"], axis=1)
 
 # Trim all institution codes to 4 characters max
-for i, row in all_df.iterrows():
+for i, row in source_df.iterrows():
     if len(row["institutionCode"]) > 4:
         institution_code = row["institutionCode"][0:4]
         institution_df.at[i, "institutionCode"] = institution_code
@@ -45,7 +41,7 @@ for i, row in all_df.iterrows():
         collection_df.at[c_row_idx, "institutionCode"] = institution_code
 
 # Trim all collection codes to 4 characters max
-for i, row in all_df.iterrows():
+for i, row in source_df.iterrows():
     if len(row["collectionCode"]) > 4:
         collection_code = row["collectionCode"][0:4]
         collection_df.at[i, "collectionCode"] = collection_code

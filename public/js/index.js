@@ -3,17 +3,48 @@ const hillShadingTilesURL = "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.p
 const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
 const collectionsGeojsonURL = "api/collections?geojson=true&columns=institutionCode,collectionCode,tier";
 
-// Style for the geojson points
-const pointMarkerStyle = {
-  fillColor: "darkgreen",
-  fillOpacity: 0.6,
-  stroke: false,
-  radius: 3,
-  riseOnHover: true
-};
+/**
+ * @param  {L.map}    map       Leaflet map
+ * @param  {object}   feature   A GeoJSON point
+ * @return {integer}            Radius for the feature's marker based on
+ *                              tier and zoom level
+ */
+function getMarkerRadius(map, feature) {
+  const currentZoom = map.getZoom();
+  let zoomComp = 1 + currentZoom / 10;
 
-function getMarkerStyle(feature) {
+  if (feature.properties.tier) {
+    if (feature.properties.tier === 1) {
+      return 3 * zoomComp;
+    } else if (feature.properties.tier === 2) {
+      return 4 * zoomComp;
+    } else if (feature.properties.tier === 3) {
+      return 4.5 * zoomComp;
+    } else if (feature.properties.tier === 4) {
+      return 5 * zoomComp;
+    }
+  }
 
+  // Default, if tier isn't available
+  return 3 * zoomComp;
+}
+
+/**
+ * @param  {L.map}            map     Leaflet map
+ * @param  {L.circleMarker}   layer   circleMarker layer
+ * @return {object}                   Style for the circleMarker based on
+ *                                    tier of the underlying GeoJSON feature
+ *                                    and zoom level
+ */
+function getMarkerStyle(map, layer) {
+  return {
+    fillColor: "darkgreen",
+    fillOpacity: 0.6,
+    stroke: false,
+    radius: getMarkerRadius(map, layer.feature),
+    riseOnHover: true,
+    riseOffset: 500
+  };
 }
 
 /**
@@ -109,35 +140,16 @@ function populateData(map, geojsonUrl) {
         }
       ).addTo(map);
 
+      pointLayer.eachLayer((layer) => {
+        layer.setStyle(getMarkerStyle(map, layer));
+      });
+
       map.on("zoomend", () => {
-        resizeMarkers(map, pointLayer);
+        pointLayer.eachLayer((layer) => {
+          layer.setRadius(getMarkerRadius(map, layer.feature));
+        });
       });
     });
-}
-
-/**
- * Called on zoomend to resize the geojson markers
- */
-function resizeMarkers(map, pointLayer) {
-  const currentZoom = map.getZoom();
-  if (currentZoom > 4) {
-    pointLayer.eachLayer((layer) => {
-      layer.setRadius(6);
-    });
-  } else if (currentZoom > 5) {
-    pointLayer.eachLayer((layer) => {
-      layer.setRadius(9);
-    });
-
-  } else if (currentZoom > 6) {
-   pointLayer.eachLayer((layer) => {
-     layer.setRadius(12);
-   });
-  } else {
-    pointLayer.eachLayer((layer) => {
-      layer.setRadius(3);
-    });
-  }
 }
 
 /**
@@ -147,7 +159,7 @@ function resizeMarkers(map, pointLayer) {
  * @return {L.circleMarker}       Leaflet circle marker for the geojson point
  */
 function doTooltip(feature, latLng) {
-  const marker = L.circleMarker(latLng, pointMarkerStyle);
+  const marker = L.circleMarker(latLng, null);
   marker.on("mouseover", () => { marker.selected = true; });
   marker.on("mouseout", () => { marker.selected = false; });
   marker.once(
