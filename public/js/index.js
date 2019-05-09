@@ -55,6 +55,31 @@ function getCollectionName(institutionCode, collectionCode) {
 }
 
 /**
+ * Returns the collection url for the given collection code
+ * @param  {string} institutionCode Institution code the collection belongs to
+ * @param  {string} collectionCode Collection code to return the url for
+ * @return {Promise<string>} Promise to return the collection url
+ */
+function getCollectionUrl(institutionCode, collectionCode) {
+  return new Promise((resolve, reject) => {
+    try {
+      fetch("api/collections/" + institutionCode + "/" + collectionCode + "?columns=url")
+        .then((response) => {
+          return response.json();
+        })
+        .then((collectionJson) => {
+          resolve(collectionJson.url);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    } catch(err) {
+      reject(err);
+    }
+  });
+}
+
+/**
  * Return the institution name for the given institution code
  * @param  {integer} institutionCode Institution code to return the name for
  * @return {Promise<string>} Promise to return the institution name
@@ -185,15 +210,29 @@ function doTooltip(feature, latLng) {
         );
       }
 
+      if (!("url" in feature.properties)) {
+        propertiesPopulated.push(
+          getCollectionUrl(feature.properties.institutionCode, feature.properties.collectionCode)
+            .then((url) => {
+              return feature.properties.url = url;
+            })
+        );
+      }
+
       Promise.all(propertiesPopulated).then(() => {
-        marker.unbindTooltip();
-        marker.bindTooltip(
+        marker.unbindPopup();
+        marker.bindPopup(
           "<h3>" + feature.properties.institutionName + "</h3>" +
-          "<h4>" + feature.properties.collectionName + "</h4>"
+          "<a target='_blank' href='" + feature.properties.url + "'>" +
+            "<h4>" + feature.properties.collectionName + "</h4>" +
+          "</a>"
         );
 
+        marker.on("mouseover", () => { marker.openPopup(); });
+        marker.getPopup().on("mouseout", () => { marker.closePopup(); });
+
         if (marker.selected) {
-          marker.openTooltip();
+          marker.openPopup();
         }
       });
     }
