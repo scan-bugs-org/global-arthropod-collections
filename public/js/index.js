@@ -1,7 +1,7 @@
 const wikiMediaAttrib = "<a href=\"https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use\">Wikimedia Maps</a> | Map data © <a href=\"https://openstreetmap.org/copyright\">OpenStreetMap</a> contributors";
 const hillShadingTilesURL = "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png";
 const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
-const collectionsGeojsonURL = "api/collections?geojson=true&columns=institutionCode,collectionCode";
+const collectionsGeojsonURL = "api/collections?geojson=true&columns=institutionCode,collectionCode,tier";
 
 // Style for the geojson points
 const pointMarkerStyle = {
@@ -11,6 +11,10 @@ const pointMarkerStyle = {
   radius: 3,
   riseOnHover: true
 };
+
+function getMarkerStyle(feature) {
+
+}
 
 /**
  * Loads open street map tiles into the map container
@@ -77,38 +81,6 @@ function getInstitutionName(institutionCode) {
         })
         .then((institutionJson) => {
           resolve(institutionJson.institutionName);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    } catch(err) {
-      reject(err);
-    }
-  });
-}
-
-/**
- * Returns the institution name for the given collection code
- * @param  {string} institutionCode Institution that the collection belongs to
- * @param  {string} collectionCode Collection code to return the institution for
- * @return {Promise<string>} Promise to return the institution name
- */
-function getInstitutionForCollection(institutionCode, collectionCode) {
-  return new Promise((resolve, reject) => {
-    try {
-      fetch("api/collections/" + institutionCode + "/" + collectionCode + "?columns=institutionCode")
-        .then((response) => {
-          return response.json();
-        })
-        .then((collectionJson) => {
-          return getInstitutionName(collectionJson.institutionCode);
-        })
-        .then((institutionName) => {
-          if (institutionName == null) {
-            resolve("Unnamed Institution");
-          } else {
-            resolve(institutionName);
-          }
         })
         .catch((err) => {
           reject(err);
@@ -194,7 +166,7 @@ function doTooltip(feature, latLng) {
 
       if (!("institutionName" in feature.properties)) {
         propertiesPopulated.push(
-          getInstitutionForCollection(feature.properties.institutionCode, feature.properties.collectionCode)
+          getInstitutionName(feature.properties.institutionCode)
             .then((institutionName) => {
               return feature.properties.institutionName = institutionName;
           })
