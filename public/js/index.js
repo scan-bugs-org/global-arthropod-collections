@@ -4,50 +4,6 @@ const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
 const collectionsGeojsonURL = "api/collections?geojson=true&columns=institutionCode,collectionCode,tier";
 
 /**
- * @param  {L.map}    map       Leaflet map
- * @param  {object}   feature   A GeoJSON point
- * @return {integer}            Radius for the feature's marker based on
- *                              tier and zoom level
- */
-function getMarkerRadius(map, feature) {
-  const currentZoom = map.getZoom();
-  let zoomComp = 1 + currentZoom / 10;
-
-  if (feature.properties.tier) {
-    if (feature.properties.tier === 1) {
-      return 3 * zoomComp;
-    } else if (feature.properties.tier === 2) {
-      return 4 * zoomComp;
-    } else if (feature.properties.tier === 3) {
-      return 4.5 * zoomComp;
-    } else if (feature.properties.tier === 4) {
-      return 5 * zoomComp;
-    }
-  }
-
-  // Default, if tier isn't available
-  return 3 * zoomComp;
-}
-
-/**
- * @param  {L.map}            map     Leaflet map
- * @param  {L.circleMarker}   layer   circleMarker layer
- * @return {object}                   Style for the circleMarker based on
- *                                    tier of the underlying GeoJSON feature
- *                                    and zoom level
- */
-function getMarkerStyle(map, layer) {
-  return {
-    fillColor: "darkgreen",
-    fillOpacity: 0.6,
-    stroke: false,
-    radius: getMarkerRadius(map, layer.feature),
-    riseOnHover: true,
-    riseOffset: 500
-  };
-}
-
-/**
  * Loads open street map tiles into the map container
  * @return L.map
  */
@@ -60,7 +16,7 @@ function loadMap() {
 
   const hillTiles = new L.TileLayer(
     hillShadingTilesURL,
-    { minZoom: 10, maxZoom: 10 }
+    { minZoom: 8, maxZoom: 10 }
   );
 
   map.addLayer(wikiTiles);
@@ -150,6 +106,50 @@ function populateData(map, geojsonUrl) {
         });
       });
     });
+}
+
+/**
+ * @param  {L.map}    map       Leaflet map
+ * @param  {object}   feature   A GeoJSON point
+ * @return {integer}            Radius for the feature's marker based on
+ *                              tier and zoom level
+ */
+function getMarkerRadius(map, feature) {
+  const currentZoom = map.getZoom();
+  let zoomComp = 1 + currentZoom / 10;
+
+  if (feature.properties.tier) {
+    if (feature.properties.tier === 1) {
+      return 3 * zoomComp;
+    } else if (feature.properties.tier === 2) {
+      return 4 * zoomComp;
+    } else if (feature.properties.tier === 3) {
+      return 4.5 * zoomComp;
+    } else if (feature.properties.tier === 4) {
+      return 5 * zoomComp;
+    }
+  }
+
+  // Default, if tier isn't available
+  return 3 * zoomComp;
+}
+
+/**
+ * @param  {L.map}            map     Leaflet map
+ * @param  {L.circleMarker}   layer   circleMarker layer
+ * @return {object}                   Style for the circleMarker based on
+ *                                    tier of the underlying GeoJSON feature
+ *                                    and zoom level
+ */
+function getMarkerStyle(map, layer) {
+  return {
+    fillColor: "darkgreen",
+    fillOpacity: 0.6,
+    stroke: false,
+    radius: getMarkerRadius(map, layer.feature),
+    riseOnHover: true,
+    riseOffset: 500
+  };
 }
 
 /**
