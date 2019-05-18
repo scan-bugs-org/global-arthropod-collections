@@ -5,26 +5,31 @@ import os
 import pandas as pd
 import sqlite3
 
+columns = {
+    "Inst code": {"institutionCode": str },
+    "Institution": {"institutionName": str },
+    "Collection Name": {"collectionName": str },
+    "Size": {"size": int },
+    "Country": {"country": str },
+    "State": {"state": str },
+    "Collection size category (Tier)": {"tier": int },
+    "Reversed Collection size category (Tier)": {"tierRev": int },
+    "% Collection Records Public": {"percentPublic": float },
+    "Collection Type": {"type": str },
+    "Collection latitude": {"lat": float },
+    "Collection longitude": {"lng": float },
+    "Website": {"url": str },
+    "SCAN": {"scan": bool },
+    "SCAN Collection Type": {"scanType": str },
+    "iDigBio": {"idigbio": bool },
+    "GBIF": {"gbif": bool },
+    "GBIF Date": {"gbifDate": str }
+}
+
 source_df = pd.read_csv(
     "source.csv",
-    dtype={
-        "institutionCode": str,
-        "institutionName": str,
-        "country": str,
-        "state": str,
-        "collectionCode": str,
-        "collectionName": str,
-        "size": int,
-        "tier": int,
-        "percentPublic": float,
-        "type": str,
-        "lat": float,
-        "lon": float,
-        "url": str,
-        "scan": str,
-        "idigbio": bool,
-        "gbif": bool
-    }
+    names=[val["name"] for _, val in columns.items()],
+    dtype={}.update(*[v for _, v in columns.items()])
 )
 
 institution_df = source_df[
