@@ -1,0 +1,5 @@
+name: naac_data
+dependencies:
+  - python=3
+  - pandas
+
