@@ -1,0 +1,4 @@
+name: naac
+dependencies:
+  - python=3
+  - pandas
