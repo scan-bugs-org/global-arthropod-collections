@@ -5,32 +5,48 @@ import os
 import pandas as pd
 import sqlite3
 
+t_str = np.unicode_
+t_int = pd.Int64Dtype
+t_float = np.single
+t_bool = np.bool
+
 columns = {
-    "Inst code": {"institutionCode": str },
-    "Institution": {"institutionName": str },
-    "Collection Name": {"collectionName": str },
-    "Size": {"size": int },
-    "Country": {"country": str },
-    "State": {"state": str },
-    "Collection size category (Tier)": {"tier": int },
-    "Reversed Collection size category (Tier)": {"tierRev": int },
-    "% Collection Records Public": {"percentPublic": float },
-    "Collection Type": {"type": str },
-    "Collection latitude": {"lat": float },
-    "Collection longitude": {"lng": float },
-    "Website": {"url": str },
-    "SCAN": {"scan": bool },
-    "SCAN Collection Type": {"scanType": str },
-    "iDigBio": {"idigbio": bool },
-    "GBIF": {"gbif": bool },
-    "GBIF Date": {"gbifDate": str }
+    "institutionCode": t_str,
+    "institutionName": t_str,
+    "collectionCode": t_str,
+    "collectionName": t_str,
+    "size": t_int(),
+    "country": t_str,
+    "state": t_str,
+    "tier": t_int(),
+    "percentPublic": t_float,
+    "type": t_str,
+    "lat": t_float,
+    "lng": t_float,
+    "url": t_str,
+    "scan": t_str,
+    "scanType": t_str,
+    "idigbio": t_str,
+    "gbif": t_str,
+    "gbifDate": t_str
 }
 
 source_df = pd.read_csv(
     "source.csv",
-    names=[val["name"] for _, val in columns.items()],
-    dtype={}.update(*[v for _, v in columns.items()])
+    dtype=columns
 )
+
+for i, row in source_df.iterrows():
+    scan = str(row["scan"]).lower() == "yes"
+    idigbio = str(row["idigbio"]).lower() == "yes"
+    gbif = str(row["gbif"]).lower() == "yes"
+
+    source_df.at[i, "scan"] = scan
+    source_df.at[i, "idigbio"] = idigbio
+    source_df.at[i, "gbif"] = gbif
+
+for c in ["scan", "idigbio", "gbif"]:
+    source_df[c] = source_df[c].astype(t_bool)
 
 institution_df = source_df[
     ["institutionCode", "institutionName", "state", "country"]
@@ -47,7 +63,7 @@ for i, row in source_df.iterrows():
 
 # Trim all collection codes to 4 characters max
 for i, row in source_df.iterrows():
-    if len(row["collectionCode"]) > 4:
+    if not pd.isna(row["collectionCode"]) and len(row["collectionCode"]) > 4:
         collection_code = row["collectionCode"][0:4]
         collection_df.at[i, "collectionCode"] = collection_code
 
