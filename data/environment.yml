@@ -1,4 +1,7 @@
 name: naac
+channels:
+  - conda-forge
+  - defaults
 dependencies:
   - python=3
-  - pandas
+  - geopandas>=0.5.1

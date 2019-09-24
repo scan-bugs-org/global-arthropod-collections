@@ -1,8 +1,23 @@
-const wikiMediaAttrib = "<a href=\"https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use\">Wikimedia Maps</a> | Map data © <a href=\"https://openstreetmap.org/copyright\">OpenStreetMap</a> contributors";
-const hillShadingTilesURL = "https://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png";
+const wikiMediaAttrib = `
+    <a href=\"https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use\">
+        Wikimedia Maps
+    </a> | Map data © 
+    <a href=\"https://openstreetmap.org/copyright\">
+        OpenStreetMap
+    </a> contributors
+`;
 const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
-const collectionsGeojsonURL = "api/collections?geojson=true&columns=institutionCode,collectionCode,tier";
+const mapDataUrl = "../data/collections.geojson";
 const minZoom = 3;
+
+/**
+ * Page's main function
+ */
+function main() {
+  const map = loadMap();
+  map.setView([39.8, -98.6], 4);
+  populateData(map, mapDataUrl);
+}
 
 /**
  * Loads open street map tiles into the map container
@@ -15,99 +30,14 @@ function loadMap() {
     { minZoom: minZoom, maxZoom: 10, attribution: wikiMediaAttrib }
   );
 
-  const hillTiles = new L.TileLayer(
-    hillShadingTilesURL,
-    { minZoom: 8, maxZoom: 10 }
-  );
-
   map.addLayer(wikiTiles);
-  map.addLayer(hillTiles);
-
   return map;
 }
 
 /**
- * Returns the collection name for the given collection code
- * @param  {string} institutionCode Institution code the collection belongs to
- * @param  {string} collectionCode Collection code to return the name for
- * @return {Promise<string>} Promise to return the collection name
- */
-function getCollectionName(institutionCode, collectionCode) {
-  return new Promise((resolve, reject) => {
-    try {
-      fetch("api/collections/" + institutionCode + "/" + collectionCode + "?columns=collectionName")
-        .then((response) => {
-          return response.json();
-        })
-        .then((collectionJson) => {
-          let name = collectionJson.collectionName;
-          if (name == null) {
-            name = "Unnamed Collection";
-          }
-          resolve(name);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    } catch(err) {
-      reject(err);
-    }
-  });
-}
-
-/**
- * Returns the collection url for the given collection code
- * @param  {string} institutionCode Institution code the collection belongs to
- * @param  {string} collectionCode Collection code to return the url for
- * @return {Promise<string>} Promise to return the collection url
- */
-function getCollectionUrl(institutionCode, collectionCode) {
-  return new Promise((resolve, reject) => {
-    try {
-      fetch("api/collections/" + institutionCode + "/" + collectionCode + "?columns=url")
-        .then((response) => {
-          return response.json();
-        })
-        .then((collectionJson) => {
-          resolve(collectionJson.url);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    } catch(err) {
-      reject(err);
-    }
-  });
-}
-
-/**
- * Return the institution name for the given institution code
- * @param  {integer} institutionCode Institution code to return the name for
- * @return {Promise<string>} Promise to return the institution name
- */
-function getInstitutionName(institutionCode) {
-  return new Promise((resolve, reject) => {
-    try {
-      fetch("api/institutions/" + institutionCode + "?columns=institutionName")
-        .then((response) => {
-          return response.json();
-        })
-        .then((institutionJson) => {
-          resolve(institutionJson.institutionName);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    } catch(err) {
-      reject(err);
-    }
-  });
-}
-
-/**
  * Populates the map collection data
- * @param  {L.map}  map         Leaflet map object
- * @param  {url}    geojsonUrl  Location of the GeoJSON data
+ * @param  {L.map}      map         Leaflet map object
+ * @param  {string}     geojsonUrl  Location of the GeoJSON data
  */
 function populateData(map, geojsonUrl) {
   fetch(geojsonUrl)
@@ -121,6 +51,7 @@ function populateData(map, geojsonUrl) {
           pointToLayer: doTooltip
         }
       );
+      pointLayer.addTo(map);
 
       const tierOne = L.layerGroup();
       const tierTwo = L.layerGroup();
@@ -175,7 +106,7 @@ function populateData(map, geojsonUrl) {
 /**
  * @param  {L.map}    map       Leaflet map
  * @param  {object}   feature   A GeoJSON point
- * @return {integer}            Radius for the feature's marker based on
+ * @return {number}             Radius for the feature's marker based on
  *                              tier and zoom level
  */
 function getMarkerRadius(map, feature) {
@@ -219,85 +150,32 @@ function getMarkerStyle(map, layer) {
 /**
  * Populate the markers & corresponding tooltips for each geojson collection
  * @param  {Object} feature GeoJSON feature representing the collection
- * @param  {Array<float>} latLng  [lat, lon]
+ * @param  {Array<number>} latLng  [lat, lon]
  * @return {L.circleMarker}       Leaflet circle marker for the geojson point
  */
 function doTooltip(feature, latLng) {
   const marker = L.circleMarker(latLng, null);
-  marker.on("mouseover", () => { marker.selected = true; });
-  marker.on("mouseout", () => { marker.selected = false; });
-  marker.once(
-    "mouseover",
-    () => {
-      const propertiesPopulated = [];
+    let popupContent = (
+      "<h3>" + feature.properties.institutionName + "</h3>" +
+      "<a target='_blank' href='" + feature.properties.url + "'>" +
+        "<h4>" + feature.properties.collectionName + "</h4>" +
+      "</a>"
+    );
 
-      if (!("collectionName" in feature.properties)) {
-        propertiesPopulated.push(
-          getCollectionName(feature.properties.institutionCode, feature.properties.collectionCode)
-            .then((name) => {
-              return feature.properties.collectionName = name.trim();
-            })
-          );
-      }
-
-      if (!("institutionName" in feature.properties)) {
-        propertiesPopulated.push(
-          getInstitutionName(feature.properties.institutionCode)
-            .then((institutionName) => {
-              return feature.properties.institutionName = institutionName.trim();
-          })
-        );
-      }
-
-      if (!("url" in feature.properties)) {
-        propertiesPopulated.push(
-          getCollectionUrl(feature.properties.institutionCode, feature.properties.collectionCode)
-            .then((url) => {
-              return feature.properties.url = url != null ? url.trim() : url;
-            })
-        );
-      }
-
-      Promise.all(propertiesPopulated).then(() => {
-        marker.unbindPopup();
-
-        let popupContent = (
-          "<h3>" + feature.properties.institutionName + "</h3>" +
-          "<a target='_blank' href='" + feature.properties.url + "'>" +
-            "<h4>" + feature.properties.collectionName + "</h4>" +
-          "</a>"
-        );
-
-        if (!feature.properties.url) {
-          popupContent = (
-            "<h3>" + feature.properties.institutionName + "</h3>" +
-            "<h4>" + feature.properties.collectionName + "</h4>"
-          );
-        }
-
-        marker.bindPopup(
-          popupContent,
-          { closeButton: false }
-        );
-
-        marker.on("mouseover", () => { marker.openPopup(); });
-
-        if (marker.selected) {
-          marker.openPopup();
-        }
-      });
+    if (!feature.properties.url) {
+      popupContent = (
+        "<h3>" + feature.properties.institutionName + "</h3>" +
+        "<h4>" + feature.properties.collectionName + "</h4>"
+      );
     }
-  );
+
+    marker.bindPopup(
+      popupContent,
+      { closeButton: false }
+    );
   return marker;
 }
 
-/**
- * Page's main function
- */
-function main() {
-  const map = loadMap();
-  map.setView([39.8, -98.6], 4);
-  populateData(map, collectionsGeojsonURL);
-}
-
-window.onload = main;
+window.onload = () => {
+  main();
+};
