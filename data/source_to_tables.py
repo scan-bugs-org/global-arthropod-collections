@@ -55,8 +55,15 @@ collection_df = source_df.drop(["institutionName", "state", "country"], axis=1)
 
 # Trim all institution codes to 4 characters max
 for i, row in source_df.iterrows():
-    if len(row["institutionCode"]) > 4:
-        institution_code = row["institutionCode"][0:4]
+    if pd.isna(row["institutionCode"]):
+        institution_name = row["institutionName"]
+        institution_code = ''.join([l[0].upper() for l in institution_name.strip().split(" ")])
+        institution_df.at[i, "institutionCode"] = institution_code
+    else:
+        institution_code = row["institutionCode"]
+
+    if len(institution_code) > 4:
+        institution_code = institution_code[0:4]
         institution_df.at[i, "institutionCode"] = institution_code
         c_row_idx = collection_df.loc[collection_df["institutionCode"] == row["institutionCode"]].index
         collection_df.at[c_row_idx, "institutionCode"] = institution_code
