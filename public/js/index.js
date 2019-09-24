@@ -7,7 +7,7 @@ const wikiMediaAttrib = `
     </a> contributors
 `;
 const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
-const mapDataUrl = "./data/collections.geojson";
+const mapDataUrl = "data/collections.geojson";
 const minZoom = 3;
 
 /**
