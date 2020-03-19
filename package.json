@@ -1,0 +1,33 @@
+{
+  "name": "global-arthropod-collections",
+  "version": "0.0.1",
+  "description": "Map of global arthropod collections",
+  "main": "bin/server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node bin/server.js",
+    "devstart": "NODE_ENV=development nodemon bin/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scan-bugs-org/global-arthropod-collections.git"
+  },
+  "author": "Evin Dunn",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/scan-bugs-org/global-arthropod-collections/issues"
+  },
+  "homepage": "https://github.com/scan-bugs-org/global-arthropod-collections#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-multiparty": "^2.2.0",
+    "csv-parser": "^2.3.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.5",
+    "morgan": "^1.9.1",
+    "nunjucks": "^3.2.1"
+  },
+  "devDependencies": {
+    "chokidar": "^3.3.1",
+    "nodemon": "^2.0.2"
+  }
+}

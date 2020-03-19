@@ -10,4 +10,5 @@ rules:
   quotes: ["warn", "double"]
   no-empty: warn
 globals:
-  Promise: readwrite
+  Promise: writable
+

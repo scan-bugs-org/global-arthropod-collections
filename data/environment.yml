@@ -1,7 +1,0 @@
-name: naac
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - python=3
-  - geopandas>=0.5.1
