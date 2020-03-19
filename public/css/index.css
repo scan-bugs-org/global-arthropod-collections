@@ -18,11 +18,12 @@ body {
 }
 
 #header {
+  z-index: 1000;
   height: 5em;
-
   text-align: center;
   padding: 1em;
   background-color: darkgreen;
+  box-shadow: 0 0.1rem 2rem 1rem rgba(0, 0, 0, 0.7);
 }
 
 #map {
