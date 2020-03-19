@@ -14,13 +14,12 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true
   }
-);
+).catch((err) => {
+  console.error(`Error connecting to database: ${err.message}`);
+});
 
 const connection = mongoose.connection;
 connection.on("error", console.error.bind(console, "MongoDB Error: "));
-connection.on("open", () => {
-  console.debug("Connected to mongo");
-});
 
 const InstitutionModel = mongoose.model("Institution", InstitutionSchema);
 const CollectionModel = mongoose.model("Collection", CollectionSchema);

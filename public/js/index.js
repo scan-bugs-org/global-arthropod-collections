@@ -1,10 +1,11 @@
 const wikiMediaAttrib = `
-    <a href=\"https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use\">
+    <a href="https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use" target="_blank">
         Wikimedia Maps
     </a> | Map data © 
-    <a href=\"https://openstreetmap.org/copyright\">
+    <a href="https://openstreetmap.org/copyright" target="_blank">
         OpenStreetMap
     </a> contributors
+    | <a href="./edit">Edit this map</a>
 `;
 const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
 const mapDataUrl = "./geojson";
