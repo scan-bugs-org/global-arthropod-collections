@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
-const InstitutionSchema = require("./Institution");
 
 const CollectionSchema = mongoose.Schema({
   code: String,
-  institution: InstitutionSchema,
+  institution: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Institution"
+  },
   name: {
     type: String,
     required: true
@@ -41,15 +43,20 @@ const CollectionSchema = mongoose.Schema({
 });
 
 CollectionSchema.methods.asGeoJson = function() {
+  let name = this.name;
+  if (this.institution !== null) {
+    name = `${this.institution.name} ${this.name}`;
+  }
   return {
     type: "Feature",
     geometry: {
       type: "Point",
-      coordinates: [this.location.lat, this.location.lng]
+      coordinates: [this.location.lng, this.location.lat]
     },
     properties: {
-      "name": this.name,
-      "url": this.url,
+      name: name,
+      url: this.url,
+      tier: this.tier
     }
   };
 };
