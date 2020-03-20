@@ -4,9 +4,9 @@ const logger = require("morgan");
 const nunjucks = require("nunjucks");
 const nunjucksDateFilter = require("nunjucks-date-filter");
 const path = require("path");
-const geoJsonRouter = require("../data/geojson");
-const listViewRouter = require("../data/list");
-const collectionEditRouter = require("../data/editCollection");
+const geoJsonRouter = require("../controllers/geojson");
+const listViewRouter = require("../controllers/list");
+const collectionEditRouter = require("../controllers/editCollection");
 
 const PORT = 8080;
 const isDev = process.env.NODE_ENV === "development";
@@ -15,6 +15,7 @@ const isDev = process.env.NODE_ENV === "development";
 const app = express();
 app.use(logger(isDev ? "dev" : "tiny"));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Configure views
 const nunjucksEnv = nunjucks.configure("views", {

@@ -4,7 +4,7 @@
 {% block body %}
 <div class="p-4">
   <div class="mb-4 text-center">
-    <a href=".">Home</a>
+    <a href="{{ serverRoot | default('.') }}">Home</a>
   </div>
   <div>
     <!-- NAV -->

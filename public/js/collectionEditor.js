@@ -1,19 +1,20 @@
 window.onload = function () {
-  const form = document.forms[0];
   const scanField = document.getElementById("scan");
   const gbifField = document.getElementById("gbif");
   const scanTypeField = document.getElementById("scanType");
   const gbifDateField = document.getElementById("gbifDate");
-  const changeEvent = new Event("change");
 
   function onScanChanged(e) {
-    scanTypeField.disabled = e.target.value !== "true";
+    scanTypeField.disabled = e.target.value !== "Yes";
   }
 
   function onGbifChanged(e) {
-    gbifDateField.disabled = e.target.value !== "true";
+    gbifDateField.disabled = e.target.value !== "Yes";
   }
 
   scanField.addEventListener("change", onScanChanged);
   gbifField.addEventListener("change", onGbifChanged);
+
+  scanField.dispatchEvent(new Event("change"));
+  gbifField.dispatchEvent(new Event("change"));
 };

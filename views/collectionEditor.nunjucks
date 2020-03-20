@@ -1,228 +1,197 @@
-{% extends "webpage.nunjucks" %}
+{% extends "formPage.nunjucks" %}
+{% from "formField.nunjucks" import formField %}
+
 {% set serverRoot = "../.." %}
 {% set pageTitle = collection.name | default('') %}
 
-{% block head %}
-  {{ super() }}
-  <script type="text/javascript" src="{{ serverRoot }}/js/collectionEditor.js"></script>
+{% block formTitle %}
+  <h1>{{ pageTitle }}</h1>
+  <h3>{{ collection.institution.name }}</h3>
 {% endblock %}
 
-{% block body %}
-<div class="m-2 p-3">
-  <div class="mb-2">
-    <h1>{{ collection.name }}</h1>
-    <h3>{{ collection.institution.name }}</h3>
-    <div class="text-right">
-      <a href="..">Go back</a>
-    </div>
+{% block form %}
+  <!-- COLLECTION ID -->
+  {{ formField(
+    "collectionId",
+    displayName="Collection ID",
+    value=collection._id.toString(),
+    readonly=true,
+    inline=true
+  ) }}
+
+  <!-- COLLECTION NAME / CODE -->
+  <div class="form-group form-inline">
+    {{ formField(
+      "collectionName",
+      displayName="Collection Name",
+      value=collection.name,
+      inline=true,
+      required=true
+    ) }}
+    {{ formField(
+      "collectionCode",
+      displayName="Collection Code",
+      value=collection.code,
+      inline=true
+    ) }}
   </div>
-  <form class="border border-primary rounded p-3" method="post">
-    <!-- COLLECTION ID -->
+
+  <!-- INSTITUTION -->
+  {% set institutionId = collection.institution._id.toString() %}
+  <div class="form-group form-inline">
+    {{ formField(
+      "institutionId",
+      displayName="Institution",
+      value=institutionId,
+      options=institutions | default([]),
+      inline=true,
+      required=true
+    ) }}
+    <a href="../institutions/{{ institutionId }}">Go To</a>
+  </div>
+
+  <!-- URL -->
+  {{ formField(
+    "url",
+    displayName="URL",
+    value=collection.url,
+    inline=true,
+    url=true
+  ) }}
+
+  <!-- SIZE / TIER / IDIGBIO -->
+  <div class="form-group form-inline">
+    {{ formField(
+      "size",
+      displayName="Size",
+      value=collection.size,
+      inline=true,
+      min=0
+    ) }}
+    {{ formField(
+      "tier",
+      displayName="Tier",
+      value=collection.tier,
+      inline=true,
+      options=[1, 2, 3, 4]
+    ) }}
+
+    {% if collection.inIdigbio === "" %}
+      {% set inIdigbio = "" %}
+    {% else %}
+      {% set inIdigbio = "Yes" if collection.inIdigbio === true else "No" %}
+    {% endif %}
+    {{ formField(
+      "idigbio",
+      displayName="In iDigBio?",
+      value=inIdigbio,
+      inline=true,
+      options=["", "Yes", "No"]
+    ) }}
+  </div>
+
+  <!-- LOCATION -->
+  <fieldset class="form-group border border-primary rounded p-3">
+    <legend class="px-4 text-primary">Location</legend>
     <div class="form-group form-inline">
-      <label for="collectionId">Collection ID:</label>
-      <input
-        id="collectionId"
-        name="collectionId"
-        class="form-control mx-2"
-        value="{{ collection._id }}"
-        size="{{ collection._id.toString() | length }}"
-        required
-        readonly
-      >
+      {{ formField(
+        "lat",
+        displayName="Latitude",
+        value=collection.location.lat,
+        inline=true,
+        required=true,
+        step=0.0001,
+        min=-90,
+        max=90
+      ) }}
+      {{ formField(
+        "lng",
+        displayName="Longitude",
+        value=collection.location.lng,
+        inline=true,
+        required=true,
+        step=0.0001,
+        min=-180,
+        max=180
+      ) }}
     </div>
     <div class="form-group form-inline">
-      <!-- INSTITUTION -->
-      {% set institutionId = collection.institution._id.toString() %}
-      <label for="institutionId">Institution: </label>
-      <select id="institutionId" name="institutionId" class="form-control mx-2" required>
-        <option value=""></option>
-        {% for institution in institutions | default([]) %}
-          {% set currentIid = institution._id.toString() %}
-          <option value="{{ currentIid }}" {% if currentIid == institutionId %}selected{% endif %}>
-            {{ institution.name }}
-          </option>
-        {% endfor %}
-      </select>
-      <a class="mx-2" href="../institutions/{{ institutionId }}">Go To</a>
+      {{ formField(
+        "country",
+        displayName="Country",
+        value=collection.location.country,
+        inline=true
+      ) }}
+      {{ formField(
+        "state",
+        displayName="State/Province",
+        value=collection.location.state,
+        inline=true
+      ) }}
     </div>
-    <!-- COLLECTION NAME / CODE -->
+  </fieldset>
+
+  <!-- SCAN -->
+  <fieldset class="form-group border border-primary rounded p-3">
+    <legend class="px-4 text-primary">SCAN</legend>
     <div class="form-group form-inline">
-      <div class="form-group form-inline">
-        <label for="collectionName">Collection Name:</label>
-        <input
-          id="collectionName"
-          name="collectionName"
-          class="form-control mx-2"
-          value="{{ collection.name }}"
-          size="{{ collection.name | length }}"
-          required
-        >
-      </div>
-      <div class="form-group form-inline">
-        <label for="collectionCode">Collection Code:</label>
-        <input
-          id="collectionCode"
-          name="collectionCode"
-          class="form-control mx-2"
-          value="{{ collection.code }}"
-          size="{{ collection.code | length }}"
-          required
-        >
-      </div>
+      {% if collection.scan.exists === "" %}
+        {% set inScan = "" %}
+      {% else %}
+        {% set inScan = "Yes" if collection.scan.exists === true else "No" %}
+      {% endif %}
+      {{ formField(
+        "scan",
+        displayName="In SCAN?",
+        value=inScan,
+        inline=true,
+        options=["", "Yes", "No"]
+      ) }}
+      {{ formField(
+        "scanType",
+        displayName="SCAN Collection Type",
+        value=collection.scan.scanType,
+        inline=true,
+        options=["", "Live", "Snapshot"]
+      ) }}
     </div>
-    <!-- URL -->
+  </fieldset>
+
+  <!-- GBIF -->
+  <fieldset class="form-group border border-primary rounded p-3">
+    <legend class="px-4 text-primary">GBIF</legend>
     <div class="form-group form-inline">
-      <label for="url">URL:</label>
-      <input
-        id="url"
-        name="url"
-        class="form-control mx-2"
-        type="url"
-        value="{{ collection.url }}"
-        size="{{ collection.url | length }}"
-      >
+      {% if collection.gbif.exists === "" %}
+        {% set inGbif = "" %}
+      {% else %}
+        {% set inGbif = "Yes" if collection.gbif.exists === true else "No" %}
+      {% endif %}
+      {{ formField(
+        "gbif",
+        displayName="In GBIF?",
+        value=inGbif,
+        inline=true,
+        options=["", "Yes", "No"]
+      ) }}
+
+      {% set gbifDate = collection.gbif.date | default('') %}
+      {% if gbifDate and gbifDate != '' %}
+        {% set gbifDate = gbifDate | date('YYYY-MM-DD') %}
+      {% endif %}
+
+      {{ formField(
+        "gbifDate",
+        displayName="GBIF Date",
+        date=true,
+        value=gbifDate,
+        inline=true
+      ) }}
     </div>
-    <!-- TIER / SIZE -->
-    <div class="form-group form-inline">
-      <div class="form-group form-inline">
-        <label for="tier">Tier:</label>
-        <select class="form-control mx-2" id="tier" name="tier" required>
-          {% for tier in [1, 2, 3, 4] %}
-            <option value="{{ tier }}" {% if tier == collection.tier %}selected{% endif %}>{{ tier }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="form-group form-inline mx-2">
-        <label for="size">Size:</label>
-        <input
-          id="size"
-          name="size"
-          class="form-control mx-2"
-          value="{{ collection.size }}"
-          type="number"
-          min="0"
-        >
-      </div>
-      <!-- IDIGBIO -->
-      <div class="form-group form-inline">
-        <label for="idigbio">In iDigBio?</label>
-        <select id="idigbio" name="idigbio" class="form-control mx-2">
-          <option value=""></option>
-          <option value="true" {% if collection.inIdigbio %}selected{% endif %}>Yes</option>
-          <option value="false" {% if not collection.inIdigbio %}selected{% endif %}>No</option>
-        </select>
-      </div>
-    </div>
-    <!-- LOCATION -->
-    <fieldset class="form-group border border-primary rounded p-3">
-      <legend class="px-4 text-primary">Location</legend>
-      <div class="form-group form-inline">
-        <div class="form-group form-inline">
-          <label for="lat">Latitude:</label>
-          <input
-            id="lat"
-            name="lat"
-            class="form-control mx-2"
-            value="{{ collection.location.lat }}"
-            type="number"
-            min="-90"
-            max="90"
-            step="0.0001"
-            required
-          >
-        </div>
-        <div class="form-group form-inline">
-          <label for="lng">Longitude:</label>
-          <input
-            id="lng"
-            name="lng"
-            class="form-control mx-2"
-            value="{{ collection.location.lng }}"
-            type="number"
-            min="-180"
-            max="180"
-            step="0.0001"
-            required
-          >
-        </div>
-      </div>
-      <div class="form-group form-inline">
-        <div class="form-group">
-          <label for="country">Country:</label>
-          <input
-            id="country"
-            name="country"
-            class="form-control mx-2"
-            value="{{ collection.location.country }}"
-          >
-        </div>
-        <div class="form-group">
-          <label for="state">State/Province:</label>
-          <input
-            id="state"
-            name="state"
-            class="form-control mx-2"
-            value="{{ collection.location.state }}"
-          >
-        </div>
-      </div>
-    </fieldset>
-    <!-- SCAN -->
-    <fieldset class="form-group form-inline border border-primary rounded p-3">
-      <legend class="px-4 text-primary">SCAN</legend>
-      <div class="form-group form-inline">
-        <label for="scan">In SCAN?</label>
-        <select id="scan" name="scan" class="form-control mx-2">
-          <option value=""></option>
-          <option value="true" {% if collection.scan.exists %}selected{% endif %}>Yes</option>
-          <option value="false" {% if not collection.scan.exists %}selected{% endif %}>No</option>
-        </select>
-      </div>
-      <div class="form-group form-inline mx-2">
-        {% set scanType = collection.scan.scanType | default('') | lower %}
-        <label for="scanType">Type:</label>
-        <select id="scanType" name="scanType" class="form-control mx-2">
-          <option value=""></option>
-          <option value="snapshot" {% if scanType == "snapshot" %}selected{% endif %}>
-            Snapshot
-          </option>
-          <option value="live" {% if scanType == "live" %}selected{% endif %}>
-            Live
-          </option>
-        </select>
-      </div>
-    </fieldset>
-    <!-- GBIF -->
-    <fieldset class="form-group form-inline border border-primary rounded p-3">
-      <legend class="px-4 text-primary">GBIF</legend>
-      <div class="form-group form-inline">
-        <label for="gbif">In GBIF?</label>
-        <select id="gbif" name="gbif" class="form-control mx-2">
-          <option value=""></option>
-          <option value="true" {% if collection.gbif.exists %}selected{% endif %}>Yes</option>
-          <option value="false" {% if not collection.gbif.exists %}selected{% endif %}>No</option>
-        </select>
-      </div>
-      <div class="form-group form-inline mx-2">
-        {% set gbifDate = collection.gbif.date | default('') %}
-        {% if gbifDate and gbifDate != '' %}
-          {% set gbifDate = gbifDate | date('YYYY-MM-DD') %}
-        {% endif %}
-        <label for="gbifDate">Date:</label>
-        <input
-          id="gbifDate"
-          name="gbifDate"
-          class="form-control mx-2"
-          type="date"
-          value="{{ gbifDate }}"
-        >
-      </div>
-    </fieldset>
-    <!-- BUTTONS -->
-    <div class="form-group mt-4 mb-0">
-      <button class="btn btn-primary" type="submit">Submit</button>
-      <button class="btn btn-secondary" type="reset">Reset</button>
-    </div>
-  </form>
-</div>
+  </fieldset>
+
+  <!-- BUTTONS -->
+  <div class="form-group mt-4 mb-0">
+    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-secondary" type="reset">Reset</button>
+  </div>
 {% endblock %}

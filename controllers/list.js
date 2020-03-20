@@ -31,6 +31,7 @@ router.get("/", (req, res) => {
     res.render(
       "listPage.nunjucks",
       {
+        serverRoot: "..",
         collectionHeaders: ["ID", "Institution", "Name"],
         institutionHeaders: ["ID", "Name"],
         collectionRows: collections,
