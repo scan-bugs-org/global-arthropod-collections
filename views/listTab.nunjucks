@@ -1,0 +1,28 @@
+<form class="border border-primary rounded p-2 m-2" name="{{ formId }}" id="{{ formId }}" method="post">
+  <table class="my-5 table">
+    <thead>
+      <tr>
+        {% for header in headers | default([]) %}
+          <th scope="col">{{ header }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows | default([]) %}
+        <tr>
+          {% for header, value in row %}
+            <td>
+            {% if header == "_id" %}
+            <a href="./{{ formId }}/{{ value }}">
+            {% endif %}
+            {{ value }}
+            {% if header == "_id" %}
+            </a>
+            {% endif %}
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</form>
