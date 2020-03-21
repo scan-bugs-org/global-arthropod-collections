@@ -35,5 +35,8 @@ app.use("/edit", listViewRouter);
 // Static files
 app.use(express.static(path.resolve(__dirname, "..", "public")));
 
+// Redirect to home on 404
+app.use("*", (req, res) => res.redirect("/"));
+
 // Start app
 app.listen(PORT, () => console.info(`Server listening on port ${PORT}...`));

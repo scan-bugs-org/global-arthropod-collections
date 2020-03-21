@@ -12,7 +12,8 @@ mongoose.connect(
   `mongodb://${user}:${password}@${host}:${port}/${database}`,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
   }
 ).catch((err) => {
   console.error(`Error connecting to database: ${err.message}`);

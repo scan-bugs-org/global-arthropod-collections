@@ -74,7 +74,7 @@ router.post("/:collectionId", (req, res) => {
   };
 
   Collection.findByIdAndUpdate(req.params.collectionId, collectionObj).then(() => {
-    res.redirect(`./${req.params.collectionId}`, 303);
+    res.redirect(303, `./${req.params.collectionId}`);
   }).catch((err) => {
     doError(res, err.reason);
   })
