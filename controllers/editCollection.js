@@ -2,7 +2,7 @@ const Router = require("express").Router;
 const database = require("../include/database");
 const Collection = database.Collection;
 const Institution = database.Institution;
-const doError = require("./common").doError;
+const doError = require("../include/common").doError;
 
 const router = Router();
 

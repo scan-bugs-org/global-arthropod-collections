@@ -15,12 +15,13 @@
   step=null,
   url=false,
   date=false,
+  password=false,
   options=[]
 ) %}
 
 {%- set isNumber = min != null or max != null or step != null -%}
 {%- set isSelect = options | length > 0 -%}
-{%- set isText = not (isNumber or isSelect or url or date) -%}
+{%- set isText = not (isNumber or isSelect or url or date or password) -%}
 
 <div class="form-group {% if inline %}form-inline mr-2{% endif %}">
   {{ label(name, displayName, required) }}
@@ -53,6 +54,8 @@
       {% if value != '' %}value="{{ value }}"{% endif %}
       {% if url %}
         type="url"
+      {% elseif password %}
+        type="password"
       {% endif %}
       {% if isText or url and value != '' %}
         size="{{ value | length }}"

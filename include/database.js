@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
+const path = require("path");
+const session = require("express-session");
+const MongoSessionStore = require("connect-mongo")(session);
+
 const InstitutionSchema = require("../models/Institution");
 const CollectionSchema = require("../models/Collection");
+const UserSchema = require("../models/User");
+
+const getSessionKey = require("../include/serverSessionKey");
+const SESSION_KEY_FILE = path.resolve(__dirname, "..", "data", ".session");
 
 const user = "appUser";
 const password = "password";
@@ -22,11 +30,23 @@ mongoose.connect(
 const connection = mongoose.connection;
 connection.on("error", console.error.bind(console, "MongoDB Error: "));
 
+// Models
 const InstitutionModel = mongoose.model("Institution", InstitutionSchema);
 const CollectionModel = mongoose.model("Collection", CollectionSchema);
+const UserModel = mongoose.model("User", UserSchema);
+
+// Sessions
+const mongoSessionStore = new MongoSessionStore({
+  mongooseConnection: connection,
+  ttl: 24 * 60 * 60,
+  touchAfter: 3600,
+  secret: getSessionKey(SESSION_KEY_FILE)
+});
 
 module.exports = {
   connection: connection,
+  sessionStore: mongoSessionStore,
   Institution: InstitutionModel,
-  Collection: CollectionModel
+  Collection: CollectionModel,
+  User: UserModel,
 };
