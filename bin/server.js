@@ -70,6 +70,16 @@ nunjucksEnv.addFilter("date", nunjucksDateFilter);
 // Unprotected
 app.use("/geojson", geoJsonRouter);
 app.use("/login", loginRouter);
+app.get("/logout", (req, res) => {
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err !== null) {
+        console.error(`Error destroying session: ${err}`);
+      }
+    });
+  }
+  res.redirect("/");
+});
 
 // Protected
 app.use("/edit", authMiddleware);

@@ -7,6 +7,8 @@
     {% block formTitle %}{% endblock %}
     <div class="text-right">
       <a href="{{ backUrl | default('..') }}">Go back</a>
+      <span class="mx-2">|</span>
+      <a href="{{ serverRoot | default('.') }}/logout">Log out</a>
     </div>
   </div>
   <form class="border border-primary rounded p-3" method="{{ formMethod | default('post') }}">
