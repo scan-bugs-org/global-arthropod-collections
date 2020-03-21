@@ -1,5 +1,3 @@
-const User = require("../include/database").User;
-
 function doError(res, err, backUrl="..") {
   res.render(
     "errorPage.nunjucks",
@@ -8,16 +6,8 @@ function doError(res, err, backUrl="..") {
 }
 
 function protectRoute(req, res, next) {
-  if ("sessionId" in req.session && "uid" in req.session) {
-    User.findById(req.session.uid, { _id: 0, sessions: 1 }).then((user) => {
-      if (user !== null && user.sessions.includes(req.session.sessionId)) {
-        next();
-      } else {
-        res.redirect(`/login?redir=${encodeURIComponent(req.originalUrl)}`);
-      }
-    }).catch((err) => {
-      doError(res, err, req.originalUrl);
-    });
+  if ("uid" in req.session) {
+    next();
   } else {
     res.redirect(`/login?redir=${encodeURIComponent(req.originalUrl)}`);
   }

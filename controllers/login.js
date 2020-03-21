@@ -29,7 +29,6 @@ router.post("*", (req, res, next) => {
     // Check password
     } else if (user.verifyPassword(req.body.password)) {
       req.session.uid = user._id;
-      req.session.sessionId = user.addSession();
       Promise.all([user.save(), req.session.save()]).then(() => {
         req.session.save(() => {
           res.redirect(req.body.redirUrl);

@@ -7,9 +7,6 @@ const InstitutionSchema = require("../models/Institution");
 const CollectionSchema = require("../models/Collection");
 const UserSchema = require("../models/User");
 
-const getSessionKey = require("../include/serverSessionKey");
-const SESSION_KEY_FILE = path.resolve(__dirname, "..", "data", ".session");
-
 const user = "appUser";
 const password = "password";
 const host = "127.0.0.1";
@@ -39,8 +36,7 @@ const UserModel = mongoose.model("User", UserSchema);
 const mongoSessionStore = new MongoSessionStore({
   mongooseConnection: connection,
   ttl: 24 * 60 * 60,
-  touchAfter: 3600,
-  secret: getSessionKey(SESSION_KEY_FILE)
+  touchAfter: 3600
 });
 
 module.exports = {
