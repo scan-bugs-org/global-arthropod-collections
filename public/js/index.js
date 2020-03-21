@@ -5,7 +5,7 @@ const wikiMediaAttrib = `
     <a href="https://openstreetmap.org/copyright" target="_blank">
         OpenStreetMap
     </a> contributors
-    | <a href="./edit">Edit this map</a>
+    | <a href="./edit/">Edit this map</a>
 `;
 const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
 const mapDataUrl = "./geojson";

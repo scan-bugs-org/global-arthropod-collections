@@ -1,8 +1,8 @@
 {% extends "webpage.nunjucks" %}
 
 {% block body %}
-  <div class="text-center">
-    <p class="text-danger">{{ errorMsg | default("Unknown error") }}</p>
+  <div class="text-center p-5">
+    <p class="text-danger">{{ error | default("Unknown error") }}</p>
     <a href="{{ backUrl | default('..') }}">Go Back</a>
   </div>
 {% endblock %}

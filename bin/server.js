@@ -4,9 +4,11 @@ const logger = require("morgan");
 const nunjucks = require("nunjucks");
 const nunjucksDateFilter = require("nunjucks-date-filter");
 const path = require("path");
+
 const geoJsonRouter = require("../controllers/geojson");
 const listViewRouter = require("../controllers/list");
 const collectionEditRouter = require("../controllers/editCollection");
+const institutionEditRouter = require("../controllers/editInstitution");
 
 const PORT = 8080;
 const isDev = process.env.NODE_ENV === "development";
@@ -27,6 +29,7 @@ nunjucksEnv.addFilter("date", nunjucksDateFilter);
 
 app.use("/geojson", geoJsonRouter);
 app.use("/edit/collections", collectionEditRouter);
+app.use("/edit/institutions", institutionEditRouter);
 app.use("/edit", listViewRouter);
 
 // Static files

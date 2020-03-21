@@ -4,6 +4,11 @@
 {% set serverRoot = "../.." %}
 {% set pageTitle = collection.name | default('') %}
 
+{% block head %}
+  {{ super() }}
+  <script type="text/javascript" src="{{ serverRoot }}/js/collectionEditor.js"></script>
+{% endblock %}
+
 {% block formTitle %}
   <h1>{{ pageTitle }}</h1>
   <h3>{{ collection.institution.name }}</h3>

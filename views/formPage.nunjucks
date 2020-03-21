@@ -1,18 +1,12 @@
 {% extends "webpage.nunjucks" %}
 {% set serverRoot = "../.." %}
-{% set pageTitle = collection.name | default('') %}
-
-{% block head %}
-  {{ super() }}
-  <script type="text/javascript" src="{{ serverRoot }}/js/collectionEditor.js"></script>
-{% endblock %}
 
 {% block body %}
 <div class="m-2 p-3">
   <div class="mb-2">
     {% block formTitle %}{% endblock %}
     <div class="text-right">
-      <a href="{{ backPage | default('..') }}">Go back</a>
+      <a href="{{ backUrl | default('..') }}">Go back</a>
     </div>
   </div>
   <form class="border border-primary rounded p-3" method="{{ formMethod | default('post') }}">

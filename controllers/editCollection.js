@@ -2,13 +2,9 @@ const Router = require("express").Router;
 const database = require("../include/database");
 const Collection = database.Collection;
 const Institution = database.Institution;
+const doError = require("./common").doError;
 
 const router = Router();
-
-function doError(req, res, err) {
-  console.error(err);
-  res.redirect("..");
-}
 
 router.get("/:collectionId", (req, res) => {
   const promises = [
@@ -18,7 +14,7 @@ router.get("/:collectionId", (req, res) => {
 
   Promise.all(promises).then(([collection, institutions]) => {
     if (collection === null) {
-      res.redirect("..");
+      doError(res, "Collection not found");
     }
     res.render(
       "collectionEditor.nunjucks",
@@ -28,7 +24,7 @@ router.get("/:collectionId", (req, res) => {
       }
     );
   }).catch((err) => {
-    doError(req, res, err);
+    doError(res, err.reason);
   });
 });
 
@@ -80,7 +76,7 @@ router.post("/:collectionId", (req, res) => {
   Collection.findByIdAndUpdate(req.params.collectionId, collectionObj).then(() => {
     res.redirect(`./${req.params.collectionId}`, 303);
   }).catch((err) => {
-    res.render("errorPage.nunjucks", { error: err.message });
+    doError(res, err.reason);
   })
 });
 

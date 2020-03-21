@@ -1,6 +1,11 @@
 {% extends "webpage.nunjucks" %}
 {% set pageTitle = "Map Editor" %}
 
+{% block head %}
+  {{ super() }}
+  <script type="text/javascript" src="{{ serverRoot | default('.') }}/js/listPage.js"></script>
+{% endblock %}
+
 {% block body %}
 <div class="p-4">
   <div class="mb-4 text-center">
@@ -10,12 +15,12 @@
     <!-- NAV -->
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="#collections-tab" class="nav-link active" data-toggle="tab">
+        <a id="btn-tab-collections" href="#collections-tab" class="nav-link active" data-toggle="tab">
           Collections
         </a>
       </li>
       <li class="nav-item">
-        <a href="#institutions-tab" class="nav-link" data-toggle="tab">
+        <a id="btn-tab-institutions" href="#institutions-tab" class="nav-link" data-toggle="tab">
           Institutions
         </a>
       </li>
