@@ -35,7 +35,7 @@
     ) }}
   </div>
 
-  <fieldset class="form-group border border-primary rounded p-3 w-50">
+  <fieldset class="form-group border border-primary rounded p-3">
     <legend class="p-2">Collections</legend>
     <div class="list-group">
       {% for collection in collections | default([]) %}

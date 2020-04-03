@@ -7,45 +7,46 @@
 {% endblock %}
 
 {% block body %}
-<div class="p-4">
-  <div class="mb-4 text-center">
-    <a href="{{ serverRoot | default('.') }}">Home</a>
-    <span class="mx-2">|</span>
-    <a href="{{ serverRoot | default('.') }}/logout">Log out</a>
-  </div>
-  <div>
-    <!-- NAV -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a id="btn-tab-collections" href="#collections-tab" class="nav-link active" data-toggle="tab">
-          Collections
-        </a>
-      </li>
-      <li class="nav-item">
-        <a id="btn-tab-institutions" href="#institutions-tab" class="nav-link" data-toggle="tab">
-          Institutions
-        </a>
-      </li>
-    </ul>
+{% include 'navbar.nunjucks' %}
 
-    <div class="tab-content">
-      <!-- COLLECTIONS -->
-      <div id="collections-tab" class="tab-pane show active">
-        {% set formId = "collections" %}
-        {% set headers = collectionHeaders | default([]) %}
-        {% set rows = collectionRows | default([]) %}
-        {% include 'listTab.nunjucks' %}
-      </div>
+<div class="container-fluid py-3 px-md-5">
+  <div class="row">
+    <div class="col">
+      <div>
+        <!-- NAV -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a id="btn-tab-collections" href="#collections-tab" class="nav-link active" data-toggle="tab">
+              Collections
+            </a>
+          </li>
+          <li class="nav-item">
+            <a id="btn-tab-institutions" href="#institutions-tab" class="nav-link" data-toggle="tab">
+              Institutions
+            </a>
+          </li>
+        </ul>
 
-      <!-- INSTITUTIONS -->
-      <div id="institutions-tab" class="tab-pane">
-        {% set formId = "institutions" %}
-        {% set headers = institutionHeaders | default([]) %}
-        {% set rows = institutionRows | default([]) %}
-        {% include 'listTab.nunjucks' %}
+        <div class="tab-content">
+          <!-- COLLECTIONS -->
+          <div id="collections-tab" class="tab-pane show active">
+            {% set formId = "collections" %}
+            {% set headers = collectionHeaders | default([]) %}
+            {% set rows = collectionRows | default([]) %}
+            {% include 'listTab.nunjucks' %}
+          </div>
+
+          <!-- INSTITUTIONS -->
+          <div id="institutions-tab" class="tab-pane">
+            {% set formId = "institutions" %}
+            {% set headers = institutionHeaders | default([]) %}
+            {% set rows = institutionRows | default([]) %}
+            {% include 'listTab.nunjucks' %}
+          </div>
+        </div>
+
       </div>
     </div>
-
   </div>
 </div>
 {% endblock %}
