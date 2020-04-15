@@ -5,11 +5,36 @@ const path = require("path");
 const Institution = require("../include/database").Institution;
 const Collection = require("../include/database").Collection;
 
-const fileName = path.resolve(__dirname, "..", "data", "source.csv");
+// const fileName = path.resolve(__dirname, "..", "data", "source.csv");
+const fileName = path.resolve(__dirname, "..", "data", "austrasia.csv");
 const rows = [];
 
 function strToNull(str) {
   return (str === null || str === '' ? null : str);
+}
+
+function intOrDefault(str, defaultVal) {
+  try {
+    const asInt = Number.parseInt(str);
+    if (isNaN(asInt)) {
+      return defaultVal;
+    }
+    return asInt;
+  } catch (e) {
+    return defaultVal;
+  }
+}
+
+function floatOrDefault(str, defaultVal) {
+  try {
+    const asFloat = Number.parseFloat(str);
+    if (isNaN(asFloat)) {
+      return defaultVal;
+    }
+    return asFloat;
+  } catch (e) {
+    return defaultVal;
+  }
 }
 
 function doCreateCollection(institutionId, row) {
@@ -25,10 +50,10 @@ function doCreateCollection(institutionId, row) {
     institution: institutionId,
     code: strToNull(row["collectionCode"]),
     name: strToNull(row["collectionName"]),
-    size: Number.parseInt(row["collectionSize"]),
-    tier: Number.parseInt(row["tier"]),
-    url: strToNull(row["url"]),
-    inIdigbio: row["idigbio"].toLowerCase() === "yes",
+    size: intOrDefault(row["collectionSize"], 0),
+    tier: intOrDefault(row["tier"], 4),
+    url: row["url"] ? strToNull(row["url"]) : null,
+    inIdigbio: row["idigbio"] && row["idigbio"].toLowerCase() === "yes",
     scan: {
       exists: row["scan"].toLowerCase() === "yes",
       scanType: strToNull(row["scanType"])
@@ -40,8 +65,8 @@ function doCreateCollection(institutionId, row) {
     location: {
       country: strToNull(row["country"]),
       state: strToNull(row["state"]),
-      lat: Number.parseFloat(row["lat"]),
-      lng: Number.parseFloat(row["lng"])
+      lat: floatOrDefault(row["lat"], 0),
+      lng: floatOrDefault(row["lng"], 0)
     }
   };
 
