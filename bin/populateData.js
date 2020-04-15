@@ -37,15 +37,20 @@ function floatOrDefault(str, defaultVal) {
   }
 }
 
-function doCreateCollection(institutionId, row) {
-  let gbifDate = row["gbifDate"].trim();
-  if (gbifDate !== "") {
-    let [d, m, y] = gbifDate.split('-');
-    gbifDate = Date.parse([m, d, y].join('/'));
-  } else {
-    gbifDate = null;
+function dateOrNull(str) {
+  try {
+    let [d, m, y] = str.trim().split('-');
+    const date = Date.parse([m, d, y].join('/'));
+    if (isNaN(date)) {
+      return null;
+    }
+    return date;
+  } catch (e) {
+    return null;
   }
+}
 
+async function doCreateCollection(institutionId, row) {
   const collectionData = {
     institution: institutionId,
     code: strToNull(row["collectionCode"]),
@@ -60,7 +65,7 @@ function doCreateCollection(institutionId, row) {
     },
     gbif: {
       exists: row["gbif"].toLowerCase() === "yes",
-      date: gbifDate
+      date: dateOrNull(row["gbifDate"])
     },
     location: {
       country: strToNull(row["country"]),
@@ -72,10 +77,11 @@ function doCreateCollection(institutionId, row) {
 
   console.log(JSON.stringify(collectionData, null, 2));
 
-  return new Promise((resolve, reject) => {
-    const collection = new Collection(collectionData);
-    collection.save().catch((err) => reject(err)).then(() => resolve());
-  });
+  // Delete duplicates
+  await Collection.deleteMany({ name: collectionData.name });
+
+  const collection = new Collection(collectionData);
+  return collection.save();
 }
 
 fs.createReadStream(fileName).pipe(csvParser({ strict: true })).on("data", (line) => {
@@ -90,14 +96,21 @@ fs.createReadStream(fileName).pipe(csvParser({ strict: true })).on("data", (line
     };
 
     if (institutionData.code !== null || institutionData.name !== null) {
-      const institution = new Institution(institutionData);
-      promises.push(institution.save().then(() => {
+
+      // Delete duplicates
+      promises.push(Institution.deleteMany(institutionData).then(() => {
+        const institution = new Institution(institutionData);
+        return institution.save();
+
+      }).then((institution) => {
         return doCreateCollection(institution._id, row)
+
       }).catch((err) => console.error(err)));
+
     } else {
       promises.push(doCreateCollection(null, row));
     }
-    // console.log(JSON.stringify(institutionData, null, 2));
+      // console.log(JSON.stringify(institutionData, null, 2));
   });
 
   Promise.all(promises).then(() => {
