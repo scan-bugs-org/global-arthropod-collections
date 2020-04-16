@@ -10,14 +10,14 @@ const wikiMediaAttrib = `
 // UPDATE THIS IN PRODUCTION
 const wikimediaTilesURL = "https://tiles.bug-collections.org/osm-intl/{z}/{x}/{y}.png";
 const mapDataUrl = "./geojson";
-const minZoom = 3;
+const minZoom = 2;
+const maxZoom = 16;
 
 /**
  * Page's main function
  */
 function main() {
   const map = loadMap();
-  map.locate({setView: true, maxZoom: 16});
   populateData(map, mapDataUrl);
 }
 
@@ -49,12 +49,14 @@ function loadMap() {
   const map = L.map("map", {
     preferCanvas: true,
     bounceAtZoomLimits: false,
-    inertia: false
+    inertia: false,
+    center: [0, 0],
+    zoom: minZoom
   });
   map.setMaxBounds([[-90, -180], [90, 180]]);
   const wikiTiles = new L.TileLayer(
     wikimediaTilesURL,
-    { minZoom: minZoom, maxZoom: 10, attribution: wikiMediaAttrib }
+    { minZoom: minZoom, maxZoom: maxZoom, attribution: wikiMediaAttrib }
   );
 
   map.addLayer(wikiTiles);
