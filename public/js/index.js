@@ -21,12 +21,32 @@ function main() {
   populateData(map, mapDataUrl);
 }
 
+function deepCopy(obj) {
+  if (Array.isArray(obj)) {
+    const arrCopy = [];
+    obj.forEach((item) => {
+      arrCopy.push(deepCopy(item));
+    });
+    return arrCopy;
+  }
+
+  if (obj instanceof Object) {
+    const objCopy = {};
+    Object.keys(obj).forEach((k) => {
+      objCopy[k] = deepCopy(obj[k]);
+    });
+    return objCopy;
+  }
+
+  return obj;
+}
+
 /**
  * Loads open street map tiles into the map container
  * @return L.map
  */
 function loadMap() {
-  const map = L.map("map", { preferCanvas: true });
+  const map = L.map("map", { preferCanvas: true, worldCopyJump: true });
   const wikiTiles = new L.TileLayer(
     wikimediaTilesURL,
     { minZoom: minZoom, maxZoom: 10, attribution: wikiMediaAttrib }

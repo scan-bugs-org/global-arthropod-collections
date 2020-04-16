@@ -36,7 +36,3 @@ body {
     font-size: 0.5em;
   }
 }
-
-.leaflet-map-pane {
-  z-index: 2 !important;
-}

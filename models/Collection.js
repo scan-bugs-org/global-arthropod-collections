@@ -54,6 +54,7 @@ CollectionSchema.methods.asGeoJson = function() {
       coordinates: [this.location.lng, this.location.lat]
     },
     properties: {
+      id: this._id,
       name: name,
       url: this.url,
       tier: this.tier
