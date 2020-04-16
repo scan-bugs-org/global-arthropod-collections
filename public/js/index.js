@@ -8,7 +8,7 @@ const wikiMediaAttrib = `
     | <a href="./edit/">Edit this map</a>
 `;
 // UPDATE THIS IN PRODUCTION
-const wikimediaTilesURL = "http://127.0.0.1:8082/osm-intl/{z}/{x}/{y}.png";
+const wikimediaTilesURL = "https://tiles.bug-collections.org/osm-intl/{z}/{x}/{y}.png";
 const mapDataUrl = "./geojson";
 const minZoom = 3;
 
