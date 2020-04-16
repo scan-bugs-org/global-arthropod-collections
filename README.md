@@ -1,7 +1,14 @@
-# North American Arthropod Collections
+# Global Arthropod Collections
 
-1. `conda env create -f ./data/environment.yml` to create python environment for processing source
-2. `conda activate naac` to activate the conda environment
-3. Run [data/process_source.py](./data/process_source.py) in order to convert [data/source.csv](data/source.csv) into geojson
-4. Copy the [public](./public/) directory to the web server directory
+Requires config.json in the repo root with the following database parameters:
+```json
+{
+  "user": "",
+  "password": "",
+  "host": "",
+  "port": 27017,
+  "database": ""
+}
+``` 
+
 

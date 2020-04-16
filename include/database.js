@@ -1,3 +1,4 @@
+const fs = require("fs");
 const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
@@ -7,14 +8,12 @@ const InstitutionSchema = require("../models/Institution");
 const CollectionSchema = require("../models/Collection");
 const UserSchema = require("../models/User");
 
-const user = "appUser";
-const password = "password";
-const host = "127.0.0.1";
-const port = 27017;
-const database = "globalCollections";
+const dbConfig = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, "..", "config.json")).toString("utf-8")
+);
 
 mongoose.connect(
-  `mongodb://${user}:${password}@${host}:${port}/${database}`,
+  `mongodb://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

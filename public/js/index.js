@@ -47,6 +47,7 @@ function deepCopy(obj) {
  */
 function loadMap() {
   const map = L.map("map", { preferCanvas: true, worldCopyJump: true });
+  map.setMaxBounds([[-90, -180], [90, 180]])
   const wikiTiles = new L.TileLayer(
     wikimediaTilesURL,
     { minZoom: minZoom, maxZoom: 10, attribution: wikiMediaAttrib }
