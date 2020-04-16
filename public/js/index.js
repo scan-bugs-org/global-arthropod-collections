@@ -7,7 +7,8 @@ const wikiMediaAttrib = `
     </a> contributors
     | <a href="./edit/">Edit this map</a>
 `;
-const wikimediaTilesURL = "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
+// UPDATE THIS IN PRODUCTION
+const wikimediaTilesURL = "http://127.0.0.1:8082/osm-intl/{z}/{x}/{y}.png";
 const mapDataUrl = "./geojson";
 const minZoom = 3;
 
@@ -16,7 +17,7 @@ const minZoom = 3;
  */
 function main() {
   const map = loadMap();
-  map.setView([39.8, -98.6], 4);
+  map.locate({setView: true, maxZoom: 16});
   populateData(map, mapDataUrl);
 }
 
@@ -25,7 +26,7 @@ function main() {
  * @return L.map
  */
 function loadMap() {
-  const map = L.map("map");
+  const map = L.map("map", { preferCanvas: true });
   const wikiTiles = new L.TileLayer(
     wikimediaTilesURL,
     { minZoom: minZoom, maxZoom: 10, attribution: wikiMediaAttrib }
@@ -127,7 +128,8 @@ function getMarkerStyle(map, layer) {
     stroke: false,
     radius: getMarkerRadius(map, layer.feature),
     riseOnHover: true,
-    riseOffset: 500
+    riseOffset: 500,
+    weight: 1
   };
 }
 

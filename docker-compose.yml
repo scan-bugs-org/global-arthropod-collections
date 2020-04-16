@@ -20,3 +20,11 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
     ports:
     - 8081:8081
+
+  tile-cacher:
+    container_name: gac-tile-cacher
+    image: nginx:stable
+    volumes:
+      - ./nginx-tile-cacher.conf:/etc/nginx/conf.d/tile-cacher.conf
+    ports:
+      - 8082:80
