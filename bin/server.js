@@ -8,7 +8,6 @@ const session = require("express-session");
 const uuid = require("uuid");
 
 const geoJsonRouter = require("../controllers/geojson");
-const tileRouter = require("../controllers/tiles");
 const listViewRouter = require("../controllers/list");
 const collectionEditRouter = require("../controllers/editCollection");
 const institutionEditRouter = require("../controllers/editInstitution");
@@ -70,7 +69,6 @@ nunjucksEnv.addFilter("date", nunjucksDateFilter);
 
 // Unprotected
 app.use("/geojson", geoJsonRouter);
-app.use("/tiles", tileRouter);
 
 app.use("/login", loginRouter);
 app.get("/logout", (req, res) => {
