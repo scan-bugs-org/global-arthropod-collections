@@ -123,7 +123,7 @@ function populateData(map, geojsonUrl) {
  */
 function getMarkerRadius(map, feature) {
   const currentZoom = map.getZoom();
-  let zoomComp = currentZoom / minZoom;
+  let zoomComp = currentZoom / (minZoom + 1);
 
   if (feature.properties.tier) {
     if (feature.properties.tier === 1) {
