@@ -12,8 +12,12 @@ const dbConfig = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "..", "config.json")).toString("utf-8")
 );
 
+let dbUri = `mongodb://${encodeURIComponent(dbConfig.user)}:`
+dbUri += `${encodeURIComponent(dbConfig.password)}@`;
+dbUri += `${dbConfig.host}:${dbConfig.port}/${dbConfig.database}`;
+
 mongoose.connect(
-  `mongodb://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}`,
+  dbUri,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
