@@ -8,7 +8,8 @@ const wikiMediaAttrib = `
     | <a href="./edit/">Edit this map</a>
 `;
 // UPDATE THIS IN PRODUCTION
-const wikimediaTilesURL = "https://tiles.bug-collections.org/osm-intl/{z}/{x}/{y}.png";
+const mapboxToken = "pk.eyJ1IjoiZXZpbmR1bm4iLCJhIjoiY2thY3M3cXMwMWM4bzJ1cnliNnlkNHV2MiJ9.Twln5aH0wWGw9iKJoPE2Kg";
+const mapboxTilesUrl = `https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=${mapboxToken}`;
 const mapDataUrl = "./geojson";
 const minZoom = 2;
 const maxZoom = 16;
@@ -55,7 +56,7 @@ function loadMap() {
   });
   map.setMaxBounds([[-90, -180], [90, 180]]);
   const wikiTiles = new L.TileLayer(
-    wikimediaTilesURL,
+    mapboxTilesUrl,
     { minZoom: minZoom, maxZoom: maxZoom, attribution: wikiMediaAttrib }
   );
 
