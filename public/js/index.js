@@ -1,11 +1,8 @@
-const wikiMediaAttrib = `
-    <a href="https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use" target="_blank">
-        Wikimedia Maps
-    </a> | Map data © 
-    <a href="https://openstreetmap.org/copyright" target="_blank">
-        OpenStreetMap
-    </a> contributors
-    | <a href="./edit/">Edit this map</a>
+const mapAttrib = `
+  © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> |
+  © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> |
+  <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong> |
+  <a href="./edit/">Edit this map</a>
 `;
 // UPDATE THIS IN PRODUCTION
 const mapboxToken = "pk.eyJ1IjoiZXZpbmR1bm4iLCJhIjoiY2thY3M3cXMwMWM4bzJ1cnliNnlkNHV2MiJ9.Twln5aH0wWGw9iKJoPE2Kg";
@@ -57,7 +54,7 @@ function loadMap() {
   map.setMaxBounds([[-90, -180], [90, 180]]);
   const wikiTiles = new L.TileLayer(
     mapboxTilesUrl,
-    { minZoom: minZoom, maxZoom: maxZoom, attribution: wikiMediaAttrib }
+    { minZoom: minZoom, maxZoom: maxZoom, attribution: mapAttrib }
   );
 
   map.addLayer(wikiTiles);
