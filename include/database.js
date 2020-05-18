@@ -7,6 +7,7 @@ const MongoSessionStore = require("connect-mongo")(session);
 const InstitutionSchema = require("../models/Institution");
 const CollectionSchema = require("../models/Collection");
 const UserSchema = require("../models/User");
+const TmpUploadSchema = require("../models/TmpUpload");
 
 const dbConfig = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "..", "config.json")).toString("utf-8")
@@ -34,6 +35,7 @@ connection.on("error", console.error.bind(console, "MongoDB Error: "));
 const InstitutionModel = mongoose.model("Institution", InstitutionSchema);
 const CollectionModel = mongoose.model("Collection", CollectionSchema);
 const UserModel = mongoose.model("User", UserSchema);
+const TmpUploadModel = mongoose.model("TmpUpload", TmpUploadSchema);
 
 // Sessions
 const mongoSessionStore = new MongoSessionStore({
@@ -47,5 +49,6 @@ module.exports = {
   sessionStore: mongoSessionStore,
   Institution: InstitutionModel,
   Collection: CollectionModel,
+  TmpUpload: TmpUploadModel,
   User: UserModel,
 };

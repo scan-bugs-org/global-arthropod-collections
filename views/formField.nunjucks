@@ -20,7 +20,7 @@
 ) %}
 
 {%- set isNumber = min != null or max != null or step != null -%}
-{%- set isSelect = options | length > 0 -%}
+{%- set isSelect = options and options | length > 0 -%}
 {%- set isText = not (isNumber or isSelect or url or date or password) -%}
 
 <div class="form-group {% if inline %}form-inline mr-2{% endif %}">

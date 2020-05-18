@@ -5,40 +5,71 @@ const Institution = database.Institution;
 
 const router = new Router();
 
-router.get("/", (req, res) => {
-  const promises = [
-    Collection.find(
-      null,
-      {_id: 1, name: 1, institution: 1},
-      { sort: "name" }
-    ).populate("institution", "name"),
+function collectionNameCmp(first, second) {
+  const firstInstitutionName = first.institution ? first.institution.toLowerCase() : '';
+  const secondInstitutionName = second.institution ? second.institution.toLowerCase() : '';
 
-    Institution.find(
-      null,
-      {_id: 1, name: 1},
-      { sort: "name" }
-    )
-  ];
+  const firstName = first.name.toLowerCase();
+  const secondName = second.name.toLowerCase();
 
-  Promise.all(promises).then(([collections, institutions]) => {
-    collections = collections.map(c => {
-      let institution = c.institution.name;
-      let asObj = c.toObject();
-      asObj.institution = institution;
-      return asObj;
-    });
+  // Sort by institution name
+  if (firstInstitutionName < secondInstitutionName) {
+    return -1;
+  }
 
-    res.render(
-      "listPage.nunjucks",
-      {
-        serverRoot: "..",
-        collectionHeaders: ["ID", "Institution", "Name"],
-        institutionHeaders: ["ID", "Name"],
-        collectionRows: collections,
-        institutionRows: institutions.map(c => c.toObject())
-      }
-    );
+  if (firstInstitutionName > secondInstitutionName) {
+    return 1;
+  }
+
+  // Then by name
+  if (firstName < secondName) {
+    return -1;
+  }
+
+  if (firstName > secondName) {
+    return 1;
+  }
+
+  return 0;
+}
+
+router.get("/", async (req, res) => {
+  let collections = await Collection.find(
+    null,
+    {_id: 1, name: 1, institution: 1},
+    { sort: "name" }
+  ).populate("institution", "name");
+
+  let institutions = await Institution.find(
+    null,
+    {_id: 1, name: 1},
+    { sort: "name" }
+  );
+
+  collections = collections.map(c => {
+    let asObj = c.toObject();
+    asObj.institution = c.institution.name;
+    return asObj;
   });
+  collections.sort(collectionNameCmp);
+
+  res.render(
+    "listPage.nunjucks",
+    {
+      serverRoot: "..",
+      collectionHeaders: [
+        { displayName: "ID", dbName: "_id" },
+        { displayName: "Institution", dbName: "institution" },
+        { displayName: "Name", dbName: "name" }
+      ],
+      institutionHeaders: [
+        { displayName: "ID", dbName: "_id" },
+        { displayName: "Name", dbName: "name" }
+      ],
+      collectionRows: collections,
+      institutionRows: institutions.map(c => c.toObject())
+    }
+  );
 });
 
 module.exports = router;

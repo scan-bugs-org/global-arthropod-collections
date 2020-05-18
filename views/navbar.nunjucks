@@ -20,10 +20,10 @@
         <a class="nav-link" href="{{ serverRoot | default('.') }}/edit?tab=institutions">Institutions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ serverRoot | default('.') }}/edit/addCollection">Add collection</a>
+        <a class="nav-link" href="{{ serverRoot | default('.') }}/edit/collections">Add collection</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ serverRoot | default('.') }}/edit/addInstitution">Add institution</a>
+        <a class="nav-link" href="{{ serverRoot | default('.') }}/edit/institutions">Add institution</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">

@@ -4,21 +4,23 @@
       <thead>
         <tr>
           {% for header in headers | default([]) %}
-            <th scope="col">{{ header }}</th>
+            <th scope="col">{{ header.displayName }}</th>
           {% endfor %}
         </tr>
       </thead>
       <tbody>
         {% for row in rows | default([]) %}
           <tr>
-            {% for header, value in row %}
+            {% for header in headers | default([]) %}
               <td>
-              {% if header == "_id" %}
-              <a href="{{ serverRoot | default('.') }}/edit/{{ formId }}/{{ value }}">
+              {% if header.dbName == "_id" %}
+                <a href="{{ serverRoot | default('.') }}/edit/{{ formId }}/{{ row[header.dbName] }}">
               {% endif %}
-              {{ value }}
+
+              {{ row[header.dbName] }}
+
               {% if header == "_id" %}
-              </a>
+                </a>
               {% endif %}
               </td>
             {% endfor %}

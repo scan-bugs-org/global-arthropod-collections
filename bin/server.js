@@ -52,10 +52,10 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     name: "bug-collections",
-    proxy: true,
+    proxy: process.env.NODE_ENV !== "development",
+    secure: process.env.NODE_ENV !== "development",
     sameSite: true,
     httpOnly: true,
-    // secure: process.env.NODE_ENV !== "development"
   }
 }));
 

@@ -2,7 +2,6 @@
 {% from "formField.nunjucks" import formField %}
 
 {% set serverRoot = "../.." %}
-{% set pageTitle = collection.name | default('') %}
 
 {% block head %}
   {{ super() }}
@@ -10,8 +9,10 @@
 {% endblock %}
 
 {% block formTitle %}
-  <h1>{{ pageTitle }}</h1>
-  <h3>{{ collection.institution.name }}</h3>
+  <h1>{{ collection.name | default("New collection") }}</h1>
+  {% if collection %}
+    <h3>{{ collection.institution.name }}</h3>
+  {% endif %}
 {% endblock %}
 
 {% block form %}
@@ -19,7 +20,7 @@
   {{ formField(
     "collectionId",
     displayName="Collection ID",
-    value=collection._id.toString(),
+    value=collection._id.toString() if collection else '',
     readonly=true,
     inline=true
   ) }}
@@ -42,18 +43,20 @@
   </div>
 
   <!-- INSTITUTION -->
-  {% set institutionId = collection.institution._id.toString() %}
-  <div class="form-group form-inline">
-    {{ formField(
-      "institutionId",
-      displayName="Institution",
-      value=institutionId,
-      options=institutions | default([]),
-      inline=true,
-      required=true
-    ) }}
-    <a href="../institutions/{{ institutionId }}">Go To</a>
-  </div>
+  {% set institutionId = collection.institution._id.toString() if collection else '' %}
+    <div class="form-group form-inline">
+      {{ formField(
+        "institutionId",
+        displayName="Institution",
+        value=institutionId,
+        options=institutions | default([]),
+        inline=true,
+        required=true
+      ) }}
+      {% if institutionId != '' %}
+        <a href="../institutions/{{ institutionId }}">Go To</a>
+      {% endif %}
+    </div>
 
   <!-- URL -->
   {{ formField(
@@ -71,12 +74,13 @@
       displayName="Size",
       value=collection.size,
       inline=true,
+      required=true,
       min=0
     ) }}
     {{ formField(
       "tier",
       displayName="Tier",
-      value=collection.tier,
+      value=collection.tier | default(4),
       inline=true,
       options=[1, 2, 3, 4]
     ) }}
