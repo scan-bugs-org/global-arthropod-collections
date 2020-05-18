@@ -45,6 +45,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Configure sessions
 const sessionKey = getSessionKey(SESSION_KEY_PATH);
+if (process.env.NODE_ENV !== "development") {
+  app.set("trust proxy", 1);
+}
 app.use(session({
   secret: sessionKey,
   store: database.sessionStore,
@@ -52,7 +55,6 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     name: "bug-collections",
-    proxy: process.env.NODE_ENV !== "development",
     secure: process.env.NODE_ENV !== "development",
     sameSite: true,
     httpOnly: true,
