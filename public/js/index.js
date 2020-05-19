@@ -148,7 +148,7 @@ function getMarkerRadius(map, feature) {
  */
 function getMarkerStyle(map, layer) {
   return {
-    fillColor: "darkgreen",
+    fillColor: "#00336e",
     fillOpacity: 0.6,
     stroke: false,
     radius: getMarkerRadius(map, layer.feature),
