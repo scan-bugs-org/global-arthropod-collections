@@ -1,75 +1,98 @@
 {% macro label(name, displayName=name, required=false) %}
-  <label for="{{ name }}">{{ displayName | default(name) }}</label>
-  {% if required %}<span class="text-danger mx-1">*</span>{% endif %}
+    <label for="{{ name }}">{{ displayName | default(name) }}</label>
+    {% if required %}<span class="text-danger mx-1">*</span>{% endif %}
 {% endmacro %}
 
 {% macro formField(
-  name,
-  displayName=name,
-  value='',
-  inline=false,
-  required=false,
-  readonly=false,
-  min=null,
-  max=null,
-  step=null,
-  url=false,
-  date=false,
-  password=false,
-  options=[]
-) %}
+    name,
+    displayName=name,
+    value='',
+    inline=false,
+    required=false,
+    readonly=false,
+    min=null,
+    max=null,
+    step=null,
+    type=null,
+    accept=null,
+    url=false,
+    date=false,
+    password=false,
+    options=[]
+    ) %}
 
-{%- set isNumber = min != null or max != null or step != null -%}
-{%- set isSelect = options and options | length > 0 -%}
-{%- set isText = not (isNumber or isSelect or url or date or password) -%}
+    {%- set isNumber = min != null or max != null or step != null -%}
+    {%- set isSelect = options and options | length > 0 -%}
+    {%- set isFile = type != null and type == "file" -%}
+    {%- set isText = not (isFile or isNumber or isSelect or url or date or password) -%}
 
-<div class="form-group {% if inline %}form-inline mr-2{% endif %}">
-  {{ label(name, displayName, required) }}
-  {% if isSelect %}
-    <select
-      id="{{ name }}"
-      name="{{ name }}"
-      class="form-control {% if inline %}mx-2{% endif %}"
-      {% if required %}required{% endif %}
-      {% if readonly %}readonly{% endif %}
-    >
-      {% for opt in options %}
-        {% if opt.name and opt.value %}
-          {% set optName = opt.name %}
-          {% set optValue = opt.value %}
+    <div class="{% if isFile %}custom-file{% else %}form-group {% if inline %}form-inline mr-2{% endif %}{% endif %}">
+        {% if isFile %}
+            <label class="custom-file-label" for="{{ name }}">
+                {% if displayName == name %}
+                    Choose file
+                {% else %}
+                    {{ displayName }}
+                {% endif %}
+            </label>
         {% else %}
-          {% set optName = opt %}
-          {% set optValue = opt %}
+            {{ label(name, displayName, required) }}
         {% endif %}
-        <option value="{{ optValue }}" {% if optValue == value %}selected{% endif %}>
-          {{ optName }}
-        </option>
-      {% endfor %}
-    </select>
-  {% else %}
-    <input
-      id="{{ name }}"
-      name="{{ name }}"
-      class="form-control {% if inline %}mx-2{% endif %}"
-      {% if value != '' %}value="{{ value }}"{% endif %}
-      {% if url %}
-        type="url"
-      {% elseif password %}
-        type="password"
-      {% endif %}
-      {% if isText or url and value != '' %}
-        size="{{ value | length }}"
-      {% elseif date %}
-        type="date"
-      {% elseif isNumber %}
-        type="number"
-      {% endif %}
-      {% if min != null %}min="{{ min }}"{% endif %}
-      {% if max != null %}max="{{ max }}"{% endif %}
-      {% if step != null %}step="{{ step }}"{% endif %}
-      {% if required %}required{% endif %}
-      {% if readonly %}readonly{% endif %}
-    >
-  {% endif %}
-</div>
+        {% if isSelect %}
+            <select
+                    id="{{ name }}"
+                    name="{{ name }}"
+                    class="form-control {% if inline %}mx-2{% endif %}"
+                    {% if required %}required{% endif %}
+                    {% if readonly %}readonly{% endif %}
+            >
+                {% for opt in options %}
+                    {% if opt.name and opt.value %}
+                        {% set optName = opt.name %}
+                        {% set optValue = opt.value %}
+                    {% else %}
+                        {% set optName = opt %}
+                        {% set optValue = opt %}
+                    {% endif %}
+                    <option value="{{ optValue }}"
+                            {% if optValue == value %}selected{% endif %}>
+                        {{ optName }}
+                    </option>
+                {% endfor %}
+            </select>
+        {% else %}
+            <input
+                    id="{{ name }}"
+                    name="{{ name }}"
+                    {% if isFile %}
+                        class="custom-file-input {% if inline %}mx-2{% endif %}"
+                    {% else %}
+                        class="form-control {% if inline %}mx-2{% endif %}"
+                    {% endif %}
+                    {% if value != '' %}value="{{ value }}"{% endif %}
+                    {% if url %}
+                        type="url"
+                    {% elseif password %}
+                        type="password"
+                    {% endif %}
+                    {% if isText or url and value != '' %}
+                        size="{{ value | length }}"
+                    {% elseif date %}
+                        type="date"
+                    {% elseif isNumber %}
+                        type="number"
+                    {% elseif isFile %}
+                        type="file"
+                        {% if accept != null %}
+                            accept="{{ accept }}"
+                        {% endif %}
+                    {% endif %}
+                    {% if min != null %}min="{{ min }}"{% endif %}
+                    {% if max != null %}max="{{ max }}"{% endif %}
+                    {% if step != null %}step="{{ step }}"{% endif %}
+                    {% if required %}required{% endif %}
+                    {% if readonly %}readonly{% endif %}
+            >
+        {% endif %}
+    </div>
 {% endmacro %}

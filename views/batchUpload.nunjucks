@@ -1,0 +1,19 @@
+{% extends "formPage.nunjucks" %}
+{% from "formField.nunjucks" import formField %}
+
+{% block formTitle %}
+    <h1>Batch Upload</h1>
+{% endblock %}
+
+{% block form %}
+    {{ formField(
+        "csv-file",
+        displayName="CSV File",
+        type="file",
+        accept=".csv,text/csv"
+    ) }}
+    <div class="form-group mt-3">
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-secondary" type="reset">Clear</button>
+    </div>
+{% endblock %}

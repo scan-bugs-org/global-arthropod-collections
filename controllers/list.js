@@ -33,6 +33,10 @@ function collectionNameCmp(first, second) {
   return 0;
 }
 
+router.get("/upload", async (req, res) => {
+  res.render("batchUpload.nunjucks");
+});
+
 router.get("/", async (req, res) => {
   let collections = await Collection.find(
     null,
