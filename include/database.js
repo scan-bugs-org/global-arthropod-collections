@@ -22,7 +22,8 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true
   }
 ).catch((err) => {
   console.error(`Error connecting to database: ${err.message}`);

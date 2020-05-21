@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
 
 const CollectionSchema = mongoose.Schema({
-  code: String,
+  code: {
+    type: String
+  },
   institution: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Institution"
   },
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   size: {
     type: Number,

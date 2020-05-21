@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 module.exports = mongoose.Schema({
-  code: String,
-  name: String,
+  code: {
+    type: String,
+    unique: true
+  },
+  name: {
+    type: String,
+    unique: true
+  },
 });
