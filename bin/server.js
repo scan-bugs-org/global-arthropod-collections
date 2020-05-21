@@ -8,7 +8,7 @@ const session = require("express-session");
 const uuid = require("uuid");
 
 const geoJsonRouter = require("../controllers/geojson");
-const listViewRouter = require("../controllers/list");
+const editRouter = require("../controllers/edit");
 const collectionEditRouter = require("../controllers/editCollection");
 const institutionEditRouter = require("../controllers/editInstitution");
 const loginRouter = require("../controllers/login");
@@ -86,9 +86,7 @@ app.get("/logout", (req, res) => {
 
 // Protected
 app.use("/edit", authMiddleware);
-app.use("/edit/collections", collectionEditRouter);
-app.use("/edit/institutions", institutionEditRouter);
-app.use("/edit", listViewRouter);
+app.use("/edit", editRouter);
 
 // Static files
 app.use(express.static(path.resolve(__dirname, "..", "public")));

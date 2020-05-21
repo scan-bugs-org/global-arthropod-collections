@@ -11,8 +11,12 @@
 
 {% block formTitle %}
     <h1>Batch Upload</h1>
+{#    {% if error %}#}
+{#        <small class="text-danger">{{ error }}</small>#}
+{#    {% endif %}#}
 {% endblock %}
 
+{% set encType = "multipart/form-data" %}
 {% block form %}
     <div class="custom-file">
         <input

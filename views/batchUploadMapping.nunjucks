@@ -2,5 +2,53 @@
 {% set serverRoot = "../.." %}
 
 {% block body %}
-{% include 'navbar.nunjucks' %}
+    {% include 'navbar.nunjucks' %}
+    <div class="container-fluid">
+        <form method="post">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h1>CSV Upload Tool</h1>
+                </div>
+                <div class="row">
+                    <div class="col-auto mx-4 ml-auto">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-secondary" type="reset">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3 align-items-center">
+                <div class="col">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>
+                                Database Field
+                            </th>
+                            <th>
+                                CSV Column
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for dbField in dbFields | default([]) %}
+                                <tr>
+                                    <td>{{ dbField }}</td>
+                                    <td>
+                                        <select name="{{ dbField }}" class="form-control">
+                                            <option value="" selected>Leave field unmapped</option>
+                                            {% for csvField in csvFields %}
+                                                <option value="{{ csvField }}">{{ csvField }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}

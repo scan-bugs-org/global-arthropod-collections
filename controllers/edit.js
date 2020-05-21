@@ -3,6 +3,10 @@ const database = require("../include/database");
 const Collection = database.Collection;
 const Institution = database.Institution;
 
+const batchUploadRouter = require("./batchUpload");
+const collectionRouter = require("./editCollection");
+const institutionRouter = require("./editInstitution");
+
 const router = new Router();
 
 function collectionNameCmp(first, second) {
@@ -33,9 +37,9 @@ function collectionNameCmp(first, second) {
   return 0;
 }
 
-router.get("/upload", async (req, res) => {
-  res.render("batchUpload.nunjucks");
-});
+router.use("/collections", collectionRouter);
+router.use("/institutions", institutionRouter);
+router.use("/upload", batchUploadRouter);
 
 router.get("/", async (req, res) => {
   let collections = await Collection.find(
