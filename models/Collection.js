@@ -12,7 +12,8 @@ const CollectionSchema = mongoose.Schema({
   },
   size: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   location: {
     country: String,
@@ -28,7 +29,8 @@ const CollectionSchema = mongoose.Schema({
   },
   tier: {
     type: Number,
-    required: true
+    required: true,
+    default: 4
   },
   url: String,
   inIdigbio: Boolean,

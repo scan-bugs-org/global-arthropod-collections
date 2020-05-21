@@ -1,5 +1,0 @@
-{% extends "webpage.nunjucks" %}
-{% set serverRoot = "../.." %}
-
-{% block body %}
-{% endblock %}

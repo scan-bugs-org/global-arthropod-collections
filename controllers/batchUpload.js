@@ -83,12 +83,18 @@ router.post("/:uploadId", async (req, res) => {
   const upload = await TmpUpload.findById(req.params.uploadId);
   const mapping = req.body;
 
-  const newInstitutions = [];
-  const newCollections = [];
+  const results = {
+    "institutions": [],
+    "collections": []
+  };
+  const promises = [];
 
-  upload.data.rows.forEach((row) => {
+  for (let i = 0; i < upload.data.rows.length; i++) {
+    const row = upload.data.rows[i];
     const newInstitution = {};
     const newCollection = {};
+    let dbInstitution;
+    let dbCollection;
 
     Object.keys(INSTITUTION_MAPPING).forEach((k) => {
       const dbKey = INSTITUTION_MAPPING[k];
@@ -98,6 +104,10 @@ router.post("/:uploadId", async (req, res) => {
         newInstitution[dbKey] = dbVal;
       }
     });
+
+    dbInstitution = new Institution(newInstitution);
+    await dbInstitution.save();
+    results.institutions.push(dbInstitution.name);
 
     Object.keys(COLLECTION_MAPPING).forEach((k) => {
       const dbKey = COLLECTION_MAPPING[k];
@@ -116,11 +126,17 @@ router.post("/:uploadId", async (req, res) => {
       }
     });
 
-    newInstitutions.push(newInstitution);
-    newCollections.push(newCollection);
-  });
+    newCollection["institution"] = dbInstitution._id;
+    dbCollection = new Collection(newCollection);
+    promises.push(dbCollection.save());
+    results.collections.push(dbCollection.name);
+  }
 
-  res.json(newInstitutions.concat(newCollections));
+  await Promise.all(promises);
+  await res.render("batchUploadComplete.nunjucks", {
+    collections: results.collections,
+    institutions: results.institutions
+  });
 });
 
 router.get("/", (req, res) => {
