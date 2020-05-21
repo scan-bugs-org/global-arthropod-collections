@@ -1,19 +1,30 @@
 {% extends "formPage.nunjucks" %}
 {% from "formField.nunjucks" import formField %}
 
+{% block head %}
+    {{ super() }}
+    <script
+        type="text/javascript"
+        src="{{ serverRoot | default('.') }}/js/batchUpload.js">
+    </script>
+{% endblock %}
+
 {% block formTitle %}
     <h1>Batch Upload</h1>
 {% endblock %}
 
 {% block form %}
-    {{ formField(
-        "csv-file",
-        displayName="CSV File",
-        type="file",
-        accept=".csv,text/csv"
-    ) }}
+    <div class="custom-file">
+        <input
+            id="csv-upload"
+            name="csv-upload"
+            type="file"
+            class="custom-file-input"
+        >
+        <label id="csv-upload-label" class="custom-file-label" for="csv-upload"></label>
+    </div>
     <div class="form-group mt-3">
         <button class="btn btn-primary" type="submit">Submit</button>
-        <button class="btn btn-secondary" type="reset">Clear</button>
+        <button id="clear-btn" class="btn btn-secondary" type="reset">Clear</button>
     </div>
 {% endblock %}

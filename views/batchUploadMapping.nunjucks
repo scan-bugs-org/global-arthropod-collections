@@ -1,0 +1,6 @@
+{% extends "webpage.nunjucks" %}
+{% set serverRoot = "../.." %}
+
+{% block body %}
+{% include 'navbar.nunjucks' %}
+{% endblock %}
