@@ -10,6 +10,26 @@ function main() {
       institutionTabButton.click();
     }
   }
+
+  collectionTabButton.addEventListener("click", () => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.delete("tab");
+    window.history.pushState(
+      { query: searchParams.toString() },
+      "",
+      "?" + searchParams.toString()
+    );
+  });
+
+  institutionTabButton.addEventListener("click", () => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("tab", "institutions");
+    window.history.pushState(
+      { query: searchParams.toString() },
+      "",
+      "?" + searchParams.toString()
+    );
+  })
 }
 
 window.addEventListener("load", main);

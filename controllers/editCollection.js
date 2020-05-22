@@ -82,7 +82,7 @@ router.get("/:collectionId", async (req, res) => {
       doError(res, "Collection not found");
     }
     res.render(
-      "collectionEditor.nunjucks",
+      "editCollection.nunjucks",
       {
         collection: collection,
         institutions: institutions
@@ -105,11 +105,24 @@ router.post("/:collectionId", async (req, res) => {
   }
 });
 
+router.post("/delete/:collectionId", async (req, res) => {
+  try {
+    const collection = await Collection.deleteOne({ _id: req.params.collectionId });
+    if (collection === null || collection.deletedCount === 0) {
+      doError(res, "Collection not found");
+    } else {
+      res.redirect(303, "../../");
+    }
+  } catch (e) {
+    doError(res, e.message, "../../");
+  }
+});
+
 router.get("/", async (req, res) => {
   try {
     const institutions = await getInstitutions();
     res.render(
-      "collectionEditor.nunjucks",
+      "editCollection.nunjucks",
       {
         collection: null,
         institutions: institutions

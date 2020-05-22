@@ -33,6 +33,7 @@
             {% set formId = "collections" %}
             {% set headers = collectionHeaders | default([]) %}
             {% set rows = collectionRows | default([]) %}
+            {% set rowType = "collection" %}
             {% include 'listTab.nunjucks' %}
           </div>
 
@@ -41,6 +42,7 @@
             {% set formId = "institutions" %}
             {% set headers = institutionHeaders | default([]) %}
             {% set rows = institutionRows | default([]) %}
+            {% set rowType = "institution" %}
             {% include 'listTab.nunjucks' %}
           </div>
         </div>

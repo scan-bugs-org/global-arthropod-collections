@@ -1,4 +1,4 @@
 {
   "ignore": ["public/*"],
-  "watch": ["**/*.js"]
+  "ext": "js,nunjucks"
 }
