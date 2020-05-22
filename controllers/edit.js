@@ -6,6 +6,7 @@ const Institution = database.Institution;
 const batchUploadRouter = require("./batchUpload");
 const collectionRouter = require("./editCollection");
 const institutionRouter = require("./editInstitution");
+const doError = require("../include/common").doError;
 
 const router = new Router();
 
@@ -42,42 +43,46 @@ router.use("/institutions", institutionRouter);
 router.use("/upload", batchUploadRouter);
 
 router.get("/", async (req, res) => {
-  let collections = await Collection.find(
-    null,
-    {_id: 1, name: 1, institution: 1},
-    { sort: "name" }
-  ).populate("institution", "name");
+  try {
+    let collections = await Collection.find(
+      null,
+      {_id: 1, name: 1, institution: 1},
+      { sort: "name" }
+    ).populate("institution", "name");
 
-  let institutions = await Institution.find(
-    null,
-    {_id: 1, name: 1},
-    { sort: "name" }
-  );
+    let institutions = await Institution.find(
+      null,
+      {_id: 1, name: 1},
+      { sort: "name" }
+    );
 
-  collections = collections.map(c => {
-    let asObj = c.toObject();
-    asObj.institution = c.institution.name;
-    return asObj;
-  });
-  collections.sort(collectionNameCmp);
+    collections = collections.map(c => {
+      let asObj = c.toObject();
+      asObj.institution = c.institution ? c.institution.name : "";
+      return asObj;
+    });
+    collections.sort(collectionNameCmp);
 
-  res.render(
-    "listPage.nunjucks",
-    {
-      serverRoot: "..",
-      collectionHeaders: [
-        { displayName: "ID", dbName: "_id" },
-        { displayName: "Institution", dbName: "institution" },
-        { displayName: "Name", dbName: "name" }
-      ],
-      institutionHeaders: [
-        { displayName: "ID", dbName: "_id" },
-        { displayName: "Name", dbName: "name" }
-      ],
-      collectionRows: collections,
-      institutionRows: institutions.map(c => c.toObject())
-    }
-  );
+    res.render(
+      "listPage.nunjucks",
+      {
+        serverRoot: "..",
+        collectionHeaders: [
+          { displayName: "ID", dbName: "_id" },
+          { displayName: "Institution", dbName: "institution" },
+          { displayName: "Name", dbName: "name" }
+        ],
+        institutionHeaders: [
+          { displayName: "ID", dbName: "_id" },
+          { displayName: "Name", dbName: "name" }
+        ],
+        collectionRows: collections,
+        institutionRows: institutions.map(c => c.toObject())
+      }
+    );
+  } catch (e) {
+    doError(res, e.message, "..");
+  }
 });
 
 module.exports = router;
