@@ -105,7 +105,12 @@ router.post("/:uploadId", async (req, res) => {
       }
     });
 
-    dbInstitution = new Institution(newInstitution);
+    dbInstitution = await Institution.findOneAndUpdate(
+      { $or: [{code: newInstitution.code}, {name: newInstitution.name}] },
+      newInstitution,
+      { new: true, upsert: true }
+    );
+
     await dbInstitution.save();
     results.institutions.push(dbInstitution.name);
 
@@ -127,21 +132,28 @@ router.post("/:uploadId", async (req, res) => {
     });
 
     newCollection["institution"] = dbInstitution._id;
-    dbCollection = new Collection(newCollection);
+    dbCollection = await Collection.findOneAndUpdate(
+      { $or: [{code: newCollection.code}, {name: newCollection.name}] },
+      newCollection,
+      { new: true, upsert: true }
+    );
     promises.push(dbCollection.save());
     results.collections.push(dbCollection.name);
   }
 
+  promises.push(TmpUpload.deleteOne({ _id: req.params.uploadId }));
   await Promise.all(promises);
-  await TmpUpload.deleteOne({ _id: req.params.uploadId });
+
+  req.session.results = results;
   res.redirect(303, `./complete/${req.params.uploadId}`)
 });
 
 router.get("/complete/:uploadId", (req, res) => {
   res.render("batchUploadComplete.nunjucks", {
-    collections: req.body.collections,
-    institutions: req.body.institutions
+    collections: req.session.results.collections,
+    institutions: req.session.results.institutions
   });
+  delete req.session.results;
 });
 
 router.get("/", (req, res) => {
