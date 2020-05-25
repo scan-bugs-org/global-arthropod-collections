@@ -34,16 +34,6 @@ connection.on("error", console.error.bind(console, "MongoDB Error: "));
 
 // Models
 const CollectionModel = mongoose.model("Collection", CollectionSchema);
-
-InstitutionSchema.pre("remove", async function(next) {
-  try {
-    await CollectionModel.deleteMany({ institution: this._id });
-  } catch (e) {
-    console.error(`Error deleting institution" ${e.message}`);
-  }
-  next();
-});
-
 const InstitutionModel = mongoose.model("Institution", InstitutionSchema);
 const UserModel = mongoose.model("User", UserSchema);
 const TmpUploadModel = mongoose.model("TmpUpload", TmpUploadSchema);

@@ -64,6 +64,7 @@ router.get("/", async (req, res) => {
       [collectionsPromise, institutionsPromise]
     );
 
+    collections = collections.sort(collectionCmp);
     collections = collections.map(c => {
       const asJSON = c.toJSON();
       const institution = asJSON.institution;
@@ -72,7 +73,7 @@ router.get("/", async (req, res) => {
 
       asJSON.name = `<a href="./edit/collections/${id}">${name}</a>`;
 
-      if (institution.name) {
+      if (institution && institution.name) {
         asJSON.institution = `<a href="./edit/institutions/${institution._id}">`;
         asJSON.institution += `${institution.name}</a>`;
       } else {
@@ -87,8 +88,6 @@ router.get("/", async (req, res) => {
       asJSON.name = `<a href="./edit/institutions/${asJSON._id}">${asJSON.name}</a>`;
       return asJSON;
     });
-
-    collections.sort(collectionCmp);
 
     res.render(
       "listPage.nunjucks",
@@ -109,6 +108,7 @@ router.get("/", async (req, res) => {
     );
   } catch (e) {
     console.error(`Error displaying list: ${e.message}`);
+    console.error(e.stack);
     doError(res, e.message, "..");
   }
 });

@@ -51,11 +51,12 @@ router.post("/:institutionId", (req, res) => {
 
 router.post("/delete/:institutionId", async (req, res) => {
   try {
-    const institution = await Institution.deleteOne({ _id: req.params.institutionId });
-    if (institution === null || institution.deletedCount === 0) {
+    const institution = await Institution.findById(req.params.institutionId);
+    if (institution === null) {
       doError(res, "Collection not found", `../${backUrl}`);
     } else {
-      res.redirect(303, "../../?tab=institutions");
+      await institution.remove();
+      res.redirect(303, `../${backUrl}`);
     }
   } catch (e) {
     doError(res, e.message, `../${backUrl}`);

@@ -18,7 +18,7 @@
                             {{ row[header.dbName] | safe }}
                         </td>
                     {% endfor %}
-                    <td>
+                    <td class="text-center">
                         <form method="post" action="{{ deleteAction }}/{{ row._id }}">
                             <button class="btn bg-transparent" type="submit">
                                 <img

@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
 
-const institutionSchema = mongoose.Schema({
+async function deleteAssociatedCollections() {
+  try {
+    await this.model("Collection").deleteMany({ institution: this._id });
+  } catch (e) {
+    console.error(`Error deleting institution: ${e.message}`);
+    throw e;
+  }
+}
+
+const InstitutionSchema = mongoose.Schema({
   code: {
     type: String,
     unique: true
@@ -11,4 +20,10 @@ const institutionSchema = mongoose.Schema({
   },
 });
 
-module.exports = institutionSchema;
+InstitutionSchema.pre(
+  ["remove", "deleteOne"],
+  { document: true, query: false },
+  deleteAssociatedCollections
+);
+
+module.exports = InstitutionSchema;

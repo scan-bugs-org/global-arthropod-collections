@@ -29,22 +29,24 @@
         </ul>
         <div class="tab-content">
           <!-- COLLECTIONS -->
+          {% set deleteCollection = serverRoot | default('.') + "/edit/collections/delete" %}
           <div id="collections-tab" class="tab-pane show active">
             {{ table(
               collectionHeaders | default([]),
               collections | default([]),
               "..",
-              "./collections/delete"
+              deleteCollection
             ) }}
           </div>
 
           <!-- INSTITUTIONS -->
+          {% set deleteInstitution = serverRoot | default('.') + "/edit/institutions/delete" %}
           <div id="institutions-tab" class="tab-pane">
             {{ table(
               institutionHeaders | default([]),
               institutions | default([]),
               "..",
-              "./institutions/delete"
+              deleteInstitution
             ) }}
           </div>
         </div>
