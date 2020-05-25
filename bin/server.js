@@ -9,8 +9,6 @@ const uuid = require("uuid");
 
 const geoJsonRouter = require("../controllers/geojson");
 const editRouter = require("../controllers/edit");
-const collectionEditRouter = require("../controllers/editCollection");
-const institutionEditRouter = require("../controllers/editInstitution");
 const loginRouter = require("../controllers/login");
 
 const database = require("../include/database");
@@ -21,6 +19,23 @@ const authMiddleware = require("../include/common").protectRoute;
 const PORT = 8080;
 const SESSION_KEY_PATH = path.resolve(__dirname, "..", "data", ".session");
 const isDev = process.env.NODE_ENV === "development";
+
+function stripTrailingSlashMiddleware(req, res, next) {
+  const [path, query] = req.originalUrl.split("?");
+
+  if (path.endsWith("/")) {
+    let newPath = path.slice(0, -1);
+
+    if (query && query.length > 0) {
+      newPath += `?${query}`;
+    }
+
+    res.redirect(301, newPath);
+
+  } else {
+    next();
+  }
+}
 
 // Create admin user
 User.findById("admin").then((user) => {
@@ -85,6 +100,7 @@ app.get("/logout", (req, res) => {
 });
 
 // Protected
+app.use("/edit", stripTrailingSlashMiddleware);
 app.use("/edit", authMiddleware);
 app.use("/edit", editRouter);
 

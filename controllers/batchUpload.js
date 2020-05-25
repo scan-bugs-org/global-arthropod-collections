@@ -56,6 +56,7 @@ function fieldToBoolean(fieldVal) {
 }
 
 function parseField(fieldVal) {
+  fieldVal = unescape(fieldVal.trim());
   const asNum = fieldToNumber(fieldVal);
   if (typeof asNum === "number") {
     return asNum;
@@ -133,7 +134,12 @@ router.post("/:uploadId", async (req, res) => {
 
     newCollection["institution"] = dbInstitution._id;
     dbCollection = await Collection.findOneAndUpdate(
-      { $or: [{code: newCollection.code}, {name: newCollection.name}] },
+      {
+        $and: [{
+          institution: newCollection._id,
+          $or: [{code: newCollection.code}, {name: newCollection.name}]
+        }]
+      },
       newCollection,
       { new: true, upsert: true }
     );

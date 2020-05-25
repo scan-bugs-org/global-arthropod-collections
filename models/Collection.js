@@ -11,7 +11,7 @@ const CollectionSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    default: "Entomology Collection"
   },
   size: {
     type: Number,
