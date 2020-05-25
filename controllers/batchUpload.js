@@ -132,11 +132,11 @@ router.post("/:uploadId", async (req, res) => {
       }
     });
 
-    newCollection["institution"] = dbInstitution._id;
+    newCollection.institution = dbInstitution._id;
     dbCollection = await Collection.findOneAndUpdate(
       {
         $and: [{
-          institution: newCollection._id,
+          institution: newCollection.institution,
           $or: [{code: newCollection.code}, {name: newCollection.name}]
         }]
       },
