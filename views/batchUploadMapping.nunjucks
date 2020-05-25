@@ -55,6 +55,14 @@
                     </table>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-auto mx-4 ml-auto">
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <button class="btn btn-secondary" type="reset">Reset</button>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 {% endblock %}
