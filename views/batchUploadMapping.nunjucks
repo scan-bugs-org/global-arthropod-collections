@@ -1,6 +1,11 @@
 {% extends "webpage.nunjucks" %}
 {% set serverRoot = "../.." %}
 
+{% block head %}
+    {{ super() }}
+    <script type="text/javascript" src="{{ serverRoot }}/js/batchUploadMapping.js"></script>
+{% endblock %}
+
 {% block body %}
     {% include 'navbar.nunjucks' %}
     <div class="container-fluid">
@@ -13,6 +18,7 @@
                     <div class="col-auto mx-4 ml-auto">
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-secondary" type="button" onclick="autoMap();">Automap</button>
                             <button class="btn btn-secondary" type="reset">Reset</button>
                         </div>
                     </div>
@@ -34,8 +40,8 @@
                         <tbody>
                             {% for dbField in dbFields | default([]) %}
                                 <tr>
-                                    <td>{{ dbField }}</td>
-                                    <td>
+                                    <td class="dbField">{{ dbField }}</td>
+                                    <td class="csvField">
                                         <select name="{{ dbField }}" class="form-control">
                                             <option value="" selected>Leave field unmapped</option>
                                             {% for csvField in csvFields %}

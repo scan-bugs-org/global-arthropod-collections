@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-module.exports = mongoose.Schema({
+const institutionSchema = mongoose.Schema({
   code: {
     type: String,
     unique: true
@@ -10,3 +10,5 @@ module.exports = mongoose.Schema({
     unique: true
   },
 });
+
+module.exports = institutionSchema;

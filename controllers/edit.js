@@ -68,11 +68,12 @@ router.get("/", async (req, res) => {
       const asJSON = c.toJSON();
       const institution = asJSON.institution;
       const id = asJSON._id;
+      const name = asJSON.name;
 
-      asJSON._id = `<a href="./collections/${id}">${id}</a>`;
+      asJSON.name = `<a href="./edit/collections/${id}">${name}</a>`;
 
       if (institution.name) {
-        asJSON.institution = `<a href="./institutions/${institution._id}">`;
+        asJSON.institution = `<a href="./edit/institutions/${institution._id}">`;
         asJSON.institution += `${institution.name}</a>`;
       } else {
         asJSON.institution = "";
@@ -83,7 +84,7 @@ router.get("/", async (req, res) => {
 
     institutions = institutions.map(i => {
       const asJSON = i.toJSON();
-      asJSON._id = `<a href="./institutions/${asJSON._id}">${asJSON._id}</a>`;
+      asJSON.name = `<a href="./edit/institutions/${asJSON._id}">${asJSON.name}</a>`;
       return asJSON;
     });
 
@@ -107,6 +108,7 @@ router.get("/", async (req, res) => {
       }
     );
   } catch (e) {
+    console.error(`Error displaying list: ${e.message}`);
     doError(res, e.message, "..");
   }
 });

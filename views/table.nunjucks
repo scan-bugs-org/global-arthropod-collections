@@ -1,4 +1,4 @@
-{% macro table(headers, rows, serverRoot=".") %}
+{% macro table(headers, rows, serverRoot=".", deleteAction="") %}
 
     <div class="table-responsive">
         <table class="my-5 table">
@@ -19,8 +19,7 @@
                         </td>
                     {% endfor %}
                     <td>
-                        <form>
-                            <input type="hidden" name="_id" value="{{ row._id }}">
+                        <form method="post" action="{{ deleteAction }}/{{ row._id }}">
                             <button class="btn bg-transparent" type="submit">
                                 <img
                                     alt="delete row"
