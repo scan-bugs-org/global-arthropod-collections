@@ -133,10 +133,14 @@ router.post("/:uploadId", async (req, res) => {
   }
 
   await Promise.all(promises);
-  await TmpUpload.deleteOne({ _id: upload._id });
-  await res.render("batchUploadComplete.nunjucks", {
-    collections: results.collections,
-    institutions: results.institutions
+  await TmpUpload.deleteOne({ _id: req.params.uploadId });
+  res.redirect(303, `./complete/${req.params.uploadId}`)
+});
+
+router.get("/complete/:uploadId", (req, res) => {
+  res.render("batchUploadComplete.nunjucks", {
+    collections: req.body.collections,
+    institutions: req.body.institutions
   });
 });
 

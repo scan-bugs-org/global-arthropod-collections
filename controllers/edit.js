@@ -10,9 +10,13 @@ const doError = require("../include/common").doError;
 
 const router = new Router();
 
-function collectionNameCmp(first, second) {
-  const firstInstitutionName = first.institution ? first.institution.toLowerCase() : '';
-  const secondInstitutionName = second.institution ? second.institution.toLowerCase() : '';
+function collectionCmp(first, second) {
+  const firstInstitutionName = (
+    first.institution && first.institution.name ? first.institution.name.toLowerCase() : ''
+  );
+  const secondInstitutionName = (
+    second.institution && second.institution.name ? second.institution.name.toLowerCase() : ''
+  );
 
   const firstName = first.name.toLowerCase();
   const secondName = second.name.toLowerCase();
@@ -44,24 +48,46 @@ router.use("/upload", batchUploadRouter);
 
 router.get("/", async (req, res) => {
   try {
-    let collections = await Collection.find(
+    const collectionsPromise = await Collection.find(
       null,
-      {_id: 1, name: 1, institution: 1},
+      { _id: 1, name: 1, institution: 1 },
       { sort: "name" }
-    ).populate("institution", "name");
+    ).populate("institution", { "_id": 1, "name": 1 });
 
-    let institutions = await Institution.find(
+    const institutionsPromise = await Institution.find(
       null,
-      {_id: 1, name: 1},
+      { _id: 1, name: 1 },
       { sort: "name" }
     );
 
+    let [collections, institutions] = await Promise.all(
+      [collectionsPromise, institutionsPromise]
+    );
+
     collections = collections.map(c => {
-      let asObj = c.toObject();
-      asObj.institution = c.institution ? c.institution.name : "";
-      return asObj;
+      const asJSON = c.toJSON();
+      const institution = asJSON.institution;
+      const id = asJSON._id;
+
+      asJSON._id = `<a href="./collections/${id}">${id}</a>`;
+
+      if (institution.name) {
+        asJSON.institution = `<a href="./institutions/${institution._id}">`;
+        asJSON.institution += `${institution.name}</a>`;
+      } else {
+        asJSON.institution = "";
+      }
+
+      return asJSON;
     });
-    collections.sort(collectionNameCmp);
+
+    institutions = institutions.map(i => {
+      const asJSON = i.toJSON();
+      asJSON._id = `<a href="./institutions/${asJSON._id}">${asJSON._id}</a>`;
+      return asJSON;
+    });
+
+    collections.sort(collectionCmp);
 
     res.render(
       "listPage.nunjucks",
@@ -76,8 +102,8 @@ router.get("/", async (req, res) => {
           { displayName: "ID", dbName: "_id" },
           { displayName: "Name", dbName: "name" }
         ],
-        collectionRows: collections,
-        institutionRows: institutions.map(c => c.toObject())
+        collections: collections,
+        institutions: institutions
       }
     );
   } catch (e) {

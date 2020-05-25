@@ -1,4 +1,5 @@
 {% extends "webpage.nunjucks" %}
+{% from "table.nunjucks" import table %}
 {% set pageTitle = "Map Editor" %}
 
 {% block head %}
@@ -26,27 +27,25 @@
             </a>
           </li>
         </ul>
-
         <div class="tab-content">
           <!-- COLLECTIONS -->
           <div id="collections-tab" class="tab-pane show active">
-            {% set formId = "collections" %}
-            {% set headers = collectionHeaders | default([]) %}
-            {% set rows = collectionRows | default([]) %}
-            {% set rowType = "collection" %}
-            {% include 'listTab.nunjucks' %}
+            {{ table(
+              collectionHeaders | default([]),
+              collections | default([]),
+              ".."
+            ) }}
           </div>
 
           <!-- INSTITUTIONS -->
           <div id="institutions-tab" class="tab-pane">
-            {% set formId = "institutions" %}
-            {% set headers = institutionHeaders | default([]) %}
-            {% set rows = institutionRows | default([]) %}
-            {% set rowType = "institution" %}
-            {% include 'listTab.nunjucks' %}
+            {{ table(
+              institutionHeaders | default([]),
+              institutions | default([]),
+              ".."
+            ) }}
           </div>
         </div>
-
       </div>
     </div>
   </div>
