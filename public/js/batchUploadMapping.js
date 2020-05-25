@@ -9,7 +9,17 @@ function autoMap() {
 
     csvFieldOpts.forEach((opt) => {
       const optNormalized = opt.value.toLowerCase().replace(/[^a-z]/g, "");
-      if (optNormalized === normalizedDbName) {
+      const isLat = (
+        normalizedDbName === "latitude" && optNormalized === "lat"
+      );
+      const isLon = (
+        normalizedDbName === "longitude" && ["lon", "lng"].includes(optNormalized)
+      );
+      const isStateProvince = (
+        normalizedDbName === "stateprovince" && optNormalized === "state"
+      );
+
+      if (isLat || isLon || isStateProvince || optNormalized === normalizedDbName) {
         csvField.val(opt.value);
       }
     });
