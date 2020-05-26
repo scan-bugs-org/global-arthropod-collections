@@ -1,0 +1,18 @@
+type Query {
+    institution(id: ID!): Institution
+    institutions(skip: Int = 0, limit: Int = 10): [Institution]!
+}
+
+type Institution {
+    _id: ID!
+    code: String
+    name: String!
+    collections: [Collection]!
+}
+
+type Collection {
+    _id: ID!
+    code: String
+    name: String!
+    institution: Institution!
+}
