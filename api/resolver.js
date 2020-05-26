@@ -10,9 +10,16 @@ function handleError(msg, e) {
 
 function getGraphQLProjectionKeys(projection, fields) {
   fields.forEach(field => {
+    // If there's a selectionSet, then this field contains nested fields: It's
+    // referring to a child object in the graph
     if (field.selectionSet) {
+      // So recursively build a sub-projection object
       projection[field.name.value] = {};
-      getGraphQLProjectionKeys(projection[field.name.value], field.selectionSet.selections);
+      getGraphQLProjectionKeys(
+        projection[field.name.value],
+        field.selectionSet.selections
+      );
+    // Otherwise, it's a scalar: We should pull it directly from the database
     } else {
       projection[field.name.value] = 1;
     }
