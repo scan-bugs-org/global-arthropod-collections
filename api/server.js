@@ -5,6 +5,7 @@ const {buildSchema} = require("graphql");
 
 const checkContentType = require("./middlewares/checkContentType");
 const Utils = require("./classes/Utils");
+const defaultRoute = require("./routes/default");
 
 const isDev = process.env.NODE_ENV === "development";
 const port = process.env.PORT || 4000;
@@ -34,5 +35,6 @@ app.use("/api", graphqlHTTP({
     rootValue: root,
     graphiql: isDev,
 }));
+app.use("*", defaultRoute);
 
 app.listen(port, () => console.log(`Server running on port ${port}...`));
