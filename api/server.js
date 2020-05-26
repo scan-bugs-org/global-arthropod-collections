@@ -1,17 +1,16 @@
 const express = require("express");
-const graphql = require("graphql");
 const graphqlHTTP = require("express-graphql");
 const logger = require("morgan");
 
 const checkContentType = require("./middlewares/checkContentType");
-const Utils = require("./Utils");
 const defaultRoute = require("./routes/default");
+const graphQLSchema = require("./graphql/schema");
 
 const isDev = process.env.NODE_ENV === "development";
 const port = process.env.PORT || 4000;
 
 const app = express();
-const rootResolver = require("./resolver");
+const rootResolver = require("./graphql/schema");
 
 // Configure express app
 app.use(logger(isDev ? "dev" : "tiny"));
@@ -19,8 +18,7 @@ if (!isDev) {
     app.use(checkContentType);
 }
 app.use("/api", graphqlHTTP({
-    schema: Utils.loadSchema(),
-    rootValue: rootResolver,
+    schema: graphQLSchema,
     graphiql: isDev
 }));
 app.use("*", defaultRoute);

@@ -67,4 +67,8 @@ CollectionSchema.methods.asGeoJson = function() {
   };
 };
 
+CollectionSchema.query.byInstitutionId = function(institutionId) {
+  return this.where({ institution: institutionId });
+};
+
 module.exports = CollectionSchema;
