@@ -10,7 +10,6 @@ const isDev = process.env.NODE_ENV === "development";
 const port = process.env.PORT || 4000;
 
 const app = express();
-const rootResolver = require("./graphql/schema");
 
 // Configure express app
 app.use(logger(isDev ? "dev" : "tiny"));

@@ -5,13 +5,18 @@ function handleError(msg, e) {
 
 function getGraphQLProjectionKeys(fields) {
   const projection = {};
-  // Grab the top-level keys only
+  const children = [];
+
   fields.forEach(field => {
-    if (!field.selectionSet) {
+    if (field.selectionSet) {
+      children.push(field.name.value);
+
+    // Project the top-level keys only
+    } else {
       projection[field.name.value] = 1;
     }
   });
-  return projection;
+  return [projection, children];
 }
 
 module.exports = {
