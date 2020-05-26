@@ -1,0 +1,13 @@
+extends: "eslint:recommended"
+parserOptions:
+  ecmaVersion: 2020
+env:
+  node: true
+rules:
+  no-console: off
+  no-unused-vars: warn
+  semi: [2, "always"]
+  quotes: ["warn", "double"]
+  no-empty: warn
+globals:
+  Promise: writable
