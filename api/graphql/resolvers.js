@@ -6,6 +6,23 @@ const Collection = Utils.model("Collection");
 
 const LIMIT_MAX = 100;
 
+function getCollectionProjection(info) {
+  const [projection, children] = GraphQLUtils.getGraphQLProjectionKeys(
+    info.fieldNodes[0].selectionSet.selections
+  );
+
+  // Include institution ID for linking purposes
+  if (children.includes("institution")) {
+    projection["institution"] = 1;
+  }
+
+  if (children.includes("location")) {
+    projection["location"] = 1;
+  }
+
+  return projection;
+}
+
 async function resolveInstitutionById(parentNode, { id }, _, info) {
   try {
     await Utils.mongoConnect();
@@ -61,19 +78,7 @@ async function resolveCollectionById(parentNode, { id }, _, info) {
   try {
     await Utils.mongoConnect();
 
-    const [projection, children] = GraphQLUtils.getGraphQLProjectionKeys(
-      info.fieldNodes[0].selectionSet.selections
-    );
-
-    // Include institution ID for linking purposes
-    if (children.includes("institution")) {
-      projection["institution"] = 1;
-    }
-
-    if (children.includes("location")) {
-      projection["location"] = 1;
-    }
-
+    const projection = getCollectionProjection(info);
     return await Collection.findById(id, projection).lean().exec();
 
   } catch (e) {
@@ -85,18 +90,7 @@ async function resolveCollections(parentNode, { skip, limit }, _, info) {
   try {
     await Utils.mongoConnect();
 
-    const [projection, children] = GraphQLUtils.getGraphQLProjectionKeys(
-      info.fieldNodes[0].selectionSet.selections
-    );
-
-    // Include institution ID for linking purposes
-    if (children.includes("institution")) {
-      projection["institution"] = 1;
-    }
-
-    if (children.includes("location")) {
-      projection["location"] = 1;
-    }
+    const projection = getCollectionProjection(info);
 
     // Cap the maximum results
     if (limit > LIMIT_MAX) {
@@ -114,19 +108,7 @@ async function resolveCollectionsForInstitution(parentNode, args, _, info) {
   try {
     await Utils.mongoConnect();
 
-    const [projection, children] = GraphQLUtils.getGraphQLProjectionKeys(
-      info.fieldNodes[0].selectionSet.selections
-    );
-
-    // Include institution ID for linking purposes
-    if (children.includes("institution")) {
-      projection["institution"] = 1;
-    }
-
-    if (children.includes("location")) {
-      projection["location"] = 1;
-    }
-
+    const projection = getCollectionProjection(info);
     return await Collection.find({}, projection).byInstitutionId(parentNode._id)
       .lean()
       .exec();
