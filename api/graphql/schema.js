@@ -75,7 +75,7 @@ QueryType = new graphql.GraphQLObjectType({
       resolve: Resolvers.resolveCollectionById
     },
     collections: {
-      type: graphql.GraphQLNonNull(graphql.GraphQLList(InstitutionType)),
+      type: graphql.GraphQLNonNull(graphql.GraphQLList(CollectionType)),
       args: {
         skip: {
           type: graphql.GraphQLInt,

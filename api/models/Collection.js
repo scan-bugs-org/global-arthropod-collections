@@ -6,12 +6,14 @@ const CollectionSchema = new mongoose.Schema({
   },
   institution: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Institution"
+    ref: "Institution",
+    index: true
   },
   name: {
     type: String,
     required: true,
-    default: "Entomology Collection"
+    default: "Entomology Collection",
+    index: true
   },
   size: {
     type: Number,
