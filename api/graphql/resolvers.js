@@ -7,9 +7,7 @@ const Collection = Utils.model("Collection");
 const LIMIT_MAX = 100;
 
 function getCollectionProjection(info) {
-  const [projection, children] = GraphQLUtils.getGraphQLProjectionKeys(
-    info.fieldNodes[0].selectionSet.selections
-  );
+  const [projection, children] = GraphQLUtils.getGraphQLProjectionKeys(info);
 
   // Include institution ID for linking purposes
   if (children.includes("institution")) {
@@ -27,10 +25,7 @@ async function resolveInstitutionById(parentNode, { id }, _, info) {
   try {
     await Utils.mongoConnect();
 
-    const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(
-      info.fieldNodes[0].selectionSet.selections
-    );
-
+    const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(info);
     return await Institution.findById(id, projection).lean().exec();
 
   } catch (e) {
@@ -42,14 +37,13 @@ async function resolveInstitutions(parentNode, { skip, limit }, _, info) {
   try {
     await Utils.mongoConnect();
 
-    const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(
-      info.fieldNodes[0].selectionSet.selections
-    );
+    const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(info);
 
     // Cap the maximum results
     if (limit > LIMIT_MAX) {
       limit = LIMIT_MAX;
     }
+
     return await Institution.find({}, projection, { limit, skip }).lean().exec();
 
   } catch (e) {
@@ -61,10 +55,7 @@ async function resolveInstitutionForCollection(parentNode, { id }, _, info) {
   try {
     await Utils.mongoConnect();
 
-    const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(
-      info.fieldNodes[0].selectionSet.selections
-    );
-
+    const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(info);
     return await Institution.findById(parentNode.institution, projection)
       .lean()
       .exec();

@@ -3,9 +3,10 @@ function handleError(msg, e) {
   throw e;
 }
 
-function getGraphQLProjectionKeys(fields) {
+function getGraphQLProjectionKeys(info) {
   const projection = {};
   const children = [];
+  const fields = info.fieldNodes[0].selectionSet.selections;
 
   fields.forEach(field => {
     if (field.selectionSet) {
