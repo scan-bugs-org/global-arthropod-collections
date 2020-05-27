@@ -39,7 +39,8 @@ CollectionType = new graphql.GraphQLObjectType({
       type: InstitutionType,
       resolve: Resolvers.resolveInstitutionForCollection
     },
-    location: { type: graphql.GraphQLNonNull(LocationType) }
+    location: { type: graphql.GraphQLNonNull(LocationType) },
+    tier: { type: graphql.GraphQLInt }
   })
 });
 
@@ -70,7 +71,8 @@ QueryType = new graphql.GraphQLObjectType({
     collection: {
       type: CollectionType,
       args: {
-        id: { type: graphql.GraphQLID }
+        id: { type: graphql.GraphQLNonNull(graphql.GraphQLID) },
+        tier: { type: graphql.GraphQLInt },
       },
       resolve: Resolvers.resolveCollectionById
     },
@@ -84,6 +86,9 @@ QueryType = new graphql.GraphQLObjectType({
         limit: {
           type: graphql.GraphQLInt,
           defaultValue: 10
+        },
+        tier: {
+          type: graphql.GraphQLInt
         }
       },
       resolve: Resolvers.resolveCollections

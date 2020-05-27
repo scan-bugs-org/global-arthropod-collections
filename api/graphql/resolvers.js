@@ -77,18 +77,28 @@ async function resolveCollectionById(parentNode, { id }, _, info) {
   }
 }
 
-async function resolveCollections(parentNode, { skip, limit }, _, info) {
+async function resolveCollections(parentNode, args, _, info) {
   try {
     await Utils.mongoConnect();
 
     const projection = getCollectionProjection(info);
+    const selection = {};
+    let { skip, limit } = args;
 
     // Cap the maximum results
-    if (limit > LIMIT_MAX) {
-      limit = LIMIT_MAX;
+    if (args.limit > LIMIT_MAX) {
+      args.limit = LIMIT_MAX;
     }
 
-    return await Collection.find({}, projection, { limit, skip }).lean().exec();
+    if (Object.keys(args).includes("tier")) {
+      selection.tier = args.tier;
+    }
+
+    return await Collection.find(
+      selection,
+      projection,
+      { skip, limit }
+    ).lean().exec();
 
   } catch (e) {
     GraphQLUtils.handleError("Error fetching collections", e);
