@@ -1,5 +1,6 @@
+const bodyParser = require("body-parser");
 const cluster = require("cluster");
-const os = require('os');
+const os = require("os");
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const logger = require("./logger");
@@ -7,6 +8,7 @@ const logger = require("./logger");
 const checkContentType = require("./middlewares/checkContentType");
 const defaultRoute = require("./routes/default");
 const geojsonRoute = require("./routes/geojson");
+const authRoute = require("./routes/auth");
 const graphQLSchema = require("./graphql/schema");
 
 const numCPUs = os.cpus().length;
@@ -32,11 +34,13 @@ function runWorker() {
     // Configure express app
     app.disable("x-powered-by");
     app.use(logger(isDev ? "dev" : "prod"));
+    app.use(bodyParser.json());
     if (!isDev) {
         app.use(checkContentType);
     }
 
     // Configure routing
+    app.post("/auth", authRoute);
     app.use("/api/geojson", geojsonRoute);
     app.use("/api", graphqlHTTP({
         schema: graphQLSchema,
@@ -48,6 +52,7 @@ function runWorker() {
     app.listen(port, () => console.log(`[PID ${process.pid}] Server running on port ${port}...`));
 }
 
+// Run the app
 if (cluster.isMaster && !isDev) {
     runMaster();
 } else {
