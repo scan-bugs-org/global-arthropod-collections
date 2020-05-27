@@ -18,6 +18,28 @@ function getCollectionProjection(info) {
   return projection;
 }
 
+async function resolveUserByUsername(parentNode, { username }, _, info) {
+  try {
+    const mongo = await Utils.mongoConnect();
+    const User = mongo.model("User");
+
+    const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(info);
+    const user = await User.findById(username, projection).lean().exec();
+
+    if (user === null) {
+      return null;
+    }
+
+    // Rename '_id' to 'username'
+    user.username = user._id;
+    delete user._id;
+    return user;
+
+  } catch (e) {
+    GraphQLUtils.handleError(`Error fetching user "${username}"`, e);
+  }
+}
+
 async function resolveInstitutionById(parentNode, { id }, _, info) {
   try {
     const mongo = await Utils.mongoConnect();
@@ -124,6 +146,7 @@ async function resolveCollectionsForInstitution(parentNode, args, _, info) {
 }
 
 module.exports = {
+  resolveUserByUsername,
   resolveInstitutionById,
   resolveInstitutions,
   resolveInstitutionForCollection,

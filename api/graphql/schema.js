@@ -1,10 +1,19 @@
 const graphql = require("graphql");
 const Resolvers = require("./resolvers");
 
+let UserType;
 let InstitutionType;
 let LocationType;
 let CollectionType;
 let QueryType;
+
+UserType = new graphql.GraphQLObjectType({
+  name: "User",
+  fields: {
+    username: { type: graphql.GraphQLNonNull(graphql.GraphQLString) },
+    password: { type: graphql.GraphQLNonNull(graphql.GraphQLString) },
+  }
+});
 
 InstitutionType = new graphql.GraphQLObjectType({
   name: "Institution",
@@ -47,6 +56,13 @@ CollectionType = new graphql.GraphQLObjectType({
 QueryType = new graphql.GraphQLObjectType({
   name: "Query",
   fields: {
+    user: {
+      type: UserType,
+      args: {
+        username: { type: graphql.GraphQLNonNull(graphql.GraphQLString) }
+      },
+      resolve: Resolvers.resolveUserByUsername
+    },
     institution: {
       type: InstitutionType,
       args: {

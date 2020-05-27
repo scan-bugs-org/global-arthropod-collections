@@ -13,7 +13,7 @@ const numCPUs = os.cpus().length;
 const isDev = process.env.NODE_ENV === "development";
 const port = process.env.PORT || 4000;
 
-if (cluster.isMaster) {
+function runMaster() {
     console.log(`Master process running at PID ${process.pid}`);
 
     for (let i = 0; i < numCPUs; i++) {
@@ -24,8 +24,9 @@ if (cluster.isMaster) {
     cluster.on("exit", (worker) => {
         console.log(`Worker process ${worker.process.pid} died`);
     });
+}
 
-} else {
+function runWorker() {
     const app = express();
 
     // Configure express app
@@ -45,4 +46,10 @@ if (cluster.isMaster) {
 
     // Run express app
     app.listen(port, () => console.log(`[PID ${process.pid}] Server running on port ${port}...`));
+}
+
+if (cluster.isMaster && !isDev) {
+    runMaster();
+} else {
+    runWorker();
 }
