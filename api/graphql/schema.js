@@ -92,7 +92,7 @@ QueryType = new graphql.GraphQLObjectType({
         }
       },
       resolve: Resolvers.resolveCollections
-    },
+    }
   }
 });
 

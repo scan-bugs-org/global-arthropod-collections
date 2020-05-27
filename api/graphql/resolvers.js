@@ -5,6 +5,17 @@ const Institution = Utils.model("Institution");
 const Collection = Utils.model("Collection");
 
 const LIMIT_MAX = 100;
+const GEOJSON_PROJECTION = {
+  _id: 1,
+  name: 1,
+  institution: 1,
+  location: {
+    lat: 1,
+    lng: 1
+  },
+  url: 1,
+  tier: 1
+};
 
 function getCollectionProjection(info) {
   const [projection, children] = GraphQLUtils.getGraphQLProjectionKeys(info);
@@ -86,19 +97,17 @@ async function resolveCollections(parentNode, args, _, info) {
     let { skip, limit } = args;
 
     // Cap the maximum results
-    if (args.limit > LIMIT_MAX) {
-      args.limit = LIMIT_MAX;
+    if (limit > LIMIT_MAX) {
+      limit = LIMIT_MAX;
     }
 
     if (Object.keys(args).includes("tier")) {
       selection.tier = args.tier;
     }
 
-    return await Collection.find(
-      selection,
-      projection,
-      { skip, limit }
-    ).lean().exec();
+    return await Collection.find(selection, projection, { skip, limit })
+      .lean()
+      .exec();
 
   } catch (e) {
     GraphQLUtils.handleError("Error fetching collections", e);
