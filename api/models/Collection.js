@@ -35,7 +35,8 @@ const CollectionSchema = new mongoose.Schema({
   tier: {
     type: Number,
     required: true,
-    default: 4
+    default: 4,
+    index: true
   },
   url: String,
   inIdigbio: Boolean,
