@@ -1,5 +1,4 @@
 const fs = require("fs");
-const { buildSchema } = require("graphql");
 const mongoose = require("mongoose");
 
 const UserSchema = require("./models/User");
@@ -27,14 +26,10 @@ class Utils {
         return mongoUri;
     }
 
-    static loadSchema() {
-        return buildSchema(Utils.readFile(Utils.GRAPHQL_SCHEMA_FILE));
-    }
-
     static async mongoConnect() {
         let connection;
 
-        const waitForConnect = mongoose.connect(
+        const waitForConnect = mongoose.createConnection(
           Utils.getMongoUri(),
           {
               useNewUrlParser: true,
@@ -47,35 +42,12 @@ class Utils {
         connection.on("error", console.error.bind(console, "MONGO ERROR: "));
         // connection.on("open", () => console.log("MONGO INFO: Connected"));
 
-        await waitForConnect;
-        return connection;
-    }
+        connection.model("User", UserSchema);
+        connection.model("TmpUpload", TmpUploadSchema);
+        connection.model("Institution", InstitutionSchema);
+        connection.model("Collection", CollectionSchema);
 
-    static model(modelName) {
-        switch (modelName) {
-            case "User":
-                if (Utils.UserModel === null) {
-                    Utils.UserModel = mongoose.model(modelName, UserSchema);
-                }
-                return Utils.UserModel;
-            case "TmpUpload":
-                if (Utils.TmpUploadModel === null) {
-                    Utils.TmpUploadModel = mongoose.model(modelName, TmpUploadSchema);
-                }
-                return Utils.TmpUploadModel;
-            case "Institution":
-                if (Utils.InstitutionModel === null) {
-                    Utils.InstitutionModel = mongoose.model(modelName, InstitutionSchema);
-                }
-                return Utils.InstitutionModel;
-            case "Collection":
-                if (Utils.CollectionModel === null) {
-                    Utils.CollectionModel = mongoose.model(modelName, CollectionSchema);
-                }
-                return Utils.CollectionModel;
-            default:
-                throw new Error(`Model ${modelName} does not exist`);
-        }
+        return waitForConnect;
     }
 }
 

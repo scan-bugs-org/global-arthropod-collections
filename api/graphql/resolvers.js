@@ -1,21 +1,7 @@
 const GraphQLUtils = require("./GraphQLUtils");
 const Utils = require("../Utils");
 
-const Institution = Utils.model("Institution");
-const Collection = Utils.model("Collection");
-
 const LIMIT_MAX = 100;
-const GEOJSON_PROJECTION = {
-  _id: 1,
-  name: 1,
-  institution: 1,
-  location: {
-    lat: 1,
-    lng: 1
-  },
-  url: 1,
-  tier: 1
-};
 
 function getCollectionProjection(info) {
   const [projection, children] = GraphQLUtils.getGraphQLProjectionKeys(info);
@@ -34,7 +20,8 @@ function getCollectionProjection(info) {
 
 async function resolveInstitutionById(parentNode, { id }, _, info) {
   try {
-    await Utils.mongoConnect();
+    const mongo = await Utils.mongoConnect();
+    const Institution = mongo.model("Institution");
 
     const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(info);
     return await Institution.findById(id, projection).lean().exec();
@@ -46,7 +33,8 @@ async function resolveInstitutionById(parentNode, { id }, _, info) {
 
 async function resolveInstitutions(parentNode, { skip, limit }, _, info) {
   try {
-    await Utils.mongoConnect();
+    const mongo = await Utils.mongoConnect();
+    const Institution = mongo.model("Institution");
 
     const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(info);
 
@@ -64,7 +52,8 @@ async function resolveInstitutions(parentNode, { skip, limit }, _, info) {
 
 async function resolveInstitutionForCollection(parentNode, { id }, _, info) {
   try {
-    await Utils.mongoConnect();
+    const mongo = await Utils.mongoConnect();
+    const Institution = mongo.model("Institution");
 
     const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(info);
     return await Institution.findById(parentNode.institution, projection)
@@ -78,7 +67,8 @@ async function resolveInstitutionForCollection(parentNode, { id }, _, info) {
 
 async function resolveCollectionById(parentNode, { id }, _, info) {
   try {
-    await Utils.mongoConnect();
+    const mongo = await Utils.mongoConnect();
+    const Collection = mongo.model("Collection");
 
     const projection = getCollectionProjection(info);
     return await Collection.findById(id, projection).lean().exec();
@@ -90,7 +80,8 @@ async function resolveCollectionById(parentNode, { id }, _, info) {
 
 async function resolveCollections(parentNode, args, _, info) {
   try {
-    await Utils.mongoConnect();
+    const mongo = await Utils.mongoConnect();
+    const Collection = mongo.model("Collection");
 
     const projection = getCollectionProjection(info);
     const selection = {};
@@ -116,7 +107,8 @@ async function resolveCollections(parentNode, args, _, info) {
 
 async function resolveCollectionsForInstitution(parentNode, args, _, info) {
   try {
-    await Utils.mongoConnect();
+    const mongo = await Utils.mongoConnect();
+    const Collection = mongo.model("Collection");
 
     const projection = getCollectionProjection(info);
     return await Collection.find({}, projection).byInstitutionId(parentNode._id)
