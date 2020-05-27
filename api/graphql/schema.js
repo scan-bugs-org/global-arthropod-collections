@@ -53,13 +53,41 @@ QueryType = new graphql.GraphQLObjectType({
       },
       resolve: Resolvers.resolveInstitutionById
     },
+    institutions: {
+      type: graphql.GraphQLNonNull(graphql.GraphQLList(InstitutionType)),
+      args: {
+        skip: {
+          type: graphql.GraphQLInt,
+          defaultValue: 0
+        },
+        limit: {
+          type: graphql.GraphQLInt,
+          defaultValue: 10
+        }
+      },
+      resolve: Resolvers.resolveInstitutions
+    },
     collection: {
       type: CollectionType,
       args: {
         id: { type: graphql.GraphQLID }
       },
       resolve: Resolvers.resolveCollectionById
-    }
+    },
+    collections: {
+      type: graphql.GraphQLNonNull(graphql.GraphQLList(InstitutionType)),
+      args: {
+        skip: {
+          type: graphql.GraphQLInt,
+          defaultValue: 0
+        },
+        limit: {
+          type: graphql.GraphQLInt,
+          defaultValue: 10
+        }
+      },
+      resolve: Resolvers.resolveCollections
+    },
   }
 });
 

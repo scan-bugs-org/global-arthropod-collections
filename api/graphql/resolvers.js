@@ -4,6 +4,8 @@ const Utils = require("../Utils");
 const Institution = Utils.model("Institution");
 const Collection = Utils.model("Collection");
 
+const LIMIT_MAX = 100;
+
 async function resolveInstitutionById(parentNode, { id }, _, info) {
   try {
     await Utils.mongoConnect();
@@ -16,6 +18,25 @@ async function resolveInstitutionById(parentNode, { id }, _, info) {
 
   } catch (e) {
     GraphQLUtils.handleError(`Error fetching institution with ID "${id}"`, e);
+  }
+}
+
+async function resolveInstitutions(parentNode, { skip, limit }, _, info) {
+  try {
+    await Utils.mongoConnect();
+
+    const [projection,] = GraphQLUtils.getGraphQLProjectionKeys(
+      info.fieldNodes[0].selectionSet.selections
+    );
+
+    // Cap the maximum results
+    if (limit > LIMIT_MAX) {
+      limit = LIMIT_MAX;
+    }
+    return await Institution.find({}, projection, { limit, skip }).lean().exec();
+
+  } catch (e) {
+    GraphQLUtils.handleError("Error fetching institutions", e);
   }
 }
 
@@ -60,6 +81,35 @@ async function resolveCollectionById(parentNode, { id }, _, info) {
   }
 }
 
+async function resolveCollections(parentNode, { skip, limit }, _, info) {
+  try {
+    await Utils.mongoConnect();
+
+    const [projection, children] = GraphQLUtils.getGraphQLProjectionKeys(
+      info.fieldNodes[0].selectionSet.selections
+    );
+
+    // Include institution ID for linking purposes
+    if (children.includes("institution")) {
+      projection["institution"] = 1;
+    }
+
+    if (children.includes("location")) {
+      projection["location"] = 1;
+    }
+
+    // Cap the maximum results
+    if (limit > LIMIT_MAX) {
+      limit = LIMIT_MAX;
+    }
+
+    return await Collection.find({}, projection, { limit, skip }).lean().exec();
+
+  } catch (e) {
+    GraphQLUtils.handleError("Error fetching collections", e);
+  }
+}
+
 async function resolveCollectionsForInstitution(parentNode, args, _, info) {
   try {
     await Utils.mongoConnect();
@@ -91,7 +141,9 @@ async function resolveCollectionsForInstitution(parentNode, args, _, info) {
 
 module.exports = {
   resolveInstitutionById,
+  resolveInstitutions,
   resolveInstitutionForCollection,
   resolveCollectionById,
+  resolveCollections,
   resolveCollectionsForInstitution
 };
