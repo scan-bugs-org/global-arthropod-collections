@@ -1,5 +1,6 @@
 const fs = require("fs");
 const mongoose = require("mongoose");
+const os = require("os");
 
 const UserSchema = require("./models/User");
 const TmpUploadSchema = require("./models/TmpUpload");
@@ -34,7 +35,8 @@ class Utils {
           {
               useNewUrlParser: true,
               useUnifiedTopology: true,
-              useCreateIndex: true
+              useCreateIndex: true,
+              poolSize: os.cpus().length
           }
         );
 
