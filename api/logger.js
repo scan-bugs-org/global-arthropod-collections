@@ -14,14 +14,16 @@ class Logger {
     console.log(`${ts} ${format}`, ...args);
   }
 
-  static middleware(req, res, next) {
-    const startTime = process.hrtime();
-    res.on("finish", () => {
-      const resTime = process.hrtime(startTime);
-      res.responseTime = Math.round(resTime[0] * MS_PER_SEC + resTime[1] / NS_PER_MS);
-      Logger._middleware(req, res);
-    });
-    next();
+  static middleware() {
+    return function (req, res, next) {
+      const startTime = process.hrtime();
+      res.on("finish", () => {
+        const resTime = process.hrtime(startTime);
+        res.responseTime = Math.round(resTime[0] * MS_PER_SEC + resTime[1] / NS_PER_MS);
+        Logger._middleware(req, res);
+      });
+      next();
+    };
   }
 
   static _middleware(req, res) {
@@ -32,13 +34,13 @@ class Logger {
       let color;
 
       // Server error
-      if (req.statusCode >= 500) {
+      if (res.statusCode >= 500) {
         color = `\u001b[${RED}m`;
       // Client error
-      } else if (req.statusCode >= 400) {
+      } else if (res.statusCode >= 400) {
         color = `\u001b[${YELLOW}m`;
       // Redirection
-      } else if (req.statusCode >= 300) {
+      } else if (res.statusCode >= 300) {
         color = `\u001b[${CYAN}m`;
       // OK
       } else {

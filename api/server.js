@@ -7,7 +7,7 @@ const Logger = require("./logger");
 
 const checkContentType = require("./middlewares/checkContentType");
 const defaultRoute = require("./routes/default");
-const geojsonRoute = require("./routes/geojson");
+const geoJsonRoute = require("./routes/geojson");
 const authRoute = require("./routes/auth");
 const graphQLSchema = require("./graphql/schema");
 
@@ -33,7 +33,7 @@ function runWorker() {
 
     // Configure express app
     app.disable("x-powered-by");
-    app.use(Logger.middleware);
+    app.use(Logger.middleware());
     app.use(bodyParser.json());
     if (!isDev) {
         app.use(checkContentType);
@@ -41,7 +41,7 @@ function runWorker() {
 
     // Configure routing
     app.post("/auth", authRoute);
-    app.use("/api/geojson", geojsonRoute);
+    app.use("/api/geojson", geoJsonRoute);
     app.use("/api", graphqlHTTP({
         schema: graphQLSchema,
         graphiql: isDev,
