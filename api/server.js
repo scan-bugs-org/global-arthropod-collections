@@ -3,7 +3,7 @@ const cluster = require("cluster");
 const os = require("os");
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
-const logger = require("./logger");
+const Logger = require("./logger");
 
 const checkContentType = require("./middlewares/checkContentType");
 const defaultRoute = require("./routes/default");
@@ -16,15 +16,15 @@ const isDev = process.env.NODE_ENV === "development";
 const port = process.env.PORT || 4000;
 
 function runMaster() {
-    console.log(`Master process running at PID ${process.pid}`);
+    Logger.log(`Master process running at PID ${process.pid}`);
 
     for (let i = 0; i < numCPUs; i++) {
-        console.log("Forking child process...");
         cluster.fork();
     }
+    Logger.log(`Server running on port ${port}...`);
 
     cluster.on("exit", (worker) => {
-        console.log(`Worker process ${worker.process.pid} died`);
+        Logger.log(`Worker process with PID ${worker.process.pid} died`);
     });
 }
 
@@ -33,7 +33,7 @@ function runWorker() {
 
     // Configure express app
     app.disable("x-powered-by");
-    app.use(logger(isDev ? "dev" : "prod"));
+    app.use(Logger.middleware);
     app.use(bodyParser.json());
     if (!isDev) {
         app.use(checkContentType);
@@ -49,7 +49,7 @@ function runWorker() {
     app.use("*", defaultRoute);
 
     // Run express app
-    app.listen(port, () => console.log(`[PID ${process.pid}] Server running on port ${port}...`));
+    app.listen(port, () => Logger.log(`Worker spawned with PID ${process.pid}`));
 }
 
 // Run the app

@@ -1,45 +1,63 @@
-const morgan = require("morgan");
 const strftime = require("strftime");
 
 const RED = 31;
+const GREEN = 32;
 const YELLOW = 33;
 const CYAN = 36;
-const GREEN = 32;
-const MAGENTA = 35;
 const RESET = "\u001b[0m";
+const MS_PER_SEC = 1000;
+const NS_PER_MS = 1e6;
 
-morgan.token("datetime", () => {
-  const ts = strftime("[%F %T]");
-
-  if (process.env.NODE_ENV !== "production") {
-    return `\u001b[${MAGENTA}m${ts}${RESET}`;
+class Logger {
+  static log(format, ...args) {
+    const ts = strftime("[%F %T]");
+    console.log(`${ts} ${format}`, ...args);
   }
 
-  return ts;
-});
+  static middleware(req, res, next) {
+    const startTime = process.hrtime();
+    res.on("finish", () => {
+      const resTime = process.hrtime(startTime);
+      res.responseTime = Math.round(resTime[0] * MS_PER_SEC + resTime[1] / NS_PER_MS);
+      Logger._middleware(req, res);
+    });
+    next();
+  }
 
-if (process.env.NODE_ENV !== "production") {
-  morgan.token("status", (_, res) => {
-    const status = res.statusCode;
-    let color;
+  static _middleware(req, res) {
+    let status = `${res.statusCode}`;
 
-    if (status >= 500) {
-      color = RED;
-    } else if (status >= 400) {
-      color = YELLOW;
-    } else if (status >= 300) {
-      color = CYAN;
-    } else if (status >= 200) {
-      color = GREEN;
-    } else {
-      color = 0;
+    // Color the status in dev mode
+    if (process.env.NODE_ENV !== "production") {
+      let color;
+
+      // Server error
+      if (req.statusCode >= 500) {
+        color = `\u001b[${RED}m`;
+      // Client error
+      } else if (req.statusCode >= 400) {
+        color = `\u001b[${YELLOW}m`;
+      // Redirection
+      } else if (req.statusCode >= 300) {
+        color = `\u001b[${CYAN}m`;
+      // OK
+      } else {
+        color = `\u001b[${GREEN}m`;
+      }
+      status = `${color}${status}${RESET}`;
     }
 
-    return `\u001b[${color}m${status}${RESET}`;
-  });
+    const contentLength = `${res.get("Content-Length") ? res.get("Content-Length") : "-"}`;
+
+    Logger.log(
+        "%s %s %s %s - %d ms",
+        req.method,
+        req.originalUrl,
+        status,
+        contentLength,
+        res.responseTime
+    );
+  }
 }
 
-morgan.format("dev", ":datetime :method :url :status :response-time ms - :res[content-length]");
-morgan.format("prod", ":datetime :method :url :status :res[content-length] - :response-time ms");
-
-module.exports = morgan;
+module.exports = Logger;
