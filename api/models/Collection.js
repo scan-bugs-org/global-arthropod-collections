@@ -50,6 +50,9 @@ const CollectionSchema = new mongoose.Schema({
   }
 });
 
+// Enforce unique institution + collection name
+CollectionSchema.index({ institution: 1, name: 1 }, { unique: true });
+
 CollectionSchema.methods.asGeoJson = function() {
   let name = this.name;
   if (this.institution !== null) {
