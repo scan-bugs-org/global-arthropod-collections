@@ -4,12 +4,15 @@ const mongoose = require("mongoose");
 // 2-3 hashes/sec
 const saltRounds = 12;
 
-async function setPassword(plainTextStr) {
-  return await bcrypt.hash(plainTextStr, saltRounds);
+function setPassword(plainTextStr) {
+  return bcrypt.hashSync(plainTextStr, saltRounds);
 }
 
 const UserSchema = new mongoose.Schema({
-  _id: String,
+  _id: {
+    type: String,
+    alias: "username"
+  },
   password: {
     type: String,
     required: true,
