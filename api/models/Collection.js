@@ -54,9 +54,9 @@ const CollectionSchema = new mongoose.Schema({
 CollectionSchema.index({ institution: 1, name: 1 }, { unique: true });
 
 CollectionSchema.methods.asGeoJson = function() {
-  let name = this.name;
+  let name = this.name.trim();
   if (this.institution !== null) {
-    name = `${this.institution.name} ${this.name}`;
+    name = `${this.institution.name.trim()} ${name}`;
   }
   return {
     type: "Feature",
