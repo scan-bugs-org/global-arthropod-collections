@@ -17,7 +17,7 @@ class Utils {
     }
 
     static getMongoUri() {
-        const config = Utils.getConfig();
+        const config = Utils.getConfig().database;
         let mongoUri = `mongodb://${encodeURIComponent(config.user)}:`;
         mongoUri +=  `${encodeURIComponent(config.password)}@`;
         mongoUri += `${encodeURIComponent(config.host)}:`;

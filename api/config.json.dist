@@ -1,0 +1,13 @@
+{
+  "app": {
+    "initialAdminUser": "admin",
+    "initialAdminPassword": "password"
+  },
+  "database": {
+    "user": "appUser",
+    "password": "password",
+    "host": "127.0.0.1",
+    "port": 27017,
+    "database": "globalCollections"
+  }
+}

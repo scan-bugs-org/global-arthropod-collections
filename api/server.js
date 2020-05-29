@@ -3,7 +3,9 @@ const cluster = require("cluster");
 const os = require("os");
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
+
 const Logger = require("./logger");
+const Utils = require("./Utils");
 
 const checkContentType = require("./middlewares/checkContentType");
 const defaultRoute = require("./routes/default");
@@ -28,15 +30,32 @@ function runMaster() {
     });
 }
 
-function runWorker() {
+async function runWorker() {
     const app = express();
 
     // Configure express app
     app.disable("x-powered-by");
     app.use(Logger.middleware());
     app.use(bodyParser.json());
-    if (!isDev) {
+    if (isDev) {
+        const mongo = await Utils.mongoConnect();
+        const User = mongo.model("User");
+        const config = Utils.getConfig();
+        const initialAdminUser = config.app.initialAdminUser;
+        const initialAdminPassword = config.app.initialAdminPassword;
+
+        let adminUser = await User.findById(initialAdminUser);
+        if (adminUser === null) {
+            adminUser = new User({ username: initialAdminUser, password: initialAdminPassword });
+            await adminUser.save();
+            Logger.log("Admin user created");
+        } else {
+            Logger.log("Admin user exists, skipping creation...");
+        }
+
+    } else {
         app.use(checkContentType);
+
     }
 
     // Configure routing
