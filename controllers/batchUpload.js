@@ -8,6 +8,7 @@ const os = require("os");
 const fs = require("fs");
 const path = require("path");
 const csvParser = require("csv-parser");
+const doError = require("../include/common").doError;
 
 const TMP_DIR = path.join(os.tmpdir(), "global-arthropod-collections");
 
@@ -81,74 +82,84 @@ router.get("/:uploadId", async (req, res) => {
 });
 
 router.post("/:uploadId", async (req, res) => {
-  const upload = await TmpUpload.findById(req.params.uploadId);
-  const mapping = req.body;
+  try {
+    const upload = await TmpUpload.findById(req.params.uploadId);
 
-  const results = {
-    "institutions": [],
-    "collections": []
-  };
-  const promises = [];
+    if (upload === null) {
+      doError(res, "Upload not found");
 
-  for (let i = 0; i < upload.data.rows.length; i++) {
-    const row = upload.data.rows[i];
-    const newInstitution = {};
-    const newCollection = {};
-    let dbInstitution;
-    let dbCollection;
+    } else {
+      const mapping = req.body;
 
-    Object.keys(INSTITUTION_MAPPING).forEach((k) => {
-      const dbKey = INSTITUTION_MAPPING[k];
-      const dbVal = row[mapping[k]];
+      const results = {
+        "institutions": [],
+        "collections": []
+      };
+      const promises = [];
 
-      if (dbVal) {
-        newInstitution[dbKey] = dbVal;
-      }
-    });
+      for (let i = 0; i < upload.data.rows.length; i++) {
+        const row = upload.data.rows[i];
+        const newInstitution = {};
+        const newCollection = {};
+        let dbInstitution;
+        let dbCollection;
 
-    dbInstitution = await Institution.findOneAndUpdate(
-      { $or: [{code: newInstitution.code}, {name: newInstitution.name}] },
-      newInstitution,
-      { new: true, upsert: true }
-    );
+        Object.keys(INSTITUTION_MAPPING).forEach((k) => {
+          const dbKey = INSTITUTION_MAPPING[k];
+          const dbVal = row[mapping[k]];
 
-    await dbInstitution.save();
-    results.institutions.push(dbInstitution.name);
-
-    Object.keys(COLLECTION_MAPPING).forEach((k) => {
-      const dbKey = COLLECTION_MAPPING[k];
-      let dbVal = row[mapping[k]];
-      if (dbVal) {
-        dbVal = parseField(dbVal);
-        if (dbKey.includes(".")) {
-          const parts = dbKey.split(".");
-          if (!Object.keys(newCollection).includes(parts[0])) {
-            newCollection[parts[0]] = {};
+          if (dbVal) {
+            newInstitution[dbKey] = dbVal;
           }
-          newCollection[parts[0]][parts[1]] = dbVal;
-        } else {
-          newCollection[dbKey] = dbVal;
-        }
+        });
+
+        dbInstitution = await Institution.findOneAndUpdate(
+            {$or: [{code: newInstitution.code}, {name: newInstitution.name}]},
+            newInstitution,
+            {new: true, upsert: true}
+        );
+
+        await dbInstitution.save();
+        results.institutions.push(dbInstitution.name);
+
+        Object.keys(COLLECTION_MAPPING).forEach((k) => {
+          const dbKey = COLLECTION_MAPPING[k];
+          let dbVal = row[mapping[k]];
+          if (dbVal) {
+            dbVal = parseField(dbVal);
+            if (dbKey.includes(".")) {
+              const parts = dbKey.split(".");
+              if (!Object.keys(newCollection).includes(parts[0])) {
+                newCollection[parts[0]] = {};
+              }
+              newCollection[parts[0]][parts[1]] = dbVal;
+            } else {
+              newCollection[dbKey] = dbVal;
+            }
+          }
+        });
+
+        newCollection.institution = dbInstitution._id;
+        dbCollection = await Collection.findOneAndUpdate(
+            {
+              $and: [{
+                institution: newCollection.institution,
+                $or: [{code: newCollection.code}, {name: newCollection.name}]
+              }]
+            },
+            newCollection,
+            {new: true, upsert: true}
+        );
+        promises.push(dbCollection.save());
+        results.collections.push(dbCollection.name);
       }
-    });
 
-    newCollection.institution = dbInstitution._id;
-    dbCollection = await Collection.findOneAndUpdate(
-      {
-        $and: [{
-          institution: newCollection.institution,
-          $or: [{code: newCollection.code}, {name: newCollection.name}]
-        }]
-      },
-      newCollection,
-      { new: true, upsert: true }
-    );
-    promises.push(dbCollection.save());
-    results.collections.push(dbCollection.name);
+      await Promise.all(promises);
+      await TmpUpload.deleteOne({_id: req.params.uploadId});
+    }
+  } catch (e) {
+    doError(res, e.message);
   }
-
-  promises.push(TmpUpload.deleteOne({ _id: req.params.uploadId }));
-  await Promise.all(promises);
 
   req.session.results = results;
   res.redirect(303, `./complete/${req.params.uploadId}`)
