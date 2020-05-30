@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Container from "react-bootstrap/Container";
 
 class Main extends React.Component {
     render() {
         return (
-            <div>
+            <Container>
                 TEST1
-            </div>
+            </Container>
         );
     }
 }
