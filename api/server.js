@@ -37,6 +37,7 @@ async function runWorker() {
     app.disable("x-powered-by");
     app.use(Logger.middleware());
     app.use(bodyParser.json());
+    // Create the initialAdminUser in development env
     if (isDev) {
         const mongo = await Utils.mongoConnect();
         const User = mongo.model("User");
@@ -46,7 +47,10 @@ async function runWorker() {
 
         let adminUser = await User.findById(initialAdminUser);
         if (adminUser === null) {
-            adminUser = new User({ username: initialAdminUser, password: initialAdminPassword });
+            adminUser = new User({
+                username: initialAdminUser,
+                password: initialAdminPassword
+            });
             await adminUser.save();
             Logger.log("Admin user created");
         } else {
@@ -55,7 +59,6 @@ async function runWorker() {
 
     } else {
         app.use(checkContentType);
-
     }
 
     // Configure routing

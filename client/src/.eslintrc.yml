@@ -1,0 +1,7 @@
+extends:
+  - "../../.eslintrc.yml"
+  - "plugin:react/recommended"
+env:
+  browser: true
+parserOptions:
+  sourceType: module
