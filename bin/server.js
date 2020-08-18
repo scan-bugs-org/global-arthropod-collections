@@ -54,6 +54,7 @@ User.findById("admin").then((user) => {
 
 // Configure app
 const app = express();
+app.disable("x-powered-by");
 app.use(logger(isDev ? "dev" : "tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
