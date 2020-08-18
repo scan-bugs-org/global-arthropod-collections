@@ -1,0 +1,22 @@
+env:
+  commonjs: true
+  es2020: true
+  node: true
+extends: 'eslint:recommended'
+parserOptions:
+  ecmaVersion: 11
+rules:
+  indent:
+    - error
+    - 4
+  linebreak-style:
+    - warn
+    - unix
+  no-empty: warn
+  no-unused-vars: warn
+  quotes:
+    - warn
+    - double
+  semi:
+    - error
+    - always
