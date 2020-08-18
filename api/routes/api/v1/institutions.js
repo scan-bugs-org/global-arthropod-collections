@@ -93,7 +93,9 @@ async function deleteIdRoute(req, res) {
     const connection = await database.connect();
     const Institution = connection.model("Institution");
 
-    const result = await Institution.findOneAndDelete(req.params.id).exec();
+    const result = await Institution.findOneAndDelete({ _id: req.params.id })
+        .select(DEFAULT_PROJECTION)
+        .exec();
 
     if (result) {
         return res.json(result);
