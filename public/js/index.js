@@ -48,8 +48,8 @@ function loadMap() {
     preferCanvas: true,
     bounceAtZoomLimits: false,
     inertia: false,
-    center: [0, 0],
-    zoom: minZoom
+    center: [31, -20],
+    zoom: 3
   });
   map.setMaxBounds([[-90, -180], [90, 180]]);
   const wikiTiles = new L.TileLayer(
