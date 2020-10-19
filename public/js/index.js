@@ -6,7 +6,7 @@ const mapAttrib = `
 `;
 // UPDATE THIS IN PRODUCTION
 const mapboxToken = "pk.eyJ1IjoiZXZpbmR1bm4iLCJhIjoiY2thY3M3cXMwMWM4bzJ1cnliNnlkNHV2MiJ9.Twln5aH0wWGw9iKJoPE2Kg";
-const mapboxTilesUrl = `https://tiles.bug-collections.org/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=${mapboxToken}`;
+const mapboxTilesUrl = `https://tiles.bug-collections.org/v4/mapbox.mapbox-streets-v8/{z}/{x}/{y}.png?access_token=${mapboxToken}`;
 const mapDataUrl = "./geojson";
 const minZoom = 2;
 const maxZoom = 16;
