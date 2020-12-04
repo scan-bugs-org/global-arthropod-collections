@@ -18,21 +18,9 @@ export interface Institution extends Document {
     readonly name: string;
 }
 
-async function deleteAssociatedCollections() {
-    try {
-        await this.model("Collection").deleteMany({ institution: this._id });
-    } catch (e) {
-        console.error(`Error deleting institution: ${e.message}`);
-        throw e;
-    }
-}
-
 function institutionModelFactory(connection: Connection) {
     return connection.model('Institution', InstitutionSchema);
 }
-
-InstitutionSchema.pre("remove", deleteAssociatedCollections);
-InstitutionSchema.pre("deleteOne", deleteAssociatedCollections);
 
 export const INSTITUTION_PROVIDER_ID = "INSTITUTION_PROVIDER";
 export const InstitutionProvider: Provider = {

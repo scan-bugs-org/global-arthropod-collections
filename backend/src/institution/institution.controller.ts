@@ -1,7 +1,7 @@
 import {
     Body,
     Controller, Delete,
-    Get,
+    Get, HttpCode, HttpStatus,
     NotFoundException,
     Param, Patch, Post,
 } from '@nestjs/common';
@@ -65,6 +65,7 @@ export class InstitutionController {
     }
 
     @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
     async deleteByID(@Param('id') id: string): Promise<void> {
         const deletedSuccess = await this.institutionService.deleteByID(id);
         if (!deletedSuccess) {

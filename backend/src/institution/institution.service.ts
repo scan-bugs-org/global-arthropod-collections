@@ -4,6 +4,10 @@ import {
     Institution,
     INSTITUTION_PROVIDER_ID,
 } from '../database/models/Institution';
+import {
+    Collection,
+    COLLECTION_PROVIDER_ID,
+} from '../database/models/Collection';
 
 type InstitutionData = {
     code: string;
@@ -14,7 +18,9 @@ type InstitutionData = {
 export class InstitutionService {
     constructor(
         @Inject(INSTITUTION_PROVIDER_ID)
-        private readonly institution: Model<Institution>) { }
+        private readonly institution: Model<Institution>,
+        @Inject(COLLECTION_PROVIDER_ID)
+        private readonly collection: Model<Collection>) { }
 
     async findAll(): Promise<Institution[]> {
         return this.institution.find().exec();
@@ -37,6 +43,12 @@ export class InstitutionService {
 
     async deleteByID(id: string): Promise<boolean> {
         const query = await this.institution.deleteOne({ _id: id }).exec();
-        return query.deletedCount === 1;
+        const deleted = query.deletedCount;
+
+        if (deleted === 1) {
+            await this.collection.deleteMany({ institution: id });
+        }
+
+        return deleted === 1;
     }
 }
