@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
     IsBoolean, IsDateString, IsHexadecimal,
     IsNumber, IsObject,
@@ -60,7 +60,7 @@ export class CollectionInputDto {
 
     @ApiProperty({ required: false })
     @IsOptional()
-    @Length(24)
+    @Length(24, 24)
     @IsHexadecimal()
     institution: string;
 
@@ -108,3 +108,5 @@ export class CollectionInputDto {
     @Type(() => CollectionGbifInputDto)
     gbif: CollectionGbifInputDto;
 }
+
+export class CollectionUpdateDto extends PartialType(CollectionInputDto) {}

@@ -2,10 +2,10 @@ import {
     Body,
     Controller,
     Get, HttpCode,
-    HttpStatus,
-    Optional, ParseArrayPipe,
+    HttpStatus, NotFoundException,
+    Optional, Param, ParseArrayPipe, Patch,
     Post,
-    Query, UsePipes,
+    Query,
 } from '@nestjs/common';
 import {
     ApiBody,
@@ -15,7 +15,10 @@ import {
 } from '@nestjs/swagger';
 import { CollectionOutputDto } from './dto/collection.output.dto';
 import { CollectionService } from './collection.service';
-import { CollectionInputDto } from './dto/collection.input.dto';
+import {
+    CollectionInputDto,
+    CollectionUpdateDto,
+} from './dto/collection.input.dto';
 import { CheckInstitutionPipe } from './check-institution.pipe';
 
 @Controller('collections')
@@ -48,5 +51,26 @@ export class CollectionController {
 
         const result = await this.collection.create(collectionData);
         return result.map((r) => new CollectionOutputDto(r.toJSON()));
+    }
+
+    @Get(':id')
+    @ApiResponse({ status: HttpStatus.OK, type: CollectionOutputDto })
+    async findByID(@Param('id') id: string): Promise<CollectionOutputDto> {
+        const collection = await this.collection.findByID(id);
+        if (!collection) {
+            throw new NotFoundException();
+        }
+        return new CollectionOutputDto(collection.toJSON());
+    }
+
+    @Patch(':id')
+    async updateByID(
+        @Param('id') id: string,
+        @Body(CheckInstitutionPipe) collectionData: CollectionUpdateDto): Promise<CollectionOutputDto> {
+        const collection = await this.collection.updateByID(id, collectionData);
+        if (!collection) {
+            throw new NotFoundException();
+        }
+        return new CollectionOutputDto(collection.toJSON());
     }
 }

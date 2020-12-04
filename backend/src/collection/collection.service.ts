@@ -57,15 +57,25 @@ export class CollectionService {
         @Inject(COLLECTION_PROVIDER_ID) private readonly collection: Model<Collection>) { }
 
     async findAll(): Promise<Collection[]> {
-        return this.collection.find();
+        return this.collection.find().exec();
     }
 
     async findByInstitution(institutionID: string): Promise<Collection[]> {
-        return this.collection.find({ institution: institutionID });
+        return this.collection.find({ institution: institutionID }).exec();
     }
 
     async create(collectionData: CollectionData[]): Promise<Collection[]> {
         collectionData = collectionData.map((c) => Object.assign({}, collectionDefaults, c));
         return this.collection.insertMany(collectionData as any[]) as Promise<Collection[]>;
+    }
+
+    async findByID(id: string): Promise<Collection> {
+        return this.collection.findById(id).exec();
+    }
+
+    async updateByID(id: string, updates: Partial<Collection>): Promise<Collection> {
+        return this.collection.findOneAndUpdate(
+            { _id: id }, updates, { returnOriginal: false }
+        ).exec();
     }
 }

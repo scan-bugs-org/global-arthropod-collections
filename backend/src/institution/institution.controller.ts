@@ -66,14 +66,10 @@ export class InstitutionController {
     async updateByID(
         @Param('id') id: string,
         @Body() institutionData: InstitutionInputDto): Promise<InstitutionOutputDto> {
-        const institution = await this.institutionService.findByID(id);
-        if (!institution) {
+        const updated = await this.institutionService.updateByID(id, institutionData);
+        if (!updated) {
             throw new NotFoundException();
         }
-
-        const updates = Object.assign(institution, institutionData);
-        const updated = await this.institutionService.updateByID(id, updates);
-
         return new InstitutionOutputDto(updated.toJSON());
     }
 

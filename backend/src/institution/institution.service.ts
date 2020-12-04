@@ -31,7 +31,11 @@ export class InstitutionService {
     }
 
     async updateByID(id: string, updates: Partial<Institution>): Promise<Institution> {
-        return this.institution.findOneAndUpdate({ _id: id }, updates).exec();
+        return this.institution.findOneAndUpdate(
+            { _id: id },
+            updates,
+            { returnOriginal: false }
+        ).exec();
     }
 
     async create(institution: InstitutionData | InstitutionData[]): Promise<Institution | Institution[]> {

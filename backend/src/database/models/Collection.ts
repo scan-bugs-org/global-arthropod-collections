@@ -67,7 +67,7 @@ export interface Collection extends Document {
     readonly inIdigbio: boolean;
     readonly scan: {
         readonly exists: boolean;
-        readonly date: Date;
+        readonly scanType: string;
     },
     readonly gbif: {
         readonly exists: boolean,

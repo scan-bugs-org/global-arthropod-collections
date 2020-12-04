@@ -17,19 +17,29 @@ export class CheckInstitutionPipe implements PipeTransform {
         @Inject(INSTITUTION_PROVIDER_ID)
         private readonly institution: Model<Institution>) { }
 
-    async transform(values: CollectionInputDto[], metadata: ArgumentMetadata) {
+    async transform(values: CollectionInputDto | CollectionInputDto[], metadata: ArgumentMetadata) {
+        const origValues = values;
+
         if (metadata.type !== 'body') {
-            return values;
+            return origValues;
+        }
+
+        if (!Array.isArray(values)) {
+            values = [{ ...values }];
         }
 
         for (const value of values) {
             const iid = value.institution;
+            if (!iid) {
+                continue;
+            }
+
             const institution = await this.institution.findById(iid, { _id: 1 }).exec();
             if (!institution) {
                 throw new BadRequestException(`No institution with id ${iid}`);
             }
         }
 
-        return values;
+        return origValues;
     }
 }
