@@ -1,7 +1,8 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
+import { ClassSerializerInterceptor } from '@nestjs/common';
 
 async function bootstrap() {
     // Basic setup
@@ -19,6 +20,16 @@ async function bootstrap() {
     // Start server
     SwaggerModule.setup('docs', app, swaggerDoc);
     app.use(helmet());
+    app.useGlobalInterceptors(
+        new ClassSerializerInterceptor(
+            app.get(Reflector),
+            {
+                enableImplicitConversion: true,
+                excludeExtraneousValues: true,
+                strategy: "excludeAll"
+            }
+        )
+    );
     await app.listen(port);
 }
 
