@@ -1,53 +1,54 @@
 import { Connection, Schema, Document } from 'mongoose';
 import { Provider } from '@nestjs/common';
 import { DatabaseService } from '../database.service';
+
 const SchemaTypes = Schema.Types;
 
 const CollectionSchema = new Schema({
-  code: {
-    type: String
-  },
-  institution: {
-    type: SchemaTypes.ObjectId,
-    ref: "Institution"
-  },
-  name: {
-    type: String,
-    required: true,
-    default: "Entomology Collection"
-  },
-  size: {
-    type: Number,
-    required: true,
-    default: 0
-  },
-  location: {
-    country: String,
-    state: String,
-    lat: {
-      type: Number,
-      required: true
+    code: {
+        type: String,
     },
-    lng: {
-      type: Number,
-      required: true
-    }
-  },
-  tier: {
-    type: Number,
-    required: true,
-    default: 4
-  },
-  url: String,
-  inIdigbio: Boolean,
-  scan: {
-    exists: Boolean,
-    scanType: String
-  },
-  gbif: {
-    exists: Boolean,
-    date: Date
-  }
+    institution: {
+        type: SchemaTypes.ObjectId,
+        ref: 'Institution',
+    },
+    name: {
+        type: String,
+        required: true,
+        default: 'Entomology Collection',
+    },
+    size: {
+        type: Number,
+        required: true,
+        default: 0,
+    },
+    location: {
+        country: String,
+        state: String,
+        lat: {
+            type: Number,
+            required: true,
+        },
+        lng: {
+            type: Number,
+            required: true,
+        },
+    },
+    tier: {
+        type: Number,
+        required: true,
+        default: 4,
+    },
+    url: String,
+    inIdigbio: Boolean,
+    scan: {
+        exists: Boolean,
+        scanType: String,
+    },
+    gbif: {
+        exists: Boolean,
+        date: Date,
+    },
 });
 
 export interface Collection extends Document {
@@ -92,29 +93,29 @@ function collectionModelFactory(connection: Connection) {
     return connection.model('Collection', CollectionSchema);
 }
 
-export const COLLECTION_PROVIDER_ID = "COLLECTION_MODEL";
+export const COLLECTION_PROVIDER_ID = 'COLLECTION_MODEL';
 export const CollectionProvider: Provider = {
     provide: COLLECTION_PROVIDER_ID,
     useFactory: collectionModelFactory,
-    inject: [DatabaseService.PROVIDER_ID]
-}
+    inject: [DatabaseService.PROVIDER_ID],
+};
 
 CollectionSchema.methods.asGeoJson = function(): GeoJsonCollection {
-  let name = this.name;
-  if (this.institution !== null) {
-    name = `${this.institution.name} ${this.name}`;
-  }
-  return {
-    type: "Feature",
-    geometry: {
-      type: "Point",
-      coordinates: [this.location.lng, this.location.lat]
-    },
-    properties: {
-      id: this._id,
-      name: name,
-      url: this.url,
-      tier: this.tier
+    let name = this.name;
+    if (this.institution !== null) {
+        name = `${ this.institution.name } ${ this.name }`;
     }
-  };
+    return {
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [this.location.lng, this.location.lat],
+        },
+        properties: {
+            id: this._id,
+            name: name,
+            url: this.url,
+            tier: this.tier,
+        },
+    };
 };

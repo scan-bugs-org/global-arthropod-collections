@@ -5,6 +5,52 @@ import {
 } from '../database/models/Collection';
 import { Model } from 'mongoose';
 
+interface CollectionData {
+    code?: string;
+    institution?: string;
+    name?: string;
+    size?: number;
+    location: {
+        country?: string;
+        state?: string;
+        lat: number;
+        lng: number;
+    },
+    tier?: number;
+    url?: string;
+    inIdigbio?: boolean;
+    scan?: {
+        exists?: boolean;
+        scanType?: string;
+    };
+    gbif: {
+        exists?: boolean;
+        date?: Date;
+    }
+}
+
+const collectionDefaults = {
+    name: 'Entomology Collection',
+    institution: null,
+    code: null,
+    size: 0,
+    location: {
+        country: null,
+        state: null
+    },
+    tier: 4,
+    url: null,
+    inIdigbio: null,
+    scan: {
+        exists: null,
+        scanType: null,
+    },
+    gbif: {
+        exists: null,
+        date: null
+    }
+};
+
 @Injectable()
 export class CollectionService {
     constructor(
@@ -16,5 +62,10 @@ export class CollectionService {
 
     async findByInstitution(institutionID: string): Promise<Collection[]> {
         return this.collection.find({ institution: institutionID });
+    }
+
+    async create(collectionData: CollectionData[]): Promise<Collection[]> {
+        collectionData = collectionData.map((c) => Object.assign({}, collectionDefaults, c));
+        return this.collection.insertMany(collectionData as any[]) as Promise<Collection[]>;
     }
 }

@@ -2,12 +2,13 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
-import { ClassSerializerInterceptor } from '@nestjs/common';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+
+const CURRENT_VERSION = "v1";
 
 async function bootstrap() {
     // Basic setup
     const port = parseInt(process.env.PORT) || 8080;
-    const app = await NestFactory.create(AppModule);
 
     // Swagger UI
     const swaggerOpts = new DocumentBuilder()
@@ -15,11 +16,12 @@ async function bootstrap() {
         .setVersion('1.0')
         .build();
 
-    const swaggerDoc = SwaggerModule.createDocument(app, swaggerOpts);
-
-    // Start server
-    SwaggerModule.setup('docs', app, swaggerDoc);
+    // Define the app
+    const app = await NestFactory.create(AppModule);
+    app.setGlobalPrefix(`api/${CURRENT_VERSION}`)
     app.use(helmet());
+
+    // Set up app globals
     app.useGlobalInterceptors(
         new ClassSerializerInterceptor(
             app.get(Reflector),
@@ -30,6 +32,21 @@ async function bootstrap() {
             }
         )
     );
+    app.useGlobalPipes(
+        new ValidationPipe({
+            whitelist: true,
+            transform: true,
+            transformOptions: {
+                enableImplicitConversion: true
+            }
+        })
+    );
+
+    // Set up docs
+    const swaggerDoc = SwaggerModule.createDocument(app, swaggerOpts);
+    SwaggerModule.setup('docs', app, swaggerDoc);
+
+    // Start app
     await app.listen(port);
 }
 

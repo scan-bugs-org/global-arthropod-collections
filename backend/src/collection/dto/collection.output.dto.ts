@@ -61,7 +61,7 @@ export class CollectionOutputDto {
     @ApiProperty()
     @Expose()
     @Type(() => ObjectId)
-    @Transform((id: typeof ObjectId) => id.toString(), { toPlainOnly: true })
+    @Transform((id: typeof ObjectId) => id ? id.toString() : null, { toPlainOnly: true })
     institution: string;
 
     @ApiProperty()
