@@ -24,7 +24,7 @@ export class CheckInstitutionPipe implements PipeTransform {
 
         for (const value of values) {
             const iid = value.institution;
-            const institution = await this.institution.findById(iid).exec();
+            const institution = await this.institution.findById(iid, { _id: 1 }).exec();
             if (!institution) {
                 throw new BadRequestException(`No institution with id ${iid}`);
             }
