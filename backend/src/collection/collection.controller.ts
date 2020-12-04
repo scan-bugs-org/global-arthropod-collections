@@ -1,6 +1,6 @@
 import {
     Body,
-    Controller,
+    Controller, Delete,
     Get, HttpCode,
     HttpStatus, NotFoundException,
     Optional, Param, ParseArrayPipe, Patch,
@@ -72,5 +72,14 @@ export class CollectionController {
             throw new NotFoundException();
         }
         return new CollectionOutputDto(collection.toJSON());
+    }
+
+    @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async deleteByID(@Param('id') id: string): Promise<void> {
+        const deleted = await this.collection.deleteByID(id);
+        if (!deleted) {
+            throw new NotFoundException();
+        }
     }
 }

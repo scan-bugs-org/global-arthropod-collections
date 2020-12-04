@@ -78,4 +78,9 @@ export class CollectionService {
             { _id: id }, updates, { returnOriginal: false }
         ).exec();
     }
+
+    async deleteByID(id: string): Promise<boolean> {
+        const query = await this.collection.deleteOne({ _id: id }).exec();
+        return query.deletedCount === 1;
+    }
 }
