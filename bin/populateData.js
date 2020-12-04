@@ -5,8 +5,8 @@ const path = require("path");
 const Institution = require("../include/database").Institution;
 const Collection = require("../include/database").Collection;
 
-// const fileName = path.resolve(__dirname, "..", "data", "source.csv");
-const fileName = path.resolve(__dirname, "..", "data", "austrasia.csv");
+const fileName = path.resolve(__dirname, "..", "data", "source.csv");
+// const fileName = path.resolve(__dirname, "..", "data", "austrasia.csv");
 const rows = [];
 
 function strToNull(str) {
