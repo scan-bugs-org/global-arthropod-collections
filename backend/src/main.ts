@@ -9,12 +9,7 @@ const CURRENT_VERSION = "v1";
 async function bootstrap() {
     // Basic setup
     const port = parseInt(process.env.PORT) || 8080;
-
-    // Swagger UI
-    const swaggerOpts = new DocumentBuilder()
-        .setTitle('Global arthropod collections')
-        .setVersion('1.0')
-        .build();
+    const env = process.env.NODE_ENV;
 
     // Define the app
     const app = await NestFactory.create(AppModule);
@@ -43,8 +38,15 @@ async function bootstrap() {
     );
 
     // Set up docs
-    const swaggerDoc = SwaggerModule.createDocument(app, swaggerOpts);
-    SwaggerModule.setup('docs', app, swaggerDoc);
+    if (env === 'development') {
+        const swaggerOpts = new DocumentBuilder()
+            .setTitle('Global arthropod collections')
+            .setVersion('1.0')
+            .build();
+
+        const swaggerDoc = SwaggerModule.createDocument(app, swaggerOpts);
+        SwaggerModule.setup('docs', app, swaggerDoc);
+    }
 
     // Start app
     await app.listen(port);
