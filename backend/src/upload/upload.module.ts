@@ -9,5 +9,4 @@ import { CsvFileInterceptor } from './csv-file.interceptor';
     providers: [UploadService, CsvFileInterceptor],
     controllers: [UploadController],
 })
-export class UploadModule {
-}
+export class UploadModule { }
