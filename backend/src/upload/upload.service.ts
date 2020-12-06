@@ -17,7 +17,6 @@ import {
 } from '../database/models/Collection';
 import { CollectionInputDto } from '../collection/dto/collection.input.dto';
 import { MapUploadOutputDto } from './dto/map-upload.output.dto';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UploadService {
@@ -69,25 +68,25 @@ export class UploadService {
 
             const collection: CollectionInputDto = {
                 name: row[mappings.collectionName] as string,
-                code: row[mappings.collectionName] as string,
+                code: row[mappings.collectionName] as string || null,
                 institution: iid,
-                size: row[mappings.size] as number,
+                size: row[mappings.size] as number || 0,
                 location: {
                     country: row[mappings.country] as string,
                     state: row[mappings.state] as string,
                     lat: row[mappings.lat] as number,
                     lng: row[mappings.lng] as number
                 },
-                tier: row[mappings.tier] as number,
-                url: row[mappings.url] as string,
-                inIdigbio: row[mappings.inIdigbio] as boolean,
+                tier: row[mappings.tier] as number || 4,
+                url: row[mappings.url] as string || null,
+                inIdigbio: row[mappings.inIdigbio] as boolean || null,
                 scan: {
-                    exists: row[mappings.scanExists] as boolean,
-                    scanType: row[mappings.scanType] as string
+                    exists: row[mappings.scanExists] as boolean || null,
+                    scanType: row[mappings.scanType] as string || null
                 },
                 gbif: {
-                    exists: row[mappings.gbifExists] as boolean,
-                    date: row[mappings.gbifDate] as Date
+                    exists: row[mappings.gbifExists] as boolean || null,
+                    date: row[mappings.gbifDate] as Date || null
                 }
             };
             newCollections.push(collection);
