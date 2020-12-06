@@ -14,12 +14,13 @@
         </button>
     </h1>
     <div *ngIf="isEditing else notEditing" [formGroup]="form">
-        <mat-form-field size="20">
+        <mat-form-field
+            [ngStyle]="{ 'width.ex': formControlName.value.length + 5 }"
+        >
             <mat-label>Institution name</mat-label>
             <input
                 matInput
                 [formControl]="formControlName"
-                size="{{ formControlName.value.length + 5 }}"
             >
         </mat-form-field>
         <mat-form-field>
