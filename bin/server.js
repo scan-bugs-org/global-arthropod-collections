@@ -16,7 +16,7 @@ const User = database.User;
 const getSessionKey = require("../include/serverSessionKey");
 const authMiddleware = require("../include/common").protectRoute;
 
-const PORT = 8080;
+const PORT = parseInt(process.env.PORT) || 8080;
 const SESSION_KEY_PATH = path.resolve(__dirname, "..", "data", ".session");
 const isDev = process.env.NODE_ENV === "development";
 
