@@ -1,6 +1,7 @@
 import { Connection, Schema, Document } from 'mongoose';
 import { Provider } from '@nestjs/common';
-import { DatabaseService } from '../database.service';
+import { DatabaseConfigService } from '../database-config.service';
+import { DATABASE_PROVIDER_ID } from '../database.provider';
 
 const InstitutionSchema = new Schema({
   code: {
@@ -26,5 +27,5 @@ export const INSTITUTION_PROVIDER_ID = "INSTITUTION_PROVIDER";
 export const InstitutionProvider: Provider = {
     provide: INSTITUTION_PROVIDER_ID,
     useFactory: institutionModelFactory,
-    inject: [DatabaseService.PROVIDER_ID]
+    inject: [DATABASE_PROVIDER_ID]
 }

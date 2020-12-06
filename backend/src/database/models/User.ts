@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt';
 import { Schema, Document, Connection } from 'mongoose';
 import { Provider } from '@nestjs/common';
-import { DatabaseService } from '../database.service';
+import { DatabaseConfigService } from '../database-config.service';
+import { DATABASE_PROVIDER_ID } from '../database.provider';
 
 // 2-3 hashes/sec
 const saltRounds = 12;
@@ -37,7 +38,7 @@ export const USER_PROVIDER_ID = "USER_PROVIDER";
 export const UserProvider: Provider = {
     provide: USER_PROVIDER_ID,
     useFactory: userModelFactory,
-    inject: [DatabaseService.PROVIDER_ID]
+    inject: [DATABASE_PROVIDER_ID]
 }
 
 UserSchema.methods.verifyPassword = verifyPassword;

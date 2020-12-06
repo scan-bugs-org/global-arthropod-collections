@@ -1,6 +1,7 @@
 import { Connection, Schema, Document } from 'mongoose';
 import { Provider } from '@nestjs/common';
-import { DatabaseService } from '../database.service';
+import { DatabaseConfigService } from '../database-config.service';
+import { DATABASE_PROVIDER_ID } from '../database.provider';
 
 const SchemaTypes = Schema.Types;
 
@@ -97,7 +98,7 @@ export const COLLECTION_PROVIDER_ID = 'COLLECTION_MODEL';
 export const CollectionProvider: Provider = {
     provide: COLLECTION_PROVIDER_ID,
     useFactory: collectionModelFactory,
-    inject: [DatabaseService.PROVIDER_ID],
+    inject: [DATABASE_PROVIDER_ID],
 };
 
 CollectionSchema.methods.asGeoJson = function(): GeoJsonCollection {

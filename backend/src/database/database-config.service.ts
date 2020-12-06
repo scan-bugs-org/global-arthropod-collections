@@ -1,7 +1,6 @@
-import { Injectable, Provider } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import path from 'path';
 import fs from 'fs';
-import { Connection, createConnection } from 'mongoose';
 
 interface MongoConfig {
     user: string;
@@ -11,21 +10,8 @@ interface MongoConfig {
     database: string;
 }
 
-async function databaseConnectionFactory(database: DatabaseService): Promise<Connection> {
-    return createConnection(
-        database.mongoUri(),
-        {
-            useCreateIndex: true,
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false
-        }
-    );
-}
-
 @Injectable()
-export class DatabaseService {
-    public static readonly PROVIDER_ID = 'DATABASE_PROVIDER';
+export class DatabaseConfigService {
     private readonly _mongoConfig: MongoConfig;
 
     constructor() {
@@ -40,13 +26,5 @@ export class DatabaseService {
         uri += `${this._mongoConfig.host}:${this._mongoConfig.port}/`;
         uri += `${this._mongoConfig.database}`;
         return uri;
-    }
-
-    static getProvider(): Provider {
-        return {
-            provide: DatabaseService.PROVIDER_ID,
-            useFactory: databaseConnectionFactory,
-            inject: [DatabaseService]
-        };
     }
 }
