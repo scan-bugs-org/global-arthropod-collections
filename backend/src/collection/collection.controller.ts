@@ -5,7 +5,7 @@ import {
     HttpStatus, NotFoundException,
     Optional, Param, ParseArrayPipe, Patch,
     Post,
-    Query,
+    Query, UseInterceptors,
 } from '@nestjs/common';
 import {
     ApiBody,
@@ -20,9 +20,11 @@ import {
     CollectionUpdateDto,
 } from './dto/collection.input.dto';
 import { CheckInstitutionPipe } from './check-institution.pipe';
+import { ObjectIdInterceptor } from '../common/object-id.interceptor';
 
 @Controller('collections')
 @ApiTags('Collection')
+@UseInterceptors(ObjectIdInterceptor)
 export class CollectionController {
     constructor(private readonly collection: CollectionService) { }
 

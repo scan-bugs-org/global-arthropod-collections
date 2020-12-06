@@ -4,6 +4,7 @@ import {
     TmpUpload,
 } from '../database/models/TmpUpload';
 import { Model } from 'mongoose';
+import { HeaderMappingInputDto } from './dto/header-mapping.input.dto';
 
 @Injectable()
 export class UploadService {
@@ -23,5 +24,9 @@ export class UploadService {
     async deleteByID(id: string): Promise<boolean> {
         const result = await this.upload.deleteOne({ _id: id }).exec();
         return result.deletedCount === 1;
+    }
+
+    async mapUpload(mappings: HeaderMappingInputDto): Promise<boolean> {
+        return true;
     }
 }

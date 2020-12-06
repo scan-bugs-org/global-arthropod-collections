@@ -3,16 +3,18 @@ import {
     Controller, Delete,
     Get, HttpCode, HttpStatus,
     NotFoundException,
-    Param, Patch, Post,
+    Param, Patch, Post, UseInterceptors,
 } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags, getSchemaPath } from '@nestjs/swagger';
 import { InstitutionService } from './institution.service';
 import { InstitutionOutputDto } from './dto/institution.output.dto';
 import { InstitutionInputDto } from './dto/institution.input.dto';
 import { CollectionOutputDto } from '../collection/dto/collection.output.dto';
+import { ObjectIdInterceptor } from '../common/object-id.interceptor';
 
 @Controller('institutions')
 @ApiTags('Institution')
+@UseInterceptors(ObjectIdInterceptor)
 export class InstitutionController {
 
     constructor(private readonly institutionService: InstitutionService) { }

@@ -1,4 +1,5 @@
 import {
+    BadRequestException,
     Body,
     Controller,
     HttpCode, HttpStatus, Logger, Param,
@@ -21,6 +22,7 @@ import { UploadInputDto } from './dto/upload.input.dto';
 import { CsvFileInterceptor, CsvFile } from './csv-file.interceptor';
 import { HeaderMappingInputDto } from './dto/header-mapping.input.dto';
 import { HeaderMappingOutputDto } from './dto/header-mapping.output.dto';
+import { ObjectIdInterceptor } from '../common/object-id.interceptor';
 
 const FILE_UPLOAD_FIELD = 'file';
 const FILE_TMP_DIR = os.tmpdir();
@@ -48,12 +50,14 @@ export class UploadController {
     @HttpCode(HttpStatus.OK)
     @ApiBody({ type: HeaderMappingInputDto })
     @ApiOkResponse({ type: HeaderMappingOutputDto })
+    @UseInterceptors(ObjectIdInterceptor)
     async persistUpload(
         @Param('id') id: string,
-        @Body('headerMap') headerMap: HeaderMappingInputDto): Promise<HeaderMappingOutputDto> {
+        @Body() mappingData: HeaderMappingInputDto): Promise<HeaderMappingOutputDto> {
 
-        const uploadKeys: string[] = Object.keys(headerMap);
         const tmpUpload = await this.uploadService.findByID(id);
+        const institutions = [];
+        const collections = [];
 
 
 

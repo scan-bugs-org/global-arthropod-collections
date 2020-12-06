@@ -3,9 +3,13 @@ import { CollectionService } from './collection.service';
 import { CollectionController } from './collection.controller';
 import { DatabaseModule } from '../database/database.module';
 import { CheckInstitutionPipe } from './check-institution.pipe';
+import { CommonModule } from '../common/common.module';
 
 @Module({
-    imports: [DatabaseModule],
+    imports: [
+        CommonModule,
+        DatabaseModule
+    ],
     providers: [
         CollectionService,
         CheckInstitutionPipe
