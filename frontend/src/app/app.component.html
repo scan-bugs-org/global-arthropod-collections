@@ -1,10 +1,15 @@
 <mat-toolbar>
     <span>Map editor</span>
     <span>
-        <a routerLink="">Institutions</a>
+        <a routerLink="/">Institutions</a>
     </span>
     <span>
-        <a routerLink="" [queryParams]="{ tab: 'collections' }">Collections</a>
+        <a
+            routerLink="/"
+            [queryParams]="{ tab: 1 }"
+        >
+            Collections
+        </a>
     </span>
 </mat-toolbar>
 <div id="mainContent">
