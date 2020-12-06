@@ -2,7 +2,7 @@ import {
     BadRequestException,
     Body,
     Controller,
-    HttpCode, HttpStatus, Logger, Param,
+    HttpCode, HttpStatus, Logger, NotFoundException, Param,
     Post,
     UploadedFile,
     UseInterceptors,
@@ -56,10 +56,17 @@ export class UploadController {
         @Body() mappingData: HeaderMappingInputDto): Promise<HeaderMappingOutputDto> {
 
         const tmpUpload = await this.uploadService.findByID(id);
+
+        if (!tmpUpload) {
+            throw new NotFoundException();
+        }
+
         const institutions = [];
         const collections = [];
 
+        for (const row of tmpUpload.data) {
 
+        }
 
         return null;
     }

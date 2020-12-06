@@ -1,15 +1,22 @@
 import { Schema, Document, Connection } from 'mongoose';
 import { Provider } from '@nestjs/common';
-import { DatabaseConfigService } from '../database-config.service';
 import { DATABASE_PROVIDER_ID } from '../database.provider';
 
 
 const TmpUploadSchema = new Schema({
-  data: Object,
+    headers: {
+        type: [String],
+        required: true
+    },
+    data: {
+        type: [Object],
+        required: true
+    }
 });
 
 export interface TmpUpload extends Document {
-    data: Record<string, unknown>;
+    headers: string[];
+    data: Record<string, unknown>[];
 }
 
 function uploadModelFactory(connection: Connection) {

@@ -5,6 +5,7 @@ import {
 } from '../database/models/TmpUpload';
 import { Model } from 'mongoose';
 import { HeaderMappingInputDto } from './dto/header-mapping.input.dto';
+import { CsvFile } from './csv-file.interceptor';
 
 @Injectable()
 export class UploadService {
@@ -12,8 +13,8 @@ export class UploadService {
         @Inject(TMP_UPLOAD_PROVIDER_ID)
         private readonly upload: Model<TmpUpload>) { }
 
-    async create(data: Record<string, unknown>): Promise<string> {
-        const upload = await this.upload.create({ data });
+    async create(data: CsvFile): Promise<string> {
+        const upload = await this.upload.create(data);
         return upload._id;
     }
 
