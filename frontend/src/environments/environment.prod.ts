@@ -1,3 +1,3 @@
-export const environment = {
-  production: true
-};
+import { Environment as DevEnvironment } from './environment';
+
+export class Environment extends DevEnvironment {}

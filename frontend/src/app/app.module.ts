@@ -17,6 +17,13 @@ import { MatSortModule } from '@angular/material/sort';
 import { CollectionComponent } from './collection/collection.component';
 import { LoadingComponent } from './loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
     declarations: [
@@ -39,9 +46,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         HttpClientModule,
         MatIconModule,
         MatSortModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatSnackBarModule,
+        MatListModule,
+        MatButtonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule
     ],
-    providers: [],
+    providers: [
+        {
+            provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+            useValue: { duration: 2000 }
+        }
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {

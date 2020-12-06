@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { distinctUntilChanged, shareReplay } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
 export class LoadingService {
     private readonly _isLoading = new BehaviorSubject<boolean>(false);
-    isLoading$ = this._isLoading.asObservable().pipe(shareReplay());
+    isLoading$ = this._isLoading.asObservable().pipe(
+        distinctUntilChanged(),
+        shareReplay()
+    );
 
     constructor() { }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
     providedIn: 'root',
 })
 export class CollectionService {
-    private static readonly COLLECTION_URL = `${environment.apiUrl}/collections`;
+    private static readonly COLLECTION_URL = `${Environment.apiUrl}/collections`;
 
     constructor(private readonly http: HttpClient) { }
 

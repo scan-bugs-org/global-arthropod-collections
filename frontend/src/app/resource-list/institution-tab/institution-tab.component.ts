@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InstitutionService } from '../../services/institution.service';
-import { Institution } from '../../services/dto/institution-list-item.dto';
+import { Institution } from '../../services/dto/institution.dto';
 import { Sort } from '@angular/material/sort';
 
 @Component({
