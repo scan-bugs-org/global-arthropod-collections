@@ -1,8 +1,12 @@
-<mat-tab-group>
-    <mat-tab label="Institutions">
+<mat-tab-group
+    dynamicHeight
+    [selectedIndex]="selectedIndex"
+    (selectedIndexChange)="onTabChanged($event)"
+>
+    <mat-tab [label]="LABEL_INSTITUTIONS">
         <app-institution-tab></app-institution-tab>
     </mat-tab>
-    <mat-tab label="Collections">
+    <mat-tab [label]="LABEL_COLLECTIONS">
         <app-collection-tab></app-collection-tab>
     </mat-tab>
 </mat-tab-group>

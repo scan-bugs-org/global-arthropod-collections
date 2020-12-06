@@ -65,4 +65,14 @@ export class InstitutionService {
                 tap(() => this.loading.end())
             );
     }
+
+    deleteByID(id: string): Observable<boolean> {
+        this.loading.start();
+        const url = `${InstitutionService.INSTITUTION_URL}/${id}`;
+        return this.http.delete(url, { observe: 'response' })
+            .pipe(
+                map((response) => response.ok),
+                tap(() => this.loading.end())
+            );
+    }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InstitutionService } from '../../services/institution.service';
 import { Institution } from '../../services/dto/institution.dto';
 import { Sort } from '@angular/material/sort';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
     selector: 'app-institution-tab',
@@ -12,9 +13,15 @@ export class InstitutionTabComponent implements OnInit {
     public institutions: Institution[] = [];
     public displayedColumns: string[] = ["_id", "name", "code", "delete"];
 
-    constructor(private readonly institutionService: InstitutionService) { }
+    constructor(
+        private readonly institutionService: InstitutionService,
+        private readonly alert: AlertService) { }
 
     ngOnInit(): void {
+        this.loadInstitutions();
+    }
+
+    loadInstitutions() {
         this.institutionService.institutionList().subscribe((insts) => {
             this.institutions = insts.sort((a, b) => {
                 return InstitutionTabComponent.sortStrings(
@@ -59,7 +66,14 @@ export class InstitutionTabComponent implements OnInit {
     }
 
     async deleteInstitution(id: string): Promise<void> {
-        console.log(`DELETING ${id}!`);
+        this.institutionService.deleteByID(id).subscribe((success) => {
+            if (success) {
+                this.loadInstitutions();
+            }
+            else {
+                this.alert.showError('Error deleting institution');
+            }
+        });
     }
 
     private static sortStrings(a: string, b: string, asc = false): number {
