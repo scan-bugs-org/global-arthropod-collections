@@ -53,11 +53,19 @@ const collectionDefaults = {
 
 @Injectable()
 export class CollectionService {
+    private static readonly INSTITUTION_POPULATE = {
+        path: "institution",
+        select: ["_id", "name"]
+    };
+
     constructor(
-        @Inject(COLLECTION_PROVIDER_ID) private readonly collection: Model<Collection>) { }
+        @Inject(COLLECTION_PROVIDER_ID)
+        private readonly collection: Model<Collection>) { }
 
     async findAll(): Promise<Collection[]> {
-        return this.collection.find().exec();
+        return this.collection.find()
+            .populate(CollectionService.INSTITUTION_POPULATE)
+            .exec();
     }
 
     async findByInstitution(institutionID: string): Promise<Collection[]> {
@@ -70,7 +78,9 @@ export class CollectionService {
     }
 
     async findByID(id: string): Promise<Collection> {
-        return this.collection.findById(id).exec();
+        return this.collection.findById(id)
+            .populate(CollectionService.INSTITUTION_POPULATE)
+            .exec();
     }
 
     async updateByID(id: string, updates: Partial<Collection>): Promise<Collection> {

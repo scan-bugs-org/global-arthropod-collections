@@ -23,6 +23,18 @@ class CollectionLocationDto {
     lng: number;
 }
 
+class CollectionInstitutionDto {
+    @ApiProperty()
+    @Expose()
+    @Type(() => ObjectId)
+    @Transform((id: typeof ObjectId) => id.toString(), { toPlainOnly: true })
+    _id: string;
+
+    @ApiProperty()
+    @Expose()
+    name: string;
+}
+
 class CollectionScanDto {
     @ApiProperty()
     @Expose()
@@ -60,9 +72,8 @@ export class CollectionOutputDto {
 
     @ApiProperty()
     @Expose()
-    @Type(() => ObjectId)
-    @Transform((id: typeof ObjectId) => id ? id.toString() : null, { toPlainOnly: true })
-    institution: string;
+    @Type(() => CollectionInstitutionDto)
+    institution?: CollectionInstitutionDto;
 
     @ApiProperty()
     @Expose()

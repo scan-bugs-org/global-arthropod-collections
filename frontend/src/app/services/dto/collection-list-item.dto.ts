@@ -7,4 +7,7 @@ export class CollectionListItem {
 
     @Expose()
     name: string = "";
+
+    @Expose()
+    institution: string = "";
 }
