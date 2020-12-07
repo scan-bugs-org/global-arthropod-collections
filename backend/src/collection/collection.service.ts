@@ -69,12 +69,21 @@ export class CollectionService {
     }
 
     async findByInstitution(institutionID: string): Promise<Collection[]> {
-        return this.collection.find({ institution: institutionID }).exec();
+        return this.collection.find({ institution: institutionID })
+            .populate(CollectionService.INSTITUTION_POPULATE)
+            .exec();
     }
 
     async create(collectionData: CollectionData[]): Promise<Collection[]> {
         collectionData = collectionData.map((c) => Object.assign({}, collectionDefaults, c));
-        return this.collection.insertMany(collectionData as any[]) as Promise<Collection[]>;
+        const results = await this.collection.insertMany(
+            collectionData as any[]
+        ) as Collection[];
+        const collIDs = results.map((collection) => collection._id);
+
+        return this.collection.find({ _id: { $in: collIDs } })
+            .populate(CollectionService.INSTITUTION_POPULATE)
+            .exec();
     }
 
     async findByID(id: string): Promise<Collection> {
@@ -85,8 +94,10 @@ export class CollectionService {
 
     async updateByID(id: string, updates: Partial<Collection>): Promise<Collection> {
         return this.collection.findOneAndUpdate(
-            { _id: id }, updates, { returnOriginal: false }
-        ).exec();
+            { _id: id },
+            updates,
+            { returnOriginal: false }
+        ).populate(CollectionService.INSTITUTION_POPULATE).exec();
     }
 
     async deleteByID(id: string): Promise<boolean> {

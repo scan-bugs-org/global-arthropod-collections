@@ -57,6 +57,8 @@
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
+// For class-transformer
+import 'reflect-metadata';
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

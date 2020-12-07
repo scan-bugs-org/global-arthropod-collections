@@ -6,6 +6,7 @@ import { Expose, plainToClass } from 'class-transformer';
 import { map, tap } from 'rxjs/operators';
 import { LoadingService } from './loading.service';
 import { CollectionListItem } from './dto/collection-list-item.dto';
+import { Collection } from './dto/collection.dto';
 
 @Injectable({
     providedIn: 'root',
@@ -30,5 +31,34 @@ export class CollectionService {
             }),
             tap(() => this.loading.end())
         );
+    }
+
+    findByID(id: string): Observable<Collection> {
+        const url = `${CollectionService.COLLECTION_URL}/${id}`;
+        this.loading.start();
+        return this.http.get<Record<string, unknown>>(url).pipe(
+            map((collection) => plainToClass(Collection, collection)),
+            tap(() => this.loading.end())
+        );
+    }
+
+    deleteByID(id: string): Observable<boolean> {
+        this.loading.start();
+        const url = `${CollectionService.COLLECTION_URL}/${id}`;
+        return this.http.delete(url, { observe: 'response' })
+            .pipe(
+                map((response) => response.ok),
+                tap(() => this.loading.end())
+            );
+    }
+
+    updateByID(id: string, collectionData: Partial<Collection>): Observable<Collection> {
+        this.loading.start();
+        const url = `${CollectionService.COLLECTION_URL}/${id}`;
+        return this.http.patch<Record<string, unknown>>(url, collectionData)
+            .pipe(
+                map((collection) => plainToClass(Collection, collection)),
+                tap(() => this.loading.end())
+            );
     }
 }

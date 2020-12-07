@@ -68,6 +68,7 @@ export class InstitutionTabComponent implements OnInit {
     async deleteInstitution(id: string): Promise<void> {
         this.institutionService.deleteByID(id).subscribe((success) => {
             if (success) {
+                this.alert.showMessage('Institution deleted successfully');
                 this.loadInstitutions();
             }
             else {

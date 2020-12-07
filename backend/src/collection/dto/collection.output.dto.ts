@@ -94,7 +94,7 @@ export class CollectionOutputDto {
 
     @ApiProperty()
     @Expose()
-    url: number;
+    url: string;
 
     @ApiProperty()
     @Expose()

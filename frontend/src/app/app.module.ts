@@ -18,13 +18,11 @@ import { CollectionComponent } from './collection/collection.component';
 import { LoadingComponent } from './loading/loading.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
-import { TableComponent } from './table/table.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +34,6 @@ import { TableComponent } from './table/table.component';
         CollectionComponent,
         LoadingComponent,
         LoadingComponent,
-        TableComponent,
     ],
     imports: [
         BrowserModule,

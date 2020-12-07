@@ -1,4 +1,13 @@
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
+
+@Exclude()
+export class CollectionInstitution {
+    @Expose()
+    _id: string = "";
+
+    @Expose()
+    name: string = "";
+}
 
 @Exclude()
 export class CollectionListItem {
@@ -9,5 +18,6 @@ export class CollectionListItem {
     name: string = "";
 
     @Expose()
-    institution: string = "";
+    @Type(() => CollectionInstitution)
+    institution: CollectionInstitution | null = null;
 }

@@ -1,1 +1,54 @@
-<app-table [dataSource]="collections"></app-table>
+<table
+    mat-table
+    matSort
+    class="mat-elevation-z8"
+    [dataSource]="collections"
+    (matSortChange)="onSort($event)"
+>
+    <ng-container matColumnDef="_id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            ID
+        </th>
+        <td mat-cell *matCellDef="let collection">{{ collection._id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let collection">
+            <a [routerLink]="['collections', collection._id]">
+                {{ collection.name }}
+            </a>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Collection Code
+        </th>
+        <td mat-cell *matCellDef="let collection">{{ collection.code }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="institution">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Institution</th>
+        <td mat-cell *matCellDef="let collection">
+            <a
+                *ngIf="collection.institution"
+                [routerLink]="['institutions', collection.institution._id]"
+            >
+                {{ collection.institution.name }}
+            </a>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Delete</th>
+        <td mat-cell *matCellDef="let collection">
+            <button (click)="deleteCollection(collection._id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
