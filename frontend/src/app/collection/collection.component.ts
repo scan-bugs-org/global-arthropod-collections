@@ -19,10 +19,23 @@ export class CollectionComponent implements OnInit {
 
     public nameControl = new FormControl('');
     public codeControl = new FormControl('');
+    public sizeControl = new FormControl(0);
+    public tierControl = new FormControl(4);
+    public urlControl = new FormControl('');
+    public iDigBioControl = new FormControl(false);
+
+    public provinceControl = new FormControl('');
 
     public form = new FormGroup({
         'name': this.nameControl,
-        'code': this.codeControl
+        'code': this.codeControl,
+        'size': this.sizeControl,
+        'tier': this.tierControl,
+        'url': this.urlControl,
+        'idigbio': this.iDigBioControl,
+        'location': new FormGroup({
+            'state': this.provinceControl
+        })
     });
 
     constructor(
@@ -69,7 +82,14 @@ export class CollectionComponent implements OnInit {
     private resetValues(collection: Collection) {
         this.form.patchValue({
             'name': collection.name,
-            'code': collection.code
+            'code': collection.code,
+            'size': collection.size,
+            'tier': collection.tier,
+            'url': collection.url,
+            'idigbio': collection.inIdigbio,
+            'location': {
+                'state': collection.location?.state
+            }
         });
     }
 }

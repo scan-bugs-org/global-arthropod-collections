@@ -1,20 +1,48 @@
-<div class="row">
-    <div id="label" class="col-2">
-        <p class="my-3">{{ label }}</p>
+<div class="row mx-2">
+    <div class="col-2">
+        <label *ngIf="type === 'checkbox' else notCheckboxLabel">
+            {{ label }}
+        </label>
+        <ng-template #notCheckboxLabel>
+            <p class="py-3">{{ label }}</p>
+        </ng-template>
     </div>
-    <div class="col">
-        <mat-form-field *ngIf="isEditing else notEditing">
-            <input
-                matInput
-                [formControl]="formControl"
-            >
-        </mat-form-field>
+    <div class="col-8">
+        <ng-container *ngIf="isEditing else notEditing">
+            <ng-container *ngIf="type === 'checkbox' else notCheckbox">
+                <mat-checkbox
+                    color="primary"
+                    aria-labelledby="label"
+                    [(ngModel)]="value"
+                >
+                </mat-checkbox>
+            </ng-container>
+
+            <ng-template #notCheckbox>
+                <mat-form-field>
+                    <input
+                        matInput
+                        [type]="type"
+                        [(ngModel)]="value"
+                    >
+                </mat-form-field>
+            </ng-template>
+        </ng-container>
 
         <ng-template #notEditing>
-            <p class="my-3">
-                {{ formControl.value }}
-            </p>
-        </ng-template>
+            <ng-container *ngIf="type === 'checkbox' else notEditNotCheckbox">
+                <mat-checkbox
+                    disabled="true"
+                    color="primary"
+                    aria-labelledby="label"
+                    [(ngModel)]="value"
+                >
+                </mat-checkbox>
+            </ng-container>
 
+            <ng-template #notEditNotCheckbox>
+                <p class="py-3">{{ value }}</p>
+            </ng-template>
+        </ng-template>
     </div>
 </div>

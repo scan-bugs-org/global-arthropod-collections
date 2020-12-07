@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { EditableFieldComponent } from './editable-field/editable-field.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { EditableFieldComponent } from './editable-field/editable-field.componen
         FormsModule,
         ReactiveFormsModule,
         MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatCheckboxModule
     ],
     providers: [
         {

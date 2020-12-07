@@ -8,18 +8,58 @@
     </button>
 </h1>
 
-<app-editable-field
-    label="Name"
-    [formControl]="nameControl"
-    [isEditing]="isEditing"
->
-</app-editable-field>
-<app-editable-field
-    label="Collection Code"
-    [formControl]="codeControl"
-    [isEditing]="isEditing"
->
-</app-editable-field>
+<div [formGroup]="form">
+    <app-editable-field
+        label="Name"
+        [formControl]="nameControl"
+        [isEditing]="isEditing"
+    >
+    </app-editable-field>
+    <app-editable-field
+        label="Collection Code"
+        [formControl]="codeControl"
+        [isEditing]="isEditing"
+    >
+    </app-editable-field>
+    <app-editable-field
+        label="Size"
+        type="number"
+        [formControl]="sizeControl"
+        [isEditing]="isEditing"
+    >
+    </app-editable-field>
+    <app-editable-field
+        label="Tier"
+        type="number"
+        [formControl]="tierControl"
+        [isEditing]="isEditing"
+    >
+    </app-editable-field>
+    <app-editable-field
+        label="URL"
+        [formControl]="urlControl"
+        [isEditing]="isEditing"
+    >
+    </app-editable-field>
+    <app-editable-field
+        label="In iDigBio?"
+        type="checkbox"
+        [formControl]="iDigBioControl"
+        [isEditing]="isEditing"
+    >
+    </app-editable-field>
+
+    <fieldset>
+        <legend>Location data</legend>
+        <app-editable-field
+            label="State"
+            [formControl]="provinceControl"
+            [isEditing]="isEditing"
+        >
+        </app-editable-field>
+    </fieldset>
+</div>
+
 
 <div class="mt-3" *ngIf="isEditing">
     <button mat-raised-button color="primary" (click)="applyEdits()">
