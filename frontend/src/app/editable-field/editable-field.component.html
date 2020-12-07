@@ -1,15 +1,12 @@
 <div class="row mx-2">
-    <div class="col-2">
-        <label *ngIf="type === 'checkbox' else notCheckboxLabel">
-            {{ label }}
-        </label>
-        <ng-template #notCheckboxLabel>
-            <p class="py-3">{{ label }}</p>
-        </ng-template>
-    </div>
-    <div class="col-8">
-        <ng-container *ngIf="isEditing else notEditing">
-            <ng-container *ngIf="type === 'checkbox' else notCheckbox">
+    <!-- Checkbox -->
+    <ng-container *ngIf="type === 'checkbox' else notCheckbox">
+        <div class="col-2 my-3">
+            <label id="label">{{ label }}</label>
+        </div>
+
+        <div class="col-8 my-3">
+            <ng-container *ngIf="isEditing else notCheckboxNotEditing">
                 <mat-checkbox
                     color="primary"
                     aria-labelledby="label"
@@ -18,19 +15,7 @@
                 </mat-checkbox>
             </ng-container>
 
-            <ng-template #notCheckbox>
-                <mat-form-field>
-                    <input
-                        matInput
-                        [type]="type"
-                        [(ngModel)]="value"
-                    >
-                </mat-form-field>
-            </ng-template>
-        </ng-container>
-
-        <ng-template #notEditing>
-            <ng-container *ngIf="type === 'checkbox' else notEditNotCheckbox">
+            <ng-template #notCheckboxNotEditing>
                 <mat-checkbox
                     disabled="true"
                     color="primary"
@@ -38,11 +23,33 @@
                     [(ngModel)]="value"
                 >
                 </mat-checkbox>
+            </ng-template>
+
+        </div>
+    </ng-container>
+
+    <!-- Not checkbox -->
+    <ng-template #notCheckbox>
+        <div class="col-2">
+            <p id="pLabel" class="py-3">{{ label }}</p>
+        </div>
+
+        <div class="col-8">
+            <ng-container *ngIf="isEditing else notEditing">
+                <mat-form-field>
+                    <input
+                        matInput
+                        aria-labelledby="pLabel"
+                        [type]="type"
+                        [(ngModel)]="value"
+                    >
+                </mat-form-field>
             </ng-container>
 
-            <ng-template #notEditNotCheckbox>
+            <ng-template #notEditing>
                 <p class="py-3">{{ value }}</p>
             </ng-template>
-        </ng-template>
-    </div>
+        </div>
+
+    </ng-template>
 </div>
