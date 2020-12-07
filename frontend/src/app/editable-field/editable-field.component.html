@@ -1,0 +1,20 @@
+<div class="row">
+    <div id="label" class="col-2">
+        <p class="my-3">{{ label }}</p>
+    </div>
+    <div class="col">
+        <mat-form-field *ngIf="isEditing else notEditing">
+            <input
+                matInput
+                [formControl]="formControl"
+            >
+        </mat-form-field>
+
+        <ng-template #notEditing>
+            <p class="my-3">
+                {{ formControl.value }}
+            </p>
+        </ng-template>
+
+    </div>
+</div>

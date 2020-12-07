@@ -21,3 +21,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: black;
     background: mat-color($mat-pink);
 }
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    vertical-align: middle;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    &:disabled {
+        opacity: 50%;
+        cursor: default;
+
+        &:hover {
+            transform: none;
+        }
+    }
+
+    transition: transform 0.25s;
+}
