@@ -25,6 +25,9 @@ export class CollectionComponent implements OnInit {
     public iDigBioControl = new FormControl(false);
 
     public provinceControl = new FormControl('');
+    public countryControl = new FormControl('');
+    public latControl = new FormControl(0);
+    public lngControl = new FormControl(0);
 
     public form = new FormGroup({
         'name': this.nameControl,
@@ -34,7 +37,10 @@ export class CollectionComponent implements OnInit {
         'url': this.urlControl,
         'idigbio': this.iDigBioControl,
         'location': new FormGroup({
-            'state': this.provinceControl
+            'state': this.provinceControl,
+            'country': this.countryControl,
+            'lat': this.latControl,
+            'lng': this.lngControl
         })
     });
 
@@ -88,7 +94,10 @@ export class CollectionComponent implements OnInit {
             'url': collection.url,
             'idigbio': collection.inIdigbio,
             'location': {
-                'state': collection.location?.state
+                'state': collection.location?.state,
+                'country': collection.location?.country,
+                'lat': collection.location?.lat,
+                'lng': collection.location?.lng,
             }
         });
     }
