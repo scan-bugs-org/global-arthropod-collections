@@ -122,14 +122,6 @@
                 </a>
             </td>
         </tr>
-        <tr>
-            <td class="label">In iDigBio?</td>
-            <td class="value">
-                <mat-icon>
-                    {{ collection.inIdigbio ? 'check' : 'clear' }}
-                </mat-icon>
-            </td>
-        </tr>
         <ng-container *ngIf="collection.location">
             <tr>
                 <td class="label">State</td>
@@ -146,6 +138,32 @@
             <tr>
                 <td class="label">Longitude</td>
                 <td class="value">{{ collection.location.lng }}</td>
+            </tr>
+            <tr>
+                <td class="label">In SCAN?</td>
+                <td class="value">
+                    <mat-icon>
+                        {{ collection.scan?.exists ? 'check' : 'clear' }}
+                    </mat-icon>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">SCAN Collection type</td>
+                <td class="value">{{ collection.scan?.scanType }}</td>
+            </tr>
+            <tr>
+                <td class="label">In GBIF?</td>
+                <td class="value">
+                    <mat-icon>
+                        {{ collection.gbif?.exists ? 'check' : 'clear' }}
+                    </mat-icon>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">GBIF Date</td>
+                <td class="value">
+                    {{ collection.gbif?.date | date }}
+                </td>
             </tr>
         </ng-container>
     </table>

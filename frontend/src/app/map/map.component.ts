@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CollectionService } from '../services/collection.service';
-import { CircleMarker, LatLng, LayerGroup, tileLayer, Map, geoJSON, LatLngExpression, Point, Layer, GeoJSON } from 'leaflet';
+import { CircleMarker, LatLng, LayerGroup, tileLayer, Map, geoJSON, LatLngExpression, Point, Layer, GeoJSON, LatLngBounds } from 'leaflet';
 import { CollectionGeoJson } from '../services/dto/collection-geojson.dto';
 import { COLLECTION_ROUTE } from '../routes';
 
@@ -9,7 +9,7 @@ import { COLLECTION_ROUTE } from '../routes';
     templateUrl: './map.component.html',
     styleUrls: ['./map.component.less'],
 })
-export class MapComponent implements OnInit {
+export class MapComponent {
     private static readonly MAP_ATTRIB = `
         © <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> |
         © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> |
@@ -21,6 +21,7 @@ export class MapComponent implements OnInit {
 
     private static readonly MIN_ZOOM = 2;
     private static readonly MAX_ZOOM = 16;
+    private static readonly MAX_BOUNDS = new LatLngBounds([[-90, -180], [90, 180]]);
 
     private static readonly MARKER_STYLE = {
         fillColor: "#673ab7",
@@ -53,12 +54,9 @@ export class MapComponent implements OnInit {
 
     constructor(private readonly collections: CollectionService) { }
 
-    ngOnInit() {
-
-    }
-
     onMapReady(map: Map) {
         this.map = map;
+        this.map.setMaxBounds(MapComponent.MAX_BOUNDS);
 
         this.collections.collectionGeoJson(1).subscribe((colls) => {
             MapComponent.loadTier(map, colls);
@@ -84,7 +82,7 @@ export class MapComponent implements OnInit {
                 const style = Object.assign(
                     this.MARKER_STYLE,
                     // @ts-ignore
-                    { radius: this.getMarkerRadius(map, layer.feature) }
+                    { radius: MapComponent.getMarkerRadius(map, layer.feature) }
                 );
                 // @ts-ignore
                 layer.setStyle(style);
