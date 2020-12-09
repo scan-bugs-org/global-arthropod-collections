@@ -13,12 +13,6 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-#mainContent {
-    margin-top: 1rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-}
-
 .snackbar-error {
     color: black;
     background: mat-color($mat-pink);
