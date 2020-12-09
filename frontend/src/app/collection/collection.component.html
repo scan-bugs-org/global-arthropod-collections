@@ -1,8 +1,11 @@
 <h1 *ngIf="collection">
     {{ collection.name }}
     <span *ngIf="collection.institution" id="subtitle">
-            at {{ collection.institution.name }}
-        </span>
+        at
+        <a routerLink="/institutions/{{ collection.institution._id }}">
+            {{ collection.institution.name }}
+        </a>
+    </span>
     <button class="icon-button" (click)="isEditing = true" [disabled]="isEditing">
         <mat-icon color="primary">edit</mat-icon>
     </button>

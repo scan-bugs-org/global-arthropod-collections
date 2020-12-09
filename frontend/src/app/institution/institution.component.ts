@@ -56,6 +56,7 @@ export class InstitutionComponent implements OnInit {
             .subscribe(() => {
                 this.loadInstitution();
                 this.toggleEdit(false);
+                this.alert.showMessage('Institution updated successfully');
             });
     }
 

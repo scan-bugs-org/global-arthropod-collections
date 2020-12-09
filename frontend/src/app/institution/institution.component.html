@@ -13,32 +13,38 @@
             </mat-icon>
         </button>
     </h1>
-    <div *ngIf="isEditing else notEditing" [formGroup]="form">
-        <mat-form-field
-            [ngStyle]="{ 'width.ex': formControlName.value.length + 5 }"
-        >
-            <mat-label>Institution name</mat-label>
-            <input
-                matInput
-                [formControl]="formControlName"
-            >
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Institution code</mat-label>
-            <input matInput [formControl]="formControlCode">
-        </mat-form-field>
-        <div>
-            <button
-                class="form-btn"
-                mat-raised-button
-                color="primary"
-                (click)="applyEdits()"
-            >
-                Apply
-            </button>
-            <button class="form-btn" mat-raised-button (click)="cancelEdits()">
-                Cancel
-            </button>
+    <div *ngIf="isEditing else notEditing">
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Institution name</mat-label>
+                    <input
+                        matInput
+                        [formControl]="formControlName"
+                    >
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Institution code</mat-label>
+                    <input matInput [formControl]="formControlCode">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button
+                    class="form-btn"
+                    mat-raised-button
+                    color="primary"
+                    (click)="applyEdits()"
+                >
+                    Apply
+                </button>
+                <button class="form-btn" mat-raised-button (click)="cancelEdits()">
+                    Cancel
+                </button>
+            </div>
         </div>
     </div>
     <ng-template #notEditing>
