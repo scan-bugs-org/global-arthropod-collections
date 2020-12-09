@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CollectionListItem } from '../services/dto/collection-list-item.dto';
 import { CollectionService } from '../services/collection.service';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -7,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Collection } from '../services/dto/collection.dto';
 import { AlertService } from '../services/alert.service';
 import { FormControl, FormGroup } from '@angular/forms';
+
+type TableData = { name: string, value: any };
 
 @Component({
     selector: 'app-collection',
