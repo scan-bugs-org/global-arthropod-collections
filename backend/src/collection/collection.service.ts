@@ -1,8 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import {
-    Collection,
-    COLLECTION_PROVIDER_ID,
-} from '../database/models/Collection';
+import { Collection, COLLECTION_PROVIDER_ID, GeoJsonCollection } from '../database/models/Collection';
 import { Model } from 'mongoose';
 
 interface CollectionData {
@@ -51,6 +48,30 @@ const collectionDefaults = {
     }
 };
 
+type FindAllParams = {
+    iid?: string;
+    tier?: number;
+    geojson?: boolean;
+}
+
+const DEFAULT_IID = "";
+const DEFAULT_TIER = -1;
+const DefaultFindAllParams: FindAllParams = {
+    iid: DEFAULT_IID,
+    tier: DEFAULT_TIER,
+    geojson: false
+};
+
+function stripUndefined(object: Record<string, unknown>): Record<string, unknown> {
+    const newObj = {};
+    Object.keys(object).forEach((k) => {
+        if (object[k] !== undefined) {
+            newObj[k] = object[k];
+        }
+    });
+    return newObj;
+}
+
 @Injectable()
 export class CollectionService {
     private static readonly INSTITUTION_POPULATE = {
@@ -62,16 +83,28 @@ export class CollectionService {
         @Inject(COLLECTION_PROVIDER_ID)
         private readonly collection: Model<Collection>) { }
 
-    async findAll(): Promise<Collection[]> {
-        return this.collection.find()
-            .populate(CollectionService.INSTITUTION_POPULATE)
-            .exec();
-    }
+    async findAll(inputParams: FindAllParams): Promise<Collection[] | GeoJsonCollection[]> {
+        inputParams = stripUndefined(inputParams);
+        inputParams = Object.assign(DefaultFindAllParams, inputParams);
+        const findParams: FindAllParams = {};
 
-    async findByInstitution(institutionID: string): Promise<Collection[]> {
-        return this.collection.find({ institution: institutionID })
+        if (inputParams.iid !== DEFAULT_IID) {
+            findParams.iid = inputParams.iid;
+        }
+
+        if (inputParams.tier !== DEFAULT_TIER && !Number.isNaN(inputParams.tier)) {
+            findParams.tier = inputParams.tier;
+        }
+
+        const collections = await this.collection.find(findParams)
             .populate(CollectionService.INSTITUTION_POPULATE)
             .exec();
+
+        if (inputParams.geojson === true) {
+            return collections.map((c) => c.asGeoJson());
+        }
+
+        return collections;
     }
 
     async create(collectionData: CollectionData[]): Promise<Collection[]> {

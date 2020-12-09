@@ -1,6 +1,5 @@
 import { Connection, Schema, Document } from 'mongoose';
 import { Provider } from '@nestjs/common';
-import { DatabaseConfigService } from '../database-config.service';
 import { DATABASE_PROVIDER_ID } from '../database.provider';
 
 const SchemaTypes = Schema.Types;
@@ -69,11 +68,12 @@ export interface Collection extends Document {
     readonly scan: {
         readonly exists: boolean;
         readonly scanType: string;
-    },
+    };
     readonly gbif: {
         readonly exists: boolean,
         readonly date: Date
-    }
+    };
+    asGeoJson: () => GeoJsonCollection;
 }
 
 export interface GeoJsonCollection {

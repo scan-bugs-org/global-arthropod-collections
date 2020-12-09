@@ -27,7 +27,7 @@ class CollectionInstitutionDto {
     @ApiProperty()
     @Expose()
     @Type(() => ObjectId)
-    @Transform((id: typeof ObjectId) => id.toString(), { toPlainOnly: true })
+    @Transform((id: typeof ObjectId) => id ? id.toString() : null, { toPlainOnly: true })
     _id: string;
 
     @ApiProperty()
@@ -56,14 +56,14 @@ class CollectionGbifDto {
 }
 
 export class CollectionOutputDto {
-    constructor(institution: Partial<Collection>) {
-        Object.assign(this, institution);
+    constructor(collection: Partial<Collection>) {
+        Object.assign(this, collection);
     }
 
     @ApiProperty()
     @Expose()
     @Type(() => ObjectId)
-    @Transform((id: typeof ObjectId) => id.toString(), { toPlainOnly: true })
+    @Transform((id: typeof ObjectId) => id ? id.toString() : "", { toPlainOnly: true })
     _id: string;
 
     @ApiProperty()

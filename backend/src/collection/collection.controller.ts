@@ -5,13 +5,13 @@ import {
     HttpStatus, NotFoundException,
     Optional, Param, ParseArrayPipe, Patch,
     Post,
-    Query, UseInterceptors,
+    Query, SerializeOptions, UseInterceptors,
 } from '@nestjs/common';
 import {
-    ApiBody,
+    ApiBody, ApiExtraModels,
     ApiQuery,
     ApiResponse,
-    ApiTags,
+    ApiTags, getSchemaPath,
 } from '@nestjs/swagger';
 import { CollectionOutputDto } from './dto/collection.output.dto';
 import { CollectionService } from './collection.service';
@@ -21,26 +21,41 @@ import {
 } from './dto/collection.input.dto';
 import { CheckInstitutionPipe } from './check-institution.pipe';
 import { ObjectIdInterceptor } from '../common/object-id.interceptor';
+import { GeoJsonOutputDto } from './dto/geojson.output.dto';
+import { Collection, GeoJsonCollection } from '../database/models/Collection';
+
+const FindAllSchema = {
+    oneOf: [
+        { type: 'array', items: { $ref: getSchemaPath(CollectionOutputDto) } },
+        { type: 'array', items: { $ref: getSchemaPath(GeoJsonOutputDto) } },
+    ]
+}
 
 @Controller('collections')
 @ApiTags('Collection')
+@ApiExtraModels(CollectionOutputDto, GeoJsonOutputDto)
 @UseInterceptors(ObjectIdInterceptor)
 export class CollectionController {
     constructor(private readonly collection: CollectionService) { }
 
     @Get()
-    @ApiResponse({ status: HttpStatus.OK, type: CollectionOutputDto })
+    @ApiResponse({ status: HttpStatus.OK, schema: FindAllSchema })
     @ApiQuery({ name: 'iid', required: false })
-    async findAll(@Query('iid') @Optional() iid?: string): Promise<CollectionOutputDto[]> {
-        let collections;
+    @ApiQuery({ name: 'tier', type: Number, required: false })
+    @ApiQuery({ name: 'geojson', type: Boolean, required: false })
+    async findAll(
+        @Query('iid') @Optional() iid?: string,
+        @Query('tier') @Optional() tier?: number,
+        @Query('geojson') @Optional() geojson?: boolean): Promise<CollectionOutputDto[] | GeoJsonOutputDto[]> {
 
-        if (iid) {
-            collections = await this.collection.findByInstitution(iid);
-        }
-        else {
-            collections = await this.collection.findAll();
+        let collections = await this.collection.findAll({ iid, tier, geojson });
+
+        if (geojson === true) {
+            collections = collections as GeoJsonCollection[];
+            return collections.map((c) => new GeoJsonOutputDto(c));
         }
 
+        collections = collections as Collection[];
         return collections.map((c) => new CollectionOutputDto(c.toJSON()));
     }
 
