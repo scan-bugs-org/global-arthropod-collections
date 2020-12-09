@@ -17,7 +17,7 @@
             Institution Name
         </th>
         <td mat-cell *matCellDef="let institution">
-            <a [routerLink]="['institutions', institution._id]">
+            <a [routerLink]="[INSTITUTION_ROUTE, institution._id]">
                 {{ institution.name }}
             </a>
         </td>

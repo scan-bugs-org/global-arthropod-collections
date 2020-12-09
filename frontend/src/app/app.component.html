@@ -1,15 +1,15 @@
 <mat-toolbar color="primary">
     <span id="site-logo">
-        <a routerLink="/">
+        <a [routerLink]="MAP_ROUTE">
             <img src="/assets/logo-lg.png" alt="site logo">
         </a>
     </span>
     <span>
-        <a routerLink="/">Institutions</a>
+        <a [routerLink]="LIST_ROUTE">Institutions</a>
     </span>
     <span>
         <a
-            routerLink="/"
+            [routerLink]="LIST_ROUTE"
             [queryParams]="{ tab: 1 }"
         >
             Collections

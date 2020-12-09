@@ -2,7 +2,7 @@
     {{ collection.name }}
     <span *ngIf="collection.institution" id="subtitle">
         at
-        <a routerLink="/institutions/{{ collection.institution._id }}">
+        <a [routerLink]="[INSTITUTION_ROUTE, collection.institution._id]">
             {{ collection.institution.name }}
         </a>
     </span>

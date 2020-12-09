@@ -3,6 +3,7 @@ import { InstitutionService } from '../../services/institution.service';
 import { Institution } from '../../services/dto/institution.dto';
 import { Sort } from '@angular/material/sort';
 import { AlertService } from '../../services/alert.service';
+import { INSTITUTION_ROUTE } from '../../routes';
 
 @Component({
     selector: 'app-institution-tab',
@@ -10,6 +11,8 @@ import { AlertService } from '../../services/alert.service';
     styleUrls: ['./institution-tab.component.less'],
 })
 export class InstitutionTabComponent implements OnInit {
+    readonly INSTITUTION_ROUTE = `/${INSTITUTION_ROUTE}`;
+
     public institutions: Institution[] = [];
     public displayedColumns: string[] = ["_id", "name", "code", "delete"];
 

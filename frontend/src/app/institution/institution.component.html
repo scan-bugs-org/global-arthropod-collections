@@ -62,7 +62,7 @@
             <mat-list>
                 <a
                     *ngFor="let collection of collections"
-                    routerLink="/collections/{{ collection._id }}"
+                    [routerLink]="[COLLECTION_ROUTE, collection._id]"
                 >
                     <mat-list-item>
                         {{ collection.name }}

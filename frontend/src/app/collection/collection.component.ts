@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Collection } from '../services/dto/collection.dto';
 import { AlertService } from '../services/alert.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { INSTITUTION_ROUTE } from '../routes';
 
 @Component({
     selector: 'app-collection',
@@ -13,6 +14,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
     styleUrls: ['./collection.component.less'],
 })
 export class CollectionComponent implements OnInit {
+    readonly INSTITUTION_ROUTE = `/${INSTITUTION_ROUTE}`;
+
     public collection: Collection | null = null;
     public isEditing = false;
 

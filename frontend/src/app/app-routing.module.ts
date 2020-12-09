@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ResourceListComponent } from './resource-list/resource-list.component';
 import { InstitutionComponent } from './institution/institution.component';
 import { CollectionComponent } from './collection/collection.component';
+import { MapComponent } from './map/map.component';
+import { COLLECTION_ROUTE, INSTITUTION_ROUTE, LIST_ROUTE, MAP_ROUTE } from './routes';
 
 const routes: Routes = [
-    { path: "institutions/:id", component: InstitutionComponent },
-    { path: "collections/:id", component: CollectionComponent },
-    { path: "", component: ResourceListComponent }
+    { path: `${INSTITUTION_ROUTE}/:id`, component: InstitutionComponent },
+    { path: `${COLLECTION_ROUTE}/:id`, component: CollectionComponent },
+    { path: LIST_ROUTE, component: ResourceListComponent },
+    { path: MAP_ROUTE, component: MapComponent }
 ];
 
 @NgModule({

@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { AlertService } from '../services/alert.service';
 import { CollectionListItem } from '../services/dto/collection-list-item.dto';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { COLLECTION_ROUTE } from '../routes';
 
 type ApiResult = {
     institution: Institution;
@@ -19,6 +20,8 @@ type ApiResult = {
     styleUrls: ['./institution.component.less'],
 })
 export class InstitutionComponent implements OnInit {
+    readonly COLLECTION_ROUTE = `/${COLLECTION_ROUTE}`;
+
     public institution: Institution | null = null;
     public collections: CollectionListItem[] = [];
     public isEditing = false;

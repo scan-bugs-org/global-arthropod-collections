@@ -3,6 +3,7 @@ import { CollectionService } from '../../services/collection.service';
 import { CollectionListItem } from '../../services/dto/collection-list-item.dto';
 import { Sort } from '@angular/material/sort';
 import { AlertService } from '../../services/alert.service';
+import { COLLECTION_ROUTE, INSTITUTION_ROUTE } from '../../routes';
 
 @Component({
     selector: 'app-collection-tab',
@@ -10,6 +11,9 @@ import { AlertService } from '../../services/alert.service';
     styleUrls: ['./collection-tab.component.less'],
 })
 export class CollectionTabComponent implements OnInit {
+    readonly INSTITUTION_ROUTE = `/${INSTITUTION_ROUTE}`;
+    readonly COLLECTION_ROUTE = `/${COLLECTION_ROUTE}`;
+
     public collections: CollectionListItem[] = [];
 
     constructor(
