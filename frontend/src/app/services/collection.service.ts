@@ -7,6 +7,7 @@ import { map, tap } from 'rxjs/operators';
 import { LoadingService } from './loading.service';
 import { CollectionListItem } from './dto/collection-list-item.dto';
 import { Collection } from './dto/collection.dto';
+import { CollectionGeoJson } from './dto/collection-geojson.dto';
 
 @Injectable({
     providedIn: 'root',
@@ -26,8 +27,19 @@ export class CollectionService {
 
         this.loading.start();
         return this.http.get<Record<string, unknown>[]>(url).pipe(
-            map((institutions) => {
-                return institutions.map((inst) => plainToClass(CollectionListItem, inst));
+            map((collections) => {
+                return collections.map((coll) => plainToClass(CollectionListItem, coll));
+            }),
+            tap(() => this.loading.end())
+        );
+    }
+
+    collectionGeoJson(tier: number): Observable<CollectionGeoJson[]> {
+        let url = `${CollectionService.COLLECTION_URL}?tier=${tier}&geojson=true`;
+        this.loading.start();
+        return this.http.get<Record<string, unknown>[]>(url).pipe(
+            map((collections) => {
+                return collections.map((collections) => plainToClass(CollectionGeoJson, collections));
             }),
             tap(() => this.loading.end())
         );

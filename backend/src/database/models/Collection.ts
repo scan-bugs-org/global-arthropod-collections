@@ -113,7 +113,7 @@ CollectionSchema.methods.asGeoJson = function(): GeoJsonCollection {
             coordinates: [this.location.lng, this.location.lat],
         },
         properties: {
-            id: this._id,
+            id: this._id.toString(),
             name: name,
             url: this.url,
             tier: this.tier,

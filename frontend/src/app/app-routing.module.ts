@@ -10,7 +10,8 @@ const routes: Routes = [
     { path: `${INSTITUTION_ROUTE}/:id`, component: InstitutionComponent },
     { path: `${COLLECTION_ROUTE}/:id`, component: CollectionComponent },
     { path: LIST_ROUTE, component: ResourceListComponent },
-    { path: MAP_ROUTE, component: MapComponent }
+    { path: MAP_ROUTE, component: MapComponent },
+    { path: "**", redirectTo: MAP_ROUTE }
 ];
 
 @NgModule({

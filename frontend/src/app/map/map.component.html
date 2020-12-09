@@ -1,1 +1,7 @@
-<div id="map" leaflet [leafletOptions]="LEAFLET_OPTS"></div>
+<div
+    id="map"
+    leaflet
+    [leafletOptions]="LEAFLET_OPTS"
+    (leafletMapReady)="onMapReady($event)"
+>
+</div>
