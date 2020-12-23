@@ -1,4 +1,0 @@
-{
-  "ignore": ["public/*"],
-  "ext": "js,nunjucks"
-}
