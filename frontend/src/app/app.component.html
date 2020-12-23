@@ -1,29 +1,40 @@
-<mat-toolbar color="primary">
-    <span id="site-logo">
-        <a [routerLink]="MAP_ROUTE">
-            <img src="/assets/logo-lg.png" alt="site logo">
-        </a>
-    </span>
-    <div id="site-title">
-        <div>The Arthropod Index</div>
-        <div id="site-subtitle">A Global Database of Arthropod Collections</div>
-    </div>
+<!-- TODO: Collapsing toolbar -->
+<div class="row">
+    <mat-toolbar color="primary">
+        <span id="site-logo">
+            <a [routerLink]="MAP_ROUTE">
+                <img src="/assets/logo-lg.png" alt="site logo">
+            </a>
+        </span>
+        <div id="site-title">
+            <div>The Arthropod Index</div>
+            <div id="site-subtitle">A Global Database of Arthropod Collections
+            </div>
+        </div>
 
-    <div id="divider"></div>
+        <div id="divider"></div>
 
-    <span>
-        <a [routerLink]="LIST_ROUTE">Institutions</a>
-    </span>
-    <span>
-        <a
-            [routerLink]="LIST_ROUTE"
-            [queryParams]="{ tab: 1 }"
-        >
-            Collections
-        </a>
-    </span>
-</mat-toolbar>
-<div id="mainContent">
-    <router-outlet></router-outlet>
+        <span>
+            <a [routerLink]="LIST_ROUTE">Institutions</a>
+        </span>
+        <span>
+            <a
+                [routerLink]="LIST_ROUTE"
+                [queryParams]="{ tab: 1 }"
+            >
+                Collections
+            </a>
+        </span>
+    </mat-toolbar>
 </div>
-<app-loading></app-loading>
+
+<div class="row">
+    <div class="col">
+        <div id="mainContent">
+            <router-outlet></router-outlet>
+        </div>
+        <app-loading></app-loading>
+    </div>
+</div>
+
+
