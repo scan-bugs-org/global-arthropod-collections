@@ -3,6 +3,7 @@ import { CollectionService } from '../services/collection.service';
 import { CircleMarker, LatLng, LayerGroup, tileLayer, Map, geoJSON, LatLngExpression, Point, Layer, GeoJSON, LatLngBounds } from 'leaflet';
 import { CollectionGeoJson } from '../services/dto/collection-geojson.dto';
 import { COLLECTION_ROUTE } from '../routes';
+import { Environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-map',
@@ -16,8 +17,7 @@ export class MapComponent {
         <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong> |
     `;
 
-    private static readonly MAPBOX_TOKEN = "pk.eyJ1IjoiZXZpbmR1bm4iLCJhIjoiY2thY3M3cXMwMWM4bzJ1cnliNnlkNHV2MiJ9.Twln5aH0wWGw9iKJoPE2Kg";
-    private static readonly MAPBOX_TILES_URL = `https://tiles.bug-collections.org/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${MapComponent.MAPBOX_TOKEN}`;
+    private static readonly MAPBOX_TILES_URL = Environment.tilesUrl;
 
     private static readonly MIN_ZOOM = 2;
     private static readonly MAX_ZOOM = 16;

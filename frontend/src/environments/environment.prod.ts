@@ -1,3 +1,5 @@
-import { Environment as DevEnvironment } from './environment';
+import { CommonEnvironment } from './environment.common';
 
-export class Environment extends DevEnvironment {}
+export class Environment extends CommonEnvironment {
+    static production = true;
+}

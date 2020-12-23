@@ -2,11 +2,10 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export class Environment {
+import { CommonEnvironment } from './environment.common';
+
+export class Environment extends CommonEnvironment {
     static production = false;
-    static apiUrl = "http://127.0.0.1:8080/api/v1";
-    static institutionUrl = `${Environment.apiUrl}/institutions`;
-    static collectionUrl = `${Environment.apiUrl}/collections`;
 }
 
 /*
