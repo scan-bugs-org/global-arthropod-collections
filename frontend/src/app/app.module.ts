@@ -26,6 +26,7 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MapComponent } from './map/map.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
         CollectionComponent,
         LoadingComponent,
         LoadingComponent,
-        MapComponent
+        MapComponent,
+        UploadComponent
     ],
     imports: [
         BrowserModule,
