@@ -1,3 +1,13 @@
-<div>
-    <app-file-uploader (fileChange)="onFileChanged($event)"></app-file-uploader>
+<div id="upload-form" class="row">
+    <div class="col-auto mx-auto">
+        <app-file-uploader (fileChange)="onFileChanged($event)"></app-file-uploader>
+        <button
+            mat-raised-button
+            color="primary"
+            [disabled]="!file"
+            (click)="onSubmit()"
+        >
+            Submit
+        </button>
+    </div>
 </div>

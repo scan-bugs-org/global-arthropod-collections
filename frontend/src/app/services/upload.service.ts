@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class UploadService {
 
-  constructor() { }
+    constructor(private readonly http: HttpClient) { }
+
+    doUpload(csv: File) {
+
+    }
 }

@@ -14,8 +14,8 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .snackbar-error {
-    color: black;
-    background: mat-color($mat-pink);
+    color: white;
+    background: darkred;
 }
 
 .icon-button {
