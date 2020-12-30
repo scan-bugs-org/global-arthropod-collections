@@ -3,3 +3,4 @@ data/*.sqlite3
 data/collections.csv
 data/institutions.csv
 config.json
+data/
