@@ -1,6 +1,5 @@
 import { Connection, Schema, Document } from 'mongoose';
 import { Provider } from '@nestjs/common';
-import { DatabaseConfigService } from '../database-config.service';
 import { DATABASE_PROVIDER_ID } from '../database.provider';
 
 const InstitutionSchema = new Schema({

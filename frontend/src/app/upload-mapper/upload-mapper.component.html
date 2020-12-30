@@ -1,3 +1,23 @@
-<p *ngFor="let header of headers">
-    {{ header }}
-</p>
+<table mat-table [dataSource]="csvHeaders" class="mat-elevation-z8">
+    <ng-container matColumnDef="csvHeader">
+        <th mat-header-cell *matHeaderCellDef>CSV Column</th>
+        <td mat-cell *matCellDef="let csvHeader">{{ csvHeader }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="databaseField">
+        <th mat-header-cell *matHeaderCellDef>Database Field</th>
+        <td mat-cell *matCellDef="let csvHeader">
+            <mat-select value="" (valueChange)="onMappingChanged(csvHeader, $event)">
+                <mat-option value="">
+                    Leave unmapped
+                </mat-option>
+                <mat-option *ngFor="let field of allHeaders" [value]="field">
+                    {{ field }}
+                </mat-option>
+            </mat-select>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+</table>

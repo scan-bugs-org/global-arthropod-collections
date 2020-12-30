@@ -7,4 +7,10 @@ export class FileUpload {
 
     @Expose()
     headers: string[] = [];
+
+    @Expose()
+    requiredHeaders: string[] = [];
+
+    @Expose()
+    optionalHeaders: string[] = [];
 }

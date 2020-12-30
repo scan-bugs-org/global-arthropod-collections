@@ -29,6 +29,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UploadComponent } from './csv-upload/upload.component';
 import { FileUploaderComponent } from './csv-upload/file-uploader/file-uploader.component';
 import { UploadMapperComponent } from './upload-mapper/upload-mapper.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     declarations: [
@@ -64,7 +65,8 @@ import { UploadMapperComponent } from './upload-mapper/upload-mapper.component';
         MatInputModule,
         MatFormFieldModule,
         MatCheckboxModule,
-        LeafletModule
+        LeafletModule,
+        MatSelectModule,
     ],
     providers: [
         {
