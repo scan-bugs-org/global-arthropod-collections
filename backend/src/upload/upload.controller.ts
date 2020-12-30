@@ -1,7 +1,7 @@
 import {
     BadRequestException,
     Body,
-    Controller,
+    Controller, Get,
     HttpCode, HttpStatus, Logger, NotFoundException, Param,
     Post,
     UploadedFile,
@@ -10,7 +10,7 @@ import {
 import {
     ApiBody,
     ApiConsumes,
-    ApiOkResponse,
+    ApiOkResponse, ApiProperty,
     ApiResponse,
     ApiTags,
 } from '@nestjs/swagger';
@@ -28,6 +28,11 @@ import { MapUploadOutputDto } from './dto/map-upload.output.dto';
 const FILE_UPLOAD_FIELD = 'file';
 const FILE_TMP_DIR = os.tmpdir();
 
+class UploadIDOutput {
+    @ApiProperty()
+    _id: string;
+}
+
 @Controller('uploads')
 @ApiTags('Upload')
 export class UploadController {
@@ -40,11 +45,21 @@ export class UploadController {
     )
     @ApiConsumes('multipart/form-data')
     @ApiBody({ type: UploadInputDto })
-    @ApiResponse({ status: HttpStatus.OK, type: UploadOutputDto })
+    @ApiResponse({ status: HttpStatus.OK, type: UploadIDOutput })
     @HttpCode(HttpStatus.OK)
-    async upload(@UploadedFile() file: CsvFile): Promise<UploadOutputDto> {
-        const uploadID = await this.uploadService.create(file);
-        return new UploadOutputDto({ _id: uploadID, headers: file.headers });
+    async upload(@UploadedFile() file: CsvFile): Promise<UploadIDOutput> {
+        const tmpUploadID = await this.uploadService.create(file);
+        return { _id: tmpUploadID };
+    }
+
+    @Get(':id')
+    @ApiResponse({ type: UploadOutputDto })
+    async findByID(@Param('id') id: string): Promise<UploadOutputDto> {
+        const upload = await this.uploadService.findByID(id);
+        if (!upload) {
+            throw new NotFoundException();
+        }
+        return new UploadOutputDto({ id, headers: upload.headers });
     }
 
     @Post(':id/map')
