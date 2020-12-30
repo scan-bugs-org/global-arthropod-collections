@@ -1,0 +1,25 @@
+<mat-form-field>
+    <mat-label>File...</mat-label>
+    <input
+        matInput
+        readonly
+        [value]="fileName"
+    >
+    <button mat-icon-button matSuffix *ngIf="fileName" (click)="clearFile()">
+        <mat-icon>clear</mat-icon>
+    </button>
+</mat-form-field>
+<button
+    id="browse"
+    mat-raised-button
+    color="primary"
+    (click)="onBrowse()"
+>
+    Browse
+</button>
+<input
+    #filePicker
+    (change)="onFileChanged()"
+    type="file"
+    hidden
+>

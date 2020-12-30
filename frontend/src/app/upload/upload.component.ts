@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UploadService } from '../services/upload.service';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-upload',
@@ -8,13 +7,14 @@ import { FormControl, FormGroup } from '@angular/forms';
     styleUrls: ['./upload.component.less'],
 })
 export class UploadComponent {
-
-    fileControl = new FormControl(null);
-    form = new FormGroup({
-        'file': this.fileControl
-    });
+    file: File | null = null;
 
     constructor(private readonly uploads: UploadService) { }
+
+    onFileChanged(file: File | null) {
+        this.file = file;
+        console.log(file);
+    }
 
     onSubmit() {
 

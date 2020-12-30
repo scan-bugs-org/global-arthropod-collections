@@ -27,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MapComponent } from './map/map.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UploadComponent } from './upload/upload.component';
+import { FileUploaderComponent } from './upload/file-uploader/file-uploader.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { UploadComponent } from './upload/upload.component';
         LoadingComponent,
         LoadingComponent,
         MapComponent,
-        UploadComponent
+        UploadComponent,
+        FileUploaderComponent
     ],
     imports: [
         BrowserModule,
