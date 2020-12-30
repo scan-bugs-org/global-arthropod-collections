@@ -4,7 +4,8 @@ import { AlertService } from '../services/alert.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FileUpload } from '../services/dto/file-upload.dto';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UPLOAD_ROUTE } from '../routes';
 
 @Component({
     selector: 'app-upload',
@@ -32,7 +33,7 @@ export class UploadComponent {
                 })
             ).subscribe((fileUpload) => {
                 if (fileUpload) {
-                    this.router.navigate([`./${fileUpload._id}`]);
+                    this.router.navigate([`/${UPLOAD_ROUTE}/${fileUpload._id}`]);
                 }
             });
         }

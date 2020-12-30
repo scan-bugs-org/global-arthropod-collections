@@ -59,7 +59,7 @@ export class UploadController {
         if (!upload) {
             throw new NotFoundException();
         }
-        return new UploadOutputDto({ id, headers: upload.headers });
+        return new UploadOutputDto({ _id: id, headers: upload.headers });
     }
 
     @Post(':id/map')

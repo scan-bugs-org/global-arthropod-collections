@@ -4,8 +4,14 @@ import { Environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { FileUpload } from './dto/file-upload.dto';
 import { map, tap } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
+import { Exclude, Expose, plainToClass } from 'class-transformer';
 import { LoadingService } from './loading.service';
+
+@Exclude()
+class UploadID {
+    @Expose()
+    _id: string = '';
+}
 
 @Injectable({
     providedIn: 'root',
@@ -17,12 +23,20 @@ export class UploadService {
         private readonly loading: LoadingService,
         private readonly http: HttpClient) { }
 
-    uploadFile(csv: File): Observable<FileUpload> {
+    uploadFile(csv: File): Observable<UploadID> {
         const form = new FormData();
         form.append('file', csv);
 
         this.loading.start();
         return this.http.post(this.UPLOADS_URL, form).pipe(
+            map((upload) => plainToClass(UploadID, upload)),
+            tap(() => this.loading.end())
+        );
+    }
+
+    findByID(id: string): Observable<FileUpload> {
+        this.loading.start();
+        return this.http.get(`${this.UPLOADS_URL}/${id}`).pipe(
             map((upload) => plainToClass(FileUpload, upload)),
             tap(() => this.loading.end())
         );
