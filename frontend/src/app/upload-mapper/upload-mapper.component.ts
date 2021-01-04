@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { AlertService } from '../services/alert.service';
 import { of } from 'rxjs';
 import { FileUpload } from '../services/dto/file-upload.dto';
+import { UPLOAD_ROUTE } from "../routes";
 
 @Component({
     selector: 'app-upload-mapper',
@@ -66,5 +67,17 @@ export class UploadMapperComponent implements OnInit {
     onMappingChanged(csvHeader: string, databaseField: string) {
         this.mapping[csvHeader] = databaseField;
         console.log(this.mapping);
+    }
+
+    onAutoMap() {
+
+    }
+
+    onUpload() {
+
+    }
+
+    onCancel() {
+        this.router.navigate([UPLOAD_ROUTE]);
     }
 }
