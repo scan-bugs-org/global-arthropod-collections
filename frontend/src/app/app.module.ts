@@ -22,13 +22,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MapComponent } from './map/map.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { UploadComponent } from './csv-upload/upload.component';
 import { FileUploaderComponent } from './csv-upload/file-uploader/file-uploader.component';
-import { UploadMapperComponent } from './upload-mapper/upload-mapper.component';
+import { UploadMapperComponent } from "./upload-mapper/upload-mapper.component";
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({

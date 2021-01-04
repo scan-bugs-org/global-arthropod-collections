@@ -11,7 +11,8 @@ export class UploadOutputDto {
         "collectionName",
         "collectionSize",
         "latitude",
-        "longitude"
+        "longitude",
+        "tier",
     ];
 
     private static readonly OPTIONAL_HEADERS = [
@@ -19,7 +20,7 @@ export class UploadOutputDto {
         "institutionCode",
         "country",
         "state",
-        "tier",
+        "size",
         "url"
     ];
 

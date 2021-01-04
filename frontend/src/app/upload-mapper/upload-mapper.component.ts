@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Directive, OnInit, QueryList, ViewChildren } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
 import { UploadService } from '../services/upload.service';
 import { catchError } from 'rxjs/operators';
@@ -15,7 +15,8 @@ import { UPLOAD_ROUTE } from "../routes";
 export class UploadMapperComponent implements OnInit {
     private uploadID: string = '';
     private upload: FileUpload | null = null;
-    public mapping: Record<string, string> = {};
+
+    mapping = new Map<string, string>();
 
     public tableColumns = [
         'csvHeader',
@@ -54,8 +55,8 @@ export class UploadMapperComponent implements OnInit {
                 })
             ).subscribe((fileUpload) => {
                 this.upload = fileUpload;
-                this.allHeaders.forEach((header) => {
-                    this.mapping[header] = '';
+                this.csvHeaders.forEach((header) => {
+                    this.mapping.set(header, '');
                 });
             });
         }
@@ -65,12 +66,23 @@ export class UploadMapperComponent implements OnInit {
     }
 
     onMappingChanged(csvHeader: string, databaseField: string) {
-        this.mapping[csvHeader] = databaseField;
-        console.log(this.mapping);
+        this.mapping.set(csvHeader, databaseField);
     }
 
     onAutoMap() {
+        console.log(this.mapping);
 
+        for (let csvColumn of this.mapping.keys()) {
+            if (this.allHeaders.includes(csvColumn)) {
+                this.mapping.set(csvColumn, csvColumn);
+            }
+            else if (csvColumn === 'lat' && this.allHeaders.includes('latitude')) {
+                this.mapping.set(csvColumn, 'latitude');
+            }
+            else if (csvColumn === 'lng' && this.allHeaders.includes('longitude')) {
+                this.mapping.set(csvColumn, 'longitude');
+            }
+        }
     }
 
     onUpload() {
