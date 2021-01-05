@@ -1,7 +1,7 @@
 import { Exclude, Expose } from "class-transformer";
 
 @Exclude()
-export class HeaderMapping {
+export class HeaderMappingResult {
     @Expose()
     institutions: string[] = [];
 

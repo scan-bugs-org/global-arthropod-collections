@@ -11,6 +11,8 @@
     "prebuild": "npm run bootstrap",
     "build": "lerna run build",
     "clean": "lerna run clean",
+    "start": "concurrently 'npm:*:start'",
+    "start:dev": "concurrently 'npm:*:start:dev'",
     "frontend:start": "lerna run --stream --scope @arthropodindex/frontend start",
     "backend:start": "lerna run --stream --scope @arthropodindex/backend start",
     "frontend:start:dev": "lerna run --stream --scope @arthropodindex/frontend start:dev",
@@ -25,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/scan-bugs-org/global-arthropod-collections/issues"
   },
-  "homepage": "https://github.com/scan-bugs-org/global-arthropod-collections#readme"
+  "homepage": "https://github.com/scan-bugs-org/global-arthropod-collections#readme",
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
 }
