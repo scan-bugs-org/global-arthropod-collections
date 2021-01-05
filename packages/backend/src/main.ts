@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import cors from 'cors';
+import { LoggerInterceptor } from "./logger.interceptor";
 
 const CURRENT_VERSION = "v1";
 
@@ -20,6 +21,7 @@ async function bootstrap() {
 
     // Set up app globals
     app.useGlobalInterceptors(
+        new LoggerInterceptor(),
         new ClassSerializerInterceptor(
             app.get(Reflector),
             {
