@@ -43,7 +43,7 @@ export class UserService {
 
     async login(username: string, password: string): Promise<User> {
         const user = await this.user.findById(username).exec();
-        if (user && user.verifyPassword(password)) {
+        if (!!user && user.verifyPassword(password)) {
             return user;
         }
         return null;
@@ -58,9 +58,11 @@ export class UserService {
 
         const apiKey = uuid4();
 
-        const updatedUser = { ...user, apiKey }
-
-        await this.user.updateOne({ _id: username }, updatedUser);
+        await this.user.updateOne({ _id: username }, { apiKey });
         return apiKey;
+    }
+
+    async checkApiKey(apiKey: string): Promise<User> {
+        return this.user.findOne({ apiKey }).exec();
     }
 }

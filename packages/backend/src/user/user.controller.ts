@@ -25,9 +25,9 @@ export class UserController {
     async login(@Req() request): Promise<LoginOutputDto> {
         const apiKey = await this.user.getApiKey(request.user);
 
-        if (!apiKey) {
-            throw new UnauthorizedException();
-        }
+        // if (!!apiKey) {
+        //     throw new UnauthorizedException();
+        // }
 
         return new LoginOutputDto({ apiKey });
     }

@@ -15,7 +15,6 @@ const UserSchema = new Schema({
     },
     apiKey: {
         type: String,
-        required: true,
         default: ''
     }
 });

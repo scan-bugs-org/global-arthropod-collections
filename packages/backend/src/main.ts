@@ -46,6 +46,7 @@ async function bootstrap() {
         const swaggerOpts = new DocumentBuilder()
             .setTitle('Global arthropod collections')
             .setVersion('1.0')
+            .addApiKey({ type: "apiKey", name: 'Authorization' }, 'Authorization')
             .build();
 
         const swaggerDoc = SwaggerModule.createDocument(app, swaggerOpts);

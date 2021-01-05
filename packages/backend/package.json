@@ -36,6 +36,7 @@
     "helmet": "^4.2.0",
     "mongoose": "^5.11.4",
     "passport": "^0.4.1",
+    "passport-headerapikey": "^1.2.2",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
