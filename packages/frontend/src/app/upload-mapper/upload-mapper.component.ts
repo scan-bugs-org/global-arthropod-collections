@@ -6,6 +6,8 @@ import { AlertService } from '../services/alert.service';
 import { of } from 'rxjs';
 import { FileUpload } from '../services/dto/file-upload.dto';
 import { UPLOAD_ROUTE } from "../routes";
+import { HeaderMappingInputInterface } from "@arthropodindex/common";
+import { HeaderMap } from "../services/dto/header-map.dto";
 
 @Component({
     selector: 'app-upload-mapper',
@@ -16,28 +18,35 @@ export class UploadMapperComponent implements OnInit {
     private uploadID: string = '';
     private upload: FileUpload | null = null;
 
-    mapping = new Map<string, string>();
+    mapping = new HeaderMap();
     result = "";
 
     public tableColumns = [
-        'csvHeader',
-        'databaseField'
+        'databaseField',
+        'csvHeader'
     ];
+
+    get allHeaders(): string[] {
+        return Object.keys(this.mapping);
+    }
 
     get csvHeaders(): string[] {
         return this.upload ? this.upload.headers : [];
     }
 
-    get requiredHeaders(): string[] {
-        return this.upload ? this.upload.requiredHeaders : [];
-    }
+    get formOk(): boolean {
+        if (this.upload) {
+            for (let header of this.upload.requiredHeaders) {
+                if (this.mapping.get(header) === '') {
+                    return false;
+                }
+            }
+        }
+        else {
+            return false;
+        }
 
-    get optionalHeaders(): string[] {
-        return this.upload ? this.upload.optionalHeaders : [];
-    }
-
-    get allHeaders(): string[] {
-        return [...this.requiredHeaders, ...this.optionalHeaders];
+        return true;
     }
 
     constructor(
@@ -46,7 +55,7 @@ export class UploadMapperComponent implements OnInit {
         private readonly alerts: AlertService,
         private readonly router: Router) { }
 
-    ngOnInit(): void {
+    ngOnInit() {
         if (this.currentRoute.snapshot.paramMap.has('id')) {
             this.uploadID = this.currentRoute.snapshot.paramMap.get('id') as string;
             this.uploads.findByID(this.uploadID).pipe(
@@ -56,9 +65,6 @@ export class UploadMapperComponent implements OnInit {
                 })
             ).subscribe((fileUpload) => {
                 this.upload = fileUpload;
-                this.allHeaders.forEach((header) => {
-                    this.mapping.set(header, '');
-                });
             });
         }
         else {
@@ -66,20 +72,16 @@ export class UploadMapperComponent implements OnInit {
         }
     }
 
-    onMappingChanged(csvHeader: string, databaseField: string) {
-        this.mapping.set(csvHeader, databaseField);
-    }
-
     onAutoMap() {
-        for (let csvColumn of this.mapping.keys()) {
-            if (this.allHeaders.includes(csvColumn)) {
-                this.mapping.set(csvColumn, csvColumn);
+        for (let key of this.csvHeaders) {
+            if (this.mapping.keys().includes(key)) {
+                this.mapping.set(key, key);
             }
-            else if (csvColumn === 'lat' && this.allHeaders.includes('latitude')) {
-                this.mapping.set(csvColumn, 'latitude');
+            else if (key === 'lat') {
+                this.mapping.latitude = key;
             }
-            else if (csvColumn === 'lng' && this.allHeaders.includes('longitude')) {
-                this.mapping.set(csvColumn, 'longitude');
+            else if (key === 'lng') {
+                this.mapping.longitude = key;
             }
         }
     }
@@ -92,5 +94,9 @@ export class UploadMapperComponent implements OnInit {
 
     onCancel() {
         this.router.navigate([UPLOAD_ROUTE]);
+    }
+
+    headerIsRequired(header: string): boolean {
+        return !!this.upload && this.upload.requiredHeaders.includes(header);
     }
 }

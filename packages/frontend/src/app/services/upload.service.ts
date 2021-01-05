@@ -7,6 +7,7 @@ import { map, tap } from 'rxjs/operators';
 import { Exclude, Expose, plainToClass } from 'class-transformer';
 import { LoadingService } from './loading.service';
 import { HeaderMappingResult } from "./dto/header-mapping-result.dto";
+import { HeaderMappingInputInterface } from "@arthropodindex/common";
 
 @Exclude()
 class UploadID {
@@ -43,15 +44,9 @@ export class UploadService {
         );
     }
 
-    mapUpload(id: string, mapping: Map<string, string>): Observable<HeaderMappingResult> {
+    mapUpload(id: string, mapping: HeaderMappingInputInterface): Observable<HeaderMappingResult> {
         this.loading.start();
-
-        const mappingJSON: Record<string, string> = {};
-        for (let [key, val] of mapping.entries()) {
-            mappingJSON[key] = val;
-        }
-
-        return this.http.post(`${this.UPLOADS_URL}/${id}`, mappingJSON).pipe(
+        return this.http.post(`${this.UPLOADS_URL}/${id}`, mapping).pipe(
             map((result) => plainToClass(HeaderMappingResult, result)),
             tap(() => this.loading.end())
         );
