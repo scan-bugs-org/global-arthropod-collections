@@ -20,6 +20,7 @@ export class LoggerInterceptor implements NestInterceptor {
 
         const method = request.method;
         const client = request.ip;
+        const userAgent = request.get('User-Agent') || '';
 
         let fullUrl = `http${request.secure ? 's' : ''}://`;
         fullUrl += `${request.hostname}${request.originalUrl}`
@@ -30,8 +31,8 @@ export class LoggerInterceptor implements NestInterceptor {
             const responseSize = response.get('Content-Length') || 0;
             const responseTime = `${Date.now() - startTime}ms`;
 
-            let logMsg = `${method} ${url.pathname} ${status} ${client}`;
-            logMsg += ` - ${responseSize} ${responseTime}`;
+            let logMsg = `${method} ${url.pathname} ${status} - `;
+            logMsg += `${client} ${userAgent} ${responseSize} ${responseTime}`;
 
             if (status < 200 || status > 399) {
                 this.logger.warn(logMsg);
