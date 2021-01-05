@@ -28,7 +28,7 @@ export class LoggerInterceptor implements NestInterceptor {
             const responseSize = response.get('Content-Length') || 0;
             const responseTime = `${Date.now() - startTime}ms`;
 
-            let logMsg = `${method} ${url.pathname} ${status} - `;
+            let logMsg = `${method} ${url} ${status} - `;
             logMsg += `${client} ${userAgent} ${responseSize} ${responseTime}`;
 
             if (status < 200 || status > 399) {
