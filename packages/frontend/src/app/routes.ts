@@ -3,3 +3,4 @@ export const COLLECTION_ROUTE = 'collections';
 export const LIST_ROUTE = 'resources';
 export const MAP_ROUTE = '';
 export const UPLOAD_ROUTE = 'uploads';
+export const LOGIN_ROUTE = 'login';

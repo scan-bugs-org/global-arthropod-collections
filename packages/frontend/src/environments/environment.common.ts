@@ -7,4 +7,5 @@ export class CommonEnvironment {
     static institutionUrl = `${CommonEnvironment.apiUrl}/institutions`;
     static collectionUrl = `${CommonEnvironment.apiUrl}/collections`;
     static uploadUrl = `${CommonEnvironment.apiUrl}/uploads`;
+    static loginUrl = `${CommonEnvironment.apiUrl}/login`;
 }
