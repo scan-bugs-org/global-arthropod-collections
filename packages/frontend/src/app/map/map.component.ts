@@ -110,15 +110,9 @@ export class MapComponent {
 
     static doTooltip(feature: any, latLng: LatLng): CircleMarker {
         const marker = new CircleMarker(latLng);
-        let popupContent = '';
-
-        if (feature.properties.url && feature.properties.url !== "NA") {
-            popupContent += `<a href='${COLLECTION_ROUTE}/${ feature.properties.id }'>`;
-        }
+        let popupContent = `<a href='${COLLECTION_ROUTE}/${ feature.properties.id }'>`;
         popupContent += `<h3>${ feature.properties.name }</h3>`;
-        if (feature.properties.url && feature.properties.url !== '') {
-            popupContent += "</a>";
-        }
+        popupContent += "</a>";
 
         marker.bindPopup(
             popupContent,
