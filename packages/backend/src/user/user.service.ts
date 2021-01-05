@@ -1,7 +1,8 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { User, USER_PROVIDER_ID } from '../database/models/User';
 import { Model } from 'mongoose';
 import crypto from 'crypto';
+import { v4 as uuid4 } from 'uuid';
 
 @Injectable()
 export class UserService {
@@ -46,5 +47,20 @@ export class UserService {
             return user;
         }
         return null;
+    }
+
+    async getApiKey(username: string): Promise<string> {
+        const user = await this.user.findById(username).lean().exec();
+
+        if (!user) {
+            return null;
+        }
+
+        const apiKey = uuid4();
+
+        const updatedUser = { ...user, apiKey }
+
+        await this.user.updateOne({ _id: username }, updatedUser);
+        return apiKey;
     }
 }

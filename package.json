@@ -10,6 +10,7 @@
     "unbootstrap": "find . -maxdepth 3 -mindepth 2 -type d -name 'node_modules' -exec rm -rf {} \\;",
     "prebuild": "npm run bootstrap",
     "build": "lerna run build",
+    "build:common": "lerna run --stream --scope @arthropodindex/common build",
     "clean": "lerna run clean",
     "start": "concurrently 'npm:*:start'",
     "start:dev": "concurrently 'npm:*:start:dev'",
