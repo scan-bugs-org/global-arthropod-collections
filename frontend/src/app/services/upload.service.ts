@@ -6,6 +6,7 @@ import { FileUpload } from './dto/file-upload.dto';
 import { map, tap } from 'rxjs/operators';
 import { Exclude, Expose, plainToClass } from 'class-transformer';
 import { LoadingService } from './loading.service';
+import { HeaderMapping } from "./dto/header-mapping.dto";
 
 @Exclude()
 class UploadID {
@@ -38,6 +39,20 @@ export class UploadService {
         this.loading.start();
         return this.http.get(`${this.UPLOADS_URL}/${id}`).pipe(
             map((upload) => plainToClass(FileUpload, upload)),
+            tap(() => this.loading.end())
+        );
+    }
+
+    mapUpload(id: string, mapping: Map<string, string>): Observable<HeaderMapping> {
+        this.loading.start();
+
+        const mappingJSON: Record<string, string> = {};
+        for (let [key, val] of mapping.entries()) {
+            mappingJSON[key] = val;
+        }
+
+        return this.http.post(`${this.UPLOADS_URL}/${id}`, mappingJSON).pipe(
+            map((result) => plainToClass(HeaderMapping, result)),
             tap(() => this.loading.end())
         );
     }

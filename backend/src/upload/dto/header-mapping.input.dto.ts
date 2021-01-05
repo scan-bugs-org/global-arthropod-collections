@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class HeaderMappingInputDto {
     @ApiProperty()
@@ -16,10 +16,12 @@ export class HeaderMappingInputDto {
 
     @ApiProperty()
     @IsString()
+    @IsNotEmpty()
     collectionName: string;
 
     @ApiProperty()
     @IsString()
+    @IsNotEmpty()
     size: string;
 
     @ApiProperty()
@@ -32,11 +34,13 @@ export class HeaderMappingInputDto {
 
     @ApiProperty()
     @IsString()
-    lat: string;
+    @IsNotEmpty()
+    latitude: string;
 
     @ApiProperty()
     @IsString()
-    lng: string;
+    @IsNotEmpty()
+    longitude: string;
 
     @ApiProperty()
     @IsString()

@@ -23,7 +23,6 @@ import { CsvFileInterceptor, CsvFile } from './csv-file.interceptor';
 import { HeaderMappingInputDto } from './dto/header-mapping.input.dto';
 import { HeaderMappingOutputDto } from './dto/header-mapping.output.dto';
 import { ObjectIdInterceptor } from '../common/object-id.interceptor';
-import { MapUploadOutputDto } from './dto/map-upload.output.dto';
 
 const FILE_UPLOAD_FIELD = 'file';
 const FILE_TMP_DIR = os.tmpdir();
@@ -65,20 +64,24 @@ export class UploadController {
         });
     }
 
-    @Post(':id/map')
+    @Post(':id')
     @HttpCode(HttpStatus.OK)
     @ApiBody({ type: HeaderMappingInputDto })
     @ApiOkResponse({ type: HeaderMappingOutputDto })
     @UseInterceptors(ObjectIdInterceptor)
     async persistUpload(
         @Param('id') id: string,
-        @Body() mappingData: HeaderMappingInputDto): Promise<MapUploadOutputDto> {
+        @Body() mappingData: HeaderMappingInputDto): Promise<HeaderMappingOutputDto> {
 
         const tmpUpload = await this.uploadService.findByID(id);
         if (!tmpUpload) {
             throw new NotFoundException();
         }
 
-        return this.uploadService.mapUpload(tmpUpload, mappingData);
+        const result = await this.uploadService.mapUpload(tmpUpload, mappingData);
+        return new HeaderMappingOutputDto({
+            collections: result.collections.map((c) => c.name),
+            institutions: result.institutions.map((i) => i.name)
+        });
     }
 }

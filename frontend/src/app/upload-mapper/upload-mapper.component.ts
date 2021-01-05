@@ -17,6 +17,7 @@ export class UploadMapperComponent implements OnInit {
     private upload: FileUpload | null = null;
 
     mapping = new Map<string, string>();
+    result = "";
 
     public tableColumns = [
         'csvHeader',
@@ -55,7 +56,7 @@ export class UploadMapperComponent implements OnInit {
                 })
             ).subscribe((fileUpload) => {
                 this.upload = fileUpload;
-                this.csvHeaders.forEach((header) => {
+                this.allHeaders.forEach((header) => {
                     this.mapping.set(header, '');
                 });
             });
@@ -70,8 +71,6 @@ export class UploadMapperComponent implements OnInit {
     }
 
     onAutoMap() {
-        console.log(this.mapping);
-
         for (let csvColumn of this.mapping.keys()) {
             if (this.allHeaders.includes(csvColumn)) {
                 this.mapping.set(csvColumn, csvColumn);
@@ -86,7 +85,9 @@ export class UploadMapperComponent implements OnInit {
     }
 
     onUpload() {
-
+        this.uploads.mapUpload(this.uploadID, this.mapping).subscribe((r) => {
+            this.result = JSON.stringify(r);
+        });
     }
 
     onCancel() {

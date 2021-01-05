@@ -1,22 +1,29 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import {
     TMP_UPLOAD_PROVIDER_ID,
-    TmpUpload,
-} from '../database/models/TmpUpload';
-import { Model } from 'mongoose';
-import { HeaderMappingInputDto } from './dto/header-mapping.input.dto';
-import { CsvFile } from './csv-file.interceptor';
-import { InstitutionInputDto } from '../institution/dto/institution.input.dto';
+    TmpUpload
+} from "../database/models/TmpUpload";
+import { Model } from "mongoose";
+import { HeaderMappingInputDto } from "./dto/header-mapping.input.dto";
+import { CsvFile } from "./csv-file.interceptor";
+import { InstitutionInputDto } from "../institution/dto/institution.input.dto";
 import {
     Institution,
-    INSTITUTION_PROVIDER_ID,
-} from '../database/models/Institution';
+    INSTITUTION_PROVIDER_ID
+} from "../database/models/Institution";
 import {
     Collection,
-    COLLECTION_PROVIDER_ID,
-} from '../database/models/Collection';
-import { CollectionInputDto } from '../collection/dto/collection.input.dto';
-import { MapUploadOutputDto } from './dto/map-upload.output.dto';
+    COLLECTION_PROVIDER_ID
+} from "../database/models/Collection";
+import { CollectionInputDto } from "../collection/dto/collection.input.dto";
+import { MapUploadOutputDto } from "./dto/map-upload.output.dto";
+import { HeaderMappingOutputDto } from "./dto/header-mapping.output.dto";
+import { map } from "rxjs/operators";
+
+type MappingOutput = {
+    institutions: Institution[];
+    collections: Collection[];
+};
 
 @Injectable()
 export class UploadService {
@@ -26,7 +33,8 @@ export class UploadService {
         @Inject(INSTITUTION_PROVIDER_ID)
         private readonly institution: Model<Institution>,
         @Inject(COLLECTION_PROVIDER_ID)
-        private readonly collection: Model<Collection>,) { }
+        private readonly collection: Model<Collection>) {
+    }
 
     async create(data: CsvFile): Promise<string> {
         const upload = await this.upload.create(data);
@@ -44,7 +52,7 @@ export class UploadService {
 
     async mapUpload(
         upload: TmpUpload,
-        mappings: HeaderMappingInputDto): Promise<MapUploadOutputDto> {
+        mappings: HeaderMappingInputDto): Promise<MappingOutput> {
 
         const newInstitutions = [];
         const newCollections = [];
@@ -74,8 +82,8 @@ export class UploadService {
                 location: {
                     country: row[mappings.country] as string,
                     state: row[mappings.state] as string,
-                    lat: row[mappings.lat] as number,
-                    lng: row[mappings.lng] as number
+                    lat: row[mappings.latitude] as number,
+                    lng: row[mappings.longitude] as number
                 },
                 tier: row[mappings.tier] as number || 4,
                 url: row[mappings.url] as string || null,
@@ -92,9 +100,9 @@ export class UploadService {
             newCollections.push(collection);
         }
 
-        const collections = await this.collection.insertMany(newCollections);
+        const collections = await this.collection.insertMany(newCollections) as Collection[];
 
         await this.upload.deleteOne({ _id: upload._id });
-        return new MapUploadOutputDto({ institutions, collections });
+        return { institutions, collections };
     }
 }
