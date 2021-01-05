@@ -87,9 +87,19 @@ export class UploadMapperComponent implements OnInit {
     }
 
     onUpload() {
-        this.uploads.mapUpload(this.uploadID, this.mapping).subscribe((r) => {
-            this.result = JSON.stringify(r);
-        });
+        this.uploads.mapUpload(this.uploadID, this.mapping)
+            .pipe(
+                catchError((e) => {
+                    this.alerts.showError(JSON.stringify(e));
+                    return of(null);
+                })
+            )
+            .subscribe((r) => {
+                if (!!r) {
+                    this.alerts.showMessage(`Created ${r.collections.length} collections`);
+                }
+                this.router.navigate([`/`]);
+            });
     }
 
     onCancel() {

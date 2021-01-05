@@ -102,7 +102,7 @@ export class UploadService {
 
         const collections = await this.collection.insertMany(newCollections) as Collection[];
 
-        await this.upload.deleteOne({ _id: upload._id });
+        await this.upload.deleteOne({ _id: upload._id }).exec();
         return { institutions, collections };
     }
 }
