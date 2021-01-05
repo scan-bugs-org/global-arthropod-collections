@@ -15,13 +15,14 @@ import {
 import { UploadComponent } from './csv-upload/upload.component';
 import { UploadMapperComponent } from './upload-mapper/upload-mapper.component';
 import { LoginComponent } from "./login/login.component";
+import { UserGuard } from "./login/user.guard";
 
 const routes: Routes = [
-    { path: `${INSTITUTION_ROUTE}/:id`, component: InstitutionComponent },
-    { path: `${COLLECTION_ROUTE}/:id`, component: CollectionComponent },
-    { path: `${UPLOAD_ROUTE}/:id`, component: UploadMapperComponent },
-    { path: LIST_ROUTE, component: ResourceListComponent },
-    { path: UPLOAD_ROUTE, component: UploadComponent },
+    { path: `${INSTITUTION_ROUTE}/:id`, component: InstitutionComponent, canActivate: [UserGuard], canActivateChild: [UserGuard] },
+    { path: `${COLLECTION_ROUTE}/:id`, component: CollectionComponent, canActivate: [UserGuard], canActivateChild: [UserGuard] },
+    { path: `${UPLOAD_ROUTE}/:id`, component: UploadMapperComponent, canActivate: [UserGuard], canActivateChild: [UserGuard] },
+    { path: LIST_ROUTE, component: ResourceListComponent, canActivate: [UserGuard] },
+    { path: UPLOAD_ROUTE, component: UploadComponent, canActivate: [UserGuard] },
     { path: MAP_ROUTE, component: MapComponent },
     { path: LOGIN_ROUTE, component: LoginComponent },
     { path: "**", redirectTo: MAP_ROUTE }
