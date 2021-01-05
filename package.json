@@ -1,40 +1,25 @@
 {
-  "name": "global-arthropod-collections",
-  "version": "0.0.1",
-  "description": "Map of global arthropod collections",
-  "main": "bin/server.js",
+  "name": "@arthropodindex/monorepo",
+  "version": "1.0.0",
+  "private": "true",
+  "dependencies": {
+    "lerna": "^3.22.1"
+  },
   "scripts": {
-    "start": "NODE_ENV=production node bin/server.js",
-    "devstart": "NODE_ENV=development nodemon bin/server.js"
+    "bootstrap": "lerna bootstrap",
+    "unbootstrap": "find . -maxdepth 3 -mindepth 2 -type d -name 'node_modules' -exec rm -rf {} \\;",
+    "prebuild": "npm run bootstrap",
+    "build": "lerna run build",
+    "clean": "lerna run clean"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/scan-bugs-org/global-arthropod-collections.git"
   },
-  "author": "Evin Dunn",
-  "license": "GPL-3.0-or-later",
+  "author": "Evin Dunn <evin@scan-bugs.org>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/scan-bugs-org/global-arthropod-collections/issues"
   },
-  "homepage": "https://github.com/scan-bugs-org/global-arthropod-collections#readme",
-  "dependencies": {
-    "bcrypt": "^5.0.0",
-    "body-parser": "^1.19.0",
-    "connect-mongo": "^3.2.0",
-    "connect-multiparty": "^2.2.0",
-    "csv-parser": "^2.3.3",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "helmet": "^4.2.0",
-    "mongoose": "^5.10.9",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.2",
-    "nunjucks": "^3.2.2",
-    "nunjucks-date-filter": "^0.1.1",
-    "uuid": "^7.0.3"
-  },
-  "devDependencies": {
-    "chokidar": "^3.4.3",
-    "nodemon": "^2.0.5"
-  }
+  "homepage": "https://github.com/scan-bugs-org/global-arthropod-collections#readme"
 }
