@@ -10,7 +10,11 @@
     "unbootstrap": "find . -maxdepth 3 -mindepth 2 -type d -name 'node_modules' -exec rm -rf {} \\;",
     "prebuild": "npm run bootstrap",
     "build": "lerna run build",
-    "clean": "lerna run clean"
+    "clean": "lerna run clean",
+    "frontend:start": "lerna run --stream --scope @arthropodindex/frontend start",
+    "backend:start": "lerna run --stream --scope @arthropodindex/backend start",
+    "frontend:start:dev": "lerna run --stream --scope @arthropodindex/frontend start:dev",
+    "backend:start:dev": "lerna run --stream --scope @arthropodindex/backend start:dev"
   },
   "repository": {
     "type": "git",

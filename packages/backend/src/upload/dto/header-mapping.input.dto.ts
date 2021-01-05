@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from "class-validator";
+import { HeaderMappingInputInterface } from "@arthropodindex/common";
 
-export class HeaderMappingInputDto {
+export class HeaderMappingInputDto implements HeaderMappingInputInterface {
     @ApiProperty()
     @IsString()
     institutionName: string;
