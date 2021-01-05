@@ -40,7 +40,11 @@ export class UserService {
         }));
     }
 
-    findByUsername(id: string): Promise<User> {
-        return this.user.findById(id).exec();
+    async login(username: string, password: string): Promise<User> {
+        const user = await this.user.findById(username).exec();
+        if (user && user.verifyPassword(password)) {
+            return user;
+        }
+        return null;
     }
 }

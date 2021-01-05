@@ -22,11 +22,12 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@arthropodindex/common": "~0.0.1",
     "@nestjs/common": "^7.5.5",
     "@nestjs/core": "^7.5.5",
+    "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.5.5",
     "@nestjs/swagger": "^4.7.5",
-    "@arthropodindex/common": "~0.0.1",
     "bcrypt": "^5.0.0",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
@@ -34,6 +35,8 @@
     "csv-parser": "^3.0.0",
     "helmet": "^4.2.0",
     "mongoose": "^5.11.4",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "~6.6.0",
