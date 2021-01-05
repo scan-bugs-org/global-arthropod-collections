@@ -73,6 +73,8 @@ export class InstitutionController {
     }
 
     @Patch(':id')
+    @UseGuards(ApiKeyGuard)
+    @ApiSecurity('Authorization')
     @ApiResponse({ status: HttpStatus.OK, type: InstitutionOutputDto })
     async updateByID(
         @Param('id') id: string,
@@ -85,6 +87,8 @@ export class InstitutionController {
     }
 
     @Delete(':id')
+    @UseGuards(ApiKeyGuard)
+    @ApiSecurity('Authorization')
     @HttpCode(HttpStatus.NO_CONTENT)
     async deleteByID(@Param('id') id: string): Promise<void> {
         const deletedSuccess = await this.institutionService.deleteByID(id);

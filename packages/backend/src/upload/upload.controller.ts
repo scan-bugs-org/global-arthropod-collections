@@ -4,16 +4,16 @@ import {
     Controller, Get,
     HttpCode, HttpStatus, Logger, NotFoundException, Param,
     Post,
-    UploadedFile,
-    UseInterceptors,
-} from '@nestjs/common';
+    UploadedFile, UseGuards,
+    UseInterceptors
+} from "@nestjs/common";
 import {
     ApiBody,
     ApiConsumes,
     ApiOkResponse, ApiProperty,
-    ApiResponse,
-    ApiTags,
-} from '@nestjs/swagger';
+    ApiResponse, ApiSecurity,
+    ApiTags
+} from "@nestjs/swagger";
 import { UploadService } from './upload.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadOutputDto } from './dto/upload.output.dto';
@@ -23,6 +23,7 @@ import { CsvFileInterceptor, CsvFile } from './csv-file.interceptor';
 import { HeaderMappingInputDto } from './dto/header-mapping.input.dto';
 import { HeaderMappingOutputDto } from './dto/header-mapping.output.dto';
 import { ObjectIdInterceptor } from '../common/object-id.interceptor';
+import { ApiKeyGuard } from "../user/guards/api-key.guard";
 
 const FILE_UPLOAD_FIELD = 'file';
 const FILE_TMP_DIR = os.tmpdir();
@@ -38,6 +39,8 @@ export class UploadController {
     constructor(private readonly uploadService: UploadService) {}
 
     @Post()
+    @UseGuards(ApiKeyGuard)
+    @ApiSecurity('Authorization')
     @UseInterceptors(
         FileInterceptor(FILE_UPLOAD_FIELD, { dest: FILE_TMP_DIR }),
         CsvFileInterceptor
@@ -52,6 +55,8 @@ export class UploadController {
     }
 
     @Get(':id')
+    @UseGuards(ApiKeyGuard)
+    @ApiSecurity('Authorization')
     @ApiResponse({ type: UploadOutputDto })
     async findByID(@Param('id') id: string): Promise<UploadOutputDto> {
         const upload = await this.uploadService.findByID(id);
@@ -65,6 +70,8 @@ export class UploadController {
     }
 
     @Post(':id')
+    @UseGuards(ApiKeyGuard)
+    @ApiSecurity('Authorization')
     @HttpCode(HttpStatus.OK)
     @ApiBody({ type: HeaderMappingInputDto })
     @ApiOkResponse({ type: HeaderMappingOutputDto })
