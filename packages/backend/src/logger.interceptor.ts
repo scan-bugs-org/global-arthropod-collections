@@ -18,13 +18,10 @@ export class LoggerInterceptor implements NestInterceptor {
         const request = http.getRequest<Request>();
         const response = http.getResponse<Response>();
 
+        const url = request.originalUrl;
         const method = request.method;
         const client = request.ip;
         const userAgent = request.get('User-Agent') || '';
-
-        let fullUrl = `http${request.secure ? 's' : ''}://`;
-        fullUrl += `${request.hostname}${request.originalUrl}`
-        const url = new URL(fullUrl);
 
         response.on('finish', () => {
             const status = response.statusCode;
