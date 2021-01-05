@@ -19,7 +19,7 @@ export class MapComponent {
 
     private static readonly MAPBOX_TILES_URL = Environment.tilesUrl;
 
-    private static readonly MIN_ZOOM = 2;
+    private static readonly MIN_ZOOM = 3;
     private static readonly MAX_ZOOM = 16;
     private static readonly MAX_BOUNDS = new LatLngBounds([[-90, -180], [90, 180]]);
 
@@ -92,17 +92,17 @@ export class MapComponent {
     }
 
     private static getMarkerRadius(map: Map, feature: any) {
-        let zoomComp = map.getZoom() / (MapComponent.MIN_ZOOM + 1);
+        let zoomComp = map.getZoom() / MapComponent.MIN_ZOOM;
 
         switch (feature.properties.tier) {
             case 1:
-                return 6 * zoomComp;
+                return 7 * zoomComp;
             case 2:
-                return 5 * zoomComp;
+                return 6 * zoomComp;
             case 3:
-                return 4.5 * zoomComp;
+                return 5 * zoomComp;
             case 4:
-                return 3 * zoomComp;
+                return 4 * zoomComp;
             default:
                 return 0;
         }
