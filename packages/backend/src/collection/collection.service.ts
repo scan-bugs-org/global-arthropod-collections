@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Collection, COLLECTION_PROVIDER_ID, GeoJsonCollection } from '../database/models/Collection';
 import { Model } from 'mongoose';
+import { Institution } from "../database/models/Institution";
 
 interface CollectionData {
     code?: string;
@@ -54,14 +55,6 @@ type FindAllParams = {
     geojson?: boolean;
 }
 
-const DEFAULT_IID = "";
-const DEFAULT_TIER = -1;
-const DefaultFindAllParams: FindAllParams = {
-    iid: DEFAULT_IID,
-    tier: DEFAULT_TIER,
-    geojson: false
-};
-
 function stripUndefined(object: Record<string, unknown>): Record<string, unknown> {
     const newObj = {};
     Object.keys(object).forEach((k) => {
@@ -85,15 +78,14 @@ export class CollectionService {
 
     async findAll(inputParams: FindAllParams): Promise<Collection[] | GeoJsonCollection[]> {
         inputParams = stripUndefined(inputParams);
-        inputParams = Object.assign(DefaultFindAllParams, inputParams);
-        const findParams: FindAllParams = {};
+        const findParams = {};
 
-        if (inputParams.iid !== DEFAULT_IID) {
-            findParams.iid = inputParams.iid;
+        if (inputParams.iid) {
+            findParams['institution'] = inputParams.iid;
         }
 
-        if (inputParams.tier !== DEFAULT_TIER && !Number.isNaN(inputParams.tier)) {
-            findParams.tier = inputParams.tier;
+        if (inputParams.tier) {
+            findParams['tier'] = inputParams.tier;
         }
 
         const collections = await this.collection.find(findParams)
