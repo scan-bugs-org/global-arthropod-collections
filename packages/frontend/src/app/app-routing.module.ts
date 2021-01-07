@@ -18,8 +18,8 @@ import { LoginComponent } from "./login/login.component";
 import { UserGuard } from "./login/user.guard";
 
 const routes: Routes = [
-    { path: `${INSTITUTION_ROUTE}/:id`, component: InstitutionComponent, canActivate: [UserGuard], canActivateChild: [UserGuard] },
-    { path: `${COLLECTION_ROUTE}/:id`, component: CollectionComponent, canActivate: [UserGuard], canActivateChild: [UserGuard] },
+    { path: `${INSTITUTION_ROUTE}/:id`, component: InstitutionComponent },
+    { path: `${COLLECTION_ROUTE}/:id`, component: CollectionComponent },
     { path: `${UPLOAD_ROUTE}/:id`, component: UploadMapperComponent, canActivate: [UserGuard], canActivateChild: [UserGuard] },
     { path: LIST_ROUTE, component: ResourceListComponent, canActivate: [UserGuard] },
     { path: UPLOAD_ROUTE, component: UploadComponent, canActivate: [UserGuard] },

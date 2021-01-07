@@ -8,6 +8,7 @@ import { AlertService } from '../services/alert.service';
 import { CollectionListItem } from '../services/dto/collection-list-item.dto';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { COLLECTION_ROUTE } from '../routes';
+import { UserService } from "../services/user.service";
 
 type ApiResult = {
     institution: Institution;
@@ -25,6 +26,7 @@ export class InstitutionComponent implements OnInit {
     public institution: Institution | null = null;
     public collections: CollectionListItem[] = [];
     public isEditing = false;
+    public isLoggedIn = false;
 
     public readonly formControlCode = new FormControl('');
     public readonly formControlName = new FormControl('');
@@ -34,6 +36,7 @@ export class InstitutionComponent implements OnInit {
     });
 
     constructor(
+        private readonly userService: UserService,
         private readonly router: Router,
         private readonly currentRoute: ActivatedRoute,
         private readonly institutions: InstitutionService,
@@ -43,6 +46,10 @@ export class InstitutionComponent implements OnInit {
         this.loadInstitution();
         this.currentRoute.queryParamMap.subscribe((paramMap) => {
             this.isEditing = paramMap.get('edit') === 'true';
+        });
+
+        this.userService.isLoggedIn.subscribe((isLoggedIn) => {
+            this.isLoggedIn = isLoggedIn;
         });
     }
 

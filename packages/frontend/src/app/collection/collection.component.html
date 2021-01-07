@@ -6,7 +6,7 @@
             {{ collection.institution.name }}
         </a>
     </span>
-    <button class="icon-button" (click)="isEditing = true" [disabled]="isEditing">
+    <button *ngIf="isLoggedIn" class="icon-button" (click)="isEditing = true" [disabled]="isEditing">
         <mat-icon color="primary">edit</mat-icon>
     </button>
 </h1>

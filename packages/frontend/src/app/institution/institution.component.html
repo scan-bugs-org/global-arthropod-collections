@@ -5,6 +5,7 @@
             ({{ institution.code }})
         </span>
         <button
+            *ngIf="isLoggedIn"
             [disabled]="isEditing"
             (click)="toggleEdit(true)"
         >
