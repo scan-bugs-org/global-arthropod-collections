@@ -12,31 +12,31 @@
             </div>
         </div>
 
-        <span *ngIf="isLoggedIn">
-            <span>
-                <a [routerLink]="LIST_ROUTE">Institutions</a>
-            </span>
-            <span>
-                <a
-                    [routerLink]="LIST_ROUTE"
-                    [queryParams]="{ tab: 1 }"
-                >
-                    Collections
-                </a>
-            </span>
-            <span>
-                <a [routerLink]="UPLOAD_ROUTE">Upload</a>
-            </span>
-        </span>
+<!--        <span *ngIf="isLoggedIn">-->
+<!--            <span>-->
+<!--                <a [routerLink]="LIST_ROUTE">Institutions</a>-->
+<!--            </span>-->
+<!--            <span>-->
+<!--                <a-->
+<!--                    [routerLink]="LIST_ROUTE"-->
+<!--                    [queryParams]="{ tab: 1 }"-->
+<!--                >-->
+<!--                    Collections-->
+<!--                </a>-->
+<!--            </span>-->
+<!--            <span>-->
+<!--                <a [routerLink]="UPLOAD_ROUTE">Upload</a>-->
+<!--            </span>-->
+<!--        </span>-->
 
-        <span class="ml-auto">
-            <ng-container *ngIf="isLoggedIn else logIn">
-                <a (click)="logout()">Log out</a>
-            </ng-container>
-            <ng-template #logIn>
-            <a [routerLink]="LOGIN_ROUTE">Log In</a>
-            </ng-template>
-        </span>
+<!--        <span class="ml-auto">-->
+<!--            <ng-container *ngIf="isLoggedIn else logIn">-->
+<!--                <a (click)="logout()">Log out</a>-->
+<!--            </ng-container>-->
+<!--            <ng-template #logIn>-->
+<!--            <a [routerLink]="LOGIN_ROUTE">Log In</a>-->
+<!--            </ng-template>-->
+<!--        </span>-->
     </mat-toolbar>
 </div>
 
