@@ -31,6 +31,7 @@ import { FileUploaderComponent } from './csv-upload/file-uploader/file-uploader.
 import { UploadMapperComponent } from "./upload-mapper/upload-mapper.component";
 import { MatSelectModule } from '@angular/material/select';
 import { LoginComponent } from './login/login.component';
+import { ExtendedModule } from "@angular/flex-layout";
 
 @NgModule({
     declarations: [
@@ -69,6 +70,7 @@ import { LoginComponent } from './login/login.component';
         MatCheckboxModule,
         LeafletModule,
         MatSelectModule,
+        ExtendedModule
     ],
     providers: [
         {
