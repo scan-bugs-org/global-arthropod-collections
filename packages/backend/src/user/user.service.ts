@@ -69,4 +69,12 @@ export class UserService {
             { user: username, accessToken: token }
         ).lean().exec();
     }
+
+    async deleteRefreshToken(username: string, token: string): Promise<void> {
+        await this.userTokens.deleteOne({ user: username, refreshToken: token }).exec();
+    }
+
+    async deleteAccessToken(username: string, token: string): Promise<void> {
+        await this.userTokens.deleteOne({ user: username, accessToken: token }).exec();
+    }
 }
