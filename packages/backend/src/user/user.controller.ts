@@ -22,8 +22,7 @@ export class UserController {
     @HttpCode(HttpStatus.OK)
     @ApiBody({ type: LoginInputDto })
     @ApiResponse({ status: HttpStatus.OK, type: LoginOutputDto })
-    async login(@Req() request): Promise<LoginOutputDto> {
-        const apiKey = await this.user.getApiKey(request.user);
-        return new LoginOutputDto({ apiKey });
+    async login(@Req() request): Promise<void> {
+        // return new LoginOutputDto({ apiKey });
     }
 }

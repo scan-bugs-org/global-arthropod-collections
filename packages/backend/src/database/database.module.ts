@@ -5,6 +5,7 @@ import { InstitutionProvider } from './models/Institution';
 import { TmpUploadProvider } from './models/TmpUpload';
 import { UserProvider } from './models/User';
 import { DatabaseProvider } from './database.provider';
+import { OAuthTokenProvider } from "./models/OAuthToken";
 
 @Module({
     providers: [
@@ -13,13 +14,15 @@ import { DatabaseProvider } from './database.provider';
         CollectionProvider,
         InstitutionProvider,
         TmpUploadProvider,
-        UserProvider
+        UserProvider,
+        OAuthTokenProvider
     ],
     exports: [
         CollectionProvider,
         InstitutionProvider,
         TmpUploadProvider,
-        UserProvider
+        UserProvider,
+        OAuthTokenProvider
     ]
 })
 export class DatabaseModule { }

@@ -23,7 +23,6 @@ import { CheckInstitutionPipe } from './check-institution.pipe';
 import { ObjectIdInterceptor } from '../common/object-id.interceptor';
 import { GeoJsonOutputDto } from './dto/geojson.output.dto';
 import { Collection, GeoJsonCollection } from '../database/models/Collection';
-import { ApiKeyGuard } from "../user/guards/api-key.guard";
 
 const FindAllSchema = {
     oneOf: [
@@ -61,8 +60,6 @@ export class CollectionController {
     }
 
     @Post()
-    @UseGuards(ApiKeyGuard)
-    @ApiSecurity('Authorization')
     @HttpCode(HttpStatus.OK)
     @ApiBody({ type: CollectionInputDto, isArray: true })
     async create(
@@ -84,8 +81,6 @@ export class CollectionController {
     }
 
     @Patch(':id')
-    @UseGuards(ApiKeyGuard)
-    @ApiSecurity('Authorization')
     async updateByID(
         @Param('id') id: string,
         @Body(CheckInstitutionPipe) collectionData: CollectionUpdateDto): Promise<CollectionOutputDto> {
@@ -97,8 +92,6 @@ export class CollectionController {
     }
 
     @Delete(':id')
-    @UseGuards(ApiKeyGuard)
-    @ApiSecurity('Authorization')
     @HttpCode(HttpStatus.NO_CONTENT)
     async deleteByID(@Param('id') id: string): Promise<void> {
         const deleted = await this.collection.deleteByID(id);

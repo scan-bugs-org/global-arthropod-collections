@@ -48,21 +48,4 @@ export class UserService {
         }
         return null;
     }
-
-    async getApiKey(username: string): Promise<string> {
-        const user = await this.user.findById(username).lean().exec();
-
-        if (!user) {
-            return null;
-        }
-
-        const apiKey = uuid4();
-
-        await this.user.updateOne({ _id: username }, { apiKey });
-        return apiKey;
-    }
-
-    async checkApiKey(apiKey: string): Promise<User> {
-        return this.user.findOne({ apiKey }).exec();
-    }
 }

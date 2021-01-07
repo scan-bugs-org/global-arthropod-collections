@@ -17,7 +17,6 @@ import { InstitutionOutputDto } from './dto/institution.output.dto';
 import { InstitutionInputDto } from './dto/institution.input.dto';
 import { CollectionOutputDto } from '../collection/dto/collection.output.dto';
 import { ObjectIdInterceptor } from '../common/object-id.interceptor';
-import { ApiKeyGuard } from "../user/guards/api-key.guard";
 
 @Controller('institutions')
 @ApiTags('Institution')
@@ -34,8 +33,6 @@ export class InstitutionController {
     }
 
     @Post()
-    @UseGuards(ApiKeyGuard)
-    @ApiSecurity('Authorization')
     @ApiBody({
         schema: {
             oneOf: [
@@ -73,8 +70,6 @@ export class InstitutionController {
     }
 
     @Patch(':id')
-    @UseGuards(ApiKeyGuard)
-    @ApiSecurity('Authorization')
     @ApiResponse({ status: HttpStatus.OK, type: InstitutionOutputDto })
     async updateByID(
         @Param('id') id: string,
@@ -87,8 +82,6 @@ export class InstitutionController {
     }
 
     @Delete(':id')
-    @UseGuards(ApiKeyGuard)
-    @ApiSecurity('Authorization')
     @HttpCode(HttpStatus.NO_CONTENT)
     async deleteByID(@Param('id') id: string): Promise<void> {
         const deletedSuccess = await this.institutionService.deleteByID(id);

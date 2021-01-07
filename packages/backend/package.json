@@ -22,7 +22,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@arthropodindex/common": "~0.0.1",
+    "@arthropodindex/common": "0.0.1",
     "@nestjs/common": "^7.5.5",
     "@nestjs/core": "^7.5.5",
     "@nestjs/passport": "^7.1.5",

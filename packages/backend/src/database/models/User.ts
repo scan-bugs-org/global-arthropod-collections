@@ -2,6 +2,8 @@ import bcrypt from "bcrypt";
 import { Schema, Document, Connection } from "mongoose";
 import { Provider } from "@nestjs/common";
 import { DATABASE_PROVIDER_ID } from "../database.provider";
+import { OAuthToken } from "./OAuthToken";
+const SchemaTypes = Schema.Types;
 
 // 2-3 hashes/sec
 const saltRounds = 12;
@@ -13,16 +15,16 @@ const UserSchema = new Schema({
         required: true,
         set: setPassword
     },
-    apiKey: {
-        type: String,
-        default: ''
-    }
+    tokens: [{
+        type: SchemaTypes.ObjectId ,
+        ref: 'OAuthToken'
+    }]
 });
 
 export interface User extends Document {
     _id: string;
     password: string;
-    apiKey: string;
+    oAuthTokens: Promise<OAuthToken[]>;
     verifyPassword?: (plainText: string) => boolean
 }
 

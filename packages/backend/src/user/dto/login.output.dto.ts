@@ -5,8 +5,4 @@ export class LoginOutputDto {
     constructor(loginData: Record<string, unknown>) {
         Object.assign(this, loginData);
     }
-
-    @ApiProperty()
-    @Expose()
-    apiKey: string;
 }
