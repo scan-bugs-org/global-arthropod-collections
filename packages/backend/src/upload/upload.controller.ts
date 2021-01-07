@@ -8,6 +8,7 @@ import {
     UseInterceptors
 } from "@nestjs/common";
 import {
+    ApiBearerAuth,
     ApiBody,
     ApiConsumes,
     ApiOkResponse, ApiProperty,
@@ -23,6 +24,7 @@ import { CsvFileInterceptor, CsvFile } from './csv-file.interceptor';
 import { HeaderMappingInputDto } from './dto/header-mapping.input.dto';
 import { HeaderMappingOutputDto } from './dto/header-mapping.output.dto';
 import { ObjectIdInterceptor } from '../common/object-id.interceptor';
+import { JwtAuthGuard } from "../user/guards/jwt-auth.guard";
 
 const FILE_UPLOAD_FIELD = 'file';
 const FILE_TMP_DIR = os.tmpdir();
@@ -38,6 +40,8 @@ export class UploadController {
     constructor(private readonly uploadService: UploadService) {}
 
     @Post()
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @UseInterceptors(
         FileInterceptor(FILE_UPLOAD_FIELD, { dest: FILE_TMP_DIR }),
         CsvFileInterceptor
@@ -52,6 +56,8 @@ export class UploadController {
     }
 
     @Get(':id')
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @ApiResponse({ type: UploadOutputDto })
     async findByID(@Param('id') id: string): Promise<UploadOutputDto> {
         const upload = await this.uploadService.findByID(id);
@@ -65,6 +71,8 @@ export class UploadController {
     }
 
     @Post(':id')
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @HttpCode(HttpStatus.OK)
     @ApiBody({ type: HeaderMappingInputDto })
     @ApiOkResponse({ type: HeaderMappingOutputDto })

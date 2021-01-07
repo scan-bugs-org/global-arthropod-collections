@@ -8,6 +8,7 @@ import {
     Query, SerializeOptions, UseGuards, UseInterceptors
 } from "@nestjs/common";
 import {
+    ApiBearerAuth,
     ApiBody, ApiExtraModels,
     ApiQuery,
     ApiResponse, ApiSecurity,
@@ -23,6 +24,7 @@ import { CheckInstitutionPipe } from './check-institution.pipe';
 import { ObjectIdInterceptor } from '../common/object-id.interceptor';
 import { GeoJsonOutputDto } from './dto/geojson.output.dto';
 import { Collection, GeoJsonCollection } from '../database/models/Collection';
+import { JwtAuthGuard } from "../user/guards/jwt-auth.guard";
 
 const FindAllSchema = {
     oneOf: [
@@ -60,6 +62,8 @@ export class CollectionController {
     }
 
     @Post()
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @HttpCode(HttpStatus.OK)
     @ApiBody({ type: CollectionInputDto, isArray: true })
     async create(
@@ -81,6 +85,8 @@ export class CollectionController {
     }
 
     @Patch(':id')
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     async updateByID(
         @Param('id') id: string,
         @Body(CheckInstitutionPipe) collectionData: CollectionUpdateDto): Promise<CollectionOutputDto> {
@@ -92,6 +98,8 @@ export class CollectionController {
     }
 
     @Delete(':id')
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @HttpCode(HttpStatus.NO_CONTENT)
     async deleteByID(@Param('id') id: string): Promise<void> {
         const deleted = await this.collection.deleteByID(id);

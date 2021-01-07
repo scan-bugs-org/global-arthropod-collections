@@ -6,9 +6,11 @@ import { LocalStrategy } from "./strategies/local.strategy";
 import { JwtModule } from "@nestjs/jwt";
 import { AppConfigService } from "../app-config/app-config.service";
 import { AppConfigModule } from "../app-config/app-config.module";
+import { JwtStrategy } from "./strategies/jwt.strategy";
 
 @Module({
     imports: [
+        AppConfigModule,
         DatabaseModule,
         JwtModule.registerAsync({
             useFactory: (databaseConfigService: AppConfigService) => {
@@ -20,7 +22,8 @@ import { AppConfigModule } from "../app-config/app-config.module";
     ],
     providers: [
         UserService,
-        LocalStrategy
+        LocalStrategy,
+        JwtStrategy
     ],
     controllers: [UserController],
 })

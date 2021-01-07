@@ -9,7 +9,7 @@ import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { LoginInputDto } from './dto/login.input.dto';
 import { UserService } from './user.service';
 import { LocalAuthGuard } from "./guards/local-auth.guard";
-import { Request, Response } from "express";
+import { Response } from "express";
 import { LoginOutputDto } from "./dto/login.output.dto";
 import { JwtService } from "@nestjs/jwt";
 import ms from "ms";
@@ -33,7 +33,10 @@ export class UserController {
         const token = await this.user.createToken(request.user);
 
         const refreshToken = this.jwtService.sign(
-            { refreshToken: token.refreshToken },
+            {
+                sub: request.user,
+                refreshToken: token.refreshToken
+            },
             { expiresIn: UserController.REFRESH_EXPIRES_IN }
         );
 
@@ -49,7 +52,10 @@ export class UserController {
 
         return new LoginOutputDto({
             accessToken: this.jwtService.sign(
-                { accessToken: token.accessToken },
+                {
+                    sub: request.user,
+                    accessToken: token.accessToken
+                },
                 { expiresIn: UserController.ACCESS_EXPIRES_IN }
             )
         });

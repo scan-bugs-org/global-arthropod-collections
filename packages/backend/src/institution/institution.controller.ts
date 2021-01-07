@@ -6,6 +6,7 @@ import {
     Param, Patch, Post, UseGuards, UseInterceptors
 } from "@nestjs/common";
 import {
+    ApiBearerAuth,
     ApiBody,
     ApiResponse,
     ApiSecurity,
@@ -17,6 +18,7 @@ import { InstitutionOutputDto } from './dto/institution.output.dto';
 import { InstitutionInputDto } from './dto/institution.input.dto';
 import { CollectionOutputDto } from '../collection/dto/collection.output.dto';
 import { ObjectIdInterceptor } from '../common/object-id.interceptor';
+import { JwtAuthGuard } from "../user/guards/jwt-auth.guard";
 
 @Controller('institutions')
 @ApiTags('Institution')
@@ -33,6 +35,8 @@ export class InstitutionController {
     }
 
     @Post()
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @ApiBody({
         schema: {
             oneOf: [
@@ -70,6 +74,8 @@ export class InstitutionController {
     }
 
     @Patch(':id')
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @ApiResponse({ status: HttpStatus.OK, type: InstitutionOutputDto })
     async updateByID(
         @Param('id') id: string,
@@ -82,6 +88,8 @@ export class InstitutionController {
     }
 
     @Delete(':id')
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @HttpCode(HttpStatus.NO_CONTENT)
     async deleteByID(@Param('id') id: string): Promise<void> {
         const deletedSuccess = await this.institutionService.deleteByID(id);
