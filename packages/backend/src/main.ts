@@ -3,7 +3,6 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
-import cors from 'cors';
 import { LoggerInterceptor } from "./logger.interceptor";
 
 const CURRENT_VERSION = "v1";
@@ -17,7 +16,7 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.setGlobalPrefix(`api/${CURRENT_VERSION}`)
     app.use(helmet());
-    app.use(cors());
+    app.getHttpAdapter().enableCors({ origin: "*", credentials: true })
 
     // Set up app globals
     app.useGlobalInterceptors(

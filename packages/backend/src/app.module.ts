@@ -3,13 +3,15 @@ import { UserModule } from './user/user.module';
 import { InstitutionModule } from './institution/institution.module';
 import { CollectionModule } from './collection/collection.module';
 import { UploadModule } from './upload/upload.module';
+import { AppConfigModule } from './app-config/app-config.module';
 
 @Module({
     imports: [
         UserModule,
         InstitutionModule,
         CollectionModule,
-        UploadModule
+        UploadModule,
+        AppConfigModule
     ]
 })
 export class AppModule { }

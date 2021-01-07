@@ -1,8 +1,9 @@
 import bcrypt from "bcrypt";
-import { Schema, Document, Connection } from "mongoose";
+import { Schema, Document, Connection, Types as MongooseTypes } from "mongoose";
 import { Provider } from "@nestjs/common";
 import { DATABASE_PROVIDER_ID } from "../database.provider";
 import { OAuthToken } from "./OAuthToken";
+
 const SchemaTypes = Schema.Types;
 
 // 2-3 hashes/sec
@@ -16,7 +17,7 @@ const UserSchema = new Schema({
         set: setPassword
     },
     tokens: [{
-        type: SchemaTypes.ObjectId ,
+        type: SchemaTypes.ObjectId,
         ref: 'OAuthToken'
     }]
 });
@@ -24,7 +25,7 @@ const UserSchema = new Schema({
 export interface User extends Document {
     _id: string;
     password: string;
-    oAuthTokens: Promise<OAuthToken[]>;
+    tokens: MongooseTypes.Array<OAuthToken>;
     verifyPassword?: (plainText: string) => boolean
 }
 

@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
-import { DatabaseConfigService } from './database-config.service';
 import { CollectionProvider } from './models/Collection';
 import { InstitutionProvider } from './models/Institution';
 import { TmpUploadProvider } from './models/TmpUpload';
 import { UserProvider } from './models/User';
 import { DatabaseProvider } from './database.provider';
 import { OAuthTokenProvider } from "./models/OAuthToken";
+import { AppConfigModule } from "../app-config/app-config.module";
 
 @Module({
+    imports: [AppConfigModule],
     providers: [
-        DatabaseConfigService,
         DatabaseProvider,
         CollectionProvider,
         InstitutionProvider,

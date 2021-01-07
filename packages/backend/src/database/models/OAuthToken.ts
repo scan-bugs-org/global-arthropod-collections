@@ -2,37 +2,24 @@ import { Connection, Schema, Document } from 'mongoose';
 import { Provider } from '@nestjs/common';
 import { DATABASE_PROVIDER_ID } from '../database.provider';
 import { User } from "./User";
-const SchemaTypes = Schema.Types;
 
 const OAuthTokenSchema = new Schema({
     accessToken: {
         type: String
     },
-    accessTokenExpiresOn: {
-        type: Date
-    },
-    clientId: {
-        type: String
-    },
     refreshToken: {
         type: String
     },
-    refreshTokenExpiresOn: {
-        type: Date
-    },
     user: {
-        type: SchemaTypes.ObjectId,
+        type: String,
         ref: 'User'
     }
 });
 
 export interface OAuthToken extends Document {
     readonly accessToken: string;
-    readonly accessTokenExpiresOn: Date;
-    readonly clientId: string;
     readonly refreshToken: string;
-    readonly refreshTokenExpiresOn: Date;
-    readonly user: Promise<User>;
+    readonly user: User | string;
 }
 
 function oAuthTokenModelFactory(connection: Connection) {

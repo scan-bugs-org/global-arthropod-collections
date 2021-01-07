@@ -1,9 +1,9 @@
 import { Provider } from '@nestjs/common';
-import { DatabaseConfigService } from './database-config.service';
 import { Connection, createConnection } from 'mongoose';
+import { AppConfigService } from "../app-config/app-config.service";
 
 
-async function databaseConnectionFactory(database: DatabaseConfigService): Promise<Connection> {
+async function databaseConnectionFactory(database: AppConfigService): Promise<Connection> {
     return createConnection(
         database.mongoUri(),
         {
@@ -20,5 +20,5 @@ export const DATABASE_PROVIDER_ID = 'DATABASE_PROVIDER';
 export const DatabaseProvider: Provider = {
     provide: DATABASE_PROVIDER_ID,
     useFactory: databaseConnectionFactory,
-    inject: [DatabaseConfigService]
+    inject: [AppConfigService]
 };
