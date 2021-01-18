@@ -1,4 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import { AlertService } from "../services/alert.service";
+import { Environment } from "../../environments/environment";
+
+import GoogleUser = gapi.auth2.GoogleUser;
+import GoogleAuth = gapi.auth2.GoogleAuth;
 
 @Component({
     selector: "app-google-sign-in",
@@ -7,28 +12,33 @@ import { Component, OnInit } from "@angular/core";
 })
 export class GoogleSignInComponent implements OnInit {
     gApiReady = false;
-    authInstance = null;
+    authInstance: gapi.auth2.GoogleAuth | null = null;
 
-    constructor() { }
+    constructor(private readonly alert: AlertService) { }
 
     ngOnInit(): void {
-        gapi.load('auth2', () => {
-
-        })
+        GoogleSignInComponent.loadAuth().then((auth) => {
+            this.authInstance = auth;
+            this.gApiReady = true;
+        });
     }
 
     onSignIn() {
+        this.authInstance?.signIn().then((user: GoogleUser) => {
+            console.log(user);
+
+        }).catch((e) => {
+            this.alert.showError(JSON.stringify(e));
+        });
     }
 
-    private static loadAuth(): Promise<gapi.auth2.GoogleAuth> {
+    private static loadAuth(): Promise<GoogleAuth> {
         const loadPromise = new Promise((resolve) => {
             gapi.load('auth2', resolve);
         })
 
-        return loadPromise.then(async () => {
-            return gapi.auth2.init({  }).then(auth => {
-                return auth;
-            })
-        });
+        return loadPromise.then(() => gapi.auth2.init({
+            client_id: Environment.googleClientID
+        }));
     }
 }

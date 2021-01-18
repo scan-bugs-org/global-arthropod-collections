@@ -8,5 +8,6 @@
     <orderEntry type="library" name="leaflet.vectorgrid" level="application" />
     <orderEntry type="library" name="mapbox-gl" level="application" />
     <orderEntry type="library" name="platform" level="application" />
+    <orderEntry type="library" name="api" level="application" />
   </component>
 </module>
