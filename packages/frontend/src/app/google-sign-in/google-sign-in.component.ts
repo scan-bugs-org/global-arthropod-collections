@@ -4,6 +4,7 @@ import { Environment } from "../../environments/environment";
 
 import GoogleUser = gapi.auth2.GoogleUser;
 import GoogleAuth = gapi.auth2.GoogleAuth;
+import { GoogleUserService } from "../services/google-user.service";
 
 @Component({
     selector: "app-google-sign-in",
@@ -14,7 +15,9 @@ export class GoogleSignInComponent implements OnInit {
     gApiReady = false;
     authInstance: gapi.auth2.GoogleAuth | null = null;
 
-    constructor(private readonly alert: AlertService) { }
+    constructor(
+        private readonly userService: GoogleUserService,
+        private readonly alert: AlertService) { }
 
     ngOnInit(): void {
         GoogleSignInComponent.loadAuth().then((auth) => {
@@ -25,14 +28,10 @@ export class GoogleSignInComponent implements OnInit {
 
     onSignIn() {
         this.authInstance?.signIn().then((user: GoogleUser) => {
-            const profile = user.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-
+            this.userService.update(user);
         }).catch((e) => {
             this.alert.showError(JSON.stringify(e));
+            this.userService.update(null);
         });
     }
 
