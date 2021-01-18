@@ -1,0 +1,35 @@
+#sign-in {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    height: 3rem;
+    max-height: 100%;
+
+    #normal, #pressed {
+        max-height: 100%;
+    }
+
+    #normal {
+        display: initial;
+    }
+
+    #pressed {
+        display: none;
+    }
+
+    &:active {
+        outline: none;
+
+        #normal {
+            display: none;
+        }
+
+        #pressed {
+            display: initial;
+        }
+    }
+}

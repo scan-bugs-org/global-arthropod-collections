@@ -14,10 +14,10 @@
     "clean": "lerna run clean",
     "start": "concurrently 'npm:*:start'",
     "start:dev": "concurrently 'npm:*:start:dev'",
-    "frontend:start": "lerna run --stream --scope @arthropodindex/frontend start",
-    "backend:start": "lerna run --stream --scope @arthropodindex/backend start",
-    "frontend:start:dev": "lerna run --stream --scope @arthropodindex/frontend start:dev",
-    "backend:start:dev": "lerna run --stream --scope @arthropodindex/backend start:dev"
+    "frontend:start": "lerna run --no-prefix --stream --scope @arthropodindex/frontend start",
+    "backend:start": "lerna run --no-prefix --stream --scope @arthropodindex/backend start",
+    "frontend:start:dev": "lerna run --no-prefix --stream --scope @arthropodindex/frontend start:dev",
+    "backend:start:dev": "lerna run --no-prefix --stream --scope @arthropodindex/backend start:dev"
   },
   "repository": {
     "type": "git",

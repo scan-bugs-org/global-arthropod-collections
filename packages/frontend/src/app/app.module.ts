@@ -32,6 +32,7 @@ import { UploadMapperComponent } from "./upload-mapper/upload-mapper.component";
 import { MatSelectModule } from '@angular/material/select';
 import { LoginComponent } from './login/login.component';
 import { ExtendedModule } from "@angular/flex-layout";
+import { GoogleSignInComponent } from './google-sign-in/google-sign-in.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { ExtendedModule } from "@angular/flex-layout";
         UploadComponent,
         FileUploaderComponent,
         UploadMapperComponent,
-        LoginComponent
+        LoginComponent,
+        GoogleSignInComponent
     ],
     imports: [
         BrowserModule,
