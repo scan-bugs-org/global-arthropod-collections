@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { Institution } from './dto/institution.dto';
-import { LoadingService } from './loading.service';
+import { LoadingService } from '../loading/loading.service';
 import { CollectionListItem } from './dto/collection-list-item.dto';
 
 @Injectable({

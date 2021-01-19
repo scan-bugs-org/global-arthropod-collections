@@ -1,20 +1,22 @@
 import { Injectable } from "@angular/core";
 import { Environment } from "../../environments/environment";
 import GoogleAuth = gapi.auth2.GoogleAuth;
-import { Observable, ReplaySubject } from "rxjs";
-import { map } from "rxjs/operators";
+import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
+import { distinctUntilChanged, filter, map, shareReplay } from "rxjs/operators";
 import GoogleUser = gapi.auth2.GoogleUser;
 
 @Injectable()
 export class GoogleAuthService {
-    private apiLoaded = new ReplaySubject<void>(1);
+    private _apiLoading = new BehaviorSubject<boolean>(true);
     googleUser = new ReplaySubject<GoogleUser>(1);
     isSignedIn = new ReplaySubject<boolean>(1);
+    apiLoading = this._apiLoading.asObservable().pipe(
+        distinctUntilChanged(),
+        shareReplay(1)
+    );
 
     constructor() {
         GoogleAuthService.loadApi().then(() => {
-            this.apiLoaded.next();
-        }).then(() => {
             const GoogleAuth = gapi.auth2.getAuthInstance();
             GoogleAuth.isSignedIn.listen((isSignedIn) => {
                 this.isSignedIn.next(isSignedIn);
@@ -22,11 +24,13 @@ export class GoogleAuthService {
             GoogleAuth.currentUser.listen((user) => {
                 this.googleUser.next(user);
             });
+            this._apiLoading.next(false);
         });
     }
 
     getAuthInstance(): Observable<GoogleAuth> {
-        return this.apiLoaded.pipe(
+        return this._apiLoading.pipe(
+            filter((loading) => !loading),
             map(() => gapi.auth2.getAuthInstance())
         );
     }

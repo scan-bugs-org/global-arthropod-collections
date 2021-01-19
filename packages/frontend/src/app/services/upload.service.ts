@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { FileUpload } from './dto/file-upload.dto';
 import { map, tap } from 'rxjs/operators';
 import { Exclude, Expose, plainToClass } from 'class-transformer';
-import { LoadingService } from './loading.service';
+import { LoadingService } from '../loading/loading.service';
 import { HeaderMappingResult } from "./dto/header-mapping-result.dto";
 import { HeaderMappingInputInterface } from "@arthropodindex/common";
 

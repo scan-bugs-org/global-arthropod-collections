@@ -8,19 +8,26 @@ import { GoogleAuthService } from "../google-auth.service";
     templateUrl: "./google-sign-in.component.html",
     styleUrls: ["./google-sign-in.component.less"]
 })
-export class GoogleSignInComponent {
+export class GoogleSignInComponent implements OnInit {
+    isLoading = true;
+
     constructor(
         private readonly userService: UserService,
         private readonly alert: AlertService,
-        private readonly authService: GoogleAuthService) { }
+        private readonly googleAuth: GoogleAuthService) { }
+
+    ngOnInit(): void {
+        this.googleAuth.apiLoading.subscribe((isLoading) => {
+            this.isLoading = isLoading;
+        });
+    }
 
     onSignIn() {
-        this.authService.getAuthInstance().subscribe((googleAuth) => {
+        this.googleAuth.getAuthInstance().subscribe((googleAuth) => {
             googleAuth.signIn().then(() => {
                 return googleAuth.grantOfflineAccess({ prompt: 'consent' })
             }).catch((e) => {
                 this.alert.showError(JSON.stringify(e));
-                this.userService.onGoogleSignIn(null);
             });
         });
     }

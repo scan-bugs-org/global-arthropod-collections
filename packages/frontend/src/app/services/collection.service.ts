@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Expose, plainToClass } from 'class-transformer';
 import { map, tap } from 'rxjs/operators';
-import { LoadingService } from './loading.service';
+import { LoadingService } from '../loading/loading.service';
 import { CollectionListItem } from './dto/collection-list-item.dto';
 import { Collection } from './dto/collection.dto';
 import { CollectionGeoJson } from './dto/collection-geojson.dto';

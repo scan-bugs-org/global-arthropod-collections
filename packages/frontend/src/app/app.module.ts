@@ -33,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ExtendedModule } from "@angular/flex-layout";
 import { MatMenuModule } from "@angular/material/menu";
 import { GoogleAuthModule } from "./google-auth/google-auth.module";
+import { LoadingModule } from "./loading/loading.module";
 
 @NgModule({
     declarations: [
@@ -42,8 +43,6 @@ import { GoogleAuthModule } from "./google-auth/google-auth.module";
         InstitutionTabComponent,
         InstitutionComponent,
         CollectionComponent,
-        LoadingComponent,
-        LoadingComponent,
         MapComponent,
         UploadComponent,
         FileUploaderComponent,
@@ -72,7 +71,8 @@ import { GoogleAuthModule } from "./google-auth/google-auth.module";
         LeafletModule,
         MatSelectModule,
         ExtendedModule,
-        GoogleAuthModule
+        GoogleAuthModule,
+        LoadingModule
     ],
     providers: [
         {

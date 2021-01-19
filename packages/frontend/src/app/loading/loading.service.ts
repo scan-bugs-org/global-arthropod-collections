@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, shareReplay } from 'rxjs/operators';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class LoadingService {
     private readonly _isLoading = new BehaviorSubject<boolean>(false);
     isLoading$ = this._isLoading.asObservable().pipe(
