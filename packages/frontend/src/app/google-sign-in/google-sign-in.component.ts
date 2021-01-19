@@ -28,10 +28,10 @@ export class GoogleSignInComponent implements OnInit {
 
     onSignIn() {
         this.authInstance?.signIn().then((user: GoogleUser) => {
-            this.userService.update(user);
+            this.userService.onGoogleSignIn(user);
         }).catch((e) => {
             this.alert.showError(JSON.stringify(e));
-            this.userService.update(null);
+            this.userService.onGoogleSignIn(null);
         });
     }
 

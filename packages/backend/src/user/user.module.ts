@@ -2,28 +2,24 @@ import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { DatabaseModule } from '../database/database.module';
-import { LocalStrategy } from "./strategies/local.strategy";
-import { JwtModule } from "@nestjs/jwt";
-import { AppConfigService } from "../app-config/app-config.service";
 import { AppConfigModule } from "../app-config/app-config.module";
-import { JwtStrategy } from "./strategies/jwt.strategy";
+import { OAuth2Client } from 'google-auth-library';
+import { AppConfigService } from "../app-config/app-config.service";
 
 @Module({
     imports: [
         AppConfigModule,
-        DatabaseModule,
-        JwtModule.registerAsync({
-            useFactory: (databaseConfigService: AppConfigService) => {
-                return { secret: databaseConfigService.jwtKey() };
-            },
-            inject: [AppConfigService],
-            imports: [AppConfigModule]
-        })
+        DatabaseModule
     ],
     providers: [
         UserService,
-        LocalStrategy,
-        JwtStrategy
+        {
+            provide: OAuth2Client,
+            useFactory: (appConfig) => {
+                return new OAuth2Client(appConfig.googleClientID())
+            },
+            inject: [AppConfigService]
+        }
     ],
     controllers: [UserController],
 })

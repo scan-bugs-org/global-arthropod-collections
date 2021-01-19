@@ -36,45 +36,5 @@ export class UserService {
         }
     }
 
-    async login(username: string, password: string): Promise<User> {
-        const user = await this.user.findById(username).exec();
-        if (!!user && user.verifyPassword(password)) {
-            return user;
-        }
-        return null;
-    }
 
-    async createToken(username: string): Promise<OAuthToken> {
-        const user = await this.user.findById(username).populate('tokens').exec();
-
-        if (user === null) {
-            return null;
-        }
-
-        return await this.userTokens.create({
-            user: user._id,
-            accessToken: uuid4(),
-            refreshToken: uuid4(),
-        });
-    }
-
-    async findRefreshToken(username: string, token: string): Promise<LeanDocument<OAuthToken>> {
-        return this.userTokens.findOne(
-            { user: username, refreshToken: token }
-        ).lean().exec();
-    }
-
-    async findAccessToken(username: string, token: string): Promise<LeanDocument<OAuthToken>> {
-        return this.userTokens.findOne(
-            { user: username, accessToken: token }
-        ).lean().exec();
-    }
-
-    async deleteRefreshToken(username: string, token: string): Promise<void> {
-        await this.userTokens.deleteOne({ user: username, refreshToken: token }).exec();
-    }
-
-    async deleteAccessToken(username: string, token: string): Promise<void> {
-        await this.userTokens.deleteOne({ user: username, accessToken: token }).exec();
-    }
 }

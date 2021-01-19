@@ -1,24 +1,37 @@
 import { Injectable } from "@angular/core";
 import GoogleUser = gapi.auth2.GoogleUser;
-import { BehaviorSubject, ReplaySubject } from "rxjs";
-import { shareReplay } from "rxjs/operators";
+import { BehaviorSubject, of, ReplaySubject } from "rxjs";
+import { catchError, shareReplay } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
+import { Environment } from "../../environments/environment";
+import { AlertService } from "./alert.service";
 
 @Injectable({
     providedIn: "root"
 })
 export class GoogleUserService {
-    private googleUser = new BehaviorSubject<GoogleUser | null>(null);
-    readonly user = this.googleUser.asObservable().pipe(shareReplay(1));
+    private _googleUser = new BehaviorSubject<GoogleUser | null>(null);
+    readonly googleUser = this._googleUser.asObservable().pipe(shareReplay(1));
 
-    constructor() { }
+    constructor(
+        private readonly alert: AlertService,
+        private readonly http: HttpClient) { }
 
-    update(user: GoogleUser | null) {
-        this.googleUser.next(user);
+    onGoogleSignIn(user: GoogleUser | null) {
+        this._googleUser.next(user);
 
-        const profile = user?.getBasicProfile();
-        console.log('ID: ' + profile?.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile?.getName());
-        console.log('Image URL: ' + profile?.getImageUrl());
-        console.log('Email: ' + profile?.getEmail()); // This is null if the 'email' scope is not present.
+        if (user !== null) {
+            const idToken = user.getAuthResponse().id_token;
+            this.http.post(`${Environment.loginUrl}?id_token=${idToken}`, {})
+                .pipe(
+                    catchError((e) => {
+                        this.alert.showError(JSON.stringify(e));
+                        return of(null)
+                    })
+                )
+                .subscribe((user) => {
+                    console.log(user);
+                })
+        }
     }
 }

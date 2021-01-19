@@ -8,7 +8,7 @@ interface AppConfig {
     host: string;
     port: number;
     database: string;
-    jwtKey: string;
+    googleClientID: string;
 }
 
 @Injectable()
@@ -29,7 +29,7 @@ export class AppConfigService {
         return uri;
     }
 
-    jwtKey(): string {
-        return this.appConfig.jwtKey;
+    googleClientID(): string {
+        return this.appConfig.googleClientID;
     }
 }

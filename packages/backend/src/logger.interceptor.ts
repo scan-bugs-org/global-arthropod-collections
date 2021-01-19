@@ -34,7 +34,9 @@ export class LoggerInterceptor implements NestInterceptor {
             if (status < 200 || status > 399) {
                 this.logger.warn(logMsg);
             }
-            this.logger.log(logMsg);
+            else {
+                this.logger.log(logMsg);
+            }
         });
 
         return next.handle();
