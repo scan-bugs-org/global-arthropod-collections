@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Collection, COLLECTION_PROVIDER_ID, GeoJsonCollection } from '../database/models/Collection';
 import { Model } from 'mongoose';
 import { Institution } from "../database/models/Institution";
+import { AppConfigService } from "../app-config/app-config.service";
 
 interface CollectionData {
     code?: string;
@@ -53,6 +54,7 @@ type FindAllParams = {
     iid?: string;
     tier?: number;
     geojson?: boolean;
+    user?: string;
 }
 
 function stripUndefined(object: Record<string, unknown>): Record<string, unknown> {
@@ -74,7 +76,8 @@ export class CollectionService {
 
     constructor(
         @Inject(COLLECTION_PROVIDER_ID)
-        private readonly collection: Model<Collection>) { }
+        private readonly collection: Model<Collection>,
+        private readonly appConfig: AppConfigService) { }
 
     async findAll(inputParams: FindAllParams): Promise<Collection[] | GeoJsonCollection[]> {
         inputParams = stripUndefined(inputParams);
@@ -86,6 +89,10 @@ export class CollectionService {
 
         if (inputParams.tier) {
             findParams['tier'] = inputParams.tier;
+        }
+
+        if (inputParams.user && inputParams.user !== this.appConfig.initialAdminUser()) {
+            findParams['editors'] = inputParams.user;
         }
 
         const collections = await this.collection.find(findParams)

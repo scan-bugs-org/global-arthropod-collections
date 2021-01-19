@@ -24,6 +24,8 @@ import { CheckInstitutionPipe } from './check-institution.pipe';
 import { ObjectIdInterceptor } from '../common/object-id.interceptor';
 import { GeoJsonOutputDto } from './dto/geojson.output.dto';
 import { Collection, GeoJsonCollection } from '../database/models/Collection';
+import { GoogleAuthInterceptor } from "../user/google-auth.interceptor";
+import { CollectionGuard } from "../user/collection.guard";
 
 const FindAllSchema = {
     oneOf: [
@@ -44,12 +46,14 @@ export class CollectionController {
     @ApiQuery({ name: 'iid', required: false })
     @ApiQuery({ name: 'tier', type: Number, required: false })
     @ApiQuery({ name: 'geojson', type: Boolean, required: false })
+    @ApiQuery({ name: 'user', type: String, required: false })
     async findAll(
         @Query('iid') @Optional() iid?: string,
         @Query('tier') @Optional() tier?: number,
-        @Query('geojson') @Optional() geojson?: boolean): Promise<CollectionOutputDto[] | GeoJsonOutputDto[]> {
+        @Query('geojson') @Optional() geojson?: boolean,
+        @Query('user') @Optional() user?: string): Promise<CollectionOutputDto[] | GeoJsonOutputDto[]> {
 
-        let collections = await this.collection.findAll({ iid, tier, geojson });
+        let collections = await this.collection.findAll({ iid, tier, geojson, user });
 
         if (geojson === true) {
             collections = collections as GeoJsonCollection[];

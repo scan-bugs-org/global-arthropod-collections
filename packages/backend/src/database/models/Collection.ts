@@ -49,6 +49,10 @@ const CollectionSchema = new Schema({
         exists: Boolean,
         date: Date,
     },
+    editors: [{
+        type: String,
+        ref: 'User'
+    }]
 });
 
 export interface Collection extends Document {

@@ -2,12 +2,12 @@ import {
     Body,
     Controller, Delete,
     Get, HttpCode, HttpStatus,
-    NotFoundException,
-    Param, Patch, Post, UseGuards, UseInterceptors
+    NotFoundException, Optional,
+    Param, Patch, Post, Query, UseGuards, UseInterceptors
 } from "@nestjs/common";
 import {
     ApiBearerAuth,
-    ApiBody,
+    ApiBody, ApiQuery,
     ApiResponse,
     ApiSecurity,
     ApiTags,
@@ -26,14 +26,14 @@ export class InstitutionController {
     constructor(private readonly institutionService: InstitutionService) { }
 
     @Get()
+    @ApiQuery({ name: 'user', type: String, required: false })
     @ApiResponse({ status: HttpStatus.OK, type: InstitutionOutputDto, isArray: true })
-    async findAll(): Promise<InstitutionOutputDto[]> {
-        const institutions = await this.institutionService.findAll();
+    async findAll(@Query('user') @Optional() user: string): Promise<InstitutionOutputDto[]> {
+        const institutions = await this.institutionService.findAll({ user });
         return institutions.map((i) => new InstitutionOutputDto(i.toJSON()));
     }
 
     @Post()
-    @ApiBearerAuth()
     @ApiBody({
         schema: {
             oneOf: [
@@ -71,7 +71,6 @@ export class InstitutionController {
     }
 
     @Patch(':id')
-    @ApiBearerAuth()
     @ApiResponse({ status: HttpStatus.OK, type: InstitutionOutputDto })
     async updateByID(
         @Param('id') id: string,
@@ -84,7 +83,6 @@ export class InstitutionController {
     }
 
     @Delete(':id')
-    @ApiBearerAuth()
     @HttpCode(HttpStatus.NO_CONTENT)
     async deleteByID(@Param('id') id: string): Promise<void> {
         const deletedSuccess = await this.institutionService.deleteByID(id);

@@ -9,6 +9,7 @@ interface AppConfig {
     port: number;
     database: string;
     googleClientID: string;
+    initialAdminUser: string;
 }
 
 @Injectable()
@@ -31,5 +32,9 @@ export class AppConfigService {
 
     googleClientID(): string {
         return this.appConfig.googleClientID;
+    }
+
+    initialAdminUser(): string {
+        return this.appConfig.initialAdminUser;
     }
 }

@@ -8,22 +8,34 @@ import {
     Collection,
     COLLECTION_PROVIDER_ID,
 } from '../database/models/Collection';
+import { AppConfigService } from "../app-config/app-config.service";
 
 type InstitutionData = {
     code: string;
     name: string;
 }
 
+interface FindAllParams {
+    user?: string;
+}
+
 @Injectable()
 export class InstitutionService {
     constructor(
+        private readonly appConfig: AppConfigService,
         @Inject(INSTITUTION_PROVIDER_ID)
         private readonly institution: Model<Institution>,
         @Inject(COLLECTION_PROVIDER_ID)
         private readonly collection: Model<Collection>) { }
 
-    async findAll(): Promise<Institution[]> {
-        return this.institution.find().exec();
+    async findAll(params?: FindAllParams): Promise<Institution[]> {
+        const findParams = {};
+
+        if (params && params.user && params.user !== this.appConfig.initialAdminUser()) {
+            findParams['editors'] = params.user;
+        }
+
+        return this.institution.find(findParams).exec();
     }
 
     async findByID(id: string): Promise<Institution> {

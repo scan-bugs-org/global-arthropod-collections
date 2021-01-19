@@ -4,10 +4,12 @@ import { CollectionController } from './collection.controller';
 import { DatabaseModule } from '../database/database.module';
 import { CheckInstitutionPipe } from './check-institution.pipe';
 import { CommonModule } from '../common/common.module';
+import { AppConfigModule } from "../app-config/app-config.module";
 
 @Module({
     imports: [
         CommonModule,
+        AppConfigModule,
         DatabaseModule
     ],
     providers: [
