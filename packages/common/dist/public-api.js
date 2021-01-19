@@ -11,4 +11,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./upload"), exports);
+__exportStar(require("./user-output.dto"), exports);
 //# sourceMappingURL=public-api.js.map

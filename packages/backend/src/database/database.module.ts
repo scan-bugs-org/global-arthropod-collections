@@ -4,7 +4,6 @@ import { InstitutionProvider } from './models/Institution';
 import { TmpUploadProvider } from './models/TmpUpload';
 import { UserProvider } from './models/User';
 import { DatabaseProvider } from './database.provider';
-import { OAuthTokenProvider } from "./models/OAuthToken";
 import { AppConfigModule } from "../app-config/app-config.module";
 
 @Module({
@@ -14,15 +13,13 @@ import { AppConfigModule } from "../app-config/app-config.module";
         CollectionProvider,
         InstitutionProvider,
         TmpUploadProvider,
-        UserProvider,
-        OAuthTokenProvider
+        UserProvider
     ],
     exports: [
         CollectionProvider,
         InstitutionProvider,
         TmpUploadProvider,
-        UserProvider,
-        OAuthTokenProvider
+        UserProvider
     ]
 })
 export class DatabaseModule { }

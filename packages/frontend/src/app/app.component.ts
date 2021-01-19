@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Title } from '@angular/platform-browser';
-import { LIST_ROUTE, LOGIN_ROUTE, MAP_ROUTE, UPLOAD_ROUTE } from "./routes";
-import { UserService } from "./services/user.service";
+import { LIST_ROUTE, MAP_ROUTE, UPLOAD_ROUTE } from "./routes";
+import { GoogleUserService } from "./services/google-user.service";
 
 @Component({
     selector: 'app-root',
@@ -12,13 +12,12 @@ export class AppComponent implements OnInit {
     readonly MAP_ROUTE = MAP_ROUTE;
     readonly LIST_ROUTE = LIST_ROUTE;
     readonly UPLOAD_ROUTE = UPLOAD_ROUTE;
-    readonly LOGIN_ROUTE = LOGIN_ROUTE;
 
     isLoggedIn = false;
 
     constructor(
         private readonly title: Title,
-        private readonly userService: UserService) {
+        private readonly userService: GoogleUserService) {
 
         this.title.setTitle("Global Arthropod Collections");
     }
@@ -30,6 +29,5 @@ export class AppComponent implements OnInit {
     }
 
     logout() {
-        this.userService.logout();
     }
 }

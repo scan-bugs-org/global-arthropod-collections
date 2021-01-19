@@ -8,7 +8,7 @@ import { AlertService } from '../services/alert.service';
 import { CollectionListItem } from '../services/dto/collection-list-item.dto';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { COLLECTION_ROUTE } from '../routes';
-import { UserService } from "../services/user.service";
+import { GoogleUserService } from "../services/google-user.service";
 
 type ApiResult = {
     institution: Institution;
@@ -36,7 +36,7 @@ export class InstitutionComponent implements OnInit {
     });
 
     constructor(
-        private readonly userService: UserService,
+        private readonly userService: GoogleUserService,
         private readonly router: Router,
         private readonly currentRoute: ActivatedRoute,
         private readonly institutions: InstitutionService,

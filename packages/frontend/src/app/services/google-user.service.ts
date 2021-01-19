@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import GoogleUser = gapi.auth2.GoogleUser;
 import { BehaviorSubject, of, ReplaySubject } from "rxjs";
-import { catchError, shareReplay } from "rxjs/operators";
+import { catchError, map, shareReplay } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Environment } from "../../environments/environment";
 import { AlertService } from "./alert.service";
@@ -12,6 +12,10 @@ import { AlertService } from "./alert.service";
 export class GoogleUserService {
     private _googleUser = new BehaviorSubject<GoogleUser | null>(null);
     readonly googleUser = this._googleUser.asObservable().pipe(shareReplay(1));
+    readonly isLoggedIn = this._googleUser.pipe(
+        map((user) => user !== null),
+        shareReplay(1)
+    );
 
     constructor(
         private readonly alert: AlertService,

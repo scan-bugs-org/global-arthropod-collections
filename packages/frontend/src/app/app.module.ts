@@ -30,7 +30,6 @@ import { UploadComponent } from './csv-upload/upload.component';
 import { FileUploaderComponent } from './csv-upload/file-uploader/file-uploader.component';
 import { UploadMapperComponent } from "./upload-mapper/upload-mapper.component";
 import { MatSelectModule } from '@angular/material/select';
-import { LoginComponent } from './login/login.component';
 import { ExtendedModule } from "@angular/flex-layout";
 import { GoogleSignInComponent } from './google-sign-in/google-sign-in.component';
 
@@ -48,7 +47,6 @@ import { GoogleSignInComponent } from './google-sign-in/google-sign-in.component
         UploadComponent,
         FileUploaderComponent,
         UploadMapperComponent,
-        LoginComponent,
         GoogleSignInComponent
     ],
     imports: [

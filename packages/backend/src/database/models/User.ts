@@ -1,40 +1,25 @@
-import bcrypt from "bcrypt";
-import { Schema, Document, Connection, Types as MongooseTypes } from "mongoose";
+import { Schema, Document, Connection } from "mongoose";
 import { Provider } from "@nestjs/common";
 import { DATABASE_PROVIDER_ID } from "../database.provider";
-import { OAuthToken } from "./OAuthToken";
-
-const SchemaTypes = Schema.Types;
-
-// 2-3 hashes/sec
-const saltRounds = 12;
 
 const UserSchema = new Schema({
     _id: String,
-    password: {
-        type: String,
-        required: true,
-        set: setPassword
+    firstLogin: {
+        type: Schema.Types.Date,
+        required: false,
+        default: new Date()
     },
-    tokens: [{
-        type: SchemaTypes.ObjectId,
-        ref: 'OAuthToken'
-    }]
+    lastLogin: {
+        type: Schema.Types.Date,
+        required: false,
+        default: new Date()
+    }
 });
 
 export interface User extends Document {
     _id: string;
-    password: string;
-    tokens: MongooseTypes.Array<OAuthToken>;
-    verifyPassword?: (plainText: string) => boolean
-}
-
-function setPassword(plainTextStr): string {
-    return bcrypt.hashSync(plainTextStr, saltRounds);
-}
-
-function verifyPassword(plainTextStr): boolean {
-    return bcrypt.compareSync(plainTextStr, this.password);
+    firstLogin: Date;
+    lastLogin: Date;
 }
 
 function userModelFactory(connection: Connection) {
@@ -47,5 +32,3 @@ export const UserProvider: Provider = {
     useFactory: userModelFactory,
     inject: [DATABASE_PROVIDER_ID]
 };
-
-UserSchema.methods.verifyPassword = verifyPassword;
