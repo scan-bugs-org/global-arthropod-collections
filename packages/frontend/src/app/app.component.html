@@ -17,7 +17,28 @@
             <a href="https://scan-all-bugs.org/?page_id=2805" target="_blank">
                 About
             </a>
-            <app-google-sign-in></app-google-sign-in>
+            <ng-container *ngIf="isLoggedIn && currentUser else notLoggedIn">
+                <button id="profile-btn" [matMenuTriggerFor]="userMenu">
+                    <img
+                        src="{{ currentUser.picture }}"
+                        alt="profile picture"
+                    >
+                </button>
+                <mat-menu #userMenu="matMenu">
+                    <span id="greeting" mat-menu-item disabled>
+                        Hello, {{ currentUser.email }}!
+                    </span>
+                    <a routerLink="/" mat-menu-item>Institutions</a>
+                    <a routerLink="/" mat-menu-item>Collections</a>
+                    <button mat-menu-item>
+                        <mat-icon>exit_to_app</mat-icon>
+                        Logout
+                    </button>
+                </mat-menu>
+            </ng-container>
+            <ng-template #notLoggedIn>
+                <app-google-sign-in></app-google-sign-in>
+            </ng-template>
         </div>
 
 <!--        <span *ngIf="isLoggedIn">-->

@@ -32,6 +32,7 @@ import { UploadMapperComponent } from "./upload-mapper/upload-mapper.component";
 import { MatSelectModule } from '@angular/material/select';
 import { ExtendedModule } from "@angular/flex-layout";
 import { GoogleSignInComponent } from './google-sign-in/google-sign-in.component';
+import { MatMenuModule } from "@angular/material/menu";
 
 @NgModule({
     declarations: [
@@ -63,6 +64,7 @@ import { GoogleSignInComponent } from './google-sign-in/google-sign-in.component
         MatSnackBarModule,
         MatListModule,
         MatButtonModule,
+        MatMenuModule,
         FormsModule,
         ReactiveFormsModule,
         MatInputModule,

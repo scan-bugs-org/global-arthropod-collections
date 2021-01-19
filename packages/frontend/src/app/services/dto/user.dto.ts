@@ -7,8 +7,8 @@ export class User {
     }
 
     @Expose()
-    username: string = "";
+    email: string = "";
 
     @Expose()
-    apiKey: string = "";
+    picture: string = "";
 }

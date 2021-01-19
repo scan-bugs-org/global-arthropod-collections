@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Title } from '@angular/platform-browser';
 import { LIST_ROUTE, MAP_ROUTE, UPLOAD_ROUTE } from "./routes";
-import { GoogleUserService } from "./services/google-user.service";
+import { GoogleUserService, User } from "./services/google-user.service";
+import GoogleUser = gapi.auth2.GoogleUser;
 
 @Component({
     selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
     readonly UPLOAD_ROUTE = UPLOAD_ROUTE;
 
     isLoggedIn = false;
+    currentUser: User | null = null;
 
     constructor(
         private readonly title: Title,
@@ -26,8 +28,13 @@ export class AppComponent implements OnInit {
         this.userService.isLoggedIn.subscribe((isLoggedIn) => {
             this.isLoggedIn = isLoggedIn;
         });
+
+        this.userService.googleUser.subscribe((user) => {
+            this.currentUser = user;
+        });
     }
 
     logout() {
+
     }
 }
