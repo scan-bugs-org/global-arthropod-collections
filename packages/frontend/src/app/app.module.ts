@@ -31,8 +31,8 @@ import { FileUploaderComponent } from './csv-upload/file-uploader/file-uploader.
 import { UploadMapperComponent } from "./upload-mapper/upload-mapper.component";
 import { MatSelectModule } from '@angular/material/select';
 import { ExtendedModule } from "@angular/flex-layout";
-import { GoogleSignInComponent } from './google-sign-in/google-sign-in.component';
 import { MatMenuModule } from "@angular/material/menu";
+import { GoogleAuthModule } from "./google-auth/google-auth.module";
 
 @NgModule({
     declarations: [
@@ -47,8 +47,7 @@ import { MatMenuModule } from "@angular/material/menu";
         MapComponent,
         UploadComponent,
         FileUploaderComponent,
-        UploadMapperComponent,
-        GoogleSignInComponent
+        UploadMapperComponent
     ],
     imports: [
         BrowserModule,
@@ -72,7 +71,8 @@ import { MatMenuModule } from "@angular/material/menu";
         MatCheckboxModule,
         LeafletModule,
         MatSelectModule,
-        ExtendedModule
+        ExtendedModule,
+        GoogleAuthModule
     ],
     providers: [
         {
@@ -82,5 +82,4 @@ import { MatMenuModule } from "@angular/material/menu";
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule { }

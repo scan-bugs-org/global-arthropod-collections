@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Title } from '@angular/platform-browser';
 import { LIST_ROUTE, MAP_ROUTE, UPLOAD_ROUTE } from "./routes";
-import { GoogleUserService, User } from "./services/google-user.service";
-import GoogleUser = gapi.auth2.GoogleUser;
+import { UserService, User } from "./services/user.service";
+import { GoogleAuthService } from "./google-auth/google-auth.service";
 
 @Component({
     selector: 'app-root',
@@ -14,27 +14,29 @@ export class AppComponent implements OnInit {
     readonly LIST_ROUTE = LIST_ROUTE;
     readonly UPLOAD_ROUTE = UPLOAD_ROUTE;
 
-    isLoggedIn = false;
     currentUser: User | null = null;
 
     constructor(
         private readonly title: Title,
-        private readonly userService: GoogleUserService) {
+        private readonly userService: UserService,
+        private readonly googleAuth: GoogleAuthService) {
 
         this.title.setTitle("Global Arthropod Collections");
     }
 
     ngOnInit() {
-        this.userService.isLoggedIn.subscribe((isLoggedIn) => {
-            this.isLoggedIn = isLoggedIn;
-        });
-
-        this.userService.googleUser.subscribe((user) => {
+        this.userService.user.subscribe((user) => {
             this.currentUser = user;
         });
     }
 
-    logout() {
+    get isLoggedIn() {
+        return this.currentUser !== null;
+    }
 
+    onSignOut() {
+        this.googleAuth.getAuthInstance().subscribe((googleAuth) => {
+            googleAuth.signOut();
+        });
     }
 }

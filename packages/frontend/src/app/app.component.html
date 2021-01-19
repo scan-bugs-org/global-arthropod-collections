@@ -30,7 +30,7 @@
                     </span>
                     <a routerLink="/" mat-menu-item>Institutions</a>
                     <a routerLink="/" mat-menu-item>Collections</a>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="onSignOut()">
                         <mat-icon>exit_to_app</mat-icon>
                         Logout
                     </button>

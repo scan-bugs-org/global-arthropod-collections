@@ -7,7 +7,7 @@ import { Collection } from '../services/dto/collection.dto';
 import { AlertService } from '../services/alert.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { INSTITUTION_ROUTE } from '../routes';
-import { GoogleUserService } from "../services/google-user.service";
+import { UserService } from "../services/user.service";
 
 @Component({
     selector: 'app-collection',
@@ -49,7 +49,7 @@ export class CollectionComponent implements OnInit {
     });
 
     constructor(
-        private readonly userService: GoogleUserService,
+        private readonly userService: UserService,
         private readonly currentRoute: ActivatedRoute,
         private readonly router: Router,
         private readonly collections: CollectionService,

@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import GoogleUser = gapi.auth2.GoogleUser;
-import { BehaviorSubject, of, ReplaySubject } from "rxjs";
+import { BehaviorSubject, Observable, of, ReplaySubject } from "rxjs";
 import { catchError, map, shareReplay, tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { Environment } from "../../environments/environment";
 import { AlertService } from "./alert.service";
+import { GoogleAuthService } from "../google-auth/google-auth.service";
 
 export interface User {
     accessToken: string;
-    idToken: string;
     email: string;
     picture: string;
 }
@@ -16,35 +16,36 @@ export interface User {
 @Injectable({
     providedIn: "root"
 })
-export class GoogleUserService {
-    private _googleUser = new BehaviorSubject<User | null>(null);
-    readonly googleUser = this._googleUser.asObservable().pipe(shareReplay(1));
-    readonly isLoggedIn = this._googleUser.pipe(
-        // TODO: Remove tap
-        tap((user) => console.log(`Current user: ${JSON.stringify(user)}`)),
+export class UserService {
+    private _user = new BehaviorSubject<User | null>(null);
+    public readonly user = this._user.asObservable().pipe(shareReplay(1));
+    public readonly isLoggedIn = this._user.asObservable().pipe(
         map((user) => user !== null),
         shareReplay(1)
     );
 
     constructor(
+        private readonly googleAuth: GoogleAuthService,
         private readonly alert: AlertService,
-        private readonly http: HttpClient) { }
+        private readonly http: HttpClient) {
 
-    onGoogleSignIn(user: GoogleUser | null) {
-        if (user !== null) {
+        this.googleAuth.googleUser.subscribe((user) => {
+            this.onGoogleSignIn(user);
+        });
+    }
+
+    onGoogleSignIn(user: GoogleUser) {
+        if (user.isSignedIn()) {
             const authRes = user.getAuthResponse();
             const profile = user.getBasicProfile();
 
-            this._googleUser.next({
+            this._user.next({
                 accessToken: authRes.access_token,
-                idToken: authRes.id_token,
                 email: profile.getEmail(),
                 picture: profile.getImageUrl()
             });
 
-            const idToken = user.getAuthResponse().id_token;
-
-            this.http.post(`${Environment.loginUrl}?id_token=${idToken}`, {})
+            this.http.post(`${Environment.loginUrl}?id_token=${authRes.id_token}`, {})
                 .pipe(
                     catchError((e) => {
                         this.alert.showError(JSON.stringify(e));
@@ -52,6 +53,9 @@ export class GoogleUserService {
                     })
                 )
                 .subscribe();
+        }
+        else {
+            this._user.next(null);
         }
     }
 }
