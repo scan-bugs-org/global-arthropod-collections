@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { LoadingComponent } from "./loading.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import {
     MAT_SNACK_BAR_DEFAULT_OPTIONS,
@@ -13,9 +12,6 @@ import { LoadingService } from "./services/loading.service";
 
 
 @NgModule({
-    declarations: [
-        LoadingComponent
-    ],
     providers: [
         AlertService,
         LoadingService,
@@ -31,9 +27,6 @@ import { LoadingService } from "./services/loading.service";
         MatProgressSpinnerModule,
         MatProgressSpinnerModule,
         MatSnackBarModule,
-    ],
-    exports: [
-        LoadingComponent
     ]
 })
 export class AlertModule { }

@@ -28,9 +28,8 @@
                     <span id="greeting" mat-menu-item disabled>
                         Hello, {{ currentUser.email }}!
                     </span>
-                    <a routerLink="/" mat-menu-item>Institutions</a>
                     <a [routerLink]="COLLECTION_ROUTE" mat-menu-item>Collections</a>
-                    <a routerLink="/" mat-menu-item>Batch upload</a>
+                    <a [routerLink]="UPLOAD_ROUTE" mat-menu-item>Batch upload</a>
                     <button mat-menu-item (click)="onSignOut()">
                         <mat-icon>exit_to_app</mat-icon>
                         Logout
@@ -49,8 +48,8 @@
         <div id="mainContent">
             <router-outlet></router-outlet>
         </div>
-        <app-loading></app-loading>
+        <div *ngIf="loadingService.isLoading | async" id="loading">
+            <mat-spinner></mat-spinner>
+        </div>
     </div>
 </div>
-
-

@@ -1,14 +1,25 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { distinctUntilChanged, map, shareReplay } from "rxjs/operators";
+import { BehaviorSubject, combineLatest, timer } from "rxjs";
+import {
+    debounceTime,
+    distinctUntilChanged,
+    map,
+    shareReplay
+} from "rxjs/operators";
 
 @Injectable()
 export class LoadingService {
     private readonly _isLoading = new BehaviorSubject<number>(0);
 
-    readonly isLoading = this._isLoading.asObservable().pipe(
-        map((loadingCounter) => loadingCounter > 0),
-        distinctUntilChanged(),
+    // Load for at least 500ms
+    readonly isLoading = combineLatest([
+        this._isLoading.asObservable().pipe(
+            map((loadingCounter) => loadingCounter > 0),
+            distinctUntilChanged()
+        ),
+        timer(500)
+    ]).pipe(
+        map((result) => result[0]),
         shareReplay(1)
     );
 

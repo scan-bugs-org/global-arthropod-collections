@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnChanges, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import {
     COLLECTION_ROUTE,
@@ -17,7 +17,6 @@ import { startWith } from "rxjs/operators";
 })
 export class AppComponent implements OnInit {
     readonly MAP_ROUTE = MAP_ROUTE;
-    readonly LIST_ROUTE = LIST_ROUTE;
     readonly UPLOAD_ROUTE = UPLOAD_ROUTE;
     readonly COLLECTION_ROUTE = COLLECTION_ROUTE;
 
@@ -25,7 +24,8 @@ export class AppComponent implements OnInit {
 
     constructor(
         private readonly title: Title,
-        private readonly userService: GoogleAuthService) {
+        private readonly userService: GoogleAuthService,
+        public readonly loadingService: LoadingService) {
 
         this.title.setTitle("Global Arthropod Collections");
     }

@@ -11,6 +11,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { AlertModule } from "./alert/alert.module";
 import { GoogleAuthModule } from "./google-auth/google-auth.module";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { GoogleAuthModule } from "./google-auth/google-auth.module";
         MatIconModule,
         MatMenuModule,
         MatToolbarModule,
+        MatProgressSpinnerModule
     ],
     bootstrap: [AppComponent],
 })
