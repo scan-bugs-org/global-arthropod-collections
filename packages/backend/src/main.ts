@@ -1,8 +1,8 @@
-import { NestFactory, Reflector } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import helmet from 'helmet';
-import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { NestFactory, Reflector } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import helmet from "helmet";
+import { ClassSerializerInterceptor, ValidationPipe } from "@nestjs/common";
 import { LoggerInterceptor } from "./logger.interceptor";
 import cookieParser from "cookie-parser";
 
@@ -18,7 +18,10 @@ async function bootstrap() {
     app.setGlobalPrefix(`api/${CURRENT_VERSION}`)
     app.use(helmet());
     app.use(cookieParser());
-    app.getHttpAdapter().enableCors({ origin: "*", credentials: true })
+    app.getHttpAdapter().enableCors({
+        origin: 'http://localhost:4200',
+        credentials: true
+    });
 
     // Set up app globals
     app.useGlobalInterceptors(

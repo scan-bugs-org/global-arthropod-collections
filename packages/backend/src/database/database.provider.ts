@@ -1,5 +1,5 @@
-import { Provider } from '@nestjs/common';
-import { Connection, createConnection } from 'mongoose';
+import { Provider } from "@nestjs/common";
+import { Connection, createConnection } from "mongoose";
 import { AppConfigService } from "../app-config/app-config.service";
 
 

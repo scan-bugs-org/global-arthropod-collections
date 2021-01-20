@@ -1,4 +1,4 @@
-import { Connection, Schema, Document } from "mongoose";
+import { Connection, Document, Schema } from "mongoose";
 import { Provider } from "@nestjs/common";
 import { DATABASE_PROVIDER_ID } from "../database.provider";
 

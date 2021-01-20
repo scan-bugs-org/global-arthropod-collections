@@ -5,7 +5,6 @@ import { CollectionModule } from "../collection/collection.module";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
-import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -17,8 +16,7 @@ import { HttpClientModule } from "@angular/common/http";
         CollectionModule,
         LeafletModule,
         BrowserAnimationsModule,
-        BrowserModule,
-        HttpClientModule
+        BrowserModule
     ],
     exports: [
         MapComponent

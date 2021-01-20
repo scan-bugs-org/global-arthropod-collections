@@ -1,22 +1,29 @@
 import {
     Body,
-    Controller, Delete,
-    Get, HttpCode, HttpStatus,
-    NotFoundException, Optional,
-    Param, Patch, Post, Query, UseGuards, UseInterceptors
+    Controller,
+    Delete,
+    Get,
+    HttpCode,
+    HttpStatus,
+    NotFoundException,
+    Optional,
+    Param,
+    Patch,
+    Post,
+    Query,
+    UseInterceptors
 } from "@nestjs/common";
 import {
-    ApiBearerAuth,
-    ApiBody, ApiQuery,
+    ApiBody,
+    ApiQuery,
     ApiResponse,
-    ApiSecurity,
     ApiTags,
     getSchemaPath
 } from "@nestjs/swagger";
-import { InstitutionService } from './institution.service';
-import { InstitutionOutputDto } from './dto/institution.output.dto';
-import { InstitutionInputDto } from './dto/institution.input.dto';
-import { ObjectIdInterceptor } from '../common/object-id.interceptor';
+import { InstitutionService } from "./institution.service";
+import { InstitutionOutputDto } from "./dto/institution.output.dto";
+import { InstitutionInputDto } from "./dto/institution.input.dto";
+import { ObjectIdInterceptor } from "../common/object-id.interceptor";
 
 @Controller('institutions')
 @ApiTags('Institution')

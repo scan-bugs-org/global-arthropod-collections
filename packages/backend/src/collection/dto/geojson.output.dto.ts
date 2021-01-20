@@ -1,6 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Expose, Type } from 'class-transformer';
-import { GeoJsonCollection } from '../../database/models/Collection';
+import { ApiProperty } from "@nestjs/swagger";
+import { Expose, Type } from "class-transformer";
+import { GeoJsonCollection } from "../../database/models/Collection";
 
 class GeoJsonGeometry {
     @ApiProperty()

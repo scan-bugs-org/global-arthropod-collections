@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import {
     TMP_UPLOAD_PROVIDER_ID,
     TmpUpload
@@ -16,9 +16,6 @@ import {
     COLLECTION_PROVIDER_ID
 } from "../database/models/Collection";
 import { CollectionInputDto } from "../collection/dto/collection.input.dto";
-import { MapUploadOutputDto } from "./dto/map-upload.output.dto";
-import { HeaderMappingOutputDto } from "./dto/header-mapping.output.dto";
-import { map } from "rxjs/operators";
 
 type MappingOutput = {
     institutions: Institution[];

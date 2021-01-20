@@ -1,4 +1,4 @@
-import { ObjectIdInterceptor } from './object-id.interceptor';
+import { ObjectIdInterceptor } from "./object-id.interceptor";
 
 describe('ObjectIdInterceptor', () => {
   it('should be defined', () => {

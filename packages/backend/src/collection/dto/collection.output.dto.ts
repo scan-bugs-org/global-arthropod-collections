@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
-import { ApiProperty } from '@nestjs/swagger';
-import { Expose, Transform, Type } from 'class-transformer';
-import { Collection } from '../../database/models/Collection';
+import { ApiProperty } from "@nestjs/swagger";
+import { Expose, Transform, Type } from "class-transformer";
+import { Collection } from "../../database/models/Collection";
 
 const ObjectId = Schema.Types.ObjectId;
 

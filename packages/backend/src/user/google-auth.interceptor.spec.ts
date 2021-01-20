@@ -1,4 +1,4 @@
-import { GoogleAuthInterceptor } from './google-auth.interceptor';
+import { GoogleAuthInterceptor } from "./google-auth.interceptor";
 
 describe('GoogleAuthInterceptor', () => {
   it('should be defined', () => {

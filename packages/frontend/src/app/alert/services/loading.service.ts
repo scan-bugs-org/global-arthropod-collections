@@ -6,7 +6,7 @@ import { distinctUntilChanged, map, shareReplay } from "rxjs/operators";
 export class LoadingService {
     private readonly _isLoading = new BehaviorSubject<number>(0);
 
-    isLoading = this._isLoading.asObservable().pipe(
+    readonly isLoading = this._isLoading.asObservable().pipe(
         map((loadingCounter) => loadingCounter > 0),
         distinctUntilChanged(),
         shareReplay(1)

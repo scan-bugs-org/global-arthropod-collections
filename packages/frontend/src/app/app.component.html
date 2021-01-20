@@ -29,7 +29,8 @@
                         Hello, {{ currentUser.email }}!
                     </span>
                     <a routerLink="/" mat-menu-item>Institutions</a>
-                    <a routerLink="/" mat-menu-item>Collections</a>
+                    <a [routerLink]="COLLECTION_ROUTE" mat-menu-item>Collections</a>
+                    <a routerLink="/" mat-menu-item>Batch upload</a>
                     <button mat-menu-item (click)="onSignOut()">
                         <mat-icon>exit_to_app</mat-icon>
                         Logout

@@ -6,7 +6,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { AlertModule } from "../alert/alert.module";
-
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
     imports: [
@@ -14,7 +14,8 @@ import { AlertModule } from "../alert/alert.module";
         CommonModule,
         MatProgressSpinnerModule,
         BrowserAnimationsModule,
-        BrowserModule
+        BrowserModule,
+        HttpClientModule
     ],
     providers: [
         GoogleAuthService
@@ -23,7 +24,8 @@ import { AlertModule } from "../alert/alert.module";
         GoogleSignInComponent
     ],
     exports: [
-        GoogleSignInComponent
+        GoogleSignInComponent,
+        HttpClientModule
     ]
 })
 export class GoogleAuthModule { }

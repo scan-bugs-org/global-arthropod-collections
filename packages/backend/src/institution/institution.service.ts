@@ -1,13 +1,13 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Inject, Injectable } from "@nestjs/common";
+import { Model } from "mongoose";
 import {
     Institution,
-    INSTITUTION_PROVIDER_ID,
-} from '../database/models/Institution';
+    INSTITUTION_PROVIDER_ID
+} from "../database/models/Institution";
 import {
     Collection,
-    COLLECTION_PROVIDER_ID,
-} from '../database/models/Collection';
+    COLLECTION_PROVIDER_ID
+} from "../database/models/Collection";
 import { AppConfigService } from "../app-config/app-config.service";
 
 type InstitutionData = {

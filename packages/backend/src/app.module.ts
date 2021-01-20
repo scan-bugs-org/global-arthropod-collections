@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
-import { UserModule } from './user/user.module';
-import { InstitutionModule } from './institution/institution.module';
-import { CollectionModule } from './collection/collection.module';
-import { UploadModule } from './upload/upload.module';
-import { AppConfigModule } from './app-config/app-config.module';
+import { Module } from "@nestjs/common";
+import { UserModule } from "./user/user.module";
+import { InstitutionModule } from "./institution/institution.module";
+import { CollectionModule } from "./collection/collection.module";
+import { UploadModule } from "./upload/upload.module";
+import { AppConfigModule } from "./app-config/app-config.module";
 
 @Module({
     imports: [

@@ -1,15 +1,16 @@
 import {
-    Injectable,
     ArgumentMetadata,
-    PipeTransform,
-    Inject, BadRequestException,
-} from '@nestjs/common';
-import { CollectionInputDto } from './dto/collection.input.dto';
-import { Model } from 'mongoose';
+    BadRequestException,
+    Inject,
+    Injectable,
+    PipeTransform
+} from "@nestjs/common";
+import { CollectionInputDto } from "./dto/collection.input.dto";
+import { Model } from "mongoose";
 import {
     Institution,
-    INSTITUTION_PROVIDER_ID,
-} from '../database/models/Institution';
+    INSTITUTION_PROVIDER_ID
+} from "../database/models/Institution";
 
 @Injectable()
 export class CheckInstitutionPipe implements PipeTransform {

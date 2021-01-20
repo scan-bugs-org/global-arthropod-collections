@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { User, USER_PROVIDER_ID } from '../database/models/User';
+import { User, USER_PROVIDER_ID } from "../database/models/User";
 import { Model } from "mongoose";
 import { AppConfigService } from "../app-config/app-config.service";
 import {

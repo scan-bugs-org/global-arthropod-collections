@@ -1,31 +1,38 @@
 import {
     Body,
-    Controller, Delete,
-    Get, HttpCode,
-    HttpStatus, NotFoundException,
-    Optional, Param, ParseArrayPipe, Patch,
+    Controller,
+    Delete,
+    Get,
+    HttpCode,
+    HttpStatus,
+    NotFoundException,
+    Optional,
+    Param,
+    ParseArrayPipe,
+    Patch,
     Post,
-    Query, SerializeOptions, UseGuards, UseInterceptors
+    Query,
+    UseInterceptors
 } from "@nestjs/common";
 import {
     ApiBearerAuth,
-    ApiBody, ApiExtraModels,
+    ApiBody,
+    ApiExtraModels,
     ApiQuery,
-    ApiResponse, ApiSecurity,
-    ApiTags, getSchemaPath
+    ApiResponse,
+    ApiTags,
+    getSchemaPath
 } from "@nestjs/swagger";
-import { CollectionOutputDto } from './dto/collection.output.dto';
-import { CollectionService } from './collection.service';
+import { CollectionOutputDto } from "./dto/collection.output.dto";
+import { CollectionService } from "./collection.service";
 import {
     CollectionInputDto,
-    CollectionUpdateDto,
-} from './dto/collection.input.dto';
-import { CheckInstitutionPipe } from './check-institution.pipe';
-import { ObjectIdInterceptor } from '../common/object-id.interceptor';
-import { GeoJsonOutputDto } from './dto/geojson.output.dto';
-import { Collection, GeoJsonCollection } from '../database/models/Collection';
-import { GoogleAuthInterceptor } from "../user/google-auth.interceptor";
-import { CollectionGuard } from "../user/collection.guard";
+    CollectionUpdateDto
+} from "./dto/collection.input.dto";
+import { CheckInstitutionPipe } from "./check-institution.pipe";
+import { ObjectIdInterceptor } from "../common/object-id.interceptor";
+import { GeoJsonOutputDto } from "./dto/geojson.output.dto";
+import { Collection, GeoJsonCollection } from "../database/models/Collection";
 
 const FindAllSchema = {
     oneOf: [

@@ -1,7 +1,7 @@
-import { InstitutionOutputDto } from '../../institution/dto/institution.output.dto';
-import { CollectionOutputDto } from '../../collection/dto/collection.output.dto';
-import { ApiProperty } from '@nestjs/swagger';
-import { Expose, Type } from 'class-transformer';
+import { InstitutionOutputDto } from "../../institution/dto/institution.output.dto";
+import { CollectionOutputDto } from "../../collection/dto/collection.output.dto";
+import { ApiProperty } from "@nestjs/swagger";
+import { Expose, Type } from "class-transformer";
 
 export class MapUploadOutputDto {
     constructor(createdObjects: Record<string, unknown>) {

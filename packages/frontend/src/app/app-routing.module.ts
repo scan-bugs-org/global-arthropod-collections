@@ -12,10 +12,12 @@ import { UploadMapperComponent } from "./upload/upload-mapper/upload-mapper.comp
 import { CollectionModule } from "./collection/collection.module";
 import { UploadModule } from "./upload/upload.module";
 import { MapModule } from "./map/map.module";
+import { CollectionListComponent } from "./collection/collection-list/collection-list.component";
 
 const routes: Routes = [
     { path: `${COLLECTION_ROUTE}/:id`, component: CollectionComponent },
     { path: `${UPLOAD_ROUTE}/:id`, component: UploadMapperComponent },
+    { path: `${COLLECTION_ROUTE}`, component: CollectionListComponent },
     { path: UPLOAD_ROUTE, component: UploadComponent },
     { path: MAP_ROUTE, component: MapComponent },
     { path: "**", redirectTo: MAP_ROUTE }

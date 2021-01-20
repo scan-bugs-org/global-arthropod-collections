@@ -1,12 +1,18 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from "@nestjs/swagger";
 import {
-    IsBoolean, IsDateString, IsHexadecimal,
-    IsNumber, IsObject,
+    IsBoolean,
+    IsDateString,
+    IsHexadecimal,
+    IsNumber,
+    IsObject,
     IsOptional,
-    IsString, Length, Max, Min,
-} from 'class-validator';
-import { Type } from 'class-transformer';
-import { Optional } from '@nestjs/common';
+    IsString,
+    Length,
+    Max,
+    Min
+} from "class-validator";
+import { Type } from "class-transformer";
+import { Optional } from "@nestjs/common";
 
 class CollectionLocationInputDto {
     @ApiProperty({ required: false })

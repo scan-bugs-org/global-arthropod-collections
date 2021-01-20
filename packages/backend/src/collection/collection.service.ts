@@ -1,7 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Collection, COLLECTION_PROVIDER_ID, GeoJsonCollection } from '../database/models/Collection';
-import { Model } from 'mongoose';
-import { Institution } from "../database/models/Institution";
+import { Inject, Injectable } from "@nestjs/common";
+import {
+    Collection,
+    COLLECTION_PROVIDER_ID,
+    GeoJsonCollection
+} from "../database/models/Collection";
+import { Model } from "mongoose";
 import { AppConfigService } from "../app-config/app-config.service";
 
 interface CollectionData {

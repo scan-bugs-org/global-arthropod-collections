@@ -1,5 +1,5 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { UserService } from "./user.service";
+import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
+import { UserService } from "../user.service";
 import { TokenPayload } from "google-auth-library";
 
 @Injectable()

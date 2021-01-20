@@ -27,26 +27,20 @@ export class UploadService {
         const form = new FormData();
         form.append('file', csv);
 
-        this.loading.start();
         return this.http.post(this.UPLOADS_URL, form).pipe(
-            map((upload) => plainToClass(UploadID, upload)),
-            tap(() => this.loading.end())
+            map((upload) => plainToClass(UploadID, upload))
         );
     }
 
     findByID(id: string): Observable<FileUpload> {
-        this.loading.start();
         return this.http.get(`${this.UPLOADS_URL}/${id}`).pipe(
-            map((upload) => plainToClass(FileUpload, upload)),
-            tap(() => this.loading.end())
+            map((upload) => plainToClass(FileUpload, upload))
         );
     }
 
     mapUpload(id: string, mapping: HeaderMappingInputInterface): Observable<HeaderMappingResult> {
-        this.loading.start();
         return this.http.post(`${this.UPLOADS_URL}/${id}`, mapping).pipe(
-            map((result) => plainToClass(HeaderMappingResult, result)),
-            tap(() => this.loading.end())
+            map((result) => plainToClass(HeaderMappingResult, result))
         );
     }
 }

@@ -39,12 +39,12 @@ export class CollectionComponent implements OnInit {
                     return of(null);
                 }),
             ).subscribe((collection) => {
-            if (collection) {
-                this.collection = collection;
-            }
-            else {
-                this.router.navigate(['.']);
-            }
+                if (collection) {
+                    this.collection = collection;
+                }
+                else {
+                    this.router.navigate(['.']);
+                }
         });
     }
 }

@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { ObjectIdInterceptor } from './object-id.interceptor';
+import { Module } from "@nestjs/common";
+import { ObjectIdInterceptor } from "./object-id.interceptor";
 
 @Module({
     providers: [ObjectIdInterceptor],

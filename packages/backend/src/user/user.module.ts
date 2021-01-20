@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UserController } from './user.controller';
-import { DatabaseModule } from '../database/database.module';
+import { Module } from "@nestjs/common";
+import { UserService } from "./user.service";
+import { UserController } from "./user.controller";
+import { DatabaseModule } from "../database/database.module";
 import { AppConfigModule } from "../app-config/app-config.module";
-import { OAuth2Client } from 'google-auth-library';
+import { OAuth2Client } from "google-auth-library";
 import { AppConfigService } from "../app-config/app-config.service";
 
 @Module({
