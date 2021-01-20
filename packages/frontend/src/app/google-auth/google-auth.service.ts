@@ -6,11 +6,12 @@ import {
     distinctUntilChanged,
     filter,
     map,
-    shareReplay
+    shareReplay, take
 } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { AlertService } from "../alert/services/alert.service";
 import GoogleAuth = gapi.auth2.GoogleAuth;
+import { Router } from "@angular/router";
 
 export interface User {
     accessToken: string;
@@ -21,14 +22,15 @@ export interface User {
 @Injectable()
 export class GoogleAuthService {
     private _apiLoading = new BehaviorSubject<boolean>(true);
-    user = new ReplaySubject<User>(1);
-    isSignedIn = new ReplaySubject<boolean>(1);
-    apiLoading = this._apiLoading.asObservable().pipe(
+    readonly user = new ReplaySubject<User | null>(1);
+    readonly isSignedIn = new ReplaySubject<boolean>(1);
+    readonly apiLoading = this._apiLoading.asObservable().pipe(
         distinctUntilChanged(),
         shareReplay(1)
     );
 
     constructor(
+        private readonly router: Router,
         private readonly alert: AlertService,
         private readonly http: HttpClient) {
 
@@ -40,43 +42,58 @@ export class GoogleAuthService {
             });
 
             GoogleAuth.currentUser.listen((user) => {
-                const authRes = user.getAuthResponse();
-                const profile = user.getBasicProfile();
+                this._apiLoading.next(true);
+                if (user.isSignedIn()) {
 
-                this.user.next({
-                    accessToken: authRes.access_token,
-                    email: profile.getEmail(),
-                    picture: profile.getImageUrl()
-                });
+                    const authRes = user.getAuthResponse();
+                    const profile = user.getBasicProfile();
 
-                const loginURL = `${Environment.loginUrl}?id_token=${authRes.id_token}`;
-                this.http.post(loginURL, {})
-                    .pipe(
-                        catchError((e) => {
-                            this.alert.showError(JSON.stringify(e));
-                            return of(null)
-                        })
-                    )
-                    .subscribe();
+                    const loginURL = `${ Environment.loginUrl }?id_token=${ authRes.id_token }`;
+                    this.http.post(loginURL, {})
+                        .pipe(
+                            catchError((e) => {
+                                this.alert.showError(JSON.stringify(e));
+                                return of(null)
+                            })
+                        )
+                        .subscribe(() => {
+                            this.user.next({
+                                accessToken: authRes.access_token,
+                                email: profile.getEmail(),
+                                picture: profile.getImageUrl()
+                            });
+                        });
+                }
+                else {
+                    this.user.next(null);
+                }
+                this._apiLoading.next(false);
             });
 
             this._apiLoading.next(false);
         });
     }
 
-    getAuthInstance(): Observable<GoogleAuth> {
+    authInstance(): Observable<GoogleAuth> {
         return this._apiLoading.pipe(
             filter((loading) => !loading),
+            take(1),
             map(() => gapi.auth2.getAuthInstance())
         );
+    }
+
+    signOut() {
+        this.authInstance().subscribe((googleAuth) => {
+            googleAuth.signOut();
+            this.user.next(null);
+        });
+        this.router.navigate([]);
     }
 
     private static loadApi(): Promise<void> {
         return new Promise<void>((resolve => {
             gapi.load('auth2', () => {
-                gapi.auth2.init({
-                    client_id: Environment.googleClientID
-                });
+                gapi.auth2.init({ client_id: Environment.googleClientID });
                 resolve();
             });
         }));

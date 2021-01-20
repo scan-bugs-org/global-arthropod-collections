@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
     readonly UPLOAD_ROUTE = UPLOAD_ROUTE;
 
     currentUser: User | null = null;
+    isSignedIn = false;
 
     constructor(
         private readonly title: Title,
@@ -27,15 +28,13 @@ export class AppComponent implements OnInit {
         this.userService.user.subscribe((user) => {
             this.currentUser = user;
         });
-    }
 
-    get isLoggedIn() {
-        return this.currentUser !== null;
+        this.userService.isSignedIn.subscribe((isSignedIn) => {
+            this.isSignedIn = isSignedIn;
+        })
     }
 
     onSignOut() {
-        this.googleAuth.getAuthInstance().subscribe((googleAuth) => {
-            googleAuth.signOut();
-        });
+        this.googleAuth.signOut();
     }
 }

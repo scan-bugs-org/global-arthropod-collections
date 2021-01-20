@@ -22,10 +22,8 @@ export class GoogleSignInComponent implements OnInit {
     }
 
     onSignIn() {
-        this.googleAuth.getAuthInstance().subscribe((googleAuth) => {
-            googleAuth.signIn().then(() => {
-                return googleAuth.grantOfflineAccess({ prompt: 'consent' })
-            }).catch((e) => {
+        this.googleAuth.authInstance().subscribe((googleAuth) => {
+            googleAuth.grantOfflineAccess().catch((e) => {
                 this.alert.showError(JSON.stringify(e));
             });
         });
