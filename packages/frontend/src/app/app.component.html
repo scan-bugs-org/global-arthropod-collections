@@ -17,7 +17,7 @@
             <a href="https://scan-all-bugs.org/?page_id=2805" target="_blank">
                 About
             </a>
-            <ng-container *ngIf="isSignedIn && currentUser else notLoggedIn">
+            <ng-container *ngIf="currentUser else notLoggedIn">
                 <button id="profile-btn" [matMenuTriggerFor]="userMenu">
                     <img
                         src="{{ currentUser.picture }}"

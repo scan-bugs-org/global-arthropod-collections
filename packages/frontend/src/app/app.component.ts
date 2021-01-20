@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { LIST_ROUTE, MAP_ROUTE, UPLOAD_ROUTE } from "./routes";
 import { GoogleAuthService, User } from "./google-auth/google-auth.service";
+import { LoadingService } from "./alert/services/loading.service";
 
 @Component({
     selector: 'app-root',
@@ -14,13 +15,13 @@ export class AppComponent implements OnInit {
     readonly UPLOAD_ROUTE = UPLOAD_ROUTE;
 
     currentUser: User | null = null;
-    isSignedIn = false;
 
     constructor(
         private readonly title: Title,
         private readonly userService: GoogleAuthService,
-        private readonly googleAuth: GoogleAuthService) {
+        private readonly loading: LoadingService) {
 
+        this.loading.start();
         this.title.setTitle("Global Arthropod Collections");
     }
 
@@ -29,12 +30,10 @@ export class AppComponent implements OnInit {
             this.currentUser = user;
         });
 
-        this.userService.isSignedIn.subscribe((isSignedIn) => {
-            this.isSignedIn = isSignedIn;
-        })
+        this.loading.end();
     }
 
     onSignOut() {
-        this.googleAuth.signOut();
+        this.userService.signOut();
     }
 }

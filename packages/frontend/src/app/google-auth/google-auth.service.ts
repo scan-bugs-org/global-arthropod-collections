@@ -23,7 +23,12 @@ export interface User {
 export class GoogleAuthService {
     private _apiLoading = new BehaviorSubject<boolean>(true);
     readonly user = new ReplaySubject<User | null>(1);
-    readonly isSignedIn = new ReplaySubject<boolean>(1);
+
+    readonly isSignedIn = this.user.pipe(
+        map((user) => user !== null),
+        distinctUntilChanged(),
+        shareReplay(1)
+    );
     readonly apiLoading = this._apiLoading.asObservable().pipe(
         distinctUntilChanged(),
         shareReplay(1)
@@ -37,12 +42,7 @@ export class GoogleAuthService {
         GoogleAuthService.loadApi().then(() => {
             const GoogleAuth = gapi.auth2.getAuthInstance();
 
-            GoogleAuth.isSignedIn.listen((isSignedIn) => {
-                this.isSignedIn.next(isSignedIn);
-            });
-
             GoogleAuth.currentUser.listen((user) => {
-                this._apiLoading.next(true);
                 if (user.isSignedIn()) {
 
                     const authRes = user.getAuthResponse();
@@ -67,7 +67,6 @@ export class GoogleAuthService {
                 else {
                     this.user.next(null);
                 }
-                this._apiLoading.next(false);
             });
 
             this._apiLoading.next(false);
