@@ -1,0 +1,43 @@
+import { Component } from "@angular/core";
+import { UploadService } from "./upload.service";
+import { catchError } from "rxjs/operators";
+import { of } from "rxjs";
+import { Router } from "@angular/router";
+import { UPLOAD_ROUTE } from "../routes";
+import { AlertService } from "../alert/services/alert.service";
+
+@Component({
+    selector: 'app-upload',
+    templateUrl: './upload.component.html',
+    styleUrls: ['./upload.component.less'],
+})
+export class UploadComponent {
+    file: File | null = null;
+
+    constructor(
+        private readonly alerts: AlertService,
+        private readonly uploads: UploadService,
+        private readonly router: Router) { }
+
+    onFileChanged(file: File | null) {
+        this.file = file;
+    }
+
+    onSubmit() {
+        if (this.file !== null) {
+            this.uploads.uploadFile(this.file).pipe(
+                catchError((e) => {
+                    this.alerts.showError(e.toString());
+                    return of(null);
+                })
+            ).subscribe((fileUpload) => {
+                if (fileUpload) {
+                    this.router.navigate([`/${UPLOAD_ROUTE}/${fileUpload._id}`]);
+                }
+            });
+        }
+        else {
+            this.alerts.showError("No file selected");
+        }
+    }
+}

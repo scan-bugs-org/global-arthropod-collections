@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AlertService } from "../../services/alert.service";
-import { UserService } from "../../services/user.service";
+import { AlertService } from "../../alert/services/alert.service";
 import { GoogleAuthService } from "../google-auth.service";
 
 @Component({
@@ -12,7 +11,7 @@ export class GoogleSignInComponent implements OnInit {
     isLoading = true;
 
     constructor(
-        private readonly userService: UserService,
+        private readonly userService: GoogleAuthService,
         private readonly alert: AlertService,
         private readonly googleAuth: GoogleAuthService) { }
 

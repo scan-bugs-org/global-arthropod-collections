@@ -13,8 +13,16 @@
 * {
     -webkit-font-smoothing: antialiased;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .snackbar-error {
     color: white;

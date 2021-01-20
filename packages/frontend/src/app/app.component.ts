@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Title } from '@angular/platform-browser';
+import { Title } from "@angular/platform-browser";
 import { LIST_ROUTE, MAP_ROUTE, UPLOAD_ROUTE } from "./routes";
-import { UserService, User } from "./services/user.service";
-import { GoogleAuthService } from "./google-auth/google-auth.service";
+import { GoogleAuthService, User } from "./google-auth/google-auth.service";
 
 @Component({
     selector: 'app-root',
@@ -18,7 +17,7 @@ export class AppComponent implements OnInit {
 
     constructor(
         private readonly title: Title,
-        private readonly userService: UserService,
+        private readonly userService: GoogleAuthService,
         private readonly googleAuth: GoogleAuthService) {
 
         this.title.setTitle("Global Arthropod Collections");

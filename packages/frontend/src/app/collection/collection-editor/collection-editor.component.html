@@ -1,0 +1,80 @@
+<div *ngIf="collection">
+    <div class="row">
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Collection name</mat-label>
+                <input matInput [formControl]="nameControl">
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Collection code</mat-label>
+                <input matInput [formControl]="codeControl">
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field>
+                <mat-label>URL</mat-label>
+                <input matInput type="url" [formControl]="urlControl">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Size (specimens)</mat-label>
+                <input matInput type="number" [formControl]="sizeControl">
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Tier</mat-label>
+                <input matInput type="number" [formControl]="tierControl">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Country</mat-label>
+                <input matInput [formControl]="countryControl">
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field>
+                <mat-label>State</mat-label>
+                <input matInput [formControl]="provinceControl">
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Latitude</mat-label>
+                <input matInput type="number" [formControl]="latControl">
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field>
+                <mat-label>Longitude</mat-label>
+                <input matInput type="number" [formControl]="lngControl">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button
+                mat-raised-button
+                color="primary"
+                [disabled]="!form.valid"
+                (click)="applyEdits()"
+            >
+                Apply
+            </button>
+            <button mat-raised-button (click)="cancelEdits()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

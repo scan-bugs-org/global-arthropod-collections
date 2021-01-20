@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { CollectionService } from '../services/collection.service';
-import { CircleMarker, LatLng, LayerGroup, tileLayer, Map, geoJSON, LatLngExpression, Point, Layer, GeoJSON, LatLngBounds } from 'leaflet';
-import { CollectionGeoJson } from '../services/dto/collection-geojson.dto';
-import { COLLECTION_ROUTE } from '../routes';
-import { Environment } from '../../environments/environment';
+import { Component } from "@angular/core";
+import { CollectionService } from "../collection/collection.service";
+import {
+    CircleMarker,
+    geoJSON,
+    LatLng,
+    LatLngBounds,
+    Map,
+    tileLayer
+} from "leaflet";
+import { CollectionGeoJson } from "../collection/dto/collection-geojson.dto";
+import { COLLECTION_ROUTE } from "../routes";
+import { Environment } from "../../environments/environment";
 
 @Component({
     selector: 'app-map',
