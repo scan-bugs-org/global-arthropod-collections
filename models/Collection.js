@@ -48,10 +48,11 @@ const CollectionSchema = mongoose.Schema({
 });
 
 CollectionSchema.methods.asGeoJson = function() {
-  let name = this.name;
-  if (this.institution !== null) {
-    name = `${this.institution.name} ${this.name}`;
+  let name = '';
+  if (this.institution !== null && this.institution.name !== this.name) {
+    name += this.institution.name + ' ';
   }
+  name += this.name;
   return {
     type: "Feature",
     geometry: {
