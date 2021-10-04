@@ -36,6 +36,23 @@ router.get("/:institutionId", async (req, res) => {
   }
 });
 
+
+router.post("/", async (req, res) => {
+  try {
+    const institutionObj = {
+      name: req.body.institutionName,
+      code: req.body.institutionCode
+    };
+    const newInstitution = new Institution(institutionObj);
+    await newInstitution.save();
+
+    res.redirect(201, `${req.originalUrl}/${newInstitution._id.toString()}`);
+
+  } catch (err) {
+    doError(res, err);
+  }
+});
+
 router.post("/:institutionId", (req, res) => {
   const institutionObj = {
     name: req.body.institutionName,
